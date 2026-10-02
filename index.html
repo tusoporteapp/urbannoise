@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Noise | Página en Construcción</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tipografía auténtica: Inter & Helvetica Neue style con pesos editoriales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          letterSpacing: {
+            widest: '.2em',
+            ultra: '.35em',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection {
+      background-color: #ffffff;
+      color: #000000;
+    }
+  </style>
+</head>
+<body class="bg-[#050505] text-[#f4f4f5] min-h-screen flex flex-col justify-between font-sans selection:bg-white selection:text-black">
+
+  <!-- Top Announcement Bar (Minimalist Line) -->
+  <header class="w-full border-b border-neutral-900 px-6 py-4">
+    <div class="max-w-6xl mx-auto flex items-center justify-between text-[11px] uppercase tracking-widest text-neutral-500 font-medium">
+      <span>Bogotá, Colombia</span>
+      <span class="text-neutral-400">Sitio Web Oficial</span>
+    </div>
+  </header>
+
+  <!-- Main Content Center -->
+  <main class="w-full max-w-3xl mx-auto px-6 py-20 flex-1 flex flex-col items-center justify-center text-center">
+    
+    <!-- Brand Logo / Typography -->
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-ultra text-white leading-none">
+      URBAN NOISE
+    </h1>
+    
+    <p class="mt-4 text-xs sm:text-sm uppercase tracking-widest text-neutral-400 font-light max-w-lg">
+      Diseño, Streetwear y Estética Urbana Contemporánea
+    </p>
+
+    <!-- Subtle divider -->
+    <div class="w-12 h-[1px] bg-neutral-800 my-10"></div>
+
+    <!-- Status Notice -->
+    <div class="space-y-3">
+      <span class="inline-block text-[11px] uppercase tracking-widest text-neutral-400 border border-neutral-800 px-3 py-1 rounded-sm">
+        Página en Construcción
+      </span>
+      <p class="text-neutral-400 text-sm sm:text-base font-normal max-w-md mx-auto leading-relaxed pt-2">
+        Estamos actualizando nuestra plataforma en línea para la nueva colección. Pronto estará disponible nuestro catálogo completo.
+      </p>
+    </div>
+
+    <!-- Minimalist Early-Access Input -->
+    <div class="mt-12 w-full max-w-md">
+      <form id="notifyForm" onsubmit="handleNotify(event)" class="relative flex flex-col sm:flex-row items-center border-b border-neutral-700 focus-within:border-white transition-colors duration-300 pb-1">
+        <input 
+          type="email" 
+          id="emailInput" 
+          required 
+          placeholder="Tu correo electrónico para aviso de apertura" 
+          class="w-full bg-transparent px-2 py-3 text-xs sm:text-sm text-white placeholder-neutral-600 focus:outline-none tracking-wide"
+        >
+        <button 
+          type="submit" 
+          class="w-full sm:w-auto mt-2 sm:mt-0 px-4 py-2 text-xs uppercase tracking-widest text-white hover:text-neutral-400 font-semibold transition-colors shrink-0"
+        >
+          Notificarme
+        </button>
+      </form>
+      
+      <!-- Feedback Message -->
+      <p id="feedbackMsg" class="hidden text-xs text-neutral-400 font-normal tracking-wide mt-3">
+        Gracias. Te avisaremos el día del lanzamiento.
+      </p>
+    </div>
+
+    <!-- Contact & Attention (WhatsApp / Direct Shopping) -->
+    <div class="mt-14 pt-8 border-t border-neutral-900 w-full flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 text-xs tracking-wider uppercase text-neutral-400">
+      <a 
+        href="https://wa.me/573108720491?text=Hola%20Urban%20Noise,%20deseo%20hacer%20un%20pedido%20o%20consultar%20disponibilidad" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="hover:text-white transition-colors flex items-center gap-2"
+      >
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+        <span>WhatsApp: +57 310 872 0491</span>
+      </a>
+
+      <a 
+        href="mailto:urban.noice@gmail.com" 
+        class="hover:text-white transition-colors"
+      >
+        urban.noice@gmail.com
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Footer with official store address -->
+  <footer class="w-full border-t border-neutral-900 px-6 py-6 text-center text-[11px] text-neutral-600 tracking-wider">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      <p class="uppercase">
+        Tienda Física: Cra 10 # 9-37 Local 22-68, Bogotá, Colombia
+      </p>
+      <p>
+        © 2026 URBAN NOISE. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Minimalist Script -->
+  <script>
+    function handleNotify(e) {
+      e.preventDefault();
+      const input = document.getElementById('emailInput');
+      const feedback = document.getElementById('feedbackMsg');
+      if (input.value.trim() !== '') {
+        input.value = '';
+        feedback.classList.remove('hidden');
+        setTimeout(() => {
+          feedback.classList.add('hidden');
+        }, 5000);
+      }
+    }
+  </script>
+</body>
+</html>
