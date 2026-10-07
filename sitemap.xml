@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&amp;w=1200&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>URBANNOISE Moda Urbana &amp; Streetwear Bogotá</image:title>
+      <image:caption>Colección 2026 de hoodies oversize, boxy tees y moda urbana confeccionada en Bogotá.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/#latest-drops</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/#young-free</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/#weird-oversize</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/#dama-oversize</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/#cuenta</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

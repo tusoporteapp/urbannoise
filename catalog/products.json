@@ -1,0 +1,1370 @@
+{
+  "store_info": {
+    "brand_name": "URBANNOISE Studio",
+    "concept": "Streetwear colombiano contemporáneo, cortes oversized y siluetas urbanas",
+    "city": "Bogotá D.C.",
+    "country": "Colombia",
+    "flagship_address": "Centro Comercial El GranSan, Carrera 10 # 9-37, Piso 2, Local 2137",
+    "shopping_center": "CC El GranSan",
+    "store_location": "Piso 2, Local 2137",
+    "hours": "Lunes a Sábado: 8:00 AM - 6:30 PM | Miércoles y Sábado de Madrugón: 4:00 AM - 6:30 PM",
+    "whatsapp_sales": "+57 321 987 6543",
+    "phone": "+57 321 987 6543",
+    "website_url": "https://urbannoise.pages.dev",
+    "catalog_json_url": "https://urbannoise.pages.dev/catalog/products.json"
+  },
+  "policies": {
+    "shipping": "Envíos gratis por compras superiores a $180.000 COP en Bogotá y principales ciudades de Colombia. Guía con seguimiento online en tiempo real.",
+    "returns_and_exchanges": "30 días calendario para cambios por talla o garantía de confección en tienda física o vía mensajería nacional.",
+    "payment_methods": [
+      "Bold Checkout Oficial (Tarjetas Visa, Mastercard, American Express)",
+      "PSE (Todos los bancos de Colombia)",
+      "Nequi y Daviplata",
+      "Efectivo o Datáfono en tienda física Bogotá El GranSan"
+    ]
+  },
+  "collections_summary": {
+    "latest-drops": "Prendas de corte exclusivo y siluetas boxy fit en algodón prémium",
+    "young-free": "Esqueletos, bermudas y prendas frescas para el día a día urbano",
+    "weird-oversize": "Buzos pesados, hoodies, capoteros y sudaderas de alto gramaje",
+    "dama-oversize": "Polos, tops, siluetas fluidas y conjuntos unisex contemporáneos"
+  },
+  "total_products": 50,
+  "generated_at": "2026-10-02T15:54:08.727Z",
+  "products": [
+    {
+      "id": "930fce1c-6ed8-4cbf-8cae-1b56dd45a418",
+      "sku": "11565",
+      "name": "GRAFITURBAN • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 13,
+      "in_stock": true,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/930fce1c-6ed8-4cbf-8cae-1b56dd45a418"
+      ],
+      "image": "https://api.loyverse.com/image/930fce1c-6ed8-4cbf-8cae-1b56dd45a418",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "930fce1c-6ed8-4cbf-8cae-1b56dd45a418",
+      "loyverse_variant_id": "5032a481-6141-4307-9e93-cb8fba343042",
+      "url": "https://urbannoise.pages.dev/?product=930fce1c-6ed8-4cbf-8cae-1b56dd45a418",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20GRAFITURBAN%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011565)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "937c0e85-c802-411c-a298-f22876f54494",
+      "sku": "11559",
+      "name": "GRAFITURBAN • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 36,
+      "in_stock": true,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/937c0e85-c802-411c-a298-f22876f54494"
+      ],
+      "image": "https://api.loyverse.com/image/937c0e85-c802-411c-a298-f22876f54494",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "937c0e85-c802-411c-a298-f22876f54494",
+      "loyverse_variant_id": "e68fdf94-2c4d-46db-bd75-72b65744f4af",
+      "url": "https://urbannoise.pages.dev/?product=937c0e85-c802-411c-a298-f22876f54494",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20GRAFITURBAN%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011559)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "baba9269-6d2f-47e4-b18d-fe5e4f9baa98",
+      "sku": "11553",
+      "name": "MANIFESTO URBAN • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 18,
+      "in_stock": true,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/baba9269-6d2f-47e4-b18d-fe5e4f9baa98"
+      ],
+      "image": "https://api.loyverse.com/image/baba9269-6d2f-47e4-b18d-fe5e4f9baa98",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Azul, Cafe. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "baba9269-6d2f-47e4-b18d-fe5e4f9baa98",
+      "loyverse_variant_id": "30840eaf-8b50-4fc3-8be5-6c01915334f9",
+      "url": "https://urbannoise.pages.dev/?product=baba9269-6d2f-47e4-b18d-fe5e4f9baa98",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20MANIFESTO%20URBAN%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011553)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "342f2248-ab19-4b36-8f07-c1f96aac21d2",
+      "sku": "11550",
+      "name": "MANIFESTO URBAN • ESQUELETO ACIDWASH",
+      "category": "young-free",
+      "category_label": "Esqueleto AcidWash",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 17,
+      "in_stock": true,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/342f2248-ab19-4b36-8f07-c1f96aac21d2"
+      ],
+      "image": "https://api.loyverse.com/image/342f2248-ab19-4b36-8f07-c1f96aac21d2",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Azul. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "342f2248-ab19-4b36-8f07-c1f96aac21d2",
+      "loyverse_variant_id": "842f47a0-1b01-4a62-beaf-375b456e4f70",
+      "url": "https://urbannoise.pages.dev/?product=342f2248-ab19-4b36-8f07-c1f96aac21d2",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20MANIFESTO%20URBAN%20%E2%80%A2%20ESQUELETO%20ACIDWASH%20(SKU%3A%2011550)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "b1ec533f-b0bb-44a3-a5ca-421424c0ca34",
+      "sku": "11547",
+      "name": "MANIFESTO URBAN • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 10,
+      "in_stock": true,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/b1ec533f-b0bb-44a3-a5ca-421424c0ca34"
+      ],
+      "image": "https://api.loyverse.com/image/b1ec533f-b0bb-44a3-a5ca-421424c0ca34",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "b1ec533f-b0bb-44a3-a5ca-421424c0ca34",
+      "loyverse_variant_id": "b5c28f8f-aed2-4b51-b976-ba91b6cc30a6",
+      "url": "https://urbannoise.pages.dev/?product=b1ec533f-b0bb-44a3-a5ca-421424c0ca34",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20MANIFESTO%20URBAN%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011547)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "f6173756-d667-4dd1-95f4-dd0c423fd526",
+      "sku": "11540",
+      "name": "ANGELPRESTIGE • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 4,
+      "in_stock": true,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/f6173756-d667-4dd1-95f4-dd0c423fd526"
+      ],
+      "image": "https://api.loyverse.com/image/f6173756-d667-4dd1-95f4-dd0c423fd526",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Cobre, Gris. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "f6173756-d667-4dd1-95f4-dd0c423fd526",
+      "loyverse_variant_id": "5c0fe76d-e17b-44f5-abbe-c5085d7b91b9",
+      "url": "https://urbannoise.pages.dev/?product=f6173756-d667-4dd1-95f4-dd0c423fd526",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20ANGELPRESTIGE%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011540)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "0f586fb6-f55a-48a1-ab90-b049dd15c0c3",
+      "sku": "11537",
+      "name": "ANGELPRESTIGE • ESQUELETO ACIDWASH",
+      "category": "young-free",
+      "category_label": "Esqueleto AcidWash",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/0f586fb6-f55a-48a1-ab90-b049dd15c0c3"
+      ],
+      "image": "https://api.loyverse.com/image/0f586fb6-f55a-48a1-ab90-b049dd15c0c3",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Cobre. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "0f586fb6-f55a-48a1-ab90-b049dd15c0c3",
+      "loyverse_variant_id": "a79fc74d-7d93-40c7-8704-1c562d3e2eba",
+      "url": "https://urbannoise.pages.dev/?product=0f586fb6-f55a-48a1-ab90-b049dd15c0c3",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20ANGELPRESTIGE%20%E2%80%A2%20ESQUELETO%20ACIDWASH%20(SKU%3A%2011537)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "9510519a-7f4c-4069-8892-82d0b732b561",
+      "sku": "11534",
+      "name": "ANGELPRESTIGE • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/9510519a-7f4c-4069-8892-82d0b732b561"
+      ],
+      "image": "https://api.loyverse.com/image/9510519a-7f4c-4069-8892-82d0b732b561",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "9510519a-7f4c-4069-8892-82d0b732b561",
+      "loyverse_variant_id": "3987176e-366f-4847-9538-fcf306a1bf70",
+      "url": "https://urbannoise.pages.dev/?product=9510519a-7f4c-4069-8892-82d0b732b561",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20ANGELPRESTIGE%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011534)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "68c4b95d-42cd-4b1b-a4d9-078ba81893bd",
+      "sku": "11528",
+      "name": "URBANPOINT • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/68c4b95d-42cd-4b1b-a4d9-078ba81893bd"
+      ],
+      "image": "https://api.loyverse.com/image/68c4b95d-42cd-4b1b-a4d9-078ba81893bd",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "68c4b95d-42cd-4b1b-a4d9-078ba81893bd",
+      "loyverse_variant_id": "b9de25d9-a35f-4701-9cab-9d359832ee28",
+      "url": "https://urbannoise.pages.dev/?product=68c4b95d-42cd-4b1b-a4d9-078ba81893bd",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URBANPOINT%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011528)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "d01f5f48-3be3-4217-8f94-335fdd600dbc",
+      "sku": "11522",
+      "name": "URBANPOINT • OVERSIZE ALGODON",
+      "category": "latest-drops",
+      "category_label": "Oversize Algodon",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/d01f5f48-3be3-4217-8f94-335fdd600dbc"
+      ],
+      "image": "https://api.loyverse.com/image/d01f5f48-3be3-4217-8f94-335fdd600dbc",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "d01f5f48-3be3-4217-8f94-335fdd600dbc",
+      "loyverse_variant_id": "eba20b7f-3a09-4d24-ac88-3f91048de90a",
+      "url": "https://urbannoise.pages.dev/?product=d01f5f48-3be3-4217-8f94-335fdd600dbc",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URBANPOINT%20%E2%80%A2%20OVERSIZE%20ALGODON%20(SKU%3A%2011522)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "fa4323d4-0ef9-483d-9d79-037a21ed2e64",
+      "sku": "11519",
+      "name": "URBANPOINT • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/fa4323d4-0ef9-483d-9d79-037a21ed2e64"
+      ],
+      "image": "https://api.loyverse.com/image/fa4323d4-0ef9-483d-9d79-037a21ed2e64",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Marfil. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "fa4323d4-0ef9-483d-9d79-037a21ed2e64",
+      "loyverse_variant_id": "71276933-df53-4fe1-b987-8a6695dfedfb",
+      "url": "https://urbannoise.pages.dev/?product=fa4323d4-0ef9-483d-9d79-037a21ed2e64",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URBANPOINT%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011519)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "01e0f6f8-d121-438c-900a-5fb28dd48c82",
+      "sku": "11517",
+      "name": "RIB/POLO DAM • CONJUNTOS",
+      "category": "weird-oversize",
+      "category_label": "Conjuntos",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/01e0f6f8-d121-438c-900a-5fb28dd48c82"
+      ],
+      "image": "https://api.loyverse.com/image/01e0f6f8-d121-438c-900a-5fb28dd48c82",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Camell. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "01e0f6f8-d121-438c-900a-5fb28dd48c82",
+      "loyverse_variant_id": "bdc2601c-e2eb-40be-b1e9-40a5ab49f1df",
+      "url": "https://urbannoise.pages.dev/?product=01e0f6f8-d121-438c-900a-5fb28dd48c82",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20RIB%2FPOLO%20DAM%20%E2%80%A2%20CONJUNTOS%20(SKU%3A%2011517)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "c24e511b-b5da-4ed2-b39a-5ad795cdd298",
+      "sku": "11516",
+      "name": "WINGS UN GRAFITY • BUZO GOLD",
+      "category": "weird-oversize",
+      "category_label": "Buzo Gold",
+      "price_cop": 95000,
+      "price_formatted": "$95.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/c24e511b-b5da-4ed2-b39a-5ad795cdd298"
+      ],
+      "image": "https://api.loyverse.com/image/c24e511b-b5da-4ed2-b39a-5ad795cdd298",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "c24e511b-b5da-4ed2-b39a-5ad795cdd298",
+      "loyverse_variant_id": "c409b455-3ae7-41a2-98e0-a028c6e0283b",
+      "url": "https://urbannoise.pages.dev/?product=c24e511b-b5da-4ed2-b39a-5ad795cdd298",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20WINGS%20UN%20GRAFITY%20%E2%80%A2%20BUZO%20GOLD%20(SKU%3A%2011516)%20por%20%2495.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "3a8bd8ee-bbec-41ab-bef3-4d94c140c749",
+      "sku": "11513",
+      "name": "WINGS UN GRAFITY • ESQUELETO ACIDWASH",
+      "category": "young-free",
+      "category_label": "Esqueleto AcidWash",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/3a8bd8ee-bbec-41ab-bef3-4d94c140c749"
+      ],
+      "image": "https://api.loyverse.com/image/3a8bd8ee-bbec-41ab-bef3-4d94c140c749",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "3a8bd8ee-bbec-41ab-bef3-4d94c140c749",
+      "loyverse_variant_id": "4a9a67de-313c-4306-856b-9ac1802581e5",
+      "url": "https://urbannoise.pages.dev/?product=3a8bd8ee-bbec-41ab-bef3-4d94c140c749",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20WINGS%20UN%20GRAFITY%20%E2%80%A2%20ESQUELETO%20ACIDWASH%20(SKU%3A%2011513)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "8394007f-4cc1-4d21-8cab-7d85bd7c3f95",
+      "sku": "11427",
+      "name": "WINGS UN GRAFITY • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/8394007f-4cc1-4d21-8cab-7d85bd7c3f95"
+      ],
+      "image": "https://api.loyverse.com/image/8394007f-4cc1-4d21-8cab-7d85bd7c3f95",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "8394007f-4cc1-4d21-8cab-7d85bd7c3f95",
+      "loyverse_variant_id": "75ecec2c-f1e5-4181-93eb-ecf5d5f022d1",
+      "url": "https://urbannoise.pages.dev/?product=8394007f-4cc1-4d21-8cab-7d85bd7c3f95",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20WINGS%20UN%20GRAFITY%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011427)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "c552041d-3bcc-4e32-81f5-d9f7e8c4b4d8",
+      "sku": "11505",
+      "name": "CLOTHING 07 • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/c552041d-3bcc-4e32-81f5-d9f7e8c4b4d8"
+      ],
+      "image": "https://api.loyverse.com/image/c552041d-3bcc-4e32-81f5-d9f7e8c4b4d8",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "c552041d-3bcc-4e32-81f5-d9f7e8c4b4d8",
+      "loyverse_variant_id": "639ff432-8280-438c-bcb2-1958f8f512df",
+      "url": "https://urbannoise.pages.dev/?product=c552041d-3bcc-4e32-81f5-d9f7e8c4b4d8",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20CLOTHING%2007%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011505)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "9c1c3f74-ddd4-49a8-b571-9d5688d0b374",
+      "sku": "11497",
+      "name": "NO RISK URBAN • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/9c1c3f74-ddd4-49a8-b571-9d5688d0b374"
+      ],
+      "image": "https://api.loyverse.com/image/9c1c3f74-ddd4-49a8-b571-9d5688d0b374",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "9c1c3f74-ddd4-49a8-b571-9d5688d0b374",
+      "loyverse_variant_id": "d5eb66af-1a21-4fcd-857d-a1f306eb9bb5",
+      "url": "https://urbannoise.pages.dev/?product=9c1c3f74-ddd4-49a8-b571-9d5688d0b374",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20NO%20RISK%20URBAN%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011497)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "537eae00-4b6d-4b6e-be0a-0c2eabc7f548",
+      "sku": "11477",
+      "name": "CLOTHING 07 • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/537eae00-4b6d-4b6e-be0a-0c2eabc7f548"
+      ],
+      "image": "https://api.loyverse.com/image/537eae00-4b6d-4b6e-be0a-0c2eabc7f548",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Cobre, Azul. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "537eae00-4b6d-4b6e-be0a-0c2eabc7f548",
+      "loyverse_variant_id": "3bf7d84b-2e06-454e-95c1-97a383c8b1dc",
+      "url": "https://urbannoise.pages.dev/?product=537eae00-4b6d-4b6e-be0a-0c2eabc7f548",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20CLOTHING%2007%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011477)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "4b6185e5-b504-4bfc-b11e-1107015b7fcf",
+      "sku": "11487",
+      "name": "NO RISK URBAN • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/4b6185e5-b504-4bfc-b11e-1107015b7fcf"
+      ],
+      "image": "https://api.loyverse.com/image/4b6185e5-b504-4bfc-b11e-1107015b7fcf",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Cobre, Azul. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "4b6185e5-b504-4bfc-b11e-1107015b7fcf",
+      "loyverse_variant_id": "957ae369-59db-4080-94c4-786a7a06fed7",
+      "url": "https://urbannoise.pages.dev/?product=4b6185e5-b504-4bfc-b11e-1107015b7fcf",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20NO%20RISK%20URBAN%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011487)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "b1f4e86c-3abd-48d4-ae35-53c6c2b329ad",
+      "sku": "11471",
+      "name": "NO RISK URBAN • ESQUELETO ACIDWASH",
+      "category": "young-free",
+      "category_label": "Esqueleto AcidWash",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/b1f4e86c-3abd-48d4-ae35-53c6c2b329ad"
+      ],
+      "image": "https://api.loyverse.com/image/b1f4e86c-3abd-48d4-ae35-53c6c2b329ad",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "b1f4e86c-3abd-48d4-ae35-53c6c2b329ad",
+      "loyverse_variant_id": "52c0e486-bc76-4a4d-9a39-997eb6736221",
+      "url": "https://urbannoise.pages.dev/?product=b1f4e86c-3abd-48d4-ae35-53c6c2b329ad",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20NO%20RISK%20URBAN%20%E2%80%A2%20ESQUELETO%20ACIDWASH%20(SKU%3A%2011471)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "25622134-c9c4-486c-a8ab-9712cb3c5c63",
+      "sku": "11467",
+      "name": "NO RISK URBAN • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/25622134-c9c4-486c-a8ab-9712cb3c5c63"
+      ],
+      "image": "https://api.loyverse.com/image/25622134-c9c4-486c-a8ab-9712cb3c5c63",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: MoraLeche. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "25622134-c9c4-486c-a8ab-9712cb3c5c63",
+      "loyverse_variant_id": "d9b5f6d3-5799-48b0-9389-06c9b92bc5ab",
+      "url": "https://urbannoise.pages.dev/?product=25622134-c9c4-486c-a8ab-9712cb3c5c63",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20NO%20RISK%20URBAN%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011467)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "855c5ed4-20a6-44b1-8173-1523352793eb",
+      "sku": "11459",
+      "name": "BERMUDA ACIDWASH • BERMUDAS",
+      "category": "young-free",
+      "category_label": "Bermudas",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/855c5ed4-20a6-44b1-8173-1523352793eb"
+      ],
+      "image": "https://api.loyverse.com/image/855c5ed4-20a6-44b1-8173-1523352793eb",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "855c5ed4-20a6-44b1-8173-1523352793eb",
+      "loyverse_variant_id": "cb593f54-e918-4051-89ed-0cb3c228b1f5",
+      "url": "https://urbannoise.pages.dev/?product=855c5ed4-20a6-44b1-8173-1523352793eb",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20BERMUDA%20ACIDWASH%20%E2%80%A2%20BERMUDAS%20(SKU%3A%2011459)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "6ee5aaae-349e-4694-90ec-ed63a9d44daf",
+      "sku": "11451",
+      "name": "PANTALON ACIDWASH • CONJUNTO SUDADERA",
+      "category": "weird-oversize",
+      "category_label": "CONJUNTO SUDADERA",
+      "price_cop": 85000,
+      "price_formatted": "$85.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/6ee5aaae-349e-4694-90ec-ed63a9d44daf"
+      ],
+      "image": "https://api.loyverse.com/image/6ee5aaae-349e-4694-90ec-ed63a9d44daf",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "6ee5aaae-349e-4694-90ec-ed63a9d44daf",
+      "loyverse_variant_id": "dc74b4d1-92c6-4ead-b9ed-5c2ff45e9cca",
+      "url": "https://urbannoise.pages.dev/?product=6ee5aaae-349e-4694-90ec-ed63a9d44daf",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20PANTALON%20ACIDWASH%20%E2%80%A2%20CONJUNTO%20SUDADERA%20(SKU%3A%2011451)%20por%20%2485.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "5fc2bea9-3222-4aa2-b55c-e2298f19f5be",
+      "sku": "11447",
+      "name": "CLOTHING 07 • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/5fc2bea9-3222-4aa2-b55c-e2298f19f5be"
+      ],
+      "image": "https://api.loyverse.com/image/5fc2bea9-3222-4aa2-b55c-e2298f19f5be",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: MoraLeche. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "5fc2bea9-3222-4aa2-b55c-e2298f19f5be",
+      "loyverse_variant_id": "b53477f9-3144-4085-8009-7b35039ad828",
+      "url": "https://urbannoise.pages.dev/?product=5fc2bea9-3222-4aa2-b55c-e2298f19f5be",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20CLOTHING%2007%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011447)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "14be4863-0c49-4113-8320-0ef8c3403ddc",
+      "sku": "11441",
+      "name": "CLOTHING 07 • ESQUELETO ACIDWASH",
+      "category": "young-free",
+      "category_label": "Esqueleto AcidWash",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/14be4863-0c49-4113-8320-0ef8c3403ddc"
+      ],
+      "image": "https://api.loyverse.com/image/14be4863-0c49-4113-8320-0ef8c3403ddc",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "14be4863-0c49-4113-8320-0ef8c3403ddc",
+      "loyverse_variant_id": "78308815-3ea5-41e1-86fc-7b4a9f6bd0b7",
+      "url": "https://urbannoise.pages.dev/?product=14be4863-0c49-4113-8320-0ef8c3403ddc",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20CLOTHING%2007%20%E2%80%A2%20ESQUELETO%20ACIDWASH%20(SKU%3A%2011441)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "e05d1ff3-8cab-4c15-93ae-dd2b42ee7813",
+      "sku": "11435",
+      "name": "URBNSTD • ESQUELETO ACIDWASH",
+      "category": "young-free",
+      "category_label": "Esqueleto AcidWash",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/e05d1ff3-8cab-4c15-93ae-dd2b42ee7813"
+      ],
+      "image": "https://api.loyverse.com/image/e05d1ff3-8cab-4c15-93ae-dd2b42ee7813",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Cobre, Negro. Tallas disponibles: S, M, L.",
+      "loyverse_item_id": "e05d1ff3-8cab-4c15-93ae-dd2b42ee7813",
+      "loyverse_variant_id": "b8ce276c-abcf-4be2-955c-bfe161b46c47",
+      "url": "https://urbannoise.pages.dev/?product=e05d1ff3-8cab-4c15-93ae-dd2b42ee7813",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URBNSTD%20%E2%80%A2%20ESQUELETO%20ACIDWASH%20(SKU%3A%2011435)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "6d564857-76c2-4ec6-8b00-617770ef188d",
+      "sku": "11423",
+      "name": "BUZO DOBLE CREM • CONJUNTO SUDADERA",
+      "category": "weird-oversize",
+      "category_label": "CONJUNTO SUDADERA",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/6d564857-76c2-4ec6-8b00-617770ef188d"
+      ],
+      "image": "https://api.loyverse.com/image/6d564857-76c2-4ec6-8b00-617770ef188d",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Crema, Beige. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "6d564857-76c2-4ec6-8b00-617770ef188d",
+      "loyverse_variant_id": "c21ccc83-a7cc-4b37-94db-0a5b5544515c",
+      "url": "https://urbannoise.pages.dev/?product=6d564857-76c2-4ec6-8b00-617770ef188d",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20BUZO%20DOBLE%20CREM%20%E2%80%A2%20CONJUNTO%20SUDADERA%20(SKU%3A%2011423)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "f93280e4-35d3-4a77-8f22-c7b6f82d0775",
+      "sku": "11419",
+      "name": "PANTALON UNISEX ESTAM • CONJUNTO SUDADERA",
+      "category": "weird-oversize",
+      "category_label": "CONJUNTO SUDADERA",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/f93280e4-35d3-4a77-8f22-c7b6f82d0775"
+      ],
+      "image": "https://api.loyverse.com/image/f93280e4-35d3-4a77-8f22-c7b6f82d0775",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Crema, Beige. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "f93280e4-35d3-4a77-8f22-c7b6f82d0775",
+      "loyverse_variant_id": "f8735360-c072-4e0a-ac28-152741bb1971",
+      "url": "https://urbannoise.pages.dev/?product=f93280e4-35d3-4a77-8f22-c7b6f82d0775",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20PANTALON%20UNISEX%20ESTAM%20%E2%80%A2%20CONJUNTO%20SUDADERA%20(SKU%3A%2011419)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "474cb990-012e-4dcb-a26c-b396c117616c",
+      "sku": "11417",
+      "name": "POLO DAMA • T-SHIRT",
+      "category": "dama-oversize",
+      "category_label": "T-Shirt",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/474cb990-012e-4dcb-a26c-b396c117616c"
+      ],
+      "image": "https://api.loyverse.com/image/474cb990-012e-4dcb-a26c-b396c117616c",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Verde. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "474cb990-012e-4dcb-a26c-b396c117616c",
+      "loyverse_variant_id": "a7fe9ef2-acfb-4b70-87b0-daae1985fa4b",
+      "url": "https://urbannoise.pages.dev/?product=474cb990-012e-4dcb-a26c-b396c117616c",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20POLO%20DAMA%20%E2%80%A2%20T-SHIRT%20(SKU%3A%2011417)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "3cf76027-5cf8-47d0-9f66-c44de641b616",
+      "sku": "11407",
+      "name": "MADE IN COLOMBIA • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/3cf76027-5cf8-47d0-9f66-c44de641b616"
+      ],
+      "image": "https://api.loyverse.com/image/3cf76027-5cf8-47d0-9f66-c44de641b616",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "3cf76027-5cf8-47d0-9f66-c44de641b616",
+      "loyverse_variant_id": "5565bdc5-fc71-4fa3-be94-0bb7585d9dca",
+      "url": "https://urbannoise.pages.dev/?product=3cf76027-5cf8-47d0-9f66-c44de641b616",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20MADE%20IN%20COLOMBIA%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011407)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "09bf0107-021e-4188-b8a8-4792d0a5bd94",
+      "sku": "11403",
+      "name": "MADE IN COLOMBIA • BUZO GOLDCREM",
+      "category": "weird-oversize",
+      "category_label": "Buzo GoldCrem",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/09bf0107-021e-4188-b8a8-4792d0a5bd94"
+      ],
+      "image": "https://api.loyverse.com/image/09bf0107-021e-4188-b8a8-4792d0a5bd94",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Beige. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "09bf0107-021e-4188-b8a8-4792d0a5bd94",
+      "loyverse_variant_id": "42df1d7e-474d-4513-9a62-16b0fdbdd7b8",
+      "url": "https://urbannoise.pages.dev/?product=09bf0107-021e-4188-b8a8-4792d0a5bd94",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20MADE%20IN%20COLOMBIA%20%E2%80%A2%20BUZO%20GOLDCREM%20(SKU%3A%2011403)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "e3a13515-5285-49ce-8a71-2a6c8ce50ad9",
+      "sku": "11393",
+      "name": "NOISE TRACK • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 95000,
+      "price_formatted": "$95.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/e3a13515-5285-49ce-8a71-2a6c8ce50ad9"
+      ],
+      "image": "https://api.loyverse.com/image/e3a13515-5285-49ce-8a71-2a6c8ce50ad9",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "e3a13515-5285-49ce-8a71-2a6c8ce50ad9",
+      "loyverse_variant_id": "9fd49592-0d24-4e74-8584-4450c866306c",
+      "url": "https://urbannoise.pages.dev/?product=e3a13515-5285-49ce-8a71-2a6c8ce50ad9",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20NOISE%20TRACK%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011393)%20por%20%2495.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "aebf86c1-62f0-4d28-a0b1-91a6f0d81403",
+      "sku": "11383",
+      "name": "URBNSTD • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/aebf86c1-62f0-4d28-a0b1-91a6f0d81403"
+      ],
+      "image": "https://api.loyverse.com/image/aebf86c1-62f0-4d28-a0b1-91a6f0d81403",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "aebf86c1-62f0-4d28-a0b1-91a6f0d81403",
+      "loyverse_variant_id": "43fc2b61-e8a5-4c78-9bba-cebbcdf8c95e",
+      "url": "https://urbannoise.pages.dev/?product=aebf86c1-62f0-4d28-a0b1-91a6f0d81403",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URBNSTD%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011383)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "62f62947-2843-438b-9747-b24e91124f72",
+      "sku": "11379",
+      "name": "CAMISA TEX • CONJUNTOS",
+      "category": "weird-oversize",
+      "category_label": "Conjuntos",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/62f62947-2843-438b-9747-b24e91124f72"
+      ],
+      "image": "https://api.loyverse.com/image/62f62947-2843-438b-9747-b24e91124f72",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "62f62947-2843-438b-9747-b24e91124f72",
+      "loyverse_variant_id": "9d7d104b-cc81-4492-b995-2d6489f01410",
+      "url": "https://urbannoise.pages.dev/?product=62f62947-2843-438b-9747-b24e91124f72",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20CAMISA%20TEX%20%E2%80%A2%20CONJUNTOS%20(SKU%3A%2011379)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "21ad4e93-d44e-49be-9e19-44ca71ccb63e",
+      "sku": "11371",
+      "name": "NOISE TRACK • BUZO GOLDCREM",
+      "category": "weird-oversize",
+      "category_label": "Buzo GoldCrem",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/21ad4e93-d44e-49be-9e19-44ca71ccb63e"
+      ],
+      "image": "https://api.loyverse.com/image/21ad4e93-d44e-49be-9e19-44ca71ccb63e",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Beige. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "21ad4e93-d44e-49be-9e19-44ca71ccb63e",
+      "loyverse_variant_id": "5d2055c6-8b82-443b-9262-e98b20d4466b",
+      "url": "https://urbannoise.pages.dev/?product=21ad4e93-d44e-49be-9e19-44ca71ccb63e",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20NOISE%20TRACK%20%E2%80%A2%20BUZO%20GOLDCREM%20(SKU%3A%2011371)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "497b92be-eb31-499e-8a9e-42325d87efb4",
+      "sku": "11373",
+      "name": "URBNSTD • BUZO GOLDCREM",
+      "category": "weird-oversize",
+      "category_label": "Buzo GoldCrem",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/497b92be-eb31-499e-8a9e-42325d87efb4"
+      ],
+      "image": "https://api.loyverse.com/image/497b92be-eb31-499e-8a9e-42325d87efb4",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Beige. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "497b92be-eb31-499e-8a9e-42325d87efb4",
+      "loyverse_variant_id": "b1b4721d-9336-4784-8324-ea277aa15b4a",
+      "url": "https://urbannoise.pages.dev/?product=497b92be-eb31-499e-8a9e-42325d87efb4",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URBNSTD%20%E2%80%A2%20BUZO%20GOLDCREM%20(SKU%3A%2011373)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "925415f4-1b66-4241-beb7-6702128edbe8",
+      "sku": "11366",
+      "name": "DESERTERURBAN • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/925415f4-1b66-4241-beb7-6702128edbe8"
+      ],
+      "image": "https://api.loyverse.com/image/925415f4-1b66-4241-beb7-6702128edbe8",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "925415f4-1b66-4241-beb7-6702128edbe8",
+      "loyverse_variant_id": "12c1c12a-8223-4a0a-878a-73a3522b0316",
+      "url": "https://urbannoise.pages.dev/?product=925415f4-1b66-4241-beb7-6702128edbe8",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20DESERTERURBAN%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011366)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "d3d115ee-31ea-4cbd-a858-d7882fb0491e",
+      "sku": "11361",
+      "name": "GRAFITY URBANO • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/d3d115ee-31ea-4cbd-a858-d7882fb0491e"
+      ],
+      "image": "https://api.loyverse.com/image/d3d115ee-31ea-4cbd-a858-d7882fb0491e",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "d3d115ee-31ea-4cbd-a858-d7882fb0491e",
+      "loyverse_variant_id": "f648071d-6c84-4f91-aa0b-f7d6dd78c794",
+      "url": "https://urbannoise.pages.dev/?product=d3d115ee-31ea-4cbd-a858-d7882fb0491e",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20GRAFITY%20URBANO%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011361)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "01b8ccf9-7cad-45a5-855d-f743276b2eca",
+      "sku": "11353",
+      "name": "GRAFITY URBANO • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/01b8ccf9-7cad-45a5-855d-f743276b2eca"
+      ],
+      "image": "https://api.loyverse.com/image/01b8ccf9-7cad-45a5-855d-f743276b2eca",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Camell, Marfil. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "01b8ccf9-7cad-45a5-855d-f743276b2eca",
+      "loyverse_variant_id": "911ac718-cd15-4804-bb0f-6fb51fd3a6ed",
+      "url": "https://urbannoise.pages.dev/?product=01b8ccf9-7cad-45a5-855d-f743276b2eca",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20GRAFITY%20URBANO%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011353)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "344c20c1-9e36-4494-8c33-dda8fef46fb8",
+      "sku": "11345",
+      "name": "GRAFITY URBANO • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/344c20c1-9e36-4494-8c33-dda8fef46fb8"
+      ],
+      "image": "https://api.loyverse.com/image/344c20c1-9e36-4494-8c33-dda8fef46fb8",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: MoraLeche, Gris. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "344c20c1-9e36-4494-8c33-dda8fef46fb8",
+      "loyverse_variant_id": "0b77245b-c1b6-44e4-964d-edb19cc8e015",
+      "url": "https://urbannoise.pages.dev/?product=344c20c1-9e36-4494-8c33-dda8fef46fb8",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20GRAFITY%20URBANO%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011345)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "adfd1823-268b-4145-a3a7-af4cd0a2d0f2",
+      "sku": "11340",
+      "name": "URB PASLEY PERSA • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/adfd1823-268b-4145-a3a7-af4cd0a2d0f2"
+      ],
+      "image": "https://api.loyverse.com/image/adfd1823-268b-4145-a3a7-af4cd0a2d0f2",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "adfd1823-268b-4145-a3a7-af4cd0a2d0f2",
+      "loyverse_variant_id": "9e2ae531-0e2c-41a2-96e8-768fd5aaa6fb",
+      "url": "https://urbannoise.pages.dev/?product=adfd1823-268b-4145-a3a7-af4cd0a2d0f2",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URB%20PASLEY%20PERSA%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011340)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "d6afe05f-4d6e-4b9a-93e3-b763303b1d22",
+      "sku": "11336",
+      "name": "CALAVERA FLOWER • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/d6afe05f-4d6e-4b9a-93e3-b763303b1d22"
+      ],
+      "image": "https://api.loyverse.com/image/d6afe05f-4d6e-4b9a-93e3-b763303b1d22",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro. Tallas disponibles: M, L, XL.",
+      "loyverse_item_id": "d6afe05f-4d6e-4b9a-93e3-b763303b1d22",
+      "loyverse_variant_id": "a1b3625a-471a-4f27-a6a0-09c23f0e5c70",
+      "url": "https://urbannoise.pages.dev/?product=d6afe05f-4d6e-4b9a-93e3-b763303b1d22",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20CALAVERA%20FLOWER%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011336)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "92af4827-7923-4685-96d4-0f746dd02516",
+      "sku": "11328",
+      "name": "URB PASLEY PERSA • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/92af4827-7923-4685-96d4-0f746dd02516"
+      ],
+      "image": "https://api.loyverse.com/image/92af4827-7923-4685-96d4-0f746dd02516",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Cafe, Azul. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "92af4827-7923-4685-96d4-0f746dd02516",
+      "loyverse_variant_id": "363c1548-cb50-4b1f-ba2d-cf67e2f74669",
+      "url": "https://urbannoise.pages.dev/?product=92af4827-7923-4685-96d4-0f746dd02516",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URB%20PASLEY%20PERSA%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011328)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "dd67bc3c-313f-4466-851a-cdba99ed36db",
+      "sku": "11324",
+      "name": "URB PASLEY PERSA • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/dd67bc3c-313f-4466-851a-cdba99ed36db"
+      ],
+      "image": "https://api.loyverse.com/image/dd67bc3c-313f-4466-851a-cdba99ed36db",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "dd67bc3c-313f-4466-851a-cdba99ed36db",
+      "loyverse_variant_id": "6703e4c3-4fd4-4ad1-bd04-ca97cb7e7137",
+      "url": "https://urbannoise.pages.dev/?product=dd67bc3c-313f-4466-851a-cdba99ed36db",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URB%20PASLEY%20PERSA%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011324)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "ab1a19d0-1d31-44f7-9159-7b38eb799596",
+      "sku": "11316",
+      "name": "URB PASLEY PERSA • OVERSIZE ALGODON",
+      "category": "latest-drops",
+      "category_label": "Oversize Algodon",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/ab1a19d0-1d31-44f7-9159-7b38eb799596"
+      ],
+      "image": "https://api.loyverse.com/image/ab1a19d0-1d31-44f7-9159-7b38eb799596",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "ab1a19d0-1d31-44f7-9159-7b38eb799596",
+      "loyverse_variant_id": "2b74bced-4cd9-4926-9106-9553fb1c68aa",
+      "url": "https://urbannoise.pages.dev/?product=ab1a19d0-1d31-44f7-9159-7b38eb799596",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20URB%20PASLEY%20PERSA%20%E2%80%A2%20OVERSIZE%20ALGODON%20(SKU%3A%2011316)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "bc83d2b4-9d50-4736-9008-309d31f5daf9",
+      "sku": "11312",
+      "name": "CALAVERA FLOWER • ESQUELETO",
+      "category": "young-free",
+      "category_label": "Esqueleto",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/bc83d2b4-9d50-4736-9008-309d31f5daf9"
+      ],
+      "image": "https://api.loyverse.com/image/bc83d2b4-9d50-4736-9008-309d31f5daf9",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Marfil. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "bc83d2b4-9d50-4736-9008-309d31f5daf9",
+      "loyverse_variant_id": "0b7391b3-8f70-4384-8fba-ea203ac0d958",
+      "url": "https://urbannoise.pages.dev/?product=bc83d2b4-9d50-4736-9008-309d31f5daf9",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20CALAVERA%20FLOWER%20%E2%80%A2%20ESQUELETO%20(SKU%3A%2011312)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "929a2a54-d336-467c-a74d-a9a159b65eb8",
+      "sku": "11304",
+      "name": "CALAVERA FLOWER • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/929a2a54-d336-467c-a74d-a9a159b65eb8"
+      ],
+      "image": "https://api.loyverse.com/image/929a2a54-d336-467c-a74d-a9a159b65eb8",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "929a2a54-d336-467c-a74d-a9a159b65eb8",
+      "loyverse_variant_id": "e729ce56-e1b6-40bc-9791-fb25f643e190",
+      "url": "https://urbannoise.pages.dev/?product=929a2a54-d336-467c-a74d-a9a159b65eb8",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20CALAVERA%20FLOWER%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011304)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "dabc60d1-108f-485d-8851-f058adc564eb",
+      "sku": "11300",
+      "name": "CALAVERA FLOWER • OVERSIZE ALGODON",
+      "category": "latest-drops",
+      "category_label": "Oversize Algodon",
+      "price_cop": 50000,
+      "price_formatted": "$50.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/dabc60d1-108f-485d-8851-f058adc564eb"
+      ],
+      "image": "https://api.loyverse.com/image/dabc60d1-108f-485d-8851-f058adc564eb",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Marfil. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "dabc60d1-108f-485d-8851-f058adc564eb",
+      "loyverse_variant_id": "a4de8bec-d4c2-4e2c-b22f-8c5067c92c05",
+      "url": "https://urbannoise.pages.dev/?product=dabc60d1-108f-485d-8851-f058adc564eb",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20CALAVERA%20FLOWER%20%E2%80%A2%20OVERSIZE%20ALGODON%20(SKU%3A%2011300)%20por%20%2450.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "ba3be14e-8526-4b82-affc-bd352c3ea09e",
+      "sku": "11292",
+      "name": "PURSUIT • BUZO ACIDWASH",
+      "category": "weird-oversize",
+      "category_label": "Buzo AcidWash",
+      "price_cop": 110000,
+      "price_formatted": "$110.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/ba3be14e-8526-4b82-affc-bd352c3ea09e"
+      ],
+      "image": "https://api.loyverse.com/image/ba3be14e-8526-4b82-affc-bd352c3ea09e",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "ba3be14e-8526-4b82-affc-bd352c3ea09e",
+      "loyverse_variant_id": "3a42cb62-f391-4051-8bfc-58767c41a9d4",
+      "url": "https://urbannoise.pages.dev/?product=ba3be14e-8526-4b82-affc-bd352c3ea09e",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20PURSUIT%20%E2%80%A2%20BUZO%20ACIDWASH%20(SKU%3A%2011292)%20por%20%24110.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    },
+    {
+      "id": "6acfe0bf-cf43-4634-bb63-fa60afe0a74a",
+      "sku": "11284",
+      "name": "PURSUIT • OVERSIZE ACIDWASH",
+      "category": "latest-drops",
+      "category_label": "Oversize AcidWash",
+      "price_cop": 55000,
+      "price_formatted": "$55.000",
+      "currency": "COP",
+      "stock": 0,
+      "in_stock": false,
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "images": [
+        "https://api.loyverse.com/image/6acfe0bf-cf43-4634-bb63-fa60afe0a74a"
+      ],
+      "image": "https://api.loyverse.com/image/6acfe0bf-cf43-4634-bb63-fa60afe0a74a",
+      "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón prémium y silueta contemporánea. Colores: Verde. Tallas disponibles: S, M, L, XL.",
+      "loyverse_item_id": "6acfe0bf-cf43-4634-bb63-fa60afe0a74a",
+      "loyverse_variant_id": "80c9df30-e1a0-47f8-b9da-1d547681b525",
+      "url": "https://urbannoise.pages.dev/?product=6acfe0bf-cf43-4634-bb63-fa60afe0a74a",
+      "whatsapp_order_url": "https://wa.me/573219876543?text=Hola%20URBANNOISE%20Studio%2C%20me%20interesa%20la%20prenda%3A%20PURSUIT%20%E2%80%A2%20OVERSIZE%20ACIDWASH%20(SKU%3A%2011284)%20por%20%2455.000.%20%C2%BFTienen%20disponibilidad%20en%20mi%20talla%3F"
+    }
+  ]
+}

@@ -1,152 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Urban Noise | Página en Construcción</title>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Tipografía auténtica: Inter & Helvetica Neue style con pesos editoriales -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    
+    <!-- Meta Títulos y Descripciones (SEO) -->
+    <title>URBANNOISE | Moda Urbana & Streetwear en Bogotá</title>
+    <meta 
+      name="description" 
+      content="Compra moda urbana auténtica, siluetas boxy fit y hoodies oversize en Bogotá, Colombia. Envíos a todo el país y pagos 100% protegidos." 
+    />
+    <meta name="keywords" content="streetwear bogota, ropa urbana colombia, hoodies oversize bogota, camisetas boxy fit, moda urbana colombiana, urbannoise" />
+    <meta name="author" content="URBANNOISE S.A.S." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/" />
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+    <!-- OpenGraph Social Cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="URBANNOISE" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:title" content="URBANNOISE | Moda Urbana & Streetwear en Bogotá" />
+    <meta 
+      property="og:description" 
+      content="Compra moda urbana auténtica, siluetas boxy fit y hoodies oversize en Bogotá, Colombia. Envíos a todo el país y pagos 100% protegidos." 
+    />
+    <meta property="og:url" content="https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Colección Streetwear y Hoodies Oversize URBANNOISE Bogotá" />
+
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="URBANNOISE | Moda Urbana & Streetwear en Bogotá" />
+    <meta 
+      name="twitter:description" 
+      content="Compra moda urbana auténtica, siluetas boxy fit y hoodies oversize en Bogotá, Colombia. Envíos a todo el país y pagos 100% protegidos." 
+    />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop" />
+
+    <!-- Favicon & PWA Theme -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#101013" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Optimización de Rendimiento y Carga de Recursos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,700&display=swap" 
+      rel="stylesheet" 
+    />
+
+    <!-- Datos Estructurados Schema.org (JSON-LD): Ficha de Google LocalBusiness & Tienda Oficial -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ClothingStore",
+          "@id": "https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/#store",
+          "name": "URBANNOISE | Moda Urbana & Streetwear",
+          "alternateName": "URBANNOISE Bogotá",
+          "url": "https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/",
+          "logo": "https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/favicon.svg",
+          "image": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop",
+          "description": "Tienda oficial de ropa urbana, hoodies oversize, siluetas boxy fit y streetwear confeccionado en Bogotá, Colombia.",
+          "telephone": "+57-310-872-0491",
+          "email": "urban.noice2023@gmail.com",
+          "priceRange": "$$",
+          "currenciesAccepted": "COP",
+          "paymentAccepted": "Cash, Credit Card, Debit Card, PSE, Nequi, Bancolombia",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Cra 10 # 9-37, Local 23-54, Centro Comercial El GranSan",
+            "addressLocality": "Bogotá",
+            "addressRegion": "Bogotá D.C.",
+            "postalCode": "110221",
+            "addressCountry": "CO"
           },
-          letterSpacing: {
-            widest: '.2em',
-            ultra: '.35em',
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 4.6025,
+            "longitude": -74.0792
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Cra+10+%23+9-37+Local+23-54+Bogota+Colombia+El+GranSan",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "142",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+              "opens": "09:00",
+              "closes": "19:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Sunday",
+              "opens": "10:00",
+              "closes": "16:00"
+            }
+          ],
+          "sameAs": [
+            "https://instagram.com/urbannoise_co",
+            "https://facebook.com/urbannoisecolombia"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/#website",
+          "url": "https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/",
+          "name": "URBANNOISE Streetwear",
+          "publisher": {
+            "@id": "https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/#store"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/?search={search_term_string}",
+            "query-input": "required name=search_term_string"
           }
         }
-      }
+      ]
     }
-  </script>
-
-  <style>
-    body {
-      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-      -webkit-font-smoothing: antialiased;
-    }
-    ::selection {
-      background-color: #ffffff;
-      color: #000000;
-    }
-  </style>
-</head>
-<body class="bg-[#050505] text-[#f4f4f5] min-h-screen flex flex-col justify-between font-sans selection:bg-white selection:text-black">
-
-  <!-- Top Announcement Bar (Minimalist Line) -->
-  <header class="w-full border-b border-neutral-900 px-6 py-4">
-    <div class="max-w-6xl mx-auto flex items-center justify-between text-[11px] uppercase tracking-widest text-neutral-500 font-medium">
-      <span>Bogotá, Colombia</span>
-      <span class="text-neutral-400">Sitio Web Oficial</span>
-    </div>
-  </header>
-
-  <!-- Main Content Center -->
-  <main class="w-full max-w-3xl mx-auto px-6 py-20 flex-1 flex flex-col items-center justify-center text-center">
-    
-    <!-- Brand Logo / Typography -->
-    <h1 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-ultra text-white leading-none">
-      URBAN NOISE
-    </h1>
-    
-    <p class="mt-4 text-xs sm:text-sm uppercase tracking-widest text-neutral-400 font-light max-w-lg">
-      Diseño, Streetwear y Estética Urbana Contemporánea
-    </p>
-
-    <!-- Subtle divider -->
-    <div class="w-12 h-[1px] bg-neutral-800 my-10"></div>
-
-    <!-- Status Notice -->
-    <div class="space-y-3">
-      <span class="inline-block text-[11px] uppercase tracking-widest text-neutral-400 border border-neutral-800 px-3 py-1 rounded-sm">
-        Página en Construcción
-      </span>
-      <p class="text-neutral-400 text-sm sm:text-base font-normal max-w-md mx-auto leading-relaxed pt-2">
-        Estamos actualizando nuestra plataforma en línea para la nueva colección. Pronto estará disponible nuestro catálogo completo.
-      </p>
-    </div>
-
-    <!-- Minimalist Early-Access Input -->
-    <div class="mt-12 w-full max-w-md">
-      <form id="notifyForm" onsubmit="handleNotify(event)" class="relative flex flex-col sm:flex-row items-center border-b border-neutral-700 focus-within:border-white transition-colors duration-300 pb-1">
-        <input 
-          type="email" 
-          id="emailInput" 
-          required 
-          placeholder="Tu correo electrónico para aviso de apertura" 
-          class="w-full bg-transparent px-2 py-3 text-xs sm:text-sm text-white placeholder-neutral-600 focus:outline-none tracking-wide"
-        >
-        <button 
-          type="submit" 
-          class="w-full sm:w-auto mt-2 sm:mt-0 px-4 py-2 text-xs uppercase tracking-widest text-white hover:text-neutral-400 font-semibold transition-colors shrink-0"
-        >
-          Notificarme
-        </button>
-      </form>
-      
-      <!-- Feedback Message -->
-      <p id="feedbackMsg" class="hidden text-xs text-neutral-400 font-normal tracking-wide mt-3">
-        Gracias. Te avisaremos el día del lanzamiento.
-      </p>
-    </div>
-
-    <!-- Contact & Attention (WhatsApp / Direct Shopping) -->
-    <div class="mt-14 pt-8 border-t border-neutral-900 w-full flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 text-xs tracking-wider uppercase text-neutral-400">
-      <a 
-        href="https://wa.me/573108720491?text=Hola%20Urban%20Noise,%20deseo%20hacer%20un%20pedido%20o%20consultar%20disponibilidad" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="hover:text-white transition-colors flex items-center gap-2"
-      >
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-        <span>WhatsApp: +57 310 872 0491</span>
-      </a>
-
-      <a 
-        href="mailto:urban.noice@gmail.com" 
-        class="hover:text-white transition-colors"
-      >
-        urban.noice@gmail.com
-      </a>
-    </div>
-
-  </main>
-
-  <!-- Footer with official store address -->
-  <footer class="w-full border-t border-neutral-900 px-6 py-6 text-center text-[11px] text-neutral-600 tracking-wider">
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-      <p class="uppercase">
-        Tienda Física: Cra 10 # 9-37 Local 22-68, Bogotá, Colombia
-      </p>
-      <p>
-        © 2026 URBAN NOISE. Todos los derechos reservados.
-      </p>
-    </div>
-  </footer>
-
-  <!-- Minimalist Script -->
-  <script>
-    function handleNotify(e) {
-      e.preventDefault();
-      const input = document.getElementById('emailInput');
-      const feedback = document.getElementById('feedbackMsg');
-      if (input.value.trim() !== '') {
-        input.value = '';
-        feedback.classList.remove('hidden');
-        setTimeout(() => {
-          feedback.classList.add('hidden');
-        }, 5000);
-      }
-    }
-  </script>
-</body>
+    </script>
+    <script type="module" crossorigin src="/assets/index-Bdr7WcB0.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BIueJB7r.css">
+  </head>
+  <body class="bg-white text-[#101013] font-sans antialiased selection:bg-[#101013] selection:text-[#F5F2E4] overflow-x-hidden">
+    <div id="root"></div>
+  </body>
 </html>
