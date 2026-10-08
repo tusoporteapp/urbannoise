@@ -6,7 +6,6 @@
     "category": "latest-drops",
     "price": 70000,
     "images": [
-      "https://api.loyverse.com/image/930fce1c-6ed8-4cbf-8cae-1b56dd45a418",
       "https://cdn.jsdelivr.net/gh/tusoporteapp/urbannoise@master/images/products/11565/1-617055.webp",
       "https://cdn.jsdelivr.net/gh/tusoporteapp/urbannoise@master/images/products/11565/2-621744.webp",
       "https://cdn.jsdelivr.net/gh/tusoporteapp/urbannoise@master/images/products/11565/3-627318.webp",
@@ -14,6 +13,6 @@
       "https://cdn.jsdelivr.net/gh/tusoporteapp/urbannoise@master/images/products/11565/5-638220.webp"
     ],
     "isPublished": true,
-    "updatedAt": "2026-10-07T17:23:24.831Z"
+    "updatedAt": "2026-10-07T17:15:00.000Z"
   }
 }
