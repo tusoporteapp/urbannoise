@@ -4,7 +4,7 @@
     "name": "GRAFITURBAN • OVERSIZE ACIDWASH",
     "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L.",
     "category": "latest-drops",
-    "price": 70000,
+    "price": 0,
     "images": [
       "https://cdn.jsdelivr.net/gh/tusoporteapp/urbannoise@master/images/products/11565/1-617055.webp",
       "https://cdn.jsdelivr.net/gh/tusoporteapp/urbannoise@master/images/products/11565/2-621744.webp",
@@ -12,7 +12,8 @@
       "https://cdn.jsdelivr.net/gh/tusoporteapp/urbannoise@master/images/products/11565/4-633822.webp",
       "https://cdn.jsdelivr.net/gh/tusoporteapp/urbannoise@master/images/products/11565/5-638220.webp"
     ],
+    "video": "https://www.youtube.com/shorts/focNZk2TkFk",
     "isPublished": true,
-    "updatedAt": "2026-10-07T17:15:00.000Z"
+    "updatedAt": "2026-10-08T16:24:09.736Z"
   }
 }
