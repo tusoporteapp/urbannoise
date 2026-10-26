@@ -611,10 +611,11 @@ app.post("/api/customers/register-web", async (req, res) => {
           (c) => c.email && c.email.toLowerCase() === cleanEmail || cleanPhone && c.phone_number && c.phone_number.replace(/\D/g, "") === cleanPhone || cleanDocument && c.customer_code && c.customer_code === cleanDocument
         );
         const buildNote = (baseNote) => {
-          let cleanBase = (baseNote || "").replace(/\[PW_HASH:[^\]]+\]/gi, "").replace(/CC:\s*\d+/gi, "").replace(/Cliente Web URBANNOISE/gi, "").replace(/•|\|/g, " ").trim();
+          let cleanBase = (baseNote || "").replace(/\[PW_(?:WEB|HASH):[^\]]+\]/gi, "").replace(/CC:\s*\d+/gi, "").replace(/Cliente Web URBANNOISE/gi, "").replace(/•|\|/g, " ").trim();
           const parts = [];
           if (cleanDocument) parts.push(`CC: ${cleanDocument}`);
           parts.push("Cliente Web URBANNOISE");
+          if (passwordHash) parts.push(`[PW_WEB:${passwordHash}]`);
           if (cleanBase) parts.push(cleanBase);
           return parts.join(" | ");
         };
@@ -715,7 +716,7 @@ app.post("/api/customers/login-web", rateLimit(6e4, 10), async (req, res) => {
         error: "No encontramos ninguna cuenta asociada a este correo o tel\xE9fono. Por favor reg\xEDstrate para continuar."
       });
     }
-    const noteHashMatch = loyverseCustomer?.note?.match(/\[PW_HASH:([^\]]+)\]/i);
+    const noteHashMatch = loyverseCustomer?.note?.match(/\[PW_(?:WEB|HASH):([^\]]+)\]/i);
     const loyverseSavedHash = noteHashMatch ? noteHashMatch[1] : null;
     if (localUser && (localUser.passwordHash || localUser.password)) {
       const isMatch = verifyPassword(password, localUser.passwordHash || localUser.password);
@@ -726,14 +727,39 @@ app.post("/api/customers/login-web", rateLimit(6e4, 10), async (req, res) => {
         localUser.passwordHash = hashPassword(password);
         saveWebUsersStore();
       }
+      if (activeLoyverseToken && loyverseCustomer && loyverseSavedHash !== localUser.passwordHash) {
+        const cleanBase = (loyverseCustomer.note || "").replace(/\[PW_(?:WEB|HASH):[^\]]+\]/gi, "").trim();
+        const updatedNote = cleanBase ? `${cleanBase} | [PW_WEB:${localUser.passwordHash}]` : `[PW_WEB:${localUser.passwordHash}]`;
+        callLoyverseApi(`/customers/${loyverseCustomer.id}`, {
+          method: "POST",
+          body: {
+            ...loyverseCustomer,
+            note: updatedNote
+          }
+        }).catch(() => {
+        });
+      }
     } else if (loyverseSavedHash) {
       const isMatch = verifyPassword(password, loyverseSavedHash);
       if (!isMatch) {
         return res.status(401).json({ error: "Contrase\xF1a incorrecta. Por favor verifica tus credenciales." });
       }
+      webUsersStore[query] = {
+        id: loyverseCustomer.id,
+        name: loyverseCustomer.name,
+        email: loyverseCustomer.email || query,
+        phone: loyverseCustomer.phone_number || "",
+        document: loyverseCustomer.customer_code || "",
+        city: loyverseCustomer.city || "Bogot\xE1, D.C.",
+        address: loyverseCustomer.address || "",
+        passwordHash: loyverseSavedHash,
+        loyverseCustomerId: loyverseCustomer.id,
+        createdAt: loyverseCustomer.created_at || (/* @__PURE__ */ new Date()).toISOString()
+      };
+      saveWebUsersStore();
     } else {
       return res.status(403).json({
-        error: "Esta cuenta fue registrada en nuestra tienda f\xEDsica. Por favor usa la opci\xF3n 'Crear Cuenta' o 'Registrarse' con tu correo para proteger tu acceso web."
+        error: "Esta cuenta fue registrada en nuestra tienda f\xEDsica sin clave web. Por favor usa la opci\xF3n 'Crear Cuenta' o 'Registrarse' con tu correo para asignar tu clave."
       });
     }
     const docMatch = loyverseCustomer?.note?.match(/CC:\s*([0-9]+)/i);
@@ -1163,10 +1189,15 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
               }
             } else if (customer.name && (cleanEmail || cleanPhone)) {
               const cleanDoc = (customer.document || "").trim().replace(/\D/g, "");
+              const existingHash = cleanEmail && webUsersStore[cleanEmail]?.passwordHash || "";
+              const noteParts = [];
+              if (cleanDoc) noteParts.push(`CC: ${cleanDoc}`);
+              noteParts.push("Cliente Web URBANNOISE \u2022 Creado en Checkout");
+              if (existingHash) noteParts.push(`[PW_WEB:${existingHash}]`);
               const newCustPayload = {
                 name: customer.name.trim().toUpperCase(),
                 email: cleanEmail || void 0,
-                note: cleanDoc ? `CC: ${cleanDoc} | Cliente Web URBANNOISE \u2022 Creado en Checkout` : "Cliente Web URBANNOISE \u2022 Creado en Checkout",
+                note: noteParts.join(" | "),
                 customer_code: cleanDoc || `WEB-${Math.floor(1e5 + Math.random() * 9e5)}`
               };
               if (cleanPhone) newCustPayload.phone_number = cleanPhone;
