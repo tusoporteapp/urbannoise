@@ -169,19 +169,8 @@ function matchPhone(phoneA, phoneB) {
   return false;
 }
 var webUsersStore = loadWebUsersStore();
-var DEMO_EMAIL = "cliente.prueba@urbannoise.co";
-if (!webUsersStore[DEMO_EMAIL] || !webUsersStore[DEMO_EMAIL].passwordHash.startsWith("scrypt:")) {
-  webUsersStore[DEMO_EMAIL] = {
-    id: "demo-cust-mateo",
-    name: "MATEO G\xD3MEZ RODR\xCDGUEZ",
-    email: DEMO_EMAIL,
-    phone: "3124589210",
-    city: "Bogot\xE1, D.C.",
-    address: "Calle 85 # 14-26, Apt 402, Chapinero",
-    passwordHash: hashPassword("prueba123"),
-    loyverseCustomerId: "demo-cust-mateo",
-    createdAt: (/* @__PURE__ */ new Date()).toISOString()
-  };
+if (webUsersStore["cliente.prueba@urbannoise.co"]) {
+  delete webUsersStore["cliente.prueba@urbannoise.co"];
   saveWebUsersStore();
 }
 var recentAnalyticsEvents = [];
