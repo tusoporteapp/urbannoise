@@ -1084,6 +1084,76 @@ app.post("/api/bold/create-payment-intent", (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+var activeServientregaClientKey = process.env.SERVIENTREGA_CLIENT_KEY || "";
+var activeServientregaBearerToken = process.env.SERVIENTREGA_BEARER_TOKEN || "";
+var activeServientregaEnv = process.env.SERVIENTREGA_ENV || "sandbox";
+app.get("/api/shipping/servientrega/status", (req, res) => {
+  res.json({
+    configured: Boolean(activeServientregaClientKey && activeServientregaBearerToken),
+    env: activeServientregaEnv,
+    hasClientKey: Boolean(activeServientregaClientKey),
+    hasBearerToken: Boolean(activeServientregaBearerToken),
+    docUrl: "https://www.servientregaapi.com/docs/public"
+  });
+});
+app.post("/api/shipping/servientrega/configure", requireAdminAuth, (req, res) => {
+  const { clientKey, bearerToken, env } = req.body;
+  if (clientKey !== void 0) activeServientregaClientKey = String(clientKey).trim();
+  if (bearerToken !== void 0) activeServientregaBearerToken = String(bearerToken).trim();
+  if (env === "prod" || env === "sandbox") activeServientregaEnv = env;
+  res.json({
+    success: true,
+    message: "Credenciales de Servientrega API actualizadas correctamente.",
+    configured: Boolean(activeServientregaClientKey && activeServientregaBearerToken),
+    env: activeServientregaEnv
+  });
+});
+app.get("/api/shipping/servientrega/tracking/:guia", rateLimit(6e4, 30), async (req, res) => {
+  try {
+    const rawGuia = req.params.guia;
+    const cleanGuia = String(rawGuia || "").trim();
+    if (!cleanGuia) {
+      return res.status(400).json({ success: false, error: "El n\xFAmero de gu\xEDa es requerido." });
+    }
+    if (!activeServientregaClientKey || !activeServientregaBearerToken) {
+      return res.status(400).json({
+        success: false,
+        configured: false,
+        error: "Servientrega API no est\xE1 configurada a\xFAn en el servidor.",
+        details: "Se requiere 'clientKey' y 'Bearer Token' proporcionados por Servientrega seg\xFAn https://www.servientregaapi.com/docs/public"
+      });
+    }
+    const targetUrl = `https://www.servientregaapi.com/public/integration/${encodeURIComponent(
+      activeServientregaClientKey
+    )}/siscore/guias/tracking/${encodeURIComponent(cleanGuia)}?env=${activeServientregaEnv}`;
+    const apiRes = await fetch(targetUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${activeServientregaBearerToken}`,
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await apiRes.json().catch(() => null);
+    if (!apiRes.ok) {
+      return res.status(apiRes.status).json({
+        success: false,
+        status: apiRes.status,
+        error: data?.message || data?.error || `Error ${apiRes.status} de Servientrega API`,
+        data
+      });
+    }
+    res.json({
+      success: true,
+      guia: cleanGuia,
+      tracking: data
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message || "Error al conectar con la API de Servientrega"
+    });
+  }
+});
 app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) => {
   try {
     const {
