@@ -1498,6 +1498,24 @@ app.post("/api/orders/update-tracking", requireAdminAuth, (req, res) => {
 app.get("/api/bold/webhook-events", requireAdminAuth, (req, res) => {
   res.json({ events: recentBoldWebhooks });
 });
+app.post("/api/admin/save-site-content", (req, res) => {
+  try {
+    const content = req.body;
+    if (!content || !Array.isArray(content.heroSlides)) {
+      return res.status(400).json({ success: false, error: "Contenido inv\xE1lido" });
+    }
+    const publicPath = import_path.default.join(process.cwd(), "public", "catalog", "site_content.json");
+    const distCatalogPath = import_path.default.join(process.cwd(), "dist", "catalog", "site_content.json");
+    import_fs.default.mkdirSync(import_path.default.dirname(publicPath), { recursive: true });
+    import_fs.default.writeFileSync(publicPath, JSON.stringify(content, null, 2), "utf-8");
+    if (import_fs.default.existsSync(import_path.default.dirname(distCatalogPath))) {
+      import_fs.default.writeFileSync(distCatalogPath, JSON.stringify(content, null, 2), "utf-8");
+    }
+    res.json({ success: true, message: "Contenido guardado en servidor" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await (0, import_vite.createServer)({
