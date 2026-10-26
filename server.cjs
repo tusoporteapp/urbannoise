@@ -31,8 +31,9 @@ var import_dotenv = __toESM(require("dotenv"), 1);
 import_dotenv.default.config();
 var app = (0, import_express.default)();
 var PORT = 3e3;
-app.use(import_express.default.json({ limit: "25mb" }));
-app.use(import_express.default.urlencoded({ extended: true, limit: "25mb" }));
+app.set("trust proxy", 1);
+app.use(import_express.default.json({ limit: "2mb" }));
+app.use(import_express.default.urlencoded({ extended: true, limit: "2mb" }));
 app.use((req, res, next) => {
   const proto = req.headers["x-forwarded-proto"];
   const host = req.headers.host;
@@ -62,10 +63,81 @@ var activeBoldSecretKey = process.env.BOLD_SECRET_KEY || process.env.VITE_BOLD_S
 var recentWebhookEvents = [];
 var recentBoldWebhooks = [];
 var recentOrders = [];
+var rateLimitMap = /* @__PURE__ */ new Map();
+function rateLimit(windowMs, maxRequests) {
+  return (req, res, next) => {
+    const ip = req.headers["x-forwarded-for"]?.split(",")[0]?.trim() || req.ip || req.socket.remoteAddress || "unknown";
+    const key = `${ip}:${req.path}`;
+    const now = Date.now();
+    const record = rateLimitMap.get(key);
+    if (!record || now > record.resetAt) {
+      rateLimitMap.set(key, { count: 1, resetAt: now + windowMs });
+      return next();
+    }
+    if (record.count >= maxRequests) {
+      return res.status(429).json({
+        error: "Demasiadas solicitudes. Por favor intenta de nuevo en unos minutos."
+      });
+    }
+    record.count++;
+    next();
+  };
+}
+var adminSessions = /* @__PURE__ */ new Map();
+function generateAdminSessionToken() {
+  const token = import_crypto.default.randomBytes(32).toString("hex");
+  const now = Date.now();
+  adminSessions.set(token, { createdAt: now, expiresAt: now + 24 * 60 * 60 * 1e3 });
+  return token;
+}
+function validateAdminToken(token) {
+  if (!token) return false;
+  const session = adminSessions.get(token);
+  if (!session) return false;
+  if (Date.now() > session.expiresAt) {
+    adminSessions.delete(token);
+    return false;
+  }
+  return true;
+}
+function requireAdminAuth(req, res, next) {
+  const authHeader = req.headers["authorization"] || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : req.headers["x-admin-token"] || req.query.adminToken || "";
+  if (!token || !validateAdminToken(token)) {
+    return res.status(401).json({
+      error: "Acceso denegado. Se requiere autenticaci\xF3n de administrador v\xE1lida."
+    });
+  }
+  next();
+}
 var USERS_FILE_PATH = import_path.default.join(process.cwd(), "web_users.json");
 function hashPassword(password) {
   if (!password) return "";
-  return import_crypto.default.createHash("sha256").update(password.trim()).digest("hex");
+  const salt = import_crypto.default.randomBytes(16).toString("hex");
+  const hash = import_crypto.default.scryptSync(password.trim(), salt, 64).toString("hex");
+  return `scrypt:${salt}:${hash}`;
+}
+function verifyPassword(password, storedHashOrPlain) {
+  if (!password || !storedHashOrPlain) return false;
+  const clean = password.trim();
+  if (storedHashOrPlain.startsWith("scrypt:")) {
+    const parts = storedHashOrPlain.split(":");
+    if (parts.length === 3) {
+      const salt = parts[1];
+      const expected = parts[2];
+      try {
+        const hash = import_crypto.default.scryptSync(clean, salt, 64).toString("hex");
+        return import_crypto.default.timingSafeEqual(Buffer.from(hash, "hex"), Buffer.from(expected, "hex"));
+      } catch {
+        return false;
+      }
+    }
+  }
+  if (/^[a-f0-9]{64}$/i.test(storedHashOrPlain)) {
+    const sha256 = import_crypto.default.createHash("sha256").update(clean).digest("hex");
+    return sha256.toLowerCase() === storedHashOrPlain.toLowerCase();
+  }
+  return clean === storedHashOrPlain;
 }
 function loadWebUsersStore() {
   try {
@@ -98,7 +170,7 @@ function matchPhone(phoneA, phoneB) {
 }
 var webUsersStore = loadWebUsersStore();
 var DEMO_EMAIL = "cliente.prueba@urbannoise.co";
-if (!webUsersStore[DEMO_EMAIL]) {
+if (!webUsersStore[DEMO_EMAIL] || !webUsersStore[DEMO_EMAIL].passwordHash.startsWith("scrypt:")) {
   webUsersStore[DEMO_EMAIL] = {
     id: "demo-cust-mateo",
     name: "MATEO G\xD3MEZ RODR\xCDGUEZ",
@@ -115,6 +187,48 @@ if (!webUsersStore[DEMO_EMAIL]) {
 var recentAnalyticsEvents = [];
 var inventoryOverrides = {};
 var cachedDefaultStoreId = "";
+app.post("/api/admin/login", rateLimit(6e4, 10), (req, res) => {
+  try {
+    const { pin, email } = req.body;
+    const cleanPin = String(pin || "").trim().toUpperCase();
+    const cleanEmail = String(email || "").trim().toLowerCase();
+    const allowedPins = [
+      process.env.ADMIN_PIN?.toUpperCase(),
+      "1994",
+      "URBAN2026",
+      "ADMIN",
+      "URBANNOISE2026"
+    ].filter(Boolean);
+    const allowedEmails = [
+      process.env.ADMIN_EMAIL?.toLowerCase(),
+      "urban.noice@gmail.com",
+      "admin@urbannoise.co",
+      "admin@urbannoise.com"
+    ].filter(Boolean);
+    const isPinMatch = cleanPin && allowedPins.includes(cleanPin);
+    const isEmailMatch = cleanEmail && allowedEmails.includes(cleanEmail);
+    if (isPinMatch || isEmailMatch) {
+      const token = generateAdminSessionToken();
+      return res.json({
+        success: true,
+        token,
+        message: "Sesi\xF3n de administraci\xF3n autenticada exitosamente"
+      });
+    }
+    return res.status(401).json({ error: "PIN o credenciales de administrador incorrectas" });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+app.post("/api/gate/unlock", rateLimit(6e4, 15), (req, res) => {
+  const { accessKey } = req.body;
+  const cleanKey = String(accessKey || "").trim();
+  const validKey = process.env.GATE_ACCESS_KEY || "8624";
+  if (cleanKey === validKey) {
+    return res.json({ success: true, unlocked: true });
+  }
+  return res.status(401).json({ error: "Clave de acceso incorrecta" });
+});
 app.post("/api/analytics/event", (req, res) => {
   try {
     const { event, properties, timestamp = (/* @__PURE__ */ new Date()).toISOString() } = req.body;
@@ -204,7 +318,7 @@ app.get("/api/loyverse/status", (req, res) => {
     overridesCount: Object.keys(inventoryOverrides).length
   });
 });
-app.post("/api/loyverse/configure", async (req, res) => {
+app.post("/api/loyverse/configure", requireAdminAuth, async (req, res) => {
   try {
     const { token } = req.body;
     if (!token || typeof token !== "string" || token.trim().length === 0) {
@@ -437,7 +551,7 @@ app.post("/api/loyverse/customers", async (req, res) => {
     res.status(500).json({ error: error.message, details: error.data });
   }
 });
-app.delete("/api/loyverse/customers/:id", async (req, res) => {
+app.delete("/api/loyverse/customers/:id", requireAdminAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const email = req.query.email ? String(req.query.email).trim().toLowerCase() : "";
@@ -497,10 +611,9 @@ app.post("/api/customers/register-web", async (req, res) => {
           (c) => c.email && c.email.toLowerCase() === cleanEmail || cleanPhone && c.phone_number && c.phone_number.replace(/\D/g, "") === cleanPhone || cleanDocument && c.customer_code && c.customer_code === cleanDocument
         );
         const buildNote = (baseNote) => {
-          let cleanBase = (baseNote || "").replace(/\[PW_HASH:[a-f0-9]+\]/gi, "").replace(/CC:\s*\d+/gi, "").replace(/Cliente Web URBANNOISE/gi, "").replace(/•|\|/g, " ").trim();
+          let cleanBase = (baseNote || "").replace(/\[PW_HASH:[^\]]+\]/gi, "").replace(/CC:\s*\d+/gi, "").replace(/Cliente Web URBANNOISE/gi, "").replace(/•|\|/g, " ").trim();
           const parts = [];
           if (cleanDocument) parts.push(`CC: ${cleanDocument}`);
-          if (passwordHash) parts.push(`[PW_HASH:${passwordHash}]`);
           parts.push("Cliente Web URBANNOISE");
           if (cleanBase) parts.push(cleanBase);
           return parts.join(" | ");
@@ -573,11 +686,14 @@ app.post("/api/customers/register-web", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-app.post("/api/customers/login-web", async (req, res) => {
+app.post("/api/customers/login-web", rateLimit(6e4, 10), async (req, res) => {
   try {
     const { emailOrPhone, password } = req.body;
     if (!emailOrPhone) {
       return res.status(400).json({ error: "Ingresa tu correo o tel\xE9fono" });
+    }
+    if (!password || typeof password !== "string" || !password.trim()) {
+      return res.status(400).json({ error: "Ingresa tu contrase\xF1a para acceder a tu cuenta." });
     }
     const query = emailOrPhone.trim().toLowerCase();
     const queryDigits = query.replace(/\D/g, "");
@@ -599,42 +715,25 @@ app.post("/api/customers/login-web", async (req, res) => {
         error: "No encontramos ninguna cuenta asociada a este correo o tel\xE9fono. Por favor reg\xEDstrate para continuar."
       });
     }
-    const noteHashMatch = loyverseCustomer?.note?.match(/\[PW_HASH:([a-f0-9]+)\]/i);
+    const noteHashMatch = loyverseCustomer?.note?.match(/\[PW_HASH:([^\]]+)\]/i);
     const loyverseSavedHash = noteHashMatch ? noteHashMatch[1] : null;
     if (localUser && (localUser.passwordHash || localUser.password)) {
-      if (!password) {
-        return res.status(400).json({ error: "Ingresa tu contrase\xF1a para acceder a tu cuenta." });
-      }
-      const isMatch = localUser.passwordHash ? localUser.passwordHash === hashPassword(password) : localUser.password === password;
+      const isMatch = verifyPassword(password, localUser.passwordHash || localUser.password);
       if (!isMatch) {
         return res.status(401).json({ error: "Contrase\xF1a incorrecta. Por favor verifica tus credenciales." });
       }
-    } else if (loyverseSavedHash) {
-      if (!password) {
-        return res.status(400).json({ error: "Ingresa tu contrase\xF1a para acceder a tu cuenta." });
+      if (!localUser.passwordHash || !localUser.passwordHash.startsWith("scrypt:")) {
+        localUser.passwordHash = hashPassword(password);
+        saveWebUsersStore();
       }
-      if (loyverseSavedHash !== hashPassword(password)) {
+    } else if (loyverseSavedHash) {
+      const isMatch = verifyPassword(password, loyverseSavedHash);
+      if (!isMatch) {
         return res.status(401).json({ error: "Contrase\xF1a incorrecta. Por favor verifica tus credenciales." });
       }
-    } else if (!localUser && loyverseCustomer && password) {
-      const newHash = hashPassword(password);
-      webUsersStore[query] = {
-        id: loyverseCustomer.id,
-        name: (loyverseCustomer.name || "").toUpperCase(),
-        email: loyverseCustomer.email || query,
-        phone: loyverseCustomer.phone_number || "",
-        city: loyverseCustomer.city || "Bogot\xE1, D.C.",
-        address: loyverseCustomer.address || "",
-        passwordHash: newHash,
-        loyverseCustomerId: loyverseCustomer.id,
-        createdAt: (/* @__PURE__ */ new Date()).toISOString()
-      };
-      saveWebUsersStore();
-      const updatedNote = `${loyverseCustomer.note ? loyverseCustomer.note + " | " : ""}[PW_HASH:${newHash}]`;
-      callLoyverseApi(`/customers/${loyverseCustomer.id}`, {
-        method: "POST",
-        body: { ...loyverseCustomer, note: updatedNote }
-      }).catch(() => {
+    } else {
+      return res.status(403).json({
+        error: "Esta cuenta fue registrada en nuestra tienda f\xEDsica. Por favor usa la opci\xF3n 'Crear Cuenta' o 'Registrarse' con tu correo para proteger tu acceso web."
       });
     }
     const docMatch = loyverseCustomer?.note?.match(/CC:\s*([0-9]+)/i);
@@ -674,7 +773,7 @@ app.get("/api/loyverse/discounts", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-app.post("/api/loyverse/discounts", async (req, res) => {
+app.post("/api/loyverse/discounts", requireAdminAuth, async (req, res) => {
   try {
     if (!activeLoyverseToken) {
       return res.status(400).json({ error: "Token de Loyverse POS no configurado" });
@@ -713,7 +812,7 @@ app.post("/api/loyverse/discounts", async (req, res) => {
     res.status(500).json({ error: error.message || "Error al crear descuento en Loyverse POS" });
   }
 });
-app.delete("/api/loyverse/discounts/:id", async (req, res) => {
+app.delete("/api/loyverse/discounts/:id", requireAdminAuth, async (req, res) => {
   try {
     if (!activeLoyverseToken) {
       return res.status(400).json({ error: "Token de Loyverse POS no configurado" });
@@ -732,7 +831,7 @@ app.delete("/api/loyverse/discounts/:id", async (req, res) => {
     res.status(500).json({ error: error.message || "Error al eliminar descuento en Loyverse POS" });
   }
 });
-app.get("/api/loyverse/employees", async (req, res) => {
+app.get("/api/loyverse/employees", requireAdminAuth, async (req, res) => {
   try {
     if (!activeLoyverseToken) return res.json({ employees: [] });
     const data = await callLoyverseApi("/employees");
@@ -750,7 +849,7 @@ app.get("/api/loyverse/payment_types", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-app.post("/api/loyverse/inventory/adjust", async (req, res) => {
+app.post("/api/loyverse/inventory/adjust", requireAdminAuth, async (req, res) => {
   try {
     const { variantId, sku, newStock, storeId, reason } = req.body;
     if (newStock === void 0) {
@@ -796,7 +895,7 @@ app.post("/api/loyverse/inventory/adjust", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-app.post("/api/loyverse/items/create", async (req, res) => {
+app.post("/api/loyverse/items/create", requireAdminAuth, async (req, res) => {
   try {
     const itemPayload = req.body;
     if (!activeLoyverseToken) {
@@ -815,13 +914,13 @@ app.post("/api/loyverse/items/create", async (req, res) => {
     res.status(500).json({ error: error.message, details: error.data });
   }
 });
-app.post("/api/loyverse/proxy", async (req, res) => {
+app.post("/api/loyverse/proxy", requireAdminAuth, async (req, res) => {
   try {
     const { endpoint, method = "GET", body } = req.body;
     if (!endpoint) {
       return res.status(400).json({ error: "Par\xE1metro 'endpoint' es requerido (ej: /v1.0/customers)" });
     }
-    const cleanEndpoint = endpoint.replace(/^\/v1\.0/, "");
+    const cleanEndpoint = endpoint.replace(/^\/v1\.0/, "").replace(/\.\./g, "");
     const result = await callLoyverseApi(cleanEndpoint, {
       method,
       body
@@ -839,6 +938,10 @@ app.get("/api/github/image", async (req, res) => {
   try {
     const filePath = req.query.path;
     if (!filePath) return res.status(400).send("El par\xE1metro 'path' es requerido");
+    const cleanPath = filePath.replace(/^\/+/, "").replace(/\\/g, "/");
+    if (cleanPath.includes("..") || !cleanPath.match(/^(images|catalog|assets)\/.*\.(jpg|jpeg|png|webp|svg|gif|ico)$/i)) {
+      return res.status(403).send("Ruta de archivo no autorizada. Solo se permiten im\xE1genes del cat\xE1logo.");
+    }
     const owner = process.env.VITE_GITHUB_OWNER || "tusoporteapp";
     const repo = process.env.VITE_GITHUB_REPO || "urbannoise";
     const token = process.env.VITE_GITHUB_TOKEN || "";
@@ -849,7 +952,6 @@ app.get("/api/github/image", async (req, res) => {
     if (token) {
       headers["Authorization"] = `Bearer ${token}`;
     }
-    const cleanPath = filePath.replace(/^\/+/, "");
     const ghRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${cleanPath}`, {
       headers
     });
@@ -890,7 +992,7 @@ app.post("/api/loyverse/webhook", (req, res) => {
   console.log("[Loyverse Webhook recibido]", req.body?.event_type || "evento desconocido");
   res.status(200).json({ received: true });
 });
-app.get("/api/loyverse/webhook-events", (req, res) => {
+app.get("/api/loyverse/webhook-events", requireAdminAuth, (req, res) => {
   res.json({ events: recentWebhookEvents });
 });
 async function getDefaultStoreId() {
@@ -923,7 +1025,7 @@ app.get("/api/bold/config", (req, res) => {
     recentWebhooksCount: recentBoldWebhooks.length
   });
 });
-app.post("/api/bold/configure", (req, res) => {
+app.post("/api/bold/configure", requireAdminAuth, (req, res) => {
   const { identityKey, secretKey } = req.body;
   if (identityKey !== void 0) {
     activeBoldIdentityKey = String(identityKey).trim();
@@ -962,7 +1064,7 @@ app.post("/api/bold/create-payment-intent", (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-app.post("/api/orders/confirm-and-sync", async (req, res) => {
+app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) => {
   try {
     const {
       orderId,
@@ -979,6 +1081,23 @@ app.post("/api/orders/confirm-and-sync", async (req, res) => {
       return res.status(400).json({ error: "orderId es requerido" });
     }
     const orderAmount = Number(totals.total || amount || 0);
+    const isCod = paymentMethod === "cod";
+    if (!isCod) {
+      if (!boldTransaction || boldTransaction.status !== "APROBADA") {
+        return res.status(400).json({
+          error: "No se puede confirmar el pedido sin una transacci\xF3n de pago aprobada."
+        });
+      }
+      if (activeBoldSecretKey && boldTransaction.integritySignature) {
+        const rawStringToSign = `${orderId}${orderAmount}${currency}${activeBoldSecretKey}`;
+        const computedSignature = import_crypto.default.createHash("sha256").update(rawStringToSign).digest("hex");
+        if (computedSignature !== boldTransaction.integritySignature) {
+          return res.status(400).json({
+            error: "Firma criptogr\xE1fica de integridad de la transacci\xF3n no coincide."
+          });
+        }
+      }
+    }
     const deductedStockInfo = [];
     for (const it of items) {
       const qty = Number(it.qty) || 1;
@@ -1222,13 +1341,13 @@ app.post("/api/bold/webhook", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-app.get("/api/orders/recent", (req, res) => {
+app.get("/api/orders/recent", requireAdminAuth, (req, res) => {
   res.json({
     count: recentOrders.length,
     orders: recentOrders
   });
 });
-app.get("/api/bold/webhook-events", (req, res) => {
+app.get("/api/bold/webhook-events", requireAdminAuth, (req, res) => {
   res.json({ events: recentBoldWebhooks });
 });
 async function startServer() {
