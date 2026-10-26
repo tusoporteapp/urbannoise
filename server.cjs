@@ -610,10 +610,15 @@ app.post("/api/customers/register-web", async (req, res) => {
         const existing = (listData.customers || []).find(
           (c) => c.email && c.email.toLowerCase() === cleanEmail || cleanPhone && c.phone_number && c.phone_number.replace(/\D/g, "") === cleanPhone || cleanDocument && c.customer_code && c.customer_code === cleanDocument
         );
+        const targetCity = city && city.trim() || existing?.city || "";
+        const targetAddress = address && address.trim() || existing?.address || "";
+        const targetDoc = cleanDocument || (existing?.customer_code && !existing.customer_code.startsWith("WEB-") ? existing.customer_code : "");
         const buildNote = (baseNote) => {
-          let cleanBase = (baseNote || "").replace(/\[PW_(?:WEB|HASH):[^\]]+\]/gi, "").replace(/CC:\s*\d+/gi, "").replace(/Cliente Web URBANNOISE/gi, "").replace(/•|\|/g, " ").trim();
+          let cleanBase = (baseNote || "").replace(/\[PW_(?:WEB|HASH):[^\]]+\]/gi, "").replace(/CC:\s*[^|•]+/gi, "").replace(/Ciudad:\s*[^|•]+/gi, "").replace(/Dir:\s*[^|•]+/gi, "").replace(/Cliente Web URBANNOISE[^|•]*/gi, "").replace(/•|\|/g, " ").trim();
           const parts = [];
-          if (cleanDocument) parts.push(`CC: ${cleanDocument}`);
+          if (targetDoc) parts.push(`CC: ${targetDoc}`);
+          if (targetCity) parts.push(`Ciudad: ${targetCity}`);
+          if (targetAddress) parts.push(`Dir: ${targetAddress}`);
           parts.push("Cliente Web URBANNOISE");
           if (passwordHash) parts.push(`[PW_WEB:${passwordHash}]`);
           if (cleanBase) parts.push(cleanBase);
@@ -626,10 +631,10 @@ app.post("/api/customers/register-web", async (req, res) => {
             body: {
               ...existing,
               note: buildNote(existing.note),
-              customer_code: existing.customer_code || cleanDocument || void 0,
+              customer_code: targetDoc || void 0,
               phone_number: cleanPhone || existing.phone_number,
-              address: address ? address.trim() : existing.address,
-              city: city ? city.trim() : existing.city
+              address: targetAddress || existing.address,
+              city: targetCity || existing.city
             }
           }).catch(() => {
           });
@@ -638,11 +643,11 @@ app.post("/api/customers/register-web", async (req, res) => {
             name: name.trim().toUpperCase(),
             email: cleanEmail,
             note: buildNote(),
-            customer_code: cleanDocument || `WEB-${Math.floor(1e5 + Math.random() * 9e5)}`
+            customer_code: targetDoc || `WEB-${Math.floor(1e5 + Math.random() * 9e5)}`
           };
           if (cleanPhone) customerPayload.phone_number = cleanPhone;
-          if (address) customerPayload.address = address.trim();
-          if (city) customerPayload.city = city.trim();
+          if (targetAddress) customerPayload.address = targetAddress;
+          if (targetCity) customerPayload.city = targetCity;
           loyverseCustomer = await callLoyverseApi("/customers", {
             method: "POST",
             body: customerPayload
@@ -1175,38 +1180,45 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
             const existing = (listData.customers || []).find(
               (c) => cleanEmail && c.email && c.email.toLowerCase() === cleanEmail || cleanPhone && c.phone_number && c.phone_number.replace(/\D/g, "") === cleanPhone
             );
+            const cCity = customer.city || shippingAddress?.city || "";
+            const cAddr = customer.address || shippingAddress?.address || "";
+            const cleanDoc = (customer.document || "").trim().replace(/\D/g, "");
+            const existingHash = cleanEmail && webUsersStore[cleanEmail]?.passwordHash || "";
+            const buildCheckoutNote = (baseNote) => {
+              let cleanBase = (baseNote || "").replace(/\[PW_(?:WEB|HASH):[^\]]+\]/gi, "").replace(/CC:\s*[^|•]+/gi, "").replace(/Ciudad:\s*[^|•]+/gi, "").replace(/Dir:\s*[^|•]+/gi, "").replace(/Cliente Web URBANNOISE[^|•]*/gi, "").replace(/•|\|/g, " ").trim();
+              const parts = [];
+              if (cleanDoc) parts.push(`CC: ${cleanDoc}`);
+              if (cCity) parts.push(`Ciudad: ${cCity}`);
+              if (cAddr) parts.push(`Dir: ${cAddr}`);
+              parts.push("Cliente Web URBANNOISE");
+              if (existingHash) parts.push(`[PW_WEB:${existingHash}]`);
+              if (cleanBase) parts.push(cleanBase);
+              return parts.join(" | ");
+            };
             if (existing) {
               attachedCustomerId = existing.id;
-              if (!existing.note?.toLowerCase().includes("web")) {
-                await callLoyverseApi(`/customers/${existing.id}`, {
-                  method: "POST",
-                  body: {
-                    ...existing,
-                    note: `${existing.note ? existing.note + " \u2022 " : ""}Cliente Web URBANNOISE`
-                  }
-                }).catch(() => {
-                });
-              }
+              await callLoyverseApi(`/customers/${existing.id}`, {
+                method: "POST",
+                body: {
+                  ...existing,
+                  note: buildCheckoutNote(existing.note),
+                  customer_code: existing.customer_code || cleanDoc || void 0,
+                  phone_number: cleanPhone || existing.phone_number,
+                  address: cAddr || existing.address,
+                  city: cCity || existing.city
+                }
+              }).catch(() => {
+              });
             } else if (customer.name && (cleanEmail || cleanPhone)) {
-              const cleanDoc = (customer.document || "").trim().replace(/\D/g, "");
-              const existingHash = cleanEmail && webUsersStore[cleanEmail]?.passwordHash || "";
-              const noteParts = [];
-              if (cleanDoc) noteParts.push(`CC: ${cleanDoc}`);
-              noteParts.push("Cliente Web URBANNOISE \u2022 Creado en Checkout");
-              if (existingHash) noteParts.push(`[PW_WEB:${existingHash}]`);
               const newCustPayload = {
                 name: customer.name.trim().toUpperCase(),
                 email: cleanEmail || void 0,
-                note: noteParts.join(" | "),
+                note: buildCheckoutNote(),
                 customer_code: cleanDoc || `WEB-${Math.floor(1e5 + Math.random() * 9e5)}`
               };
               if (cleanPhone) newCustPayload.phone_number = cleanPhone;
-              if (customer.address || shippingAddress?.address) {
-                newCustPayload.address = customer.address || shippingAddress?.address;
-              }
-              if (customer.city || shippingAddress?.city) {
-                newCustPayload.city = customer.city || shippingAddress?.city;
-              }
+              if (cAddr) newCustPayload.address = cAddr;
+              if (cCity) newCustPayload.city = cCity;
               const createdCust = await callLoyverseApi("/customers", {
                 method: "POST",
                 body: newCustPayload
