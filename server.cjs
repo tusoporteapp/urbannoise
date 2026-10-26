@@ -62,7 +62,26 @@ var activeBoldIdentityKey = process.env.BOLD_IDENTITY_KEY || process.env.VITE_BO
 var activeBoldSecretKey = process.env.BOLD_SECRET_KEY || process.env.VITE_BOLD_SECRET_KEY || "";
 var recentWebhookEvents = [];
 var recentBoldWebhooks = [];
-var recentOrders = [];
+var ORDERS_FILE_PATH = import_path.default.join(process.cwd(), "web_orders.json");
+function loadRecentOrders() {
+  try {
+    if (import_fs.default.existsSync(ORDERS_FILE_PATH)) {
+      const raw = import_fs.default.readFileSync(ORDERS_FILE_PATH, "utf8");
+      return JSON.parse(raw);
+    }
+  } catch (e) {
+    console.warn("[Orders Store] Error cargando \xF3rdenes:", e);
+  }
+  return [];
+}
+function saveRecentOrders() {
+  try {
+    import_fs.default.writeFileSync(ORDERS_FILE_PATH, JSON.stringify(recentOrders, null, 2), "utf8");
+  } catch (e) {
+    console.warn("[Orders Store] Error guardando \xF3rdenes:", e);
+  }
+}
+var recentOrders = loadRecentOrders();
 var rateLimitMap = /* @__PURE__ */ new Map();
 function rateLimit(windowMs, maxRequests) {
   return (req, res, next) => {
@@ -1408,6 +1427,7 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
     };
     recentOrders.unshift(orderRecord);
     if (recentOrders.length > 100) recentOrders.pop();
+    saveRecentOrders();
     res.json({
       success: true,
       orderId,
@@ -1448,6 +1468,32 @@ app.get("/api/orders/recent", requireAdminAuth, (req, res) => {
     count: recentOrders.length,
     orders: recentOrders
   });
+});
+app.post("/api/orders/update-tracking", requireAdminAuth, (req, res) => {
+  try {
+    const { orderId, trackingNumber, trackingCompany = "Servientrega Express Nacional", estimatedDelivery } = req.body;
+    if (!orderId) {
+      return res.status(400).json({ success: false, error: "orderId es requerido" });
+    }
+    const cleanGuia = String(trackingNumber || "").trim();
+    const order = recentOrders.find((o) => o.orderId === orderId || o.id === orderId);
+    if (order) {
+      order.trackingNumber = cleanGuia || void 0;
+      order.trackingCompany = trackingCompany;
+      if (estimatedDelivery) order.estimatedDelivery = estimatedDelivery;
+      order.status = cleanGuia ? "EN_CAMINO" : "CONFIRMADO";
+      order.statusLabel = cleanGuia ? "En Ruta con Servientrega" : "En Preparaci\xF3n para Despacho";
+      saveRecentOrders();
+      return res.json({
+        success: true,
+        message: cleanGuia ? "Gu\xEDa de Servientrega asignada correctamente" : "Gu\xEDa eliminada",
+        order
+      });
+    }
+    res.status(404).json({ success: false, error: "Orden no encontrada en el sistema" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 app.get("/api/bold/webhook-events", requireAdminAuth, (req, res) => {
   res.json({ events: recentBoldWebhooks });
