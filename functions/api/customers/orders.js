@@ -110,10 +110,16 @@ export async function onRequestGet({ request }) {
 
       const dateObj = r.created_at ? new Date(r.created_at) : new Date();
       const dateFormatted = dateObj.toLocaleDateString("es-CO", {
+        timeZone: "America/Bogota",
         day: "numeric",
         month: "short",
         year: "numeric",
-      }) + " • " + dateObj.toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit" });
+      }) + " • " + dateObj.toLocaleTimeString("es-CO", {
+        timeZone: "America/Bogota",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      });
 
       const timeline = [
         {
@@ -127,7 +133,7 @@ export async function onRequestGet({ request }) {
           title: "En Preparación",
           date: dateFormatted,
           completed: true,
-          current: !trackingNumber,
+          current: false,
           detail: "Prendas empacadas y embaladas con estándares de protección de URBANNOISE.",
         },
         {
@@ -137,7 +143,7 @@ export async function onRequestGet({ request }) {
           current: Boolean(trackingNumber),
           detail: trackingNumber
             ? `Tu pedido ha sido despachado con ${trackingCompany}. Número de guía: #${trackingNumber}.`
-            : "Asignando guía oficial con la transportadora nacional.",
+            : "Pendiente de asignación de guía en la transportadora nacional.",
         },
       ];
 
