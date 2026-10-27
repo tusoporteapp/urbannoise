@@ -253,21 +253,21 @@ app.post("/api/admin/login", rateLimit(6e4, 10), (req, res) => {
     const { pin, email } = req.body;
     const cleanPin = String(pin || "").trim().toUpperCase();
     const cleanEmail = String(email || "").trim().toLowerCase();
+    if (!cleanPin) {
+      return res.status(401).json({ error: "El PIN de administrador es obligatorio." });
+    }
     const allowedPins = [
       process.env.ADMIN_PIN?.toUpperCase(),
       "1994",
       "URBAN2026",
       "URBANNOISE2026"
     ].filter(Boolean);
-    const allowedEmails = [
-      process.env.ADMIN_EMAIL?.toLowerCase(),
-      "urban.noice@gmail.com",
-      "admin@urbannoise.co",
-      "admin@urbannoise.com"
-    ].filter(Boolean);
-    const isPinMatch = cleanPin && allowedPins.includes(cleanPin);
-    const isEmailMatch = cleanEmail && allowedEmails.includes(cleanEmail);
-    if (isPinMatch || isEmailMatch) {
+    const isPinMatch = allowedPins.some((allowed) => {
+      const pinBuf = Buffer.from(cleanPin, "utf8");
+      const allowedBuf = Buffer.from(allowed, "utf8");
+      return pinBuf.length === allowedBuf.length && import_crypto.default.timingSafeEqual(pinBuf, allowedBuf);
+    });
+    if (isPinMatch) {
       const token = generateAdminSessionToken();
       return res.json({
         success: true,
@@ -275,7 +275,7 @@ app.post("/api/admin/login", rateLimit(6e4, 10), (req, res) => {
         message: "Sesi\xF3n de administraci\xF3n autenticada exitosamente"
       });
     }
-    return res.status(401).json({ error: "PIN o credenciales de administrador incorrectas" });
+    return res.status(401).json({ error: "PIN o credenciales de administrador incorrectas." });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
@@ -1561,6 +1561,16 @@ app.post("/api/bold/webhook", async (req, res) => {
     };
     recentBoldWebhooks.unshift(event);
     if (recentBoldWebhooks.length > 50) recentBoldWebhooks.pop();
+    const incomingSignature = req.headers["x-bold-signature"] || req.headers["x-webhook-signature"] || "";
+    if (activeBoldSecretKey && incomingSignature) {
+      const expectedHmac = import_crypto.default.createHmac("sha256", activeBoldSecretKey).update(JSON.stringify(payload)).digest("hex");
+      const sigBuf = Buffer.from(incomingSignature.toLowerCase(), "utf8");
+      const expBuf = Buffer.from(expectedHmac.toLowerCase(), "utf8");
+      if (sigBuf.length !== expBuf.length || !import_crypto.default.timingSafeEqual(sigBuf, expBuf)) {
+        console.warn("[Bold Webhook] Rechazado: Firma HMAC no coincide.");
+        return res.status(401).json({ error: "Firma de webhook inv\xE1lida." });
+      }
+    }
     const eventType = payload?.type || payload?.event || payload?.status || "UNKNOWN";
     console.log("[Bold Webhook Recibido]", eventType, payload);
     const isApproved = eventType === "SALE_APPROVED" || eventType === "payment.approved" || payload?.status === "APPROVED" || payload?.data?.status === "APPROVED";
