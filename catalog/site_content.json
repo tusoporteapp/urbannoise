@@ -11,7 +11,7 @@
       "ctaAnchor": "#latest-drops",
       "ctaText": "COMPRAR DROP AHORA",
       "badge": "NOVEDADES SEMANALES",
-      "badgeSub": "hola"
+      "badgeSub": "TALLAS S - XL"
     },
     {
       "id": 1,
@@ -40,22 +40,6 @@
       "badgeSub": "TALLAS S - XL"
     }
   ],
-  "announcements": {
-    "leftTag": "COP | $",
-    "leftSub": "Envíos a toda Colombia • Tallas S - XL",
-    "marqueeText": "DESPACHO DE CORTESÍA POR COMPRAS DESDE $150.000 COP • ENVÍOS A TODA COLOMBIA • PAGOS 100% SEGUROS Y PSE",
-    "desktopText": "DESPACHO DE CORTESÍA EN BOGOTÁ Y COLOMBIA POR COMPRAS DESDE $150.000 COP • ",
-    "desktopCta": "VER CATÁLOGO →"
-  },
-  "flagship": {
-    "kicker": "PIONEROS DESDE 2024",
-    "title": "URBANNOISE CONCEPT STORE",
-    "storeHours": "Lunes a Sábado: 9:00 AM - 7:00 PM • Domingos: 10:00 AM - 4:00 PM",
-    "onlineHours": "Lunes a Sábado: 8:00 AM - 8:00 PM (Despachos a toda Colombia)",
-    "address": "Cra 10 # 9-37 Local 23-54, Centro Comercial El GranSan, Bogotá - Colombia",
-    "whatsappNumber": "(+57) 310 872 0491",
-    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Cra+10+%23+9-37+Local+23-54+Bogota+Colombia+El+GranSan"
-  },
   "categories": [
     {
       "id": "latest-drops",
@@ -86,6 +70,22 @@
       "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop"
     }
   ],
+  "announcements": {
+    "leftTag": "COP | $",
+    "leftSub": "Envíos a toda Colombia • Tallas S - XL",
+    "marqueeText": "DESPACHO DE CORTESÍA POR COMPRAS DESDE $150.000 COP • ENVÍOS A TODA COLOMBIA • PAGOS 100% SEGUROS Y PSE",
+    "desktopText": "DESPACHO DE CORTESÍA EN BOGOTÁ Y COLOMBIA POR COMPRAS DESDE $150.000 COP • ",
+    "desktopCta": "VER CATÁLOGO →"
+  },
+  "flagship": {
+    "kicker": "PIONEROS DESDE 2024",
+    "title": "URBANNOISE CONCEPT STORE",
+    "storeHours": "Lunes a Sábado: 9:00 AM - 7:00 PM • Domingos: 10:00 AM - 4:00 PM",
+    "onlineHours": "Lunes a Sábado: 8:00 AM - 8:00 PM (Despachos a toda Colombia)",
+    "address": "Cra 10 # 9-37 Local 23-54, Centro Comercial El GranSan, Bogotá - Colombia",
+    "whatsappNumber": "(+57) 310 872 0491",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Cra+10+%23+9-37+Local+23-54+Bogota+Colombia+El+GranSan"
+  },
   "manifesto": {
     "kicker": "VISIÓN & ESENCIA",
     "title": "CURADURÍA CON INTENCIÓN: ARTE ✦ FRESCO ✦ TUYO",
@@ -120,5 +120,5 @@
     "damaOversizeKicker": "SILUETAS RELAJADAS",
     "damaOversizeTitle": "DAMA OVERSIZE"
   },
-  "lastUpdated": "2026-10-27T15:50:02.437Z"
+  "lastUpdated": "2026-10-26T13:50:00.000Z"
 }
