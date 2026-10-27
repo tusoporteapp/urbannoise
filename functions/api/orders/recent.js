@@ -29,28 +29,46 @@ export async function onRequestGet() {
           source === "sitioweb"
         );
       })
-      .map((r) => ({
-        id: r.order || r.receipt_number,
-        orderId: r.order || r.receipt_number,
-        orderNumber: r.order || r.receipt_number,
-        receiptNumber: r.receipt_number,
-        total_money: r.total_money,
-        amount: r.total_money,
-        customer_name: r.customer_name || (r.note?.match(/Cliente:\s*([^•-]+)/) ? r.note.match(/Cliente:\s*([^•-]+)/)[1].trim() : "Cliente Web"),
-        customer: {
-          name: r.customer_name || (r.note?.match(/Cliente:\s*([^•-]+)/) ? r.note.match(/Cliente:\s*([^•-]+)/)[1].trim() : "Cliente Web"),
-        },
-        paymentMethod: r.payments?.[0]?.name || "Bold.co",
-        created_at: r.created_at,
-        status: "CONFIRMADO",
-        loyverseSyncStatus: "SUCCESS",
-        loyverseReceipt: {
+      .map((r) => {
+        const parsedItems = (r.line_items || []).map((li) => ({
+          name: li.item_name || "Prenda URBANNOISE",
+          size: li.variant_name || "Talla Única",
+          quantity: li.quantity || 1,
+          qty: li.quantity || 1,
+          price: li.price || 0,
+          total: li.total_money || li.gross_total_money || ((li.price || 0) * (li.quantity || 1)),
+          sku: li.sku || "N/A",
+        }));
+
+        return {
+          id: r.order || r.receipt_number,
+          orderId: r.order || r.receipt_number,
+          orderNumber: r.order || r.receipt_number,
+          receiptNumber: r.receipt_number,
           receipt_number: r.receipt_number,
           total_money: r.total_money,
+          amount: r.total_money,
+          note: r.note,
+          customer_id: r.customer_id,
+          line_items: r.line_items || [],
+          items: parsedItems,
+          customer_name: r.customer_name || (r.note?.match(/Cliente:\s*([^•-]+)/) ? r.note.match(/Cliente:\s*([^•-]+)/)[1].trim() : "Cliente Web"),
+          customer: {
+            name: r.customer_name || (r.note?.match(/Cliente:\s*([^•-]+)/) ? r.note.match(/Cliente:\s*([^•-]+)/)[1].trim() : "Cliente Web"),
+          },
+          paymentMethod: r.payments?.[0]?.name || "Bold.co",
+          payments: r.payments || [],
           created_at: r.created_at,
-          syncedToPos: true,
-        },
-      }));
+          status: "CONFIRMADO",
+          loyverseSyncStatus: "SUCCESS",
+          loyverseReceipt: {
+            receipt_number: r.receipt_number,
+            total_money: r.total_money,
+            created_at: r.created_at,
+            syncedToPos: true,
+          },
+        };
+      });
 
     return new Response(JSON.stringify({ count: webOrders.length, orders: webOrders }), {
       status: 200,
