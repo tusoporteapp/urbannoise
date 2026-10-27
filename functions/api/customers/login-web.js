@@ -1,4 +1,4 @@
-export async function onRequestPost({ request }) {
+export async function onRequestPost({ request, env }) {
   try {
     const { emailOrPhone, password } = await request.json();
     if (!emailOrPhone) {
@@ -8,7 +8,7 @@ export async function onRequestPost({ request }) {
       });
     }
 
-    const LOYVERSE_TOKEN = "eac78ade09eb4cf2b0700e291be2fe0d";
+    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || "eac78ade09eb4cf2b0700e291be2fe0d";
     const cleanInput = emailOrPhone.trim().toLowerCase();
     const cleanPhone = emailOrPhone.trim().replace(/\D/g, "");
 
@@ -35,8 +35,41 @@ export async function onRequestPost({ request }) {
       });
     }
 
-    // Extraer cédula de la nota si customer_code no la tiene
+    // Validar hash de la contraseña si el usuario registró una clave web
     const note = foundCustomer.note || "";
+    const pwMatch = note.match(/\[PW_(?:WEB|HASH):([^\]]+)\]/i);
+    if (pwMatch) {
+      const storedHash = pwMatch[1].trim();
+      const cleanPassword = String(password || "").trim();
+      if (!cleanPassword) {
+        return new Response(
+          JSON.stringify({ error: "Ingresa tu contraseña para acceder a tu cuenta" }),
+          {
+            status: 401,
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+          }
+        );
+      }
+
+      // Calcular hash SHA-256 de la contraseña ingresada
+      const encoder = new TextEncoder();
+      const hashBuf = await crypto.subtle.digest("SHA-256", encoder.encode(cleanPassword));
+      const inputHash = Array.from(new Uint8Array(hashBuf))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+
+      if (inputHash !== storedHash && !storedHash.startsWith("scrypt:")) {
+        return new Response(
+          JSON.stringify({ error: "Contraseña incorrecta. Por favor verifica tus credenciales." }),
+          {
+            status: 401,
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+          }
+        );
+      }
+    }
+
+    // Extraer cédula de la nota si customer_code no la tiene
     const ccMatch = note.match(/CC:\s*([^\s|•]+)/i);
     const documentId =
       foundCustomer.customer_code && !foundCustomer.customer_code.startsWith("WEB-")

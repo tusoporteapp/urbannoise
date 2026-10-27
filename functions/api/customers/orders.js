@@ -74,12 +74,12 @@ export async function onRequestGet({ request }) {
         attachedCust = customers.find((c) => c.id === "eed0d7e0-e4a0-463a-9abd-f04890500739");
       }
 
-      const clientName = attachedCust?.name || (nameMatch ? nameMatch[1].trim() : "JEISSON TRIANA");
-      const clientEmail = attachedCust?.email || email || "migoel585@gmail.com";
-      const clientPhone = attachedCust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : "3003926061");
-      const clientDoc = attachedCust?.customer_code || (ccMatch ? ccMatch[1].trim() : (doc || "1013636801"));
-      const clientAddress = attachedCust?.address || (addrMatch ? addrMatch[1].trim() : "cl 2 sur 11 c 45");
-      const clientCity = attachedCust?.city || (cityMatch ? cityMatch[1].trim() : "Bogota");
+      const clientName = attachedCust?.name || (nameMatch ? nameMatch[1].trim() : (email ? email.split("@")[0].toUpperCase() : "Cliente URBANNOISE"));
+      const clientEmail = attachedCust?.email || email || "";
+      const clientPhone = attachedCust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : "");
+      const clientDoc = attachedCust?.customer_code || (ccMatch ? ccMatch[1].trim() : (doc || ""));
+      const clientAddress = attachedCust?.address || (addrMatch ? addrMatch[1].trim() : "");
+      const clientCity = attachedCust?.city || (cityMatch ? cityMatch[1].trim() : "Bogotá D.C.");
 
       // Buscar guía en la nota del cliente o en la nota del recibo
       const custNote = attachedCust?.note || "";

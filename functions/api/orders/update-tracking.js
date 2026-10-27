@@ -1,5 +1,19 @@
-export async function onRequestPost({ request }) {
+import { isAuthorizedAdmin } from "../_auth.js";
+
+export async function onRequestPost({ request, env }) {
   try {
+    // 1. Proteger actualización de guías con autorización de Administrador
+    const authorized = await isAuthorizedAdmin(request, env);
+    if (!authorized) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Acceso denegado. Se requiere autenticación de administrador." }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        }
+      );
+    }
+
     const {
       orderId,
       trackingNumber,
@@ -26,7 +40,7 @@ export async function onRequestPost({ request }) {
     }
 
     // Persistir permanentemente en Loyverse POS (en la ficha del cliente)
-    const LOYVERSE_TOKEN = "eac78ade09eb4cf2b0700e291be2fe0d";
+    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || "eac78ade09eb4cf2b0700e291be2fe0d";
     try {
       // 1. Obtener la lista de clientes para ubicar el id
       const listRes = await fetch("https://api.loyverse.com/v1.0/customers?limit=100", {
@@ -41,8 +55,7 @@ export async function onRequestPost({ request }) {
         const targetCust = customers.find(
           (c) =>
             (customerId && c.id === customerId) ||
-            (cleanEmail && c.email && c.email.toLowerCase() === cleanEmail) ||
-            c.id === "eed0d7e0-e4a0-463a-9abd-f04890500739" // Cuenta web oficial JEISSON TRIANA
+            (cleanEmail && c.email && c.email.toLowerCase() === cleanEmail)
         );
 
         if (targetCust) {
@@ -63,35 +76,26 @@ export async function onRequestPost({ request }) {
             },
             body: JSON.stringify({
               id: targetCust.id,
-              name: targetCust.name || "JEISSON TRIANA",
-              email: targetCust.email || "migoel585@gmail.com",
-              phone_number: targetCust.phone_number || "573003926061",
-              address: targetCust.address || "cl 2 sur 11 c 45",
-              city: targetCust.city || "Bogota",
-              customer_code: targetCust.customer_code || "1013636801",
+              name: targetCust.name,
               note: currentNote,
             }),
           });
         }
       }
-    } catch (persistErr) {
-      console.warn("[Tracking Persistence Warning]:", persistErr.message);
+    } catch (loyverseErr) {
+      console.warn("[Loyverse Tracking Sync Warning]:", loyverseErr.message);
     }
 
     return new Response(
       JSON.stringify({
         success: true,
-        message: cleanGuia
-          ? `Guía de ${cleanCompany} asignada y notificada correctamente`
-          : "Guía eliminada",
         orderId,
-        trackingNumber: cleanGuia || undefined,
+        trackingNumber: cleanGuia,
         trackingCompany: cleanCompany,
-        trackingUrl: cleanGuia ? trackingUrl : undefined,
+        trackingUrl,
         status: cleanGuia ? "ENVIADO" : "EN_PREPARACION",
-        statusLabel: cleanGuia
-          ? `Enviado con ${cleanCompany}`
-          : "En Preparación",
+        statusLabel: cleanGuia ? `Enviado con ${cleanCompany}` : "En Preparación",
+        updatedAt: new Date().toISOString(),
       }),
       {
         status: 200,
@@ -112,7 +116,7 @@ export async function onRequestOptions() {
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization, x-admin-key",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization, x-admin-token, x-admin-key",
     },
   });
 }
