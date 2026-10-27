@@ -1,8 +1,8 @@
-# Robots.txt para URBANNOISE - Moda Urbana & Streetwear Bogotá
+# Robots.txt para URBANNOISE - Marca de Ropa Colombiana Oversize
 User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin
 
 # Sitemap Oficial
-Sitemap: https://ais-pre-eqft2ztcqhbvyjbwwel2ya-102805558481.us-east1.run.app/sitemap.xml
+Sitemap: https://www.urbannoise.co/sitemap.xml
