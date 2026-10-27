@@ -75,16 +75,8 @@ export async function onRequestGet() {
         let trackingUrl = undefined;
         if (trackingNumber) {
           const compLower = trackingCompany.toLowerCase();
-          if (compLower.includes("coordinadora")) {
-            trackingUrl = `https://coordinadora.com/rastreo/rastreo-de-guia/detalle-de-rastreo-de-guia/?guia=${trackingNumber}`;
-          } else if (compLower.includes("interrapid") || compLower.includes("inter rapidisimo")) {
+          if (compLower.includes("interrapid") || compLower.includes("inter rapidisimo")) {
             trackingUrl = `https://www.interrapidisimo.com/siga/?guia=${trackingNumber}`;
-          } else if (compLower.includes("envia") || compLower.includes("envía")) {
-            trackingUrl = `https://envia.co/?guia=${trackingNumber}`;
-          } else if (compLower.includes("tcc")) {
-            trackingUrl = `https://tcc.com.co/rastreo-envios/?guia=${trackingNumber}`;
-          } else if (compLower.includes("bogota") || compLower.includes("domicilio") || compLower.includes("mensajer")) {
-            trackingUrl = `https://wa.me/573003926061?text=${encodeURIComponent(`Hola, deseo consultar el estado de la entrega express en Bogotá de la orden #${r.order || r.receipt_number}`)}`;
           } else {
             trackingUrl = `https://www.servientrega.com/wps/portal/rastreo-envio?guia=${trackingNumber}`;
           }
@@ -133,8 +125,8 @@ export async function onRequestGet() {
           paymentMethod: r.payments?.[0]?.name || "Bold.co (Bancolombia QR / PSE)",
           payments: r.payments || [],
           created_at: r.created_at,
-          status: trackingNumber ? "EN_CAMINO" : "SINCRONIZADO POS",
-          statusLabel: trackingNumber ? `En Ruta con ${trackingCompany}` : "En Preparación para Despacho",
+          status: trackingNumber ? "ENVIADO" : "EN_PREPARACION",
+          statusLabel: trackingNumber ? `Enviado con ${trackingCompany}` : "En Preparación",
           loyverseSyncStatus: "SUCCESS",
           loyverseReceipt: {
             receipt_number: r.receipt_number,

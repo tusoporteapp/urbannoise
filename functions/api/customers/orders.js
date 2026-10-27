@@ -92,16 +92,8 @@ export async function onRequestGet({ request }) {
       let trackingUrl = undefined;
       if (trackingNumber) {
         const compLower = trackingCompany.toLowerCase();
-        if (compLower.includes("coordinadora")) {
-          trackingUrl = `https://coordinadora.com/rastreo/rastreo-de-guia/detalle-de-rastreo-de-guia/?guia=${trackingNumber}`;
-        } else if (compLower.includes("interrapid") || compLower.includes("inter rapidisimo")) {
+        if (compLower.includes("interrapid") || compLower.includes("inter rapidisimo")) {
           trackingUrl = `https://www.interrapidisimo.com/siga/?guia=${trackingNumber}`;
-        } else if (compLower.includes("envia") || compLower.includes("envía")) {
-          trackingUrl = `https://envia.co/?guia=${trackingNumber}`;
-        } else if (compLower.includes("tcc")) {
-          trackingUrl = `https://tcc.com.co/rastreo-envios/?guia=${trackingNumber}`;
-        } else if (compLower.includes("bogota") || compLower.includes("domicilio") || compLower.includes("mensajer")) {
-          trackingUrl = `https://wa.me/573003926061?text=${encodeURIComponent(`Hola, deseo consultar el estado de la entrega express en Bogotá de la orden #${orderId}`)}`;
         } else {
           trackingUrl = `https://www.servientrega.com/wps/portal/rastreo-envio?guia=${trackingNumber}`;
         }
@@ -128,31 +120,24 @@ export async function onRequestGet({ request }) {
           title: "Pedido Confirmado",
           date: dateFormatted,
           completed: true,
-          current: !trackingNumber,
+          current: false,
           detail: "Pago aprobado a través de pasarela y orden registrada en el sistema central.",
         },
         {
           title: "En Preparación",
           date: dateFormatted,
           completed: true,
-          current: false,
+          current: !trackingNumber,
           detail: "Prendas empacadas y embaladas con estándares de protección de URBANNOISE.",
         },
         {
-          title: "En Camino / Despachado",
-          date: trackingNumber ? "Hoy" : "Estimado 1-2 días hábiles",
+          title: "Enviado / Despachado",
+          date: trackingNumber ? "Hoy" : "Pendiente",
           completed: Boolean(trackingNumber),
           current: Boolean(trackingNumber),
           detail: trackingNumber
             ? `Tu pedido ha sido despachado con ${trackingCompany}. Número de guía: #${trackingNumber}.`
             : "Asignando guía oficial con la transportadora nacional.",
-        },
-        {
-          title: "Entregado",
-          date: "3-5 días hábiles",
-          completed: false,
-          current: false,
-          detail: "Entrega final en la dirección registrada.",
         },
       ];
 
@@ -162,8 +147,8 @@ export async function onRequestGet({ request }) {
         receiptNumber: r.receipt_number,
         date: dateFormatted,
         timestamp: dateObj.getTime(),
-        status: trackingNumber ? "EN_CAMINO" : "CONFIRMADO",
-        statusLabel: trackingNumber ? `En Ruta con ${trackingCompany}` : "En Preparación para Despacho",
+        status: trackingNumber ? "EN_CAMINO" : "EN_PREPARACION",
+        statusLabel: trackingNumber ? `Enviado con ${trackingCompany}` : "En Preparación",
         userEmail: clientEmail,
         trackingCompany,
         trackingNumber: trackingNumber || undefined,

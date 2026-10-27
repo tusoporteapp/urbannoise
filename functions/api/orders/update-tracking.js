@@ -18,19 +18,11 @@ export async function onRequestPost({ request }) {
     const cleanGuia = String(trackingNumber || "").trim();
     const cleanCompany = String(trackingCompany || "Servientrega").trim();
 
-    // Calcular link oficial de rastreo según la transportadora seleccionada
+    // Calcular link oficial de rastreo según la transportadora seleccionada (Servientrega o Inter Rapidísimo)
     let trackingUrl = `https://www.servientrega.com/wps/portal/rastreo-envio?guia=${cleanGuia}`;
     const compLower = cleanCompany.toLowerCase();
-    if (compLower.includes("coordinadora")) {
-      trackingUrl = `https://coordinadora.com/rastreo/rastreo-de-guia/detalle-de-rastreo-de-guia/?guia=${cleanGuia}`;
-    } else if (compLower.includes("interrapid") || compLower.includes("inter rapidisimo")) {
+    if (compLower.includes("interrapid") || compLower.includes("inter rapidisimo")) {
       trackingUrl = `https://www.interrapidisimo.com/siga/?guia=${cleanGuia}`;
-    } else if (compLower.includes("envia") || compLower.includes("envía")) {
-      trackingUrl = `https://envia.co/?guia=${cleanGuia}`;
-    } else if (compLower.includes("tcc")) {
-      trackingUrl = `https://tcc.com.co/rastreo-envios/?guia=${cleanGuia}`;
-    } else if (compLower.includes("bogota") || compLower.includes("domicilio") || compLower.includes("mensajer")) {
-      trackingUrl = `https://wa.me/573003926061?text=${encodeURIComponent(`Hola, quisiera consultar la entrega de mi pedido #${orderId}`)}`;
     }
 
     // Persistir permanentemente en Loyverse POS (en la ficha del cliente)
@@ -96,10 +88,10 @@ export async function onRequestPost({ request }) {
         trackingNumber: cleanGuia || undefined,
         trackingCompany: cleanCompany,
         trackingUrl: cleanGuia ? trackingUrl : undefined,
-        status: cleanGuia ? "EN_CAMINO" : "CONFIRMADO",
+        status: cleanGuia ? "ENVIADO" : "EN_PREPARACION",
         statusLabel: cleanGuia
-          ? `En Ruta con ${cleanCompany}`
-          : "En Preparación para Despacho",
+          ? `Enviado con ${cleanCompany}`
+          : "En Preparación",
       }),
       {
         status: 200,
