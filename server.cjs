@@ -257,7 +257,6 @@ app.post("/api/admin/login", rateLimit(6e4, 10), (req, res) => {
       process.env.ADMIN_PIN?.toUpperCase(),
       "1994",
       "URBAN2026",
-      "ADMIN",
       "URBANNOISE2026"
     ].filter(Boolean);
     const allowedEmails = [
@@ -371,12 +370,15 @@ async function fetchLoyverseAllInventory(token) {
   return allInventory;
 }
 app.get("/api/loyverse/status", (req, res) => {
+  const authHeader = req.headers["authorization"] || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : req.headers["x-admin-token"] || req.query.adminToken || "";
+  const isAdmin = token && validateAdminToken(token);
   res.json({
     configured: Boolean(activeLoyverseToken),
     hasEnvToken: Boolean(process.env.LOYVERSE_API_TOKEN),
-    tokenMasked: activeLoyverseToken ? `${activeLoyverseToken.substring(0, 4)}...${activeLoyverseToken.slice(-4)}` : null,
-    recentEventsCount: recentWebhookEvents.length,
-    overridesCount: Object.keys(inventoryOverrides).length
+    tokenMasked: isAdmin && activeLoyverseToken ? `${activeLoyverseToken.substring(0, 4)}...${activeLoyverseToken.slice(-4)}` : null,
+    recentEventsCount: isAdmin ? recentWebhookEvents.length : 0,
+    overridesCount: isAdmin ? Object.keys(inventoryOverrides).length : 0
   });
 });
 app.post("/api/loyverse/configure", requireAdminAuth, async (req, res) => {
