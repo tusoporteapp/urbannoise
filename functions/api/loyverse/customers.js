@@ -20,22 +20,20 @@ export async function onRequestGet({ request }) {
     }
 
     const data = await res.json();
-    let customers = data.customers || [];
+    const allCustomers = data.customers || [];
 
-    if (webOnly) {
-      customers = customers.filter((c) => {
-        const note = (c.note || "").toLowerCase();
-        const code = (c.customer_code || "").toUpperCase();
-        return (
-          note.includes("web") ||
-          note.includes("urbannoise") ||
-          code.startsWith("WEB") ||
-          (c.email && c.email.length > 3)
-        );
-      });
-    }
+    // Filtrar estrictamente SOLO clientes registrados a través de la página web
+    const webCustomers = allCustomers.filter((c) => {
+      const note = (c.note || "").toLowerCase();
+      const code = (c.customer_code || "").toUpperCase();
+      return (
+        note.includes("cliente web") ||
+        note.includes("[pw_web:") ||
+        code.startsWith("WEB-")
+      );
+    });
 
-    return new Response(JSON.stringify({ customers }), {
+    return new Response(JSON.stringify({ customers: webCustomers }), {
       status: 200,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });

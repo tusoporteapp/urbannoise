@@ -19,7 +19,22 @@ export async function onRequestGet({ request }) {
     }
 
     const data = await res.json();
-    return new Response(JSON.stringify(data), {
+    const allReceipts = data.receipts || [];
+
+    // Filtrar estrictamente SOLO ventas realizadas desde la página web
+    const webReceipts = allReceipts.filter((r) => {
+      const note = (r.note || "").toLowerCase();
+      const order = (r.order || "").toLowerCase();
+      const source = (r.source || "").toLowerCase();
+      return (
+        note.includes("urbannoise web") ||
+        note.includes("pasarela bold") ||
+        source === "sitioweb" ||
+        order.startsWith("un-")
+      );
+    });
+
+    return new Response(JSON.stringify({ receipts: webReceipts }), {
       status: 200,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });
