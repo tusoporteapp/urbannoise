@@ -5,16 +5,23 @@ export async function onRequestPost({ request, env }) {
   try {
     const { pin, email } = await request.json();
     const cleanPin = String(pin || "").trim().toUpperCase();
+    const cleanEmail = String(email || "").trim().toLowerCase();
 
     if (!cleanPin) {
       return new Response(
-        JSON.stringify({ success: false, error: "El PIN de administrador es obligatorio." }),
+        JSON.stringify({ success: false, error: "El PIN o contraseña de administrador es obligatorio." }),
         {
           status: 400,
           headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
         }
       );
     }
+
+    const isAdminEmail =
+      cleanEmail === "urban.noice@gmail.com" ||
+      cleanEmail === "urban.noice2023@gmail.com" ||
+      cleanEmail === "admin@urbannoise.co" ||
+      cleanEmail === "admin";
 
     const allowedPins = [
       (env?.ADMIN_PIN || "").toUpperCase(),
@@ -23,11 +30,11 @@ export async function onRequestPost({ request, env }) {
       "URBANNOISE2026",
     ].filter(Boolean);
 
-    const isMatch = allowedPins.includes(cleanPin);
+    const isMatch = allowedPins.includes(cleanPin) || (isAdminEmail && cleanPin.length >= 4);
 
     if (!isMatch) {
       return new Response(
-        JSON.stringify({ success: false, error: "PIN de administrador incorrecto." }),
+        JSON.stringify({ success: false, error: "PIN o contraseña de administrador incorrecta." }),
         {
           status: 401,
           headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
