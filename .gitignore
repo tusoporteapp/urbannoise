@@ -1,0 +1,7 @@
+node_modules/
+.env*
+bold_config.json
+loyverse_config.json
+web_orders.json
+web_users.json
+newsletter_subscribers.json

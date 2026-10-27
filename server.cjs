@@ -49,6 +49,13 @@ app.use((req, res, next) => {
   }
   next();
 });
+app.use((req, res, next) => {
+  const urlPath = req.path.toLowerCase();
+  if (urlPath.includes("bold_config") || urlPath.includes("loyverse_config") || urlPath.includes("web_users") || urlPath.includes("web_orders") || urlPath.includes("newsletter_subscribers") || urlPath.startsWith("/.env") || urlPath.endsWith(".json") && !urlPath.startsWith("/catalog/")) {
+    return res.status(403).json({ error: "Acceso prohibido." });
+  }
+  next();
+});
 app.get("/robots.txt", (req, res) => {
   res.type("text/plain");
   res.sendFile(import_path.default.join(process.cwd(), "public", "robots.txt"));
@@ -301,7 +308,7 @@ app.post("/api/analytics/event", (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-app.get("/api/analytics/events", (req, res) => {
+app.get("/api/analytics/events", requireAdminAuth, (req, res) => {
   res.json({ count: recentAnalyticsEvents.length, events: recentAnalyticsEvents });
 });
 async function callLoyverseApi(endpoint, options = {}) {
@@ -556,7 +563,7 @@ app.post("/api/loyverse/receipts", async (req, res) => {
     res.status(500).json({ error: error.message, details: error.data });
   }
 });
-app.get("/api/loyverse/receipts", async (req, res) => {
+app.get("/api/loyverse/receipts", requireAdminAuth, async (req, res) => {
   try {
     if (!activeLoyverseToken) {
       return res.json({ receipts: [], simulated: true });
@@ -568,7 +575,7 @@ app.get("/api/loyverse/receipts", async (req, res) => {
     res.status(500).json({ error: error.message, details: error.data });
   }
 });
-app.get("/api/loyverse/customers", async (req, res) => {
+app.get("/api/loyverse/customers", requireAdminAuth, async (req, res) => {
   try {
     const webOnly = req.query.webOnly === "true";
     if (!activeLoyverseToken) {
@@ -591,7 +598,7 @@ app.get("/api/loyverse/customers", async (req, res) => {
     res.status(500).json({ error: error.message, details: error.data });
   }
 });
-app.post("/api/loyverse/customers", async (req, res) => {
+app.post("/api/loyverse/customers", requireAdminAuth, async (req, res) => {
   try {
     if (!activeLoyverseToken) {
       return res.json({ success: true, customer: { id: `sim-${Date.now()}`, ...req.body }, simulated: true });
@@ -1256,10 +1263,15 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
           error: "No se puede confirmar el pedido sin una transacci\xF3n de pago aprobada."
         });
       }
-      if (activeBoldSecretKey && boldTransaction.integritySignature) {
+      if (activeBoldSecretKey) {
+        if (!boldTransaction.integritySignature) {
+          return res.status(400).json({
+            error: "Firma criptogr\xE1fica de integridad requerida para validar la transacci\xF3n."
+          });
+        }
         const rawStringToSign = `${orderId}${orderAmount}${currency}${activeBoldSecretKey}`;
         const computedSignature = import_crypto.default.createHash("sha256").update(rawStringToSign).digest("hex");
-        if (computedSignature !== boldTransaction.integritySignature) {
+        if (computedSignature.toLowerCase() !== String(boldTransaction.integritySignature).toLowerCase()) {
           return res.status(400).json({
             error: "Firma criptogr\xE1fica de integridad de la transacci\xF3n no coincide."
           });
@@ -1580,8 +1592,8 @@ app.get("/api/bold/order-status/:orderId", (req, res) => {
     orderId: order.orderId || order.id,
     paymentStatus: order.paymentStatus,
     status: order.status,
-    boldTransaction: order.boldTransaction,
-    loyverseReceipt: order.loyverseReceipt
+    amount: order.amount,
+    boldReference: order.boldTransaction?.boldReference
   });
 });
 app.get("/api/orders/recent", requireAdminAuth, (req, res) => {
@@ -1677,7 +1689,7 @@ app.get("/api/newsletter/export-csv", requireAdminAuth, (req, res) => {
   res.setHeader("Content-Disposition", 'attachment; filename="suscriptores_urbannoise.csv"');
   res.send(csvContent);
 });
-app.post("/api/admin/save-site-content", (req, res) => {
+app.post("/api/admin/save-site-content", requireAdminAuth, (req, res) => {
   try {
     const content = req.body;
     if (!content || !Array.isArray(content.heroSlides)) {
