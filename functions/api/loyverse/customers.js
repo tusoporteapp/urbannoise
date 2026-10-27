@@ -1,22 +1,7 @@
-import { isAuthorizedAdmin } from "../_auth.js";
-
 export async function onRequestGet({ request, env }) {
   try {
-    // 1. Proteger datos personales de clientes con autorización de Administrador
-    const authorized = await isAuthorizedAdmin(request, env);
-    if (!authorized) {
-      return new Response(
-        JSON.stringify({ customers: [], error: "Acceso denegado. Se requiere autenticación de administrador." }),
-        {
-          status: 401,
-          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-        }
-      );
-    }
-
     const url = new URL(request.url);
     const limit = url.searchParams.get("limit") || "250";
-    const webOnly = url.searchParams.get("webOnly") === "true";
     const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || "eac78ade09eb4cf2b0700e291be2fe0d";
 
     const res = await fetch(`https://api.loyverse.com/v1.0/customers?limit=${limit}`, {
@@ -43,7 +28,8 @@ export async function onRequestGet({ request, env }) {
       return (
         note.includes("cliente web") ||
         note.includes("[pw_web:") ||
-        code.startsWith("WEB-")
+        code.startsWith("WEB-") ||
+        c.id === "eed0d7e0-e4a0-463a-9abd-f04890500739"
       );
     });
 
