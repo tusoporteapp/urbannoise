@@ -57,9 +57,36 @@ app.get("/sitemap.xml", (req, res) => {
   res.type("application/xml");
   res.sendFile(import_path.default.join(process.cwd(), "public", "sitemap.xml"));
 });
+var BOLD_CONFIG_FILE_PATH = import_path.default.join(process.cwd(), "bold_config.json");
+function loadBoldConfig() {
+  try {
+    if (import_fs.default.existsSync(BOLD_CONFIG_FILE_PATH)) {
+      const raw = import_fs.default.readFileSync(BOLD_CONFIG_FILE_PATH, "utf8");
+      return JSON.parse(raw);
+    }
+  } catch (e) {
+    console.warn("[Bold Store] Error cargando bold_config.json:", e);
+  }
+  return {};
+}
+var initialBoldConfig = loadBoldConfig();
 var activeLoyverseToken = process.env.LOYVERSE_API_TOKEN || "";
-var activeBoldIdentityKey = process.env.BOLD_IDENTITY_KEY || process.env.VITE_BOLD_IDENTITY_KEY || "";
-var activeBoldSecretKey = process.env.BOLD_SECRET_KEY || process.env.VITE_BOLD_SECRET_KEY || "";
+var activeBoldIdentityKey = initialBoldConfig.identityKey || process.env.BOLD_IDENTITY_KEY || process.env.VITE_BOLD_IDENTITY_KEY || "";
+var activeBoldSecretKey = initialBoldConfig.secretKey || process.env.BOLD_SECRET_KEY || process.env.VITE_BOLD_SECRET_KEY || "";
+var activeBoldLiveMode = initialBoldConfig.isLiveMode !== void 0 ? initialBoldConfig.isLiveMode : Boolean(activeBoldIdentityKey && activeBoldSecretKey);
+function saveBoldConfigFile(identityKey, secretKey, isLiveMode) {
+  try {
+    const data = {
+      identityKey,
+      secretKey,
+      isLiveMode: isLiveMode !== void 0 ? isLiveMode : Boolean(identityKey && secretKey),
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    import_fs.default.writeFileSync(BOLD_CONFIG_FILE_PATH, JSON.stringify(data, null, 2), "utf8");
+  } catch (e) {
+    console.error("[Bold Store] Error guardando bold_config.json:", e);
+  }
+}
 var recentWebhookEvents = [];
 var recentBoldWebhooks = [];
 var ORDERS_FILE_PATH = import_path.default.join(process.cwd(), "web_orders.json");
@@ -1059,28 +1086,38 @@ app.get("/api/bold/config", (req, res) => {
     configured: Boolean(activeBoldIdentityKey && activeBoldSecretKey),
     hasIdentityKey: Boolean(activeBoldIdentityKey),
     hasSecretKey: Boolean(activeBoldSecretKey),
+    identityKey: activeBoldIdentityKey || "",
     identityKeyMasked: activeBoldIdentityKey ? `${activeBoldIdentityKey.substring(0, 4)}...${activeBoldIdentityKey.slice(-4)}` : null,
+    isLiveMode: Boolean(activeBoldLiveMode),
     recentOrdersCount: recentOrders.length,
-    recentWebhooksCount: recentBoldWebhooks.length
+    recentWebhooksCount: recentBoldWebhooks.length,
+    webhookUrl: "/api/bold/webhook"
   });
 });
 app.post("/api/bold/configure", requireAdminAuth, (req, res) => {
-  const { identityKey, secretKey } = req.body;
+  const { identityKey, secretKey, isLiveMode } = req.body;
   if (identityKey !== void 0) {
     activeBoldIdentityKey = String(identityKey).trim();
   }
   if (secretKey !== void 0) {
     activeBoldSecretKey = String(secretKey).trim();
   }
+  if (isLiveMode !== void 0) {
+    activeBoldLiveMode = Boolean(isLiveMode);
+  } else {
+    activeBoldLiveMode = Boolean(activeBoldIdentityKey && activeBoldSecretKey);
+  }
+  saveBoldConfigFile(activeBoldIdentityKey, activeBoldSecretKey, activeBoldLiveMode);
   res.json({
     success: true,
-    message: "Credenciales de Bold.co actualizadas correctamente en el servidor",
-    configured: Boolean(activeBoldIdentityKey && activeBoldSecretKey)
+    message: "Credenciales de Bold.co actualizadas y guardadas correctamente",
+    configured: Boolean(activeBoldIdentityKey && activeBoldSecretKey),
+    isLiveMode: activeBoldLiveMode
   });
 });
 app.post("/api/bold/create-payment-intent", (req, res) => {
   try {
-    const { orderId, amount, currency = "COP", customer, description } = req.body;
+    const { orderId, amount, currency = "COP", customer, description, redirectionUrl } = req.body;
     if (!orderId || !amount) {
       return res.status(400).json({ error: "Faltan datos requeridos (orderId, amount)" });
     }
@@ -1094,9 +1131,11 @@ app.post("/api/bold/create-payment-intent", (req, res) => {
       currency,
       integritySignature,
       identityKey: activeBoldIdentityKey || "bold_sandbox_identity_urbannoise",
-      hasLiveCredentials: Boolean(activeBoldIdentityKey && activeBoldSecretKey),
+      hasLiveCredentials: Boolean(activeBoldIdentityKey && activeBoldSecretKey && activeBoldLiveMode),
+      isLiveMode: activeBoldLiveMode,
       customer: customer || {},
       description: description || `Pedido URBANNOISE #${orderId}`,
+      redirectionUrl: redirectionUrl || "",
       timestamp: (/* @__PURE__ */ new Date()).toISOString()
     });
   } catch (error) {
@@ -1453,15 +1492,44 @@ app.post("/api/bold/webhook", async (req, res) => {
     };
     recentBoldWebhooks.unshift(event);
     if (recentBoldWebhooks.length > 50) recentBoldWebhooks.pop();
-    console.log("[Bold Webhook Recibido]", payload?.event || "evento");
-    if (payload?.event === "payment.approved" || payload?.status === "APPROVED") {
-      const reference = payload?.data?.reference || payload?.reference;
-      console.log(`[Bold Webhook] Pago aprobado para referencia: ${reference}`);
+    const eventType = payload?.type || payload?.event || payload?.status || "UNKNOWN";
+    console.log("[Bold Webhook Recibido]", eventType, payload);
+    const isApproved = eventType === "SALE_APPROVED" || eventType === "payment.approved" || payload?.status === "APPROVED" || payload?.data?.status === "APPROVED";
+    if (isApproved) {
+      const orderId = payload?.subject || payload?.data?.reference || payload?.reference || payload?.data?.orderId || payload?.orderId;
+      console.log(`[Bold Webhook] Pago Aprobado detectado para orden: ${orderId}`);
+      if (orderId) {
+        const order = recentOrders.find((o) => o.orderId === orderId || o.id === orderId);
+        if (order) {
+          order.paymentStatus = "APROBADO";
+          order.status = "CONFIRMADO";
+          if (payload?.data?.id || payload?.id) {
+            if (!order.boldTransaction) order.boldTransaction = {};
+            order.boldTransaction.boldTransactionId = payload?.data?.id || payload?.id;
+          }
+          saveRecentOrders();
+        }
+      }
     }
     res.status(200).json({ received: true });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+app.get("/api/bold/order-status/:orderId", (req, res) => {
+  const { orderId } = req.params;
+  const order = recentOrders.find((o) => o.orderId === orderId || o.id === orderId);
+  if (!order) {
+    return res.status(404).json({ found: false, error: "Orden no encontrada" });
+  }
+  res.json({
+    found: true,
+    orderId: order.orderId || order.id,
+    paymentStatus: order.paymentStatus,
+    status: order.status,
+    boldTransaction: order.boldTransaction,
+    loyverseReceipt: order.loyverseReceipt
+  });
 });
 app.get("/api/orders/recent", requireAdminAuth, (req, res) => {
   res.json({
