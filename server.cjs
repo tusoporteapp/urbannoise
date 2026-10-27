@@ -1438,7 +1438,20 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
         if (shippingAddress?.isAlternateAddress) {
           receiptNote += ` \u2022 [ENTREGA EN OTRA DIRECCI\xD3N: ${shippingAddress.address || ""}${shippingAddress.apartment ? ` (${shippingAddress.apartment})` : ""} - ${shippingAddress.city || ""} (${shippingAddress.department || ""}) | Recibe: ${shippingAddress.recipientName || ""} - Tel: ${shippingAddress.recipientPhone || ""}${shippingAddress.specialInstructions ? ` | Instrucciones: ${shippingAddress.specialInstructions}` : ""}]`;
         }
+        const PAYMENT_TYPE_MAP = {
+          bold_pse: "0ba5eda3-da41-417a-9926-a448eb6e525c",
+          // BANCOLOMBIA QR / PSE
+          bold_bancolombia: "0ba5eda3-da41-417a-9926-a448eb6e525c",
+          bold_nequi: "d9037a50-284f-4ba9-a659-5eef8e5fb26b",
+          // NEQUI
+          bold_card: "e839c9ab-5e71-4c99-abf7-c852a09c0cc6",
+          // Tarjeta
+          cod: "8caac887-0a02-4f6f-ab5c-d346ccf8d28c"
+          // Efectivo
+        };
+        const paymentTypeId = PAYMENT_TYPE_MAP[paymentMethod] || "0ba5eda3-da41-417a-9926-a448eb6e525c";
         const receiptPayload = {
+          store_id: storeId,
           receipt_type: "SELL",
           order: orderId,
           created_at: (/* @__PURE__ */ new Date()).toISOString(),
@@ -1446,8 +1459,7 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
           line_items: lineItems,
           payments: [
             {
-              payment_name: `Bold.co (${paymentMethod})`,
-              type: paymentMethod === "cod" ? "CASH" : "OTHER",
+              payment_type_id: paymentTypeId,
               paid_at: (/* @__PURE__ */ new Date()).toISOString(),
               money_amount: orderAmount
             }

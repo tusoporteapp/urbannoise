@@ -100,6 +100,16 @@ export async function onRequestPost({ request }) {
       receiptNote += ` • [ENVÍO: ${shippingAddress.address} - ${shippingAddress.city || "Bogotá"} (${shippingAddress.department || "Cundinamarca"})]`;
     }
 
+    // Mapeo dinámico a los tipos de pago oficiales configurados en Loyverse
+    const PAYMENT_TYPE_MAP = {
+      bold_pse: "0ba5eda3-da41-417a-9926-a448eb6e525c", // BANCOLOMBIA QR / PSE
+      bold_bancolombia: "0ba5eda3-da41-417a-9926-a448eb6e525c",
+      bold_nequi: "d9037a50-284f-4ba9-a659-5eef8e5fb26b", // NEQUI
+      bold_card: "e839c9ab-5e71-4c99-abf7-c852a09c0cc6", // Tarjeta
+      cod: "8caac887-0a02-4f6f-ab5c-d346ccf8d28c", // Efectivo
+    };
+    const paymentTypeId = PAYMENT_TYPE_MAP[paymentMethod] || "0ba5eda3-da41-417a-9926-a448eb6e525c";
+
     const receiptPayload = {
       store_id: STORE_ID,
       receipt_type: "SELL",
@@ -109,8 +119,7 @@ export async function onRequestPost({ request }) {
       line_items: lineItems,
       payments: [
         {
-          payment_name: `Bold.co (${paymentMethod})`,
-          type: "OTHER",
+          payment_type_id: paymentTypeId,
           paid_at: new Date().toISOString(),
           money_amount: orderAmount,
         },
@@ -222,6 +231,10 @@ export async function onRequestPost({ request }) {
         loyverseReceipt,
         loyverseSyncStatus,
         inventoryDeducted: true,
+        deductedStockDetails: items.map((it) => ({
+          item: it.name || "Prenda URBANNOISE",
+          qtyDeducted: Number(it.qty) || 1,
+        })),
       }),
       {
         status: 200,
