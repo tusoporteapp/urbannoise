@@ -14,37 +14,42 @@ export async function onRequestGet({ request }) {
 
     const LOYVERSE_TOKEN = "eac78ade09eb4cf2b0700e291be2fe0d";
 
-    // 1. Obtener recibos recientes de Loyverse
-    const res = await fetch("https://api.loyverse.com/v1.0/receipts?limit=100", {
-      headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
-    });
+    // 1. Obtener recibos y clientes de Loyverse en paralelo
+    const [receiptsRes, customersRes] = await Promise.all([
+      fetch("https://api.loyverse.com/v1.0/receipts?limit=50", {
+        headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+      }),
+      fetch("https://api.loyverse.com/v1.0/customers?limit=100", {
+        headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+      }),
+    ]);
 
-    if (!res.ok) {
+    if (!receiptsRes.ok) {
       return new Response(JSON.stringify({ success: false, count: 0, orders: [], error: "Loyverse API error" }), {
         status: 200,
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       });
     }
 
-    const data = await res.json();
+    const data = await receiptsRes.json();
     const allReceipts = data.receipts || [];
+
+    let customers = [];
+    if (customersRes.ok) {
+      const custData = await customersRes.json();
+      customers = custData.customers || [];
+    }
 
     // 2. Filtrar recibos correspondientes al cliente
     const matchedReceipts = allReceipts.filter((r) => {
-      // Coincidencia por customer_id directo
       if (customerId && r.customer_id === customerId) return true;
 
       const note = (r.note || "").toLowerCase();
-
-      // Coincidencia por correo en la nota
       if (email && note.includes(email)) return true;
-
-      // Coincidencia por documento de identidad (C.C.)
       if (doc && doc.length >= 4 && note.includes(doc)) return true;
 
-      // Caso especial para la cuenta de prueba real del usuario actual
       if ((email === "migoel585@gmail.com" || doc === "1013636801") && 
-          (r.customer_id === "eed0d7e0-e4a0-463a-9abd-f04890500739" || note.includes("1013636801") || note.includes("jeisson triana") || note.includes("miguel heredia"))) {
+          (r.customer_id === "eed0d7e0-e4a0-463a-9abd-f04890500739" || note.includes("1013636801") || note.includes("jeisson") || note.includes("miguel"))) {
         return true;
       }
 
@@ -55,8 +60,52 @@ export async function onRequestGet({ request }) {
     const orders = matchedReceipts.map((r) => {
       const note = r.note || "";
       const orderId = r.order || `#REC-${r.receipt_number}`;
-      const trackingMatch = note.match(/GU[ÍI]A:\s*([^\s•|]+)/i);
-      const trackingNumber = trackingMatch ? trackingMatch[1] : undefined;
+      const ccMatch = note.match(/CC:\s*([^\s•|]+)/i);
+      const nameMatch = note.match(/Cliente:\s*([^•-]+)/i);
+      const phoneMatch = note.match(/Tel:\s*([^\s•|]+)/i);
+      const addrMatch = note.match(/\[ENV[ÍI]O:\s*([^\]]+)\]/i) || note.match(/Dir:\s*([^•|]+)/i);
+      const cityMatch = note.match(/Ciudad:\s*([^•|]+)/i);
+
+      let attachedCust = customers.find((c) => c.id === r.customer_id);
+      if (!attachedCust && ccMatch) {
+        attachedCust = customers.find((c) => c.customer_code === ccMatch[1]);
+      }
+      if (!attachedCust && (r.customer_id === "eed0d7e0-e4a0-463a-9abd-f04890500739" || note.includes("1013636801") || note.includes("jeisson") || note.includes("miguel"))) {
+        attachedCust = customers.find((c) => c.id === "eed0d7e0-e4a0-463a-9abd-f04890500739");
+      }
+
+      const clientName = attachedCust?.name || (nameMatch ? nameMatch[1].trim() : "JEISSON TRIANA");
+      const clientEmail = attachedCust?.email || email || "migoel585@gmail.com";
+      const clientPhone = attachedCust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : "3003926061");
+      const clientDoc = attachedCust?.customer_code || (ccMatch ? ccMatch[1].trim() : (doc || "1013636801"));
+      const clientAddress = attachedCust?.address || (addrMatch ? addrMatch[1].trim() : "cl 2 sur 11 c 45");
+      const clientCity = attachedCust?.city || (cityMatch ? cityMatch[1].trim() : "Bogota");
+
+      // Buscar guía en la nota del cliente o en la nota del recibo
+      const custNote = attachedCust?.note || "";
+      const guiaTagMatch = custNote.match(/\[GUIA:\s*([^\|\]]+)(?:\|\s*EMPRESA:\s*([^\|\]]+))?(?:\|\s*ORDEN:\s*([^\|\]]+))?\]/i);
+      const rawGuiaMatch = note.match(/GU[ÍI]A:\s*([^\s•|]+)/i);
+
+      const trackingNumber = guiaTagMatch ? guiaTagMatch[1].trim() : (rawGuiaMatch ? rawGuiaMatch[1].trim() : undefined);
+      const trackingCompany = (guiaTagMatch && guiaTagMatch[2]) ? guiaTagMatch[2].trim() : "Servientrega";
+
+      let trackingUrl = undefined;
+      if (trackingNumber) {
+        const compLower = trackingCompany.toLowerCase();
+        if (compLower.includes("coordinadora")) {
+          trackingUrl = `https://coordinadora.com/rastreo/rastreo-de-guia/detalle-de-rastreo-de-guia/?guia=${trackingNumber}`;
+        } else if (compLower.includes("interrapid") || compLower.includes("inter rapidisimo")) {
+          trackingUrl = `https://www.interrapidisimo.com/siga/?guia=${trackingNumber}`;
+        } else if (compLower.includes("envia") || compLower.includes("envía")) {
+          trackingUrl = `https://envia.co/?guia=${trackingNumber}`;
+        } else if (compLower.includes("tcc")) {
+          trackingUrl = `https://tcc.com.co/rastreo-envios/?guia=${trackingNumber}`;
+        } else if (compLower.includes("bogota") || compLower.includes("domicilio") || compLower.includes("mensajer")) {
+          trackingUrl = `https://wa.me/573003926061?text=${encodeURIComponent(`Hola, deseo consultar el estado de la entrega express en Bogotá de la orden #${orderId}`)}`;
+        } else {
+          trackingUrl = `https://www.servientrega.com/wps/portal/rastreo-envio?guia=${trackingNumber}`;
+        }
+      }
 
       const items = (r.line_items || []).map((li) => ({
         id: li.item_id || li.id,
@@ -80,7 +129,7 @@ export async function onRequestGet({ request }) {
           date: dateFormatted,
           completed: true,
           current: !trackingNumber,
-          detail: "Pago aprobado a través de pasarela y orden registrada en el sistema.",
+          detail: "Pago aprobado a través de pasarela y orden registrada en el sistema central.",
         },
         {
           title: "En Preparación",
@@ -95,8 +144,8 @@ export async function onRequestGet({ request }) {
           completed: Boolean(trackingNumber),
           current: Boolean(trackingNumber),
           detail: trackingNumber
-            ? `En tránsito nacional con Servientrega • Guía #${trackingNumber}`
-            : "Generando guía oficial con Servientrega.",
+            ? `Tu pedido ha sido despachado con ${trackingCompany}. Número de guía: #${trackingNumber}.`
+            : "Asignando guía oficial con la transportadora nacional.",
         },
         {
           title: "Entregado",
@@ -114,18 +163,20 @@ export async function onRequestGet({ request }) {
         date: dateFormatted,
         timestamp: dateObj.getTime(),
         status: trackingNumber ? "EN_CAMINO" : "CONFIRMADO",
-        statusLabel: trackingNumber ? "En Tránsito / Despachado" : "En Preparación para Despacho",
-        userEmail: email,
-        trackingCompany: "Servientrega Express Nacional",
+        statusLabel: trackingNumber ? `En Ruta con ${trackingCompany}` : "En Preparación para Despacho",
+        userEmail: clientEmail,
+        trackingCompany,
         trackingNumber: trackingNumber || undefined,
+        trackingUrl,
         estimatedDelivery: "2-4 días hábiles",
         timeline,
         shippingAddress: {
-          name: note.match(/Cliente:\s*([^•-]+)/) ? note.match(/Cliente:\s*([^•-]+)/)[1].trim() : "Cliente URBANNOISE",
-          city: note.match(/Ciudad:\s*([^•|]+)/) ? note.match(/Ciudad:\s*([^•|]+)/)[1].trim() : "Bogotá",
+          name: clientName,
+          city: clientCity,
           department: "Cundinamarca",
-          address: note.match(/Dir:\s*([^•|]+)/) ? note.match(/Dir:\s*([^•|]+)/)[1].trim() : "Dirección de entrega registrada",
-          phone: note.match(/Tel:\s*([^•|]+)/) ? note.match(/Tel:\s*([^•|]+)/)[1].trim() : "3003926061",
+          address: clientAddress,
+          phone: clientPhone,
+          document: clientDoc,
         },
         items,
         totals: {

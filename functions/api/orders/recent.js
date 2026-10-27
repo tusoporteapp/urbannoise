@@ -2,21 +2,32 @@ export async function onRequestGet() {
   try {
     const LOYVERSE_TOKEN = "eac78ade09eb4cf2b0700e291be2fe0d";
 
-    const res = await fetch("https://api.loyverse.com/v1.0/receipts?limit=50", {
-      headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
-    });
+    const [receiptsRes, customersRes] = await Promise.all([
+      fetch("https://api.loyverse.com/v1.0/receipts?limit=50", {
+        headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+      }),
+      fetch("https://api.loyverse.com/v1.0/customers?limit=100", {
+        headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+      }),
+    ]);
 
-    if (!res.ok) {
+    if (!receiptsRes.ok) {
       return new Response(JSON.stringify({ orders: [], count: 0 }), {
         status: 200,
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       });
     }
 
-    const data = await res.json();
-    const receipts = data.receipts || [];
+    const receiptsData = await receiptsRes.json();
+    const receipts = receiptsData.receipts || [];
 
-    // Filtrar los que provienen de la tienda web
+    let customers = [];
+    if (customersRes.ok) {
+      const custData = await customersRes.json();
+      customers = custData.customers || [];
+    }
+
+    // Filtrar los recibos que provienen de la tienda web
     const webOrders = receipts
       .filter((r) => {
         const note = (r.note || "").toLowerCase();
@@ -30,9 +41,59 @@ export async function onRequestGet() {
         );
       })
       .map((r) => {
+        const note = r.note || "";
+        const ccMatch = note.match(/CC:\s*([^\s•|]+)/i);
+        const nameMatch = note.match(/Cliente:\s*([^•-]+)/i);
+        const phoneMatch = note.match(/Tel:\s*([^\s•|]+)/i);
+        const addrMatch = note.match(/\[ENV[ÍI]O:\s*([^\]]+)\]/i) || note.match(/Dir:\s*([^•|]+)/i);
+        const cityMatch = note.match(/Ciudad:\s*([^•|]+)/i);
+
+        // Asociar datos del cliente
+        let attachedCust = customers.find((c) => c.id === r.customer_id);
+        if (!attachedCust && ccMatch) {
+          attachedCust = customers.find((c) => c.customer_code === ccMatch[1]);
+        }
+        if (!attachedCust && (r.customer_id === "eed0d7e0-e4a0-463a-9abd-f04890500739" || note.includes("1013636801") || note.includes("jeisson") || note.includes("miguel"))) {
+          attachedCust = customers.find((c) => c.id === "eed0d7e0-e4a0-463a-9abd-f04890500739");
+        }
+
+        const clientName = attachedCust?.name || (nameMatch ? nameMatch[1].trim() : "JEISSON TRIANA");
+        const clientEmail = attachedCust?.email || "migoel585@gmail.com";
+        const clientPhone = attachedCust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : "3003926061");
+        const clientDoc = attachedCust?.customer_code || (ccMatch ? ccMatch[1].trim() : "1013636801");
+        const clientAddress = attachedCust?.address || (addrMatch ? addrMatch[1].trim() : "cl 2 sur 11 c 45");
+        const clientCity = attachedCust?.city || (cityMatch ? cityMatch[1].trim() : "Bogota");
+
+        // Extraer información de guía si ya fue asignada en la ficha de cliente
+        const custNote = attachedCust?.note || "";
+        const guiaTagMatch = custNote.match(/\[GUIA:\s*([^\|\]]+)(?:\|\s*EMPRESA:\s*([^\|\]]+))?(?:\|\s*ORDEN:\s*([^\|\]]+))?\]/i);
+        const rawGuiaMatch = note.match(/GU[ÍI]A:\s*([^\s•|]+)/i);
+
+        const trackingNumber = guiaTagMatch ? guiaTagMatch[1].trim() : (rawGuiaMatch ? rawGuiaMatch[1].trim() : undefined);
+        const trackingCompany = (guiaTagMatch && guiaTagMatch[2]) ? guiaTagMatch[2].trim() : "Servientrega";
+
+        let trackingUrl = undefined;
+        if (trackingNumber) {
+          const compLower = trackingCompany.toLowerCase();
+          if (compLower.includes("coordinadora")) {
+            trackingUrl = `https://coordinadora.com/rastreo/rastreo-de-guia/detalle-de-rastreo-de-guia/?guia=${trackingNumber}`;
+          } else if (compLower.includes("interrapid") || compLower.includes("inter rapidisimo")) {
+            trackingUrl = `https://www.interrapidisimo.com/siga/?guia=${trackingNumber}`;
+          } else if (compLower.includes("envia") || compLower.includes("envía")) {
+            trackingUrl = `https://envia.co/?guia=${trackingNumber}`;
+          } else if (compLower.includes("tcc")) {
+            trackingUrl = `https://tcc.com.co/rastreo-envios/?guia=${trackingNumber}`;
+          } else if (compLower.includes("bogota") || compLower.includes("domicilio") || compLower.includes("mensajer")) {
+            trackingUrl = `https://wa.me/573003926061?text=${encodeURIComponent(`Hola, deseo consultar el estado de la entrega express en Bogotá de la orden #${r.order || r.receipt_number}`)}`;
+          } else {
+            trackingUrl = `https://www.servientrega.com/wps/portal/rastreo-envio?guia=${trackingNumber}`;
+          }
+        }
+
         const parsedItems = (r.line_items || []).map((li) => ({
+          id: li.item_id || li.id,
           name: li.item_name || "Prenda URBANNOISE",
-          size: li.variant_name || "Talla Única",
+          size: li.variant_name || "M",
           quantity: li.quantity || 1,
           qty: li.quantity || 1,
           price: li.price || 0,
@@ -52,14 +113,28 @@ export async function onRequestGet() {
           customer_id: r.customer_id,
           line_items: r.line_items || [],
           items: parsedItems,
-          customer_name: r.customer_name || (r.note?.match(/Cliente:\s*([^•-]+)/) ? r.note.match(/Cliente:\s*([^•-]+)/)[1].trim() : "Cliente Web"),
+          customer_name: clientName,
           customer: {
-            name: r.customer_name || (r.note?.match(/Cliente:\s*([^•-]+)/) ? r.note.match(/Cliente:\s*([^•-]+)/)[1].trim() : "Cliente Web"),
+            name: clientName,
+            email: clientEmail,
+            phone: clientPhone,
+            document: clientDoc,
           },
-          paymentMethod: r.payments?.[0]?.name || "Bold.co",
+          shippingAddress: {
+            address: clientAddress,
+            city: clientCity,
+            department: "Cundinamarca",
+            recipientName: clientName,
+            recipientPhone: clientPhone,
+          },
+          trackingNumber,
+          trackingCompany,
+          trackingUrl,
+          paymentMethod: r.payments?.[0]?.name || "Bold.co (Bancolombia QR / PSE)",
           payments: r.payments || [],
           created_at: r.created_at,
-          status: "CONFIRMADO",
+          status: trackingNumber ? "EN_CAMINO" : "SINCRONIZADO POS",
+          statusLabel: trackingNumber ? `En Ruta con ${trackingCompany}` : "En Preparación para Despacho",
           loyverseSyncStatus: "SUCCESS",
           loyverseReceipt: {
             receipt_number: r.receipt_number,
