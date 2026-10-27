@@ -203,6 +203,25 @@ function saveWebUsersStore() {
     console.warn("[Users Store] Error guardando usuarios:", e);
   }
 }
+var SUBSCRIBERS_FILE_PATH = import_path.default.join(process.cwd(), "newsletter_subscribers.json");
+function loadSubscribers() {
+  try {
+    if (import_fs.default.existsSync(SUBSCRIBERS_FILE_PATH)) {
+      return JSON.parse(import_fs.default.readFileSync(SUBSCRIBERS_FILE_PATH, "utf8"));
+    }
+  } catch (e) {
+    console.warn("[Newsletter Store] Error cargando suscriptores:", e);
+  }
+  return [];
+}
+var newsletterSubscribers = loadSubscribers();
+function saveSubscribers() {
+  try {
+    import_fs.default.writeFileSync(SUBSCRIBERS_FILE_PATH, JSON.stringify(newsletterSubscribers, null, 2), "utf8");
+  } catch (e) {
+    console.warn("[Newsletter Store] Error guardando suscriptores:", e);
+  }
+}
 function matchPhone(phoneA, phoneB) {
   if (!phoneA || !phoneB) return false;
   const a = String(phoneA).replace(/\D/g, "");
@@ -1223,7 +1242,8 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
       customer,
       items = [],
       totals = {},
-      shippingAddress = {}
+      shippingAddress = {},
+      newslettersOptIn = true
     } = req.body;
     if (!orderId) {
       return res.status(400).json({ error: "orderId es requerido" });
@@ -1302,12 +1322,13 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
             const cleanDoc = (customer.document || "").trim().replace(/\D/g, "");
             const existingHash = cleanEmail && webUsersStore[cleanEmail]?.passwordHash || "";
             const buildCheckoutNote = (baseNote) => {
-              let cleanBase = (baseNote || "").replace(/\[PW_(?:WEB|HASH):[^\]]+\]/gi, "").replace(/CC:\s*[^|•]+/gi, "").replace(/Ciudad:\s*[^|•]+/gi, "").replace(/Dir:\s*[^|•]+/gi, "").replace(/Cliente Web URBANNOISE[^|•]*/gi, "").replace(/•|\|/g, " ").trim();
+              let cleanBase = (baseNote || "").replace(/\[PW_(?:WEB|HASH):[^\]]+\]/gi, "").replace(/CC:\s*[^|•]+/gi, "").replace(/Ciudad:\s*[^|•]+/gi, "").replace(/Dir:\s*[^|•]+/gi, "").replace(/Cliente Web URBANNOISE[^|•]*/gi, "").replace(/\[NEWSLETTER:\s*(?:SI|NO)\]/gi, "").replace(/•|\|/g, " ").trim();
               const parts = [];
               if (cleanDoc) parts.push(`CC: ${cleanDoc}`);
               if (cCity) parts.push(`Ciudad: ${cCity}`);
               if (cAddr) parts.push(`Dir: ${cAddr}`);
               parts.push("Cliente Web URBANNOISE");
+              if (newslettersOptIn) parts.push("[NEWSLETTER: SI]");
               if (existingHash) parts.push(`[PW_WEB:${existingHash}]`);
               if (cleanBase) parts.push(cleanBase);
               return parts.join(" | ");
@@ -1346,6 +1367,30 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
             }
           } catch (custErr) {
             console.warn("[Loyverse] Advertencia vinculando cliente a la venta:", custErr.message);
+          }
+        }
+        if (newslettersOptIn && customer?.email && String(customer.email).includes("@")) {
+          const subEmail = String(customer.email).trim().toLowerCase();
+          const existingSubIndex = newsletterSubscribers.findIndex((s) => s.email === subEmail);
+          const custName = customer.name ? String(customer.name).trim() : void 0;
+          const custPhone = customer.phone ? String(customer.phone).trim() : void 0;
+          if (existingSubIndex === -1) {
+            newsletterSubscribers.unshift({
+              email: subEmail,
+              name: custName,
+              phone: custPhone,
+              source: "checkout_purchase",
+              subscribedAt: (/* @__PURE__ */ new Date()).toISOString()
+            });
+            saveSubscribers();
+          } else {
+            if (custName && !newsletterSubscribers[existingSubIndex].name) {
+              newsletterSubscribers[existingSubIndex].name = custName;
+            }
+            if (custPhone && !newsletterSubscribers[existingSubIndex].phone) {
+              newsletterSubscribers[existingSubIndex].phone = custPhone;
+            }
+            saveSubscribers();
           }
         }
         if (customer?.email) {
@@ -1454,6 +1499,7 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
         loyverseVariantId: i.loyverseVariantId
       })),
       totals,
+      newslettersOptIn: Boolean(newslettersOptIn),
       boldTransaction: boldTransaction || {
         boldTransactionId: `TX-BOLD-${Date.now().toString(36).toUpperCase()}`,
         boldReference: `BLD${Math.floor(1e7 + Math.random() * 9e7)}`,
@@ -1565,6 +1611,64 @@ app.post("/api/orders/update-tracking", requireAdminAuth, (req, res) => {
 });
 app.get("/api/bold/webhook-events", requireAdminAuth, (req, res) => {
   res.json({ events: recentBoldWebhooks });
+});
+app.post("/api/newsletter/subscribe", (req, res) => {
+  try {
+    const { email, name, phone, source = "web" } = req.body;
+    if (!email || !String(email).includes("@")) {
+      return res.status(400).json({ success: false, error: "Correo electr\xF3nico no v\xE1lido" });
+    }
+    const cleanEmail = String(email).trim().toLowerCase();
+    const existingIndex = newsletterSubscribers.findIndex((s) => s.email === cleanEmail);
+    if (existingIndex === -1) {
+      newsletterSubscribers.unshift({
+        email: cleanEmail,
+        name: name ? String(name).trim() : void 0,
+        phone: phone ? String(phone).trim() : void 0,
+        source: String(source),
+        subscribedAt: (/* @__PURE__ */ new Date()).toISOString()
+      });
+      saveSubscribers();
+    } else {
+      let updated = false;
+      if (name && !newsletterSubscribers[existingIndex].name) {
+        newsletterSubscribers[existingIndex].name = String(name).trim();
+        updated = true;
+      }
+      if (phone && !newsletterSubscribers[existingIndex].phone) {
+        newsletterSubscribers[existingIndex].phone = String(phone).trim();
+        updated = true;
+      }
+      if (updated) saveSubscribers();
+    }
+    res.json({
+      success: true,
+      message: "\xA1Suscripci\xF3n confirmada! Te enviaremos novedades y lanzamientos exclusivos.",
+      totalSubscribers: newsletterSubscribers.length
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+app.get("/api/newsletter/subscribers", requireAdminAuth, (req, res) => {
+  res.json({
+    count: newsletterSubscribers.length,
+    subscribers: newsletterSubscribers
+  });
+});
+app.get("/api/newsletter/export-csv", requireAdminAuth, (req, res) => {
+  const headers = ["Email", "Nombre", "Telefono", "Origen", "Fecha_Suscripcion"];
+  const rows = newsletterSubscribers.map((s) => [
+    `"${(s.email || "").replace(/"/g, '""')}"`,
+    `"${(s.name || "").replace(/"/g, '""')}"`,
+    `"${(s.phone || "").replace(/"/g, '""')}"`,
+    `"${(s.source || "web").replace(/"/g, '""')}"`,
+    `"${s.subscribedAt || ""}"`
+  ]);
+  const csvContent = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+  res.setHeader("Content-Type", "text/csv; charset=utf-8");
+  res.setHeader("Content-Disposition", 'attachment; filename="suscriptores_urbannoise.csv"');
+  res.send(csvContent);
 });
 app.post("/api/admin/save-site-content", (req, res) => {
   try {
