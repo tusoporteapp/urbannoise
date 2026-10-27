@@ -280,11 +280,13 @@ app.post("/api/admin/login", rateLimit(6e4, 10), (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 });
-app.post("/api/gate/unlock", rateLimit(6e4, 15), (req, res) => {
+app.post("/api/gate/unlock", rateLimit(6e4, 5), (req, res) => {
   const { accessKey } = req.body;
   const cleanKey = String(accessKey || "").trim();
-  const validKey = process.env.GATE_ACCESS_KEY || "8624";
-  if (cleanKey === validKey) {
+  const validKey = String(process.env.GATE_ACCESS_KEY || "8624").trim();
+  const inputBuf = Buffer.from(cleanKey, "utf8");
+  const validBuf = Buffer.from(validKey, "utf8");
+  if (inputBuf.length === validBuf.length && import_crypto.default.timingSafeEqual(inputBuf, validBuf)) {
     return res.json({ success: true, unlocked: true });
   }
   return res.status(401).json({ error: "Clave de acceso incorrecta" });
