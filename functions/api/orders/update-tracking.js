@@ -48,7 +48,7 @@ export async function onRequestPost({ request }) {
         if (targetCust) {
           // Limpiar etiqueta anterior de guía si existía
           let currentNote = targetCust.note || "";
-          currentNote = currentNote.replace(/\s*\|\s*\[GUIA:[^\]]+\]/gi, "").trim();
+          currentNote = currentNote.replace(/\s*\|\s*\[GUIA:[^\]]*\]/gi, "").replace(/\[GUIA:[^\]]*\]/gi, "").trim();
 
           // Si hay nueva guía, añadir etiqueta normalizada
           if (cleanGuia) {
