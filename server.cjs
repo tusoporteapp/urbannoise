@@ -1327,6 +1327,9 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
               if (cleanDoc) parts.push(`CC: ${cleanDoc}`);
               if (cCity) parts.push(`Ciudad: ${cCity}`);
               if (cAddr) parts.push(`Dir: ${cAddr}`);
+              if (shippingAddress?.isAlternateAddress) {
+                parts.push(`[ENTREGA ALTERNATIVA: ${shippingAddress.address || ""} ${shippingAddress.apartment || ""} - ${shippingAddress.city || ""} | Recibe: ${shippingAddress.recipientName || ""} (${shippingAddress.recipientPhone || ""})]`);
+              }
               parts.push("Cliente Web URBANNOISE");
               if (newslettersOptIn) parts.push("[NEWSLETTER: SI]");
               if (existingHash) parts.push(`[PW_WEB:${existingHash}]`);
@@ -1415,11 +1418,15 @@ app.post("/api/orders/confirm-and-sync", rateLimit(6e4, 20), async (req, res) =>
             saveWebUsersStore();
           }
         }
+        let receiptNote = `URBANNOISE Web #${orderId} \u2022 Pasarela Bold: Ref ${boldTransaction?.boldReference || "BLD-DIRECT"} \u2022 Cliente: ${customer?.name || "Cliente"} - CC ${customer?.document || "N/A"} - Tel ${customer?.phone || ""}`;
+        if (shippingAddress?.isAlternateAddress) {
+          receiptNote += ` \u2022 [ENTREGA EN OTRA DIRECCI\xD3N: ${shippingAddress.address || ""}${shippingAddress.apartment ? ` (${shippingAddress.apartment})` : ""} - ${shippingAddress.city || ""} (${shippingAddress.department || ""}) | Recibe: ${shippingAddress.recipientName || ""} - Tel: ${shippingAddress.recipientPhone || ""}${shippingAddress.specialInstructions ? ` | Instrucciones: ${shippingAddress.specialInstructions}` : ""}]`;
+        }
         const receiptPayload = {
           receipt_type: "SELL",
           order: orderId,
           created_at: (/* @__PURE__ */ new Date()).toISOString(),
-          note: `URBANNOISE Web #${orderId} \u2022 Pasarela Bold: Ref ${boldTransaction?.boldReference || "BLD-DIRECT"} \u2022 Cliente: ${customer?.name || "Cliente"} - CC ${customer?.document || "N/A"} - Tel ${customer?.phone || ""}`,
+          note: receiptNote,
           line_items: lineItems,
           payments: [
             {
