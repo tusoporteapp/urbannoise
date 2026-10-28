@@ -1,5 +1,19 @@
+import { isAuthorizedAdmin } from "../_auth.js";
+
 export async function onRequestGet({ request, env }) {
   try {
+    // 0. Verificación de Autorización Administrativa
+    const authorized = await isAuthorizedAdmin(request, env);
+    if (!authorized) {
+      return new Response(
+        JSON.stringify({ error: "Acceso no autorizado a los recibos de ventas." }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        }
+      );
+    }
+
     const url = new URL(request.url);
     const limit = url.searchParams.get("limit") || "50";
     const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || "eac78ade09eb4cf2b0700e291be2fe0d";

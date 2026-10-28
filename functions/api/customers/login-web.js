@@ -38,35 +38,45 @@ export async function onRequestPost({ request, env }) {
     // Validar hash de la contraseña si el usuario registró una clave web
     const note = foundCustomer.note || "";
     const pwMatch = note.match(/\[PW_(?:WEB|HASH):([^\]]+)\]/i);
-    if (pwMatch) {
-      const storedHash = pwMatch[1].trim();
-      const cleanPassword = String(password || "").trim();
-      if (!cleanPassword) {
-        return new Response(
-          JSON.stringify({ error: "Ingresa tu contraseña para acceder a tu cuenta" }),
-          {
-            status: 401,
-            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-          }
-        );
-      }
+    if (!pwMatch) {
+      return new Response(
+        JSON.stringify({
+          error: "Esta cuenta aún no tiene contraseña web asignada. Por favor regístrate en la pestaña 'Crear Cuenta' con tu correo para configurar tu clave de acceso.",
+        }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        }
+      );
+    }
 
-      // Calcular hash SHA-256 de la contraseña ingresada
-      const encoder = new TextEncoder();
-      const hashBuf = await crypto.subtle.digest("SHA-256", encoder.encode(cleanPassword));
-      const inputHash = Array.from(new Uint8Array(hashBuf))
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("");
+    const storedHash = pwMatch[1].trim();
+    const cleanPassword = String(password || "").trim();
+    if (!cleanPassword) {
+      return new Response(
+        JSON.stringify({ error: "Ingresa tu contraseña para acceder a tu cuenta" }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        }
+      );
+    }
 
-      if (inputHash !== storedHash && !storedHash.startsWith("scrypt:")) {
-        return new Response(
-          JSON.stringify({ error: "Contraseña incorrecta. Por favor verifica tus credenciales." }),
-          {
-            status: 401,
-            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-          }
-        );
-      }
+    // Calcular hash SHA-256 de la contraseña ingresada
+    const encoder = new TextEncoder();
+    const hashBuf = await crypto.subtle.digest("SHA-256", encoder.encode(cleanPassword));
+    const inputHash = Array.from(new Uint8Array(hashBuf))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+
+    if (inputHash !== storedHash && !storedHash.startsWith("scrypt:")) {
+      return new Response(
+        JSON.stringify({ error: "Contraseña incorrecta. Por favor verifica tus credenciales." }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        }
+      );
     }
 
     // Extraer cédula de la nota si customer_code no la tiene

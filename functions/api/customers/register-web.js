@@ -51,27 +51,44 @@ export async function onRequestPost({ request }) {
           : "");
 
       const buildNote = (baseNote = "") => {
-        let cleanBase = (baseNote || "")
-          .replace(/\[PW_(?:WEB|HASH):[^\]]+\]/gi, "")
-          .replace(/CC:\s*[^|•]+/gi, "")
-          .replace(/Ciudad:\s*[^|•]+/gi, "")
-          .replace(/Dir:\s*[^|•]+/gi, "")
-          .replace(/Cliente Web URBANNOISE[^|•]*/gi, "")
-          .replace(/•|\|/g, " ")
-          .trim();
+        const pwTag = passwordHash ? `[PW_WEB:${passwordHash}]` : "";
+        // Extraer tags de guía existentes para preservarlos
+        const tagRegex = /\[(?:GUIA|G):\s*([^\|\]]+?)(?:\|\s*(?:EMPRESA|E):\s*([^\|\]]+?))?(?:\|\s*(?:ORDEN|O):\s*([^\|\]]+?))?\]/gi;
+        const orderTags = [];
+        let match;
+        while ((match = tagRegex.exec(baseNote || "")) !== null) {
+          const gNum = (match[1] || "").trim();
+          const gEmp = (match[2] || "Servientrega").trim();
+          const gOrd = match[3] ? match[3].replace(/^#/, "").trim().toUpperCase() : "";
+          if (gOrd) {
+            const empTag = gEmp && gEmp.toLowerCase() !== "servientrega" ? `|E:${gEmp}` : "";
+            orderTags.push(`[G:${gNum}${empTag}|O:${gOrd}]`);
+          }
+        }
+
         const parts = [];
-        if (targetDoc) parts.push(`CC: ${targetDoc}`);
-        if (targetCity) parts.push(`Ciudad: ${targetCity}`);
-        if (targetAddress) parts.push(`Dir: ${targetAddress}`);
-        parts.push("Cliente Web URBANNOISE");
-        if (passwordHash) parts.push(`[PW_WEB:${passwordHash}]`);
-        if (cleanBase) parts.push(cleanBase);
-        return parts.join(" | ");
+        if (pwTag) parts.push(pwTag);
+        parts.push(...orderTags);
+
+        let finalNote = parts.join(" | ");
+        // Límite estricto de 250 caracteres de Loyverse POS
+        if (finalNote.length > 250) {
+          parts.length = 0;
+          if (pwTag) parts.push(pwTag);
+          for (let i = orderTags.length - 1; i >= 0; i--) {
+            const candidate = (parts.length > 0 ? parts.join(" | ") + " | " : "") + orderTags[i];
+            if (candidate.length <= 250) {
+              parts.push(orderTags[i]);
+            }
+          }
+          finalNote = parts.join(" | ");
+        }
+        return finalNote;
       };
 
       if (existing) {
         loyverseCustomer = existing;
-        await fetch(`https://api.loyverse.com/v1.0/customers/${existing.id}`, {
+        const updateRes = await fetch(`https://api.loyverse.com/v1.0/customers/${existing.id}`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${LOYVERSE_TOKEN}`,
@@ -85,7 +102,10 @@ export async function onRequestPost({ request }) {
             address: targetAddress || existing.address,
             city: targetCity || existing.city,
           }),
-        }).catch(() => {});
+        });
+        if (!updateRes.ok) {
+          console.warn("[Loyverse Update Customer Warning]:", updateRes.status, await updateRes.text());
+        }
       } else {
         // Crear cliente en Loyverse POS
         const customerPayload = {

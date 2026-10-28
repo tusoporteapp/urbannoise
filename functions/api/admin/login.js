@@ -30,7 +30,8 @@ export async function onRequestPost({ request, env }) {
       "URBANNOISE2026",
     ].filter(Boolean);
 
-    const isMatch = allowedPins.includes(cleanPin) || (isAdminEmail && cleanPin.length >= 4);
+    // Validación estricta del PIN o clave maestra administrativa
+    const isMatch = allowedPins.includes(cleanPin);
 
     if (!isMatch) {
       return new Response(

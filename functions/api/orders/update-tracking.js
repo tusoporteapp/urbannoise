@@ -1,5 +1,19 @@
+import { isAuthorizedAdmin } from "../_auth.js";
+
 export async function onRequestPost({ request, env }) {
   try {
+    // 0. Verificación de Autorización Administrativa
+    const authorized = await isAuthorizedAdmin(request, env);
+    if (!authorized) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Acceso no autorizado para actualizar guías de despacho." }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        }
+      );
+    }
+
     const {
       orderId,
       trackingNumber,
