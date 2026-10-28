@@ -94,9 +94,9 @@ export async function onRequestGet({ env }) {
         let trackingNumber = undefined;
         let trackingCompany = "Servientrega";
 
-        // 1. Buscar en tags [GUIA:...|ORDEN:...] en la ficha del cliente que correspondan a ESTA orden
+        // 1. Buscar en tags [GUIA:...|ORDEN:...] o [G:...|O:...] en la ficha del cliente que correspondan a ESTA orden
         const custNote = attachedCust?.note || "";
-        const tagMatches = custNote.matchAll(/\[GUIA:\s*([^\|\]]+)(?:\|\s*EMPRESA:\s*([^\|\]]+))?(?:\|\s*ORDEN:\s*([^\|\]]+))?\]/gi);
+        const tagMatches = custNote.matchAll(/\[(?:GUIA|G):\s*([^\|\]]+?)(?:\|\s*(?:EMPRESA|E):\s*([^\|\]]+?))?(?:\|\s*(?:ORDEN|O):\s*([^\|\]]+?))?\]/gi);
         for (const match of tagMatches) {
           const gNum = (match[1] || "").trim();
           const gEmp = (match[2] || "Servientrega").trim();
@@ -111,7 +111,7 @@ export async function onRequestGet({ env }) {
 
         // 2. Si no se encontró en la ficha de cliente, revisar la nota del recibo específico
         if (!trackingNumber) {
-          const receiptGuiaTag = note.match(/\[GUIA:\s*([^\|\]]+)(?:\|\s*EMPRESA:\s*([^\|\]]+))?(?:\|\s*ORDEN:\s*([^\|\]]+))?\]/i);
+          const receiptGuiaTag = note.match(/\[(?:GUIA|G):\s*([^\|\]]+?)(?:\|\s*(?:EMPRESA|E):\s*([^\|\]]+?))?(?:\|\s*(?:ORDEN|O):\s*([^\|\]]+?))?\]/i);
           if (receiptGuiaTag) {
             trackingNumber = receiptGuiaTag[1].trim();
             if (receiptGuiaTag[2]) trackingCompany = receiptGuiaTag[2].trim();

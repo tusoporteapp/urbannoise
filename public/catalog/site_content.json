@@ -1,0 +1,148 @@
+{
+  "heroSlides": [
+    {
+      "id": 0,
+      "label": "01",
+      "titleLight": "young & free",
+      "titleBold": "CÁPSULA",
+      "subtitle": "URBANNOISE",
+      "desc": "Siluetas boxy de alto gramaje e ilustraciones icónicas diseñadas para conectar con la calle y la expresión auténtica.",
+      "img": "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2000&auto=format&fit=crop",
+      "ctaAnchor": "#latest-drops",
+      "ctaText": "COMPRAR DROP AHORA",
+      "badge": "NOVEDADES SEMANALES",
+      "badgeSub": "TALLAS S - XL"
+    },
+    {
+      "id": 1,
+      "label": "02",
+      "titleLight": "weird boxy",
+      "titleBold": "EDICIÓN",
+      "subtitle": "OVERSIZE DROP",
+      "desc": "Patrones cuadrados, mangas caídas y confección en algodón pesado de 240g para máxima durabilidad y presencia.",
+      "img": "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=2000&auto=format&fit=crop",
+      "ctaAnchor": "#weird-oversize",
+      "ctaText": "COMPRAR DROP AHORA",
+      "badge": "NOVEDADES SEMANALES",
+      "badgeSub": "TALLAS S - XL"
+    },
+    {
+      "id": 2,
+      "label": "03",
+      "titleLight": "dama",
+      "titleBold": "CÁPSULA",
+      "subtitle": "ESTILO ÚNICO",
+      "desc": "Colección femenina con siluetas crop y oversize relajadas creadas en Bogotá para quienes imponen su propio ritmo.",
+      "img": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=2000&auto=format&fit=crop",
+      "ctaAnchor": "#dama-oversize",
+      "ctaText": "COMPRAR DROP AHORA",
+      "badge": "NOVEDADES SEMANALES",
+      "badgeSub": "TALLAS S - XL"
+    }
+  ],
+  "categories": [
+    {
+      "id": "latest-drops",
+      "name": "ÚLTIMOS LANZAMIENTOS",
+      "menuTitle": "Novedades",
+      "mobileTitle": "ÚLTIMOS LANZAMIENTOS",
+      "subtitle": "Drop Semanal 2026",
+      "badge": "NUEVO",
+      "kicker": "DROP EXCLUSIVO 2026",
+      "description": "Prendas recién confeccionadas en Bogotá con serigrafía de alta densidad, tintorería ácida mineral wash y siluetas boxy de edición numerada.",
+      "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop",
+      "enabled": true,
+      "order": 1
+    },
+    {
+      "id": "young-free",
+      "name": "YOUNG & FREE",
+      "menuTitle": "Young & Free",
+      "mobileTitle": "COLECCIÓN YOUNG & FREE",
+      "subtitle": "Underground & Audaz",
+      "badge": "POPULAR",
+      "kicker": "CÁPSULA JUVENIL",
+      "description": "Gráficos serigráficos provocadores inspirados en la escena underground contemporánea. Confección en algodón 100% peinado nacional.",
+      "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop",
+      "enabled": true,
+      "order": 2
+    },
+    {
+      "id": "weird-oversize",
+      "name": "PLEASURES & WEIRD BOXY",
+      "menuTitle": "Weird Boxy",
+      "mobileTitle": "EDICIÓN WEIRD & OVERSIZE",
+      "subtitle": "Algodón Pesado 300g",
+      "badge": "BOXY FIT",
+      "kicker": "BOX FIT STREETWEAR",
+      "description": "Hombros caídos pronunciados, cuellos gruesos de 3.5cm y caída recta estructurada. El fit oversize definitivo desarrollado por URBANNOISE Bogotá.",
+      "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1000&auto=format&fit=crop",
+      "enabled": true,
+      "order": 3
+    },
+    {
+      "id": "dama-oversize",
+      "name": "DAMA OVERSIZE",
+      "menuTitle": "Dama",
+      "mobileTitle": "DESTACADOS DAMA OVERSIZE",
+      "subtitle": "Estampados de Autor",
+      "badge": "CÁPSULA",
+      "kicker": "SILUETAS RELAJADAS",
+      "description": "Prendas fluidas diseñadas para adaptarse con carácter. Cortes contemporáneos con comodidad absoluta y estética streetwear vanguardista.",
+      "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop",
+      "enabled": true,
+      "order": 4
+    }
+  ],
+  "announcements": {
+    "leftTag": "COP | $",
+    "leftSub": "Envíos a toda Colombia • Tallas S - XL",
+    "marqueeText": "DESPACHO DE CORTESÍA POR COMPRAS DESDE $150.000 COP • ENVÍOS A TODA COLOMBIA • PAGOS 100% SEGUROS Y PSE",
+    "desktopText": "DESPACHO DE CORTESÍA EN BOGOTÁ Y COLOMBIA POR COMPRAS DESDE $150.000 COP • ",
+    "desktopCta": "VER CATÁLOGO →"
+  },
+  "flagship": {
+    "kicker": "PIONEROS DESDE 2024",
+    "title": "URBANNOISE CONCEPT STORE",
+    "storeHours": "Lunes a Sábado: 9:00 AM - 7:00 PM • Domingos: 10:00 AM - 4:00 PM",
+    "onlineHours": "Lunes a Sábado: 8:00 AM - 8:00 PM (Despachos a toda Colombia)",
+    "address": "Cra 10 # 9-37 Local 23-54, Centro Comercial El GranSan, Bogotá - Colombia",
+    "whatsappNumber": "(+57) 310 872 0491",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Cra+10+%23+9-37+Local+23-54+Bogota+Colombia+El+GranSan"
+  },
+  "manifesto": {
+    "kicker": "VISIÓN & ESENCIA",
+    "title": "CURADURÍA CON INTENCIÓN: ARTE ✦ FRESCO ✦ TUYO",
+    "paragraph1": "El logo de URBANNOISE representa un movimiento y una transición entre caracteres que transmiten impulso, fluidez y ritmo urbano. Nos impulsa a avanzar, explorar y conectar con la ciudad a través de cada prenda, trascendiendo tendencias pasajeras para aquellos que valoran la autenticidad.",
+    "paragraph2": "Confeccionamos camisetas oversize con patrones amplios, cuellos rib reforzados y estampados de alta durabilidad en tallas S a XL, con envíos directos a toda Colombia."
+  },
+  "shipping": {
+    "freeShippingThreshold": 150000,
+    "standardShippingCost": 15000,
+    "expressShippingCost": 18000,
+    "shippingNotice": "Despacho express: Bogotá 24-48 hrs • Envíos a toda Colombia"
+  },
+  "social": {
+    "instagramUrl": "https://instagram.com/urbannoise",
+    "tiktokUrl": "https://tiktok.com/@urbannoise",
+    "facebookUrl": "https://facebook.com/urbannoise",
+    "supportEmail": "urban.noice2023@gmail.com",
+    "copyrightNotice": "© 2026 URBANNOISE • Bogotá D.C., Colombia • Todos los derechos reservados."
+  },
+  "whatsapp": {
+    "phoneNumber": "573108720491",
+    "tooltipText": "¿Asesoría de tallas o envíos?",
+    "prefilledMessage": "Hola URBANNOISE Bogotá, deseo asesoría sobre las prendas streetwear, tallas disponibles y despachos en Colombia."
+  },
+  "sections": {
+    "latestDropsKicker": "DROP EXCLUSIVO 2026",
+    "latestDropsTitle": "ÚLTIMOS LANZAMIENTOS",
+    "youngFreeKicker": "CÁPSULA JUVENIL",
+    "youngFreeTitle": "YOUNG & FREE",
+    "weirdOversizeKicker": "BOX FIT STREETWEAR",
+    "weirdOversizeTitle": "PLEASURES & WEIRD BOXY",
+    "damaOversizeKicker": "SILUETAS RELAJADAS",
+    "damaOversizeTitle": "DAMA OVERSIZE"
+  },
+  "lastUpdated": "2026-10-26T13:50:00.000Z"
+}
