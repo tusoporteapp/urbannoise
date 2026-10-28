@@ -20,7 +20,7 @@ export const PRODUCTS_DATA: Product[] = [
     "categoryLabel": "Prueba Bold $1.500",
     "loyverseItemId": "63eb5cac-2ede-4c16-a7aa-57ecb6a67f86",
     "loyverseVariantId": "52eafdd2-dbfa-4d02-aa3b-43224190430c",
-    "stock": 5,
+    "stock": 3,
     "isAvailable": true,
     "isPublished": true,
     "variants": [
@@ -33,7 +33,7 @@ export const PRODUCTS_DATA: Product[] = [
         "option1_value": "M",
         "size": "M",
         "color": "Negro",
-        "in_stock": 5
+        "in_stock": 3
       }
     ]
   },

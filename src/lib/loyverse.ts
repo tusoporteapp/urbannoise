@@ -64,14 +64,15 @@ export async function configureLoyverseToken(token: string) {
 }
 
 // Sincronizar catálogo e inventario en tiempo real desde Loyverse
-export async function syncLoyverseCatalog(): Promise<{
+export async function syncLoyverseCatalog(force: boolean = false): Promise<{
   configured: boolean;
   items: LoyverseItem[];
   categories?: any[];
   error?: string;
 }> {
   try {
-    const res = await fetch('/api/loyverse/sync');
+    const url = force ? `/api/loyverse/sync?force=true&t=${Date.now()}` : `/api/loyverse/sync?t=${Date.now()}`;
+    const res = await fetch(url);
     if (!res.ok) throw new Error('Error al sincronizar con Loyverse');
     return await res.json();
   } catch (error) {

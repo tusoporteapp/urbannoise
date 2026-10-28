@@ -390,6 +390,20 @@ export default function App() {
         }
       }
     } catch {}
+
+    // Sincronizar prenda en modal abierto si su stock o variantes se actualizaron desde Loyverse
+    if (quickViewProduct) {
+      const liveCurrent = products.find(
+        (p) => p.id === quickViewProduct.id || (p.sku && p.sku === quickViewProduct.sku)
+      );
+      if (
+        liveCurrent &&
+        (liveCurrent.stock !== quickViewProduct.stock ||
+          liveCurrent.variants !== quickViewProduct.variants)
+      ) {
+        setQuickViewProduct(liveCurrent);
+      }
+    }
   }, [products]);
 
   // Sincronización al montar y escucha de eventos de actualización
@@ -398,6 +412,18 @@ export default function App() {
       refreshCatalog();
     };
     window.addEventListener('urbannoise_catalog_updated', handleCatalogUpdated);
+
+    const handleStockDeducted = () => {
+      syncLoyverseCatalog(true)
+        .then((res) => {
+          if (res.configured && res.items && res.items.length > 0) {
+            setLoyverseItems(res.items);
+            refreshCatalog(res.items);
+          }
+        })
+        .catch(() => {});
+    };
+    window.addEventListener('urbannoise_stock_deducted', handleStockDeducted);
 
     // Cargar personalizaciones almacenadas en GitHub (Cloudflare Pages y multi-dispositivo)
     loadCustomizationsFromGitHub()
@@ -421,6 +447,7 @@ export default function App() {
 
     return () => {
       window.removeEventListener('urbannoise_catalog_updated', handleCatalogUpdated);
+      window.removeEventListener('urbannoise_stock_deducted', handleStockDeducted);
     };
   }, []);
 
