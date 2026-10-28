@@ -78,6 +78,18 @@ export async function onRequestPost({ request, env }) {
         ? ccMatch[1]
         : "";
 
+    // Extraer dirección y ciudad de la nota si vienen vacías en Loyverse
+    const dirMatch = note.match(/Dir:\s*([^|•]+)/i);
+    const cityMatch = note.match(/Ciudad:\s*([^|•]+)/i);
+    const customerAddress = foundCustomer.address || (dirMatch ? dirMatch[1].trim() : "");
+    const customerCity = foundCustomer.city || (cityMatch ? cityMatch[1].trim() : "Bogotá");
+
+    // Limpiar número de teléfono a 10 dígitos colombianos
+    let cleanCustomerPhone = (foundCustomer.phone_number || "").replace(/\D/g, "");
+    if (cleanCustomerPhone.startsWith("57") && cleanCustomerPhone.length === 12) {
+      cleanCustomerPhone = cleanCustomerPhone.substring(2);
+    }
+
     return new Response(
       JSON.stringify({
         success: true,
@@ -85,10 +97,10 @@ export async function onRequestPost({ request, env }) {
           id: foundCustomer.id,
           name: foundCustomer.name,
           email: foundCustomer.email || cleanInput,
-          phone: foundCustomer.phone_number || "",
+          phone: cleanCustomerPhone,
           document: documentId,
-          city: foundCustomer.city || "Bogotá, D.C.",
-          address: foundCustomer.address || "",
+          city: customerCity,
+          address: customerAddress,
           totalSpent: foundCustomer.total_spent || 0,
           totalVisits: foundCustomer.total_visits || 0,
           createdAt: foundCustomer.created_at || new Date().toISOString(),
