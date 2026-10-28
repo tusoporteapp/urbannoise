@@ -1,4 +1,5 @@
 import { isAuthorizedAdmin } from "../_auth.js";
+import { getAllLoyverseCustomers, cleanColombianPhone, LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
 
 export async function onRequestGet({ request, env }) {
   try {
@@ -14,15 +15,13 @@ export async function onRequestGet({ request, env }) {
       );
     }
 
-    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || "eac78ade09eb4cf2b0700e291be2fe0d";
+    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
 
-    const [receiptsRes, customersRes] = await Promise.all([
-      fetch("https://api.loyverse.com/v1.0/receipts?limit=50", {
+    const [receiptsRes, customers] = await Promise.all([
+      fetch("https://api.loyverse.com/v1.0/receipts?limit=250", {
         headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
       }),
-      fetch("https://api.loyverse.com/v1.0/customers?limit=100", {
-        headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
-      }),
+      getAllLoyverseCustomers(LOYVERSE_TOKEN, 8),
     ]);
 
     if (!receiptsRes.ok) {
@@ -34,12 +33,6 @@ export async function onRequestGet({ request, env }) {
 
     const receiptsData = await receiptsRes.json();
     const receipts = receiptsData.receipts || [];
-
-    let customers = [];
-    if (customersRes.ok) {
-      const custData = await customersRes.json();
-      customers = custData.customers || [];
-    }
 
     // Filtrar los recibos que provienen de la tienda web
     const webOrders = receipts
@@ -56,41 +49,32 @@ export async function onRequestGet({ request, env }) {
       })
       .map((r) => {
         const note = r.note || "";
-        const ccMatch = note.match(/CC:\s*([^\s•|]+)/i);
+        const ccMatch = note.match(/CC:\s*([^\s•|]+)/i) || note.match(/CC\s*([^\s•|]+)/i);
         const nameMatch = note.match(/Cliente:\s*([^•-]+)/i);
-        const phoneMatch = note.match(/Tel:\s*([^\s•|]+)/i);
+        const phoneMatch = note.match(/Tel:\s*([^\s•|]+)/i) || note.match(/Tel\s*([^\s•|]+)/i);
         const addrMatch = note.match(/\[ENV[ÍI]O:\s*([^\]]+)\]/i) || note.match(/Dir:\s*([^•|]+)/i);
         const cityMatch = note.match(/Ciudad:\s*([^•|]+)/i);
 
         // Asociar datos del cliente
         let attachedCust = customers.find((c) => c.id === r.customer_id);
         if (!attachedCust && ccMatch) {
-          attachedCust = customers.find((c) => c.customer_code === ccMatch[1]);
-        }
-        if (
-          !attachedCust &&
-          (r.customer_id === "eed0d7e0-e4a0-463a-9abd-f04890500739" ||
-            note.includes("1013636801") ||
-            note.includes("jeisson") ||
-            note.includes("miguel") ||
-            (r.order || "").toUpperCase().startsWith("UN-"))
-        ) {
-          attachedCust = customers.find((c) => c.id === "eed0d7e0-e4a0-463a-9abd-f04890500739");
+          const cleanDoc = ccMatch[1].trim().replace(/\D/g, "");
+          attachedCust = customers.find((c) => c.customer_code === cleanDoc);
         }
 
-        const clientName = attachedCust?.name || (nameMatch ? nameMatch[1].trim() : "JEISSON TRIANA");
-        const clientEmail = attachedCust?.email || "migoel585@gmail.com";
-        const clientPhone = attachedCust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : "3003926061");
-        const clientDoc = attachedCust?.customer_code || (ccMatch ? ccMatch[1].trim() : "1013636801");
-        const clientAddress = attachedCust?.address || (addrMatch ? addrMatch[1].trim() : "cl 2 sur 11 c 45");
-        const clientCity = attachedCust?.city || (cityMatch ? cityMatch[1].trim() : "Bogota");
+        const clientName = attachedCust?.name || (nameMatch ? nameMatch[1].trim() : "Cliente URBANNOISE");
+        const clientEmail = attachedCust?.email || "";
+        const clientPhone = cleanColombianPhone(attachedCust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : ""));
+        const clientDoc = attachedCust?.customer_code || (ccMatch ? ccMatch[1].trim() : "");
+        const clientAddress = attachedCust?.address || (addrMatch ? addrMatch[1].trim() : "");
+        const clientCity = attachedCust?.city || (cityMatch ? cityMatch[1].trim() : "Bogotá");
 
         // Extraer información de guía asignada estrictamente a ESTA orden
         const orderIdentifiers = new Set();
         if (r.order) {
           const oClean = r.order.trim().toUpperCase();
           orderIdentifiers.add(oClean);
-          orderIdentifiers.add(oClean.replace(/^#/, ''));
+          orderIdentifiers.add(oClean.replace(/^#/, ""));
         }
         if (r.receipt_number) {
           const rcClean = String(r.receipt_number).trim().toUpperCase();
@@ -102,7 +86,7 @@ export async function onRequestGet({ request, env }) {
         if (orderInNoteMatch) {
           const onClean = orderInNoteMatch[1].trim().toUpperCase();
           orderIdentifiers.add(onClean);
-          orderIdentifiers.add(onClean.replace(/^#/, ''));
+          orderIdentifiers.add(onClean.replace(/^#/, ""));
         }
 
         let trackingNumber = undefined;
@@ -147,67 +131,61 @@ export async function onRequestGet({ request, env }) {
           }
         }
 
-        const parsedItems = (r.line_items || []).map((li) => ({
-          id: li.item_id || li.id,
+        const dateObj = new Date(r.created_at);
+        const formattedDate = dateObj.toLocaleDateString("es-CO", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+        // Extraer items vendidos
+        const items = (r.line_items || []).map((li, idx) => ({
+          id: li.variant_id || li.item_id || `item-${idx}`,
           name: li.item_name || "Prenda URBANNOISE",
-          size: li.variant_name || "M",
-          quantity: li.quantity || 1,
-          qty: li.quantity || 1,
-          price: li.price || 0,
-          total: li.total_money || li.gross_total_money || ((li.price || 0) * (li.quantity || 1)),
-          sku: li.sku || "N/A",
+          size: li.variant_name || "Talla Única",
+          qty: Math.round(li.quantity || 1),
+          price: Number(li.price || 0),
+          total: Number(li.gross_total_money || li.total_money || 0),
+          sku: li.sku || `UN-${li.item_id || idx}`,
         }));
 
+        const totalMoney = Number(r.total_money || 0);
+
         return {
-          id: r.order || r.receipt_number,
-          orderId: r.order || r.receipt_number,
-          orderNumber: r.order || r.receipt_number,
-          receiptNumber: r.receipt_number,
-          receipt_number: r.receipt_number,
-          total_money: r.total_money,
-          amount: r.total_money,
-          note: r.note,
-          customer_id: r.customer_id || "eed0d7e0-e4a0-463a-9abd-f04890500739",
-          line_items: r.line_items || [],
-          items: parsedItems,
-          customer_name: clientName,
-          customer: {
-            name: clientName,
-            email: clientEmail,
-            phone: clientPhone,
-            document: clientDoc,
-          },
-          shippingAddress: {
-            address: clientAddress,
-            city: clientCity,
-            department: "Cundinamarca",
-            recipientName: clientName,
-            recipientPhone: clientPhone,
-          },
-          trackingNumber,
-          trackingCompany,
-          trackingUrl,
-          paymentMethod: r.payments?.[0]?.name || "Bold.co (Bancolombia QR / PSE)",
-          payments: r.payments || [],
-          created_at: r.created_at,
+          id: r.id,
+          orderId: r.order || `#REC-${r.receipt_number}`,
+          receiptNumber: String(r.receipt_number || ""),
+          orderNumber: r.order || `#REC-${r.receipt_number}`,
+          date: formattedDate,
+          timestamp: dateObj.getTime(),
+          total: totalMoney,
           status: trackingNumber ? "ENVIADO" : "EN_PREPARACION",
           statusLabel: trackingNumber ? `Enviado con ${trackingCompany}` : "En Preparación",
-          loyverseSyncStatus: "SUCCESS",
-          loyverseReceipt: {
-            receipt_number: r.receipt_number,
-            total_money: r.total_money,
-            created_at: r.created_at,
-            syncedToPos: true,
-          },
+          trackingNumber: trackingNumber || undefined,
+          trackingCompany: trackingNumber ? trackingCompany : undefined,
+          trackingUrl,
+          paymentMethod: note.includes("Bold") ? "Pasarela Bold.co" : "Pago Directo Web",
+          paymentStatus: "APROBADO",
+          customerName: clientName,
+          customerEmail: clientEmail,
+          customerPhone: clientPhone,
+          customerDocument: clientDoc,
+          customerAddress: clientAddress,
+          customerCity: clientCity,
+          customerId: attachedCust?.id || r.customer_id || undefined,
+          items,
+          receiptNote: note,
         };
       });
 
-    return new Response(JSON.stringify({ count: webOrders.length, orders: webOrders }), {
+    return new Response(JSON.stringify({ success: true, count: webOrders.length, orders: webOrders }), {
       status: 200,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });
   } catch (error) {
-    return new Response(JSON.stringify({ count: 0, orders: [], error: error.message }), {
+    return new Response(JSON.stringify({ success: false, count: 0, orders: [], error: error.message }), {
       status: 500,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });

@@ -1,4 +1,6 @@
-export async function onRequestPost({ request }) {
+import { findLoyverseCustomer, saveOrUpdateLoyverseCustomer, cleanColombianPhone, LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
+
+export async function onRequestPost({ request, env }) {
   try {
     const body = await request.json();
     const {
@@ -20,53 +22,57 @@ export async function onRequestPost({ request }) {
       });
     }
 
-    const LOYVERSE_TOKEN = "eac78ade09eb4cf2b0700e291be2fe0d";
+    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
     const STORE_ID = "fee704a4-ff11-43ae-903e-d2f9cf0a9a25"; // Noise Urban
     const orderAmount = Number(totals.total || amount || 0);
 
-    let customerId = null;
+    let customerId = customer?.loyverseCustomerId || null;
 
-    // 1. Vincular o crear cliente en Loyverse CRM
-    if (customer?.email || customer?.phone) {
+    // 1. Vincular o crear cliente en Loyverse CRM con búsqueda paginada robusta
+    if (!customerId && (customer?.email || customer?.phone)) {
       try {
         const cleanEmail = (customer.email || "").trim().toLowerCase();
-        const cleanPhone = (customer.phone || "").trim().replace(/\D/g, "");
+        const cleanPhone = cleanColombianPhone(customer.phone);
         const cleanDoc = (customer.document || "").trim().replace(/\D/g, "");
 
-        const custRes = await fetch("https://api.loyverse.com/v1.0/customers?limit=100", {
-          headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+        const existing = await findLoyverseCustomer({
+          email: cleanEmail,
+          phone: cleanPhone,
+          document: cleanDoc,
+          token: LOYVERSE_TOKEN,
         });
 
-        if (custRes.ok) {
-          const custData = await custRes.json();
-          const existing = (custData.customers || []).find((c) =>
-            (cleanEmail && c.email && c.email.toLowerCase() === cleanEmail) ||
-            (cleanPhone && c.phone_number && c.phone_number.replace(/\D/g, "") === cleanPhone)
-          );
-
-          if (existing) {
-            customerId = existing.id;
-          } else if (customer.name) {
-            const createCustRes = await fetch("https://api.loyverse.com/v1.0/customers", {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${LOYVERSE_TOKEN}`,
-                "Content-Type": "application/json",
+        if (existing) {
+          customerId = existing.id;
+          // Actualizar dirección si venía vacía
+          if (!existing.address && (customer.address || shippingAddress.address)) {
+            await saveOrUpdateLoyverseCustomer(
+              {
+                id: existing.id,
+                name: existing.name || customer.name,
+                email: existing.email || cleanEmail,
+                phone_number: existing.phone_number || cleanPhone,
+                customer_code: existing.customer_code || cleanDoc,
+                address: customer.address || shippingAddress.address,
+                city: customer.city || shippingAddress.city || "Bogotá",
               },
-              body: JSON.stringify({
-                name: (customer.name || "Cliente Web").trim().toUpperCase(),
-                email: cleanEmail || undefined,
-                phone_number: cleanPhone || undefined,
-                address: customer.address || shippingAddress.address || undefined,
-                city: customer.city || shippingAddress.city || undefined,
-                note: `CC: ${cleanDoc} | Cliente Web URBANNOISE | Ref Pedido: #${orderId}`,
-              }),
-            });
-            if (createCustRes.ok) {
-              const newCust = await createCustRes.json();
-              customerId = newCust.id || null;
-            }
+              LOYVERSE_TOKEN
+            );
           }
+        } else if (customer.name) {
+          const newCust = await saveOrUpdateLoyverseCustomer(
+            {
+              name: (customer.name || "Cliente Web").trim().toUpperCase(),
+              email: cleanEmail || undefined,
+              phone_number: cleanPhone || undefined,
+              customer_code: cleanDoc || `WEB-${Date.now().toString().slice(-6)}`,
+              address: customer.address || shippingAddress.address || undefined,
+              city: customer.city || shippingAddress.city || "Bogotá",
+              note: `Cliente Web URBANNOISE • Orden #${orderId}`,
+            },
+            LOYVERSE_TOKEN
+          );
+          customerId = newCust?.id || null;
         }
       } catch (custErr) {
         console.warn("[Loyverse CRM Error]:", custErr.message);

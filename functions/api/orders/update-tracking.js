@@ -1,4 +1,5 @@
 import { isAuthorizedAdmin } from "../_auth.js";
+import { findLoyverseCustomer, saveOrUpdateLoyverseCustomer, LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
 
 export async function onRequestPost({ request, env }) {
   try {
@@ -41,138 +42,107 @@ export async function onRequestPost({ request, env }) {
     }
 
     // Persistir permanentemente en Loyverse POS (en la ficha del cliente)
-    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || "eac78ade09eb4cf2b0700e291be2fe0d";
+    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
     let updatedNote = "";
 
     try {
-      // 1. Obtener la lista de clientes de Loyverse
-      const listRes = await fetch("https://api.loyverse.com/v1.0/customers?limit=100", {
-        headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+      // 1. Buscar el cliente objetivo por UUID directo o por email con paginación
+      let targetCust = await findLoyverseCustomer({
+        customerId: customerId || undefined,
+        email: userEmail || undefined,
+        token: LOYVERSE_TOKEN,
       });
 
-      if (listRes.ok) {
-        const data = await listRes.json();
-        const customers = data.customers || [];
-        const cleanEmail = (userEmail || "").toLowerCase().trim();
-
-        let targetCust = customers.find(
-          (c) =>
-            (customerId && c.id === customerId) ||
-            (cleanEmail && c.email && c.email.toLowerCase() === cleanEmail)
-        );
-
-        // Si no se encuentra directamente, intentar encontrarlo por recibos asociados a la orden
-        if (!targetCust) {
-          const receiptsRes = await fetch("https://api.loyverse.com/v1.0/receipts?limit=50", {
-            headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+      // 2. Si no se encontró por ID ni email, buscar por recibos recientes asociados a la orden
+      if (!targetCust) {
+        const receiptsRes = await fetch("https://api.loyverse.com/v1.0/receipts?limit=250", {
+          headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+        });
+        if (receiptsRes.ok) {
+          const rcData = await receiptsRes.json();
+          const matchedReceipt = (rcData.receipts || []).find((r) => {
+            const oClean = cleanOrderId.toUpperCase();
+            const rOrder = (r.order || "").replace(/^#/, "").trim().toUpperCase();
+            const rNum = String(r.receipt_number || "").trim().toUpperCase();
+            const rNote = (r.note || "").toUpperCase();
+            return rOrder === oClean || rNum === oClean || rNote.includes(oClean);
           });
-          if (receiptsRes.ok) {
-            const rcData = await receiptsRes.json();
-            const matchedReceipt = (rcData.receipts || []).find((r) => {
-              const oClean = cleanOrderId.toUpperCase();
-              const rOrder = (r.order || "").replace(/^#/, "").trim().toUpperCase();
-              const rNum = String(r.receipt_number || "").trim().toUpperCase();
-              const rNote = (r.note || "").toUpperCase();
-              return rOrder === oClean || rNum === oClean || rNote.includes(oClean);
+          if (matchedReceipt && matchedReceipt.customer_id) {
+            targetCust = await findLoyverseCustomer({
+              customerId: matchedReceipt.customer_id,
+              token: LOYVERSE_TOKEN,
             });
-            if (matchedReceipt && matchedReceipt.customer_id) {
-              targetCust = customers.find((c) => c.id === matchedReceipt.customer_id);
-            }
+          }
+        }
+      }
+
+      if (targetCust) {
+        const currentNote = targetCust.note || "";
+
+        // Preservar hash de autenticación web si existe
+        const pwMatch = currentNote.match(/\[PW_WEB:[^\]]+\]/i);
+        const pwTag = pwMatch ? pwMatch[0] : "";
+
+        // Extraer todos los tags de guía existentes preservando los de OTRAS órdenes
+        const tagRegex = /\[(?:GUIA|G):\s*([^\|\]]+?)(?:\|\s*(?:EMPRESA|E):\s*([^\|\]]+?))?(?:\|\s*(?:ORDEN|O):\s*([^\|\]]+?))?\]/gi;
+        const otherOrderTags = [];
+        let match;
+        while ((match = tagRegex.exec(currentNote)) !== null) {
+          const gNum = (match[1] || "").trim();
+          const gEmp = (match[2] || "Servientrega").trim();
+          const gOrd = match[3] ? match[3].replace(/^#/, "").trim().toUpperCase() : "";
+
+          // Si el tag es de OTRA orden, conservarlo intacto
+          if (gOrd && gOrd !== cleanOrderId.toUpperCase()) {
+            const empTag = gEmp && gEmp.toLowerCase() !== "servientrega" ? `|E:${gEmp}` : "";
+            otherOrderTags.push(`[G:${gNum}${empTag}|O:${gOrd}]`);
           }
         }
 
-        // Fallback por defecto a la cuenta de prueba si coincide el correo o pedidos conocidos
-        if (!targetCust && (cleanEmail === "migoel585@gmail.com" || cleanOrderId.includes("667628") || cleanOrderId.includes("685636"))) {
-          targetCust = customers.find((c) => c.id === "eed0d7e0-e4a0-463a-9abd-f04890500739");
-        }
+        // Construir el tag para la orden actual (si no se está borrando la guía)
+        const currentOrderTag = cleanGuia
+          ? `[G:${cleanGuia}${cleanCompany.toLowerCase() !== "servientrega" ? `|E:${cleanCompany}` : ""}|O:${cleanOrderId.toUpperCase()}]`
+          : null;
 
-        if (targetCust) {
-          const currentNote = targetCust.note || "";
+        const tags = [];
+        if (pwTag) tags.push(pwTag);
+        if (currentOrderTag) tags.push(currentOrderTag);
+        tags.push(...otherOrderTags);
 
-          // Preservar hash de autenticación web si existe
-          const pwMatch = currentNote.match(/\[PW_WEB:[^\]]+\]/i);
-          const pwTag = pwMatch ? pwMatch[0] : "";
+        let newNote = tags.join(" | ");
 
-          // Extraer todos los tags de guía existentes preservando los de OTRAS órdenes
-          const tagRegex = /\[(?:GUIA|G):\s*([^\|\]]+?)(?:\|\s*(?:EMPRESA|E):\s*([^\|\]]+?))?(?:\|\s*(?:ORDEN|O):\s*([^\|\]]+?))?\]/gi;
-          const otherOrderTags = [];
-          let match;
-          while ((match = tagRegex.exec(currentNote)) !== null) {
-            const gNum = (match[1] || "").trim();
-            const gEmp = (match[2] || "Servientrega").trim();
-            const gOrd = match[3] ? match[3].replace(/^#/, "").trim().toUpperCase() : "";
-            if (gOrd && gOrd !== cleanOrderId.toUpperCase()) {
-              const empTag = gEmp && gEmp.toLowerCase() !== "servientrega" ? `|E:${gEmp}` : "";
-              otherOrderTags.push(`[G:${gNum}${empTag}|O:${gOrd}]`);
-            }
-          }
-
-          const tags = [...otherOrderTags];
-          // Si se proporcionó una guía para ESTA orden, agregarla en formato compacto
-          if (cleanGuia) {
-            const empTag = cleanCompany && cleanCompany.toLowerCase() !== "servientrega" ? `|E:${cleanCompany}` : "";
-            tags.push(`[G:${cleanGuia}${empTag}|O:${cleanOrderId.toUpperCase()}]`);
-          }
-
-          // Limpiar boilerplate redundante que no aporta valor y consume caracteres (CC, Ciudad, Dir, etc.)
-          let customText = currentNote
-            .replace(/\[PW_WEB:[^\]]+\]/gi, "")
-            .replace(/\[(?:GUIA|G):[^\]]+\]/gi, "")
-            .replace(/(?:CC|Ciudad|Dir|Tel|Cliente|Cliente Web URBANNOISE)[^|]*/gi, "")
-            .replace(/\|+/g, " ")
-            .trim();
-
-          let parts = [];
+        // Respetar límite estricto de 250 caracteres de Loyverse POS
+        if (newNote.length > 250) {
+          const parts = [];
           if (pwTag) parts.push(pwTag);
-          if (customText.length > 0 && customText.length < 40) parts.push(customText);
-          parts.push(...tags);
-
-          let newNote = parts.join(" | ");
-
-          // Garantizar estrictamente el límite de 250 caracteres de Loyverse
-          if (newNote.length > 250) {
-            parts = [];
-            if (pwTag) parts.push(pwTag);
-            // Mantener las etiquetas de orden más recientes que quepan
-            for (let i = tags.length - 1; i >= 0; i--) {
-              const candidate = (parts.length > 0 ? parts.join(" | ") + " | " : "") + tags[i];
-              if (candidate.length <= 250) {
-                parts.push(tags[i]);
-              }
+          if (currentOrderTag) parts.push(currentOrderTag);
+          for (let i = 0; i < otherOrderTags.length; i++) {
+            const candidate = (parts.length > 0 ? parts.join(" | ") + " | " : "") + otherOrderTags[i];
+            if (candidate.length <= 250) {
+              parts.push(otherOrderTags[i]);
             }
-            newNote = parts.join(" | ");
           }
-
-          updatedNote = newNote;
-
-          const loyRes = await fetch("https://api.loyverse.com/v1.0/customers", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${LOYVERSE_TOKEN}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              id: targetCust.id,
-              name: targetCust.name,
-              note: newNote,
-            }),
-          });
-
-          if (!loyRes.ok) {
-            const errText = await loyRes.text();
-            console.error("[Loyverse Save Note Error]:", loyRes.status, errText);
-            return new Response(
-              JSON.stringify({
-                success: false,
-                error: `Error al persistir en Loyverse (${loyRes.status}): ${errText}`,
-              }),
-              {
-                status: 500,
-                headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-              }
-            );
-          }
+          newNote = parts.join(" | ");
         }
+
+        updatedNote = newNote;
+
+        // Actualizar en Loyverse preservando email, teléfono, dirección, etc.
+        await saveOrUpdateLoyverseCustomer(
+          {
+            id: targetCust.id,
+            name: targetCust.name,
+            email: targetCust.email,
+            phone_number: targetCust.phone_number,
+            customer_code: targetCust.customer_code,
+            address: targetCust.address,
+            city: targetCust.city,
+            note: newNote,
+          },
+          LOYVERSE_TOKEN
+        );
+      } else {
+        console.warn("[update-tracking]: No se encontró cliente en Loyverse para orden", cleanOrderId);
       }
     } catch (loyverseErr) {
       console.error("[Loyverse Tracking Sync Error]:", loyverseErr);
@@ -188,14 +158,14 @@ export async function onRequestPost({ request, env }) {
     return new Response(
       JSON.stringify({
         success: true,
-        orderId,
-        trackingNumber: cleanGuia,
+        message: cleanGuia
+          ? `Guía ${cleanGuia} guardada exitosamente y sincronizada con Loyverse POS.`
+          : `Guía eliminada de la orden #${cleanOrderId}.`,
+        orderId: cleanOrderId,
+        trackingNumber: cleanGuia || null,
         trackingCompany: cleanCompany,
-        trackingUrl,
-        updatedNote,
-        status: cleanGuia ? "ENVIADO" : "EN_PREPARACION",
-        statusLabel: cleanGuia ? `Enviado con ${cleanCompany}` : "En Preparación",
-        updatedAt: new Date().toISOString(),
+        trackingUrl: cleanGuia ? trackingUrl : null,
+        persistedNote: updatedNote,
       }),
       {
         status: 200,

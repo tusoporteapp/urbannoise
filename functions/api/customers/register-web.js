@@ -1,4 +1,6 @@
-export async function onRequestPost({ request }) {
+import { findLoyverseCustomer, saveOrUpdateLoyverseCustomer, cleanColombianPhone, LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
+
+export async function onRequestPost({ request, env }) {
   try {
     const { name, email, phone, city, address, document, password } = await request.json();
     if (!name || !email) {
@@ -8,9 +10,9 @@ export async function onRequestPost({ request }) {
       });
     }
 
-    const LOYVERSE_TOKEN = "eac78ade09eb4cf2b0700e291be2fe0d";
+    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
     const cleanEmail = email.trim().toLowerCase();
-    const cleanPhone = (phone || "").trim().replace(/\D/g, "");
+    const cleanPhone = cleanColombianPhone(phone);
     const cleanDocument = (document || "").trim().replace(/\D/g, "");
 
     // Cifrar hash sha-256 de la contraseña para seguridad
@@ -26,23 +28,15 @@ export async function onRequestPost({ request }) {
     let loyverseCustomer = null;
 
     try {
-      // 1. Buscar si ya existe en Loyverse POS por correo, teléfono o cédula
-      const listRes = await fetch("https://api.loyverse.com/v1.0/customers?limit=250", {
-        headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+      // 1. Buscar si ya existe en Loyverse POS por correo, teléfono o cédula mediante búsqueda paginada
+      const existing = await findLoyverseCustomer({
+        email: cleanEmail,
+        phone: cleanPhone,
+        document: cleanDocument,
+        token: LOYVERSE_TOKEN,
       });
 
-      let existing = null;
-      if (listRes.ok) {
-        const listData = await listRes.json();
-        existing = (listData.customers || []).find(
-          (c) =>
-            (c.email && c.email.toLowerCase() === cleanEmail) ||
-            (cleanPhone && c.phone_number && c.phone_number.replace(/\D/g, "") === cleanPhone) ||
-            (cleanDocument && c.customer_code && c.customer_code === cleanDocument)
-        );
-      }
-
-      const targetCity = (city && city.trim()) || existing?.city || "";
+      const targetCity = (city && city.trim()) || existing?.city || "Bogotá";
       const targetAddress = (address && address.trim()) || existing?.address || "";
       const targetDoc =
         cleanDocument ||
@@ -87,67 +81,55 @@ export async function onRequestPost({ request }) {
       };
 
       if (existing) {
-        loyverseCustomer = existing;
-        const updateRes = await fetch(`https://api.loyverse.com/v1.0/customers/${existing.id}`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${LOYVERSE_TOKEN}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...existing,
-            note: buildNote(existing.note),
-            customer_code: targetDoc || undefined,
+        // Actualizar cliente existente preservando todos sus datos
+        loyverseCustomer = await saveOrUpdateLoyverseCustomer(
+          {
+            id: existing.id,
+            name: name.trim().toUpperCase(),
+            email: cleanEmail || existing.email,
             phone_number: cleanPhone || existing.phone_number,
+            customer_code: targetDoc || existing.customer_code,
             address: targetAddress || existing.address,
             city: targetCity || existing.city,
-          }),
-        });
-        if (!updateRes.ok) {
-          console.warn("[Loyverse Update Customer Warning]:", updateRes.status, await updateRes.text());
-        }
-      } else {
-        // Crear cliente en Loyverse POS
-        const customerPayload = {
-          name: name.trim().toUpperCase(),
-          email: cleanEmail,
-          note: buildNote(),
-          customer_code: targetDoc || `WEB-${Math.floor(100000 + Math.random() * 900000)}`,
-        };
-        if (cleanPhone) customerPayload.phone_number = cleanPhone;
-        if (targetAddress) customerPayload.address = targetAddress;
-        if (targetCity) customerPayload.city = targetCity;
-
-        const createRes = await fetch("https://api.loyverse.com/v1.0/customers", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${LOYVERSE_TOKEN}`,
-            "Content-Type": "application/json",
+            note: buildNote(existing.note),
           },
-          body: JSON.stringify(customerPayload),
-        });
-
-        if (createRes.ok) {
-          loyverseCustomer = await createRes.json();
-        }
+          LOYVERSE_TOKEN
+        );
+      } else {
+        // Crear nuevo cliente en Loyverse
+        const generatedCode = targetDoc || `WEB-${Date.now().toString().slice(-6)}`;
+        loyverseCustomer = await saveOrUpdateLoyverseCustomer(
+          {
+            name: name.trim().toUpperCase(),
+            email: cleanEmail,
+            phone_number: cleanPhone || undefined,
+            customer_code: generatedCode,
+            address: targetAddress || undefined,
+            city: targetCity || undefined,
+            note: buildNote(),
+          },
+          LOYVERSE_TOKEN
+        );
       }
-    } catch (e) {
-      console.warn("[Loyverse CRM Customer Registration Warning]:", e.message);
+    } catch (loyverseErr) {
+      console.warn("Aviso en Loyverse (continuando con registro):", loyverseErr.message);
     }
 
-    const customerId = loyverseCustomer?.id || `web-cust-${Date.now()}`;
+    const cleanFinalPhone = cleanColombianPhone(cleanPhone || loyverseCustomer?.phone_number);
 
     return new Response(
       JSON.stringify({
         success: true,
+        message: "Cuenta creada exitosamente en URBANNOISE",
         customer: {
-          id: customerId,
+          id: loyverseCustomer?.id || `LOCAL-${Date.now()}`,
           name: name.trim().toUpperCase(),
           email: cleanEmail,
-          phone: cleanPhone,
-          document: cleanDocument,
-          city: city?.trim() || "Bogotá, D.C.",
-          address: address?.trim() || "",
+          phone: cleanFinalPhone,
+          document: cleanDocument || loyverseCustomer?.customer_code || "",
+          city: city || "Bogotá",
+          address: address || "",
+          loyverseCustomerId: loyverseCustomer?.id,
           createdAt: new Date().toISOString(),
         },
       }),

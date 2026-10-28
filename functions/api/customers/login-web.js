@@ -1,3 +1,5 @@
+import { findLoyverseCustomer, cleanColombianPhone, LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
+
 export async function onRequestPost({ request, env }) {
   try {
     const { emailOrPhone, password } = await request.json();
@@ -8,25 +10,17 @@ export async function onRequestPost({ request, env }) {
       });
     }
 
-    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || "eac78ade09eb4cf2b0700e291be2fe0d";
+    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
     const cleanInput = emailOrPhone.trim().toLowerCase();
-    const cleanPhone = emailOrPhone.trim().replace(/\D/g, "");
+    const cleanDigits = emailOrPhone.trim().replace(/\D/g, "");
 
-    // Buscar en Loyverse
-    const listRes = await fetch("https://api.loyverse.com/v1.0/customers?limit=250", {
-      headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+    // Buscar en Loyverse mediante búsqueda paginada y directa
+    const foundCustomer = await findLoyverseCustomer({
+      email: cleanInput.includes("@") ? cleanInput : undefined,
+      phone: cleanDigits.length >= 7 ? cleanDigits : undefined,
+      document: !cleanInput.includes("@") && cleanDigits.length >= 6 ? cleanDigits : undefined,
+      token: LOYVERSE_TOKEN,
     });
-
-    let foundCustomer = null;
-    if (listRes.ok) {
-      const data = await listRes.json();
-      foundCustomer = (data.customers || []).find(
-        (c) =>
-          (c.email && c.email.toLowerCase() === cleanInput) ||
-          (cleanPhone && c.phone_number && c.phone_number.replace(/\D/g, "") === cleanPhone) ||
-          (c.customer_code && c.customer_code === cleanInput)
-      );
-    }
 
     if (!foundCustomer) {
       return new Response(JSON.stringify({ error: "Usuario no encontrado en la base de clientes" }), {
@@ -95,10 +89,7 @@ export async function onRequestPost({ request, env }) {
     const customerCity = foundCustomer.city || (cityMatch ? cityMatch[1].trim() : "Bogotá");
 
     // Limpiar número de teléfono a 10 dígitos colombianos
-    let cleanCustomerPhone = (foundCustomer.phone_number || "").replace(/\D/g, "");
-    if (cleanCustomerPhone.startsWith("57") && cleanCustomerPhone.length === 12) {
-      cleanCustomerPhone = cleanCustomerPhone.substring(2);
-    }
+    const cleanCustomerPhone = cleanColombianPhone(foundCustomer.phone_number);
 
     return new Response(
       JSON.stringify({

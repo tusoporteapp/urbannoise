@@ -1,4 +1,5 @@
 import { isAuthorizedAdmin } from "../_auth.js";
+import { LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
 
 export async function onRequestGet({ request, env }) {
   try {
@@ -15,8 +16,8 @@ export async function onRequestGet({ request, env }) {
     }
 
     const url = new URL(request.url);
-    const limit = url.searchParams.get("limit") || "50";
-    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || "eac78ade09eb4cf2b0700e291be2fe0d";
+    const limit = url.searchParams.get("limit") || "250";
+    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
 
     const res = await fetch(`https://api.loyverse.com/v1.0/receipts?limit=${limit}`, {
       headers: {
@@ -43,6 +44,7 @@ export async function onRequestGet({ request, env }) {
       return (
         note.includes("urbannoise web") ||
         note.includes("pasarela bold") ||
+        note.includes("cliente web") ||
         source === "sitioweb" ||
         order.startsWith("un-")
       );

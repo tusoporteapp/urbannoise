@@ -1,4 +1,5 @@
 import { isAuthorizedAdmin } from "../_auth.js";
+import { getAllLoyverseCustomers, LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
 
 export async function onRequestGet({ request, env }) {
   try {
@@ -14,26 +15,10 @@ export async function onRequestGet({ request, env }) {
       );
     }
 
-    const url = new URL(request.url);
-    const limit = url.searchParams.get("limit") || "250";
-    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || "eac78ade09eb4cf2b0700e291be2fe0d";
+    const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
 
-    const res = await fetch(`https://api.loyverse.com/v1.0/customers?limit=${limit}`, {
-      headers: {
-        Authorization: `Bearer ${LOYVERSE_TOKEN}`,
-      },
-    });
-
-    if (!res.ok) {
-      const errText = await res.text();
-      return new Response(JSON.stringify({ customers: [], error: errText }), {
-        status: res.status,
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-      });
-    }
-
-    const data = await res.json();
-    const allCustomers = data.customers || [];
+    // Obtener todos los clientes de Loyverse paginando
+    const allCustomers = await getAllLoyverseCustomers(LOYVERSE_TOKEN, 8);
 
     // Filtrar estrictamente SOLO clientes registrados a través de la página web
     const webCustomers = allCustomers.filter((c) => {
@@ -47,7 +32,7 @@ export async function onRequestGet({ request, env }) {
       );
     });
 
-    return new Response(JSON.stringify({ customers: webCustomers }), {
+    return new Response(JSON.stringify({ customers: webCustomers, totalCount: allCustomers.length }), {
       status: 200,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });
