@@ -40,6 +40,8 @@ import {
   X,
   Loader2,
   Star,
+  Flame,
+  Clock,
 } from 'lucide-react';
 import {
   HeroSlide,
@@ -60,6 +62,7 @@ import {
   saveSiteContentToGitHub,
   DEFAULT_SITE_CONTENT,
   DEFAULT_HOME_BLOCKS,
+  DEFAULT_COUNTDOWN_BANNER,
 } from '../lib/siteContent';
 import { getGitHubConfig } from '../lib/githubStorage';
 import { PRODUCTS_DATA, formatCOP } from '../data/products';
@@ -493,6 +496,90 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
     setNewCatKicker(preset.kicker);
     setNewCatDesc(preset.description);
     setNewCatImage(preset.image);
+  };
+
+  const COUNTDOWN_PRESETS = [
+    {
+      label: '🔥 Flash Drop (48h)',
+      title: 'FLASH DROP STREETWEAR',
+      subtitle: 'Siluetas boxy de alto gramaje con inventario limitado al detal',
+      ctaText: 'COMPRAR ANTES DE QUE SE AGOTE →',
+      ctaAnchor: '#latest-drops',
+      hours: 48,
+      theme: 'gold' as const,
+    },
+    {
+      label: '⚡ Weekend Drop (72h)',
+      title: 'WEEKEND DROP EXCLUSIVO',
+      subtitle: 'Confección premium en Bogotá • Disponible solo hasta el domingo a medianoche',
+      ctaText: 'VER PIEZAS DISPONIBLES →',
+      ctaAnchor: '#latest-drops',
+      hours: 72,
+      theme: 'neon' as const,
+    },
+    {
+      label: '🔒 Cápsula Limitada (24h)',
+      title: 'CÁPSULA LIMITADA 2026',
+      subtitle: 'Pocas unidades por talla (S a XL) • Despacho express nacional',
+      ctaText: 'EXPLORAR CÁPSULA →',
+      ctaAnchor: '#latest-drops',
+      hours: 24,
+      theme: 'dark' as const,
+    },
+    {
+      label: '🚚 Envío Flash de Cortesía (12h)',
+      title: 'DESPACHO DE CORTESÍA FLASH',
+      subtitle: 'Envíos sin costo adicional a toda Colombia por las próximas horas',
+      ctaText: 'APROVECHAR BENEFICIO →',
+      ctaAnchor: '#latest-drops',
+      hours: 12,
+      theme: 'red' as const,
+    },
+  ];
+
+  const handleApplyCountdownPreset = (preset: typeof COUNTDOWN_PRESETS[0]) => {
+    const targetDate = new Date(Date.now() + preset.hours * 60 * 60 * 1000);
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const localIso = `${targetDate.getFullYear()}-${pad(targetDate.getMonth() + 1)}-${pad(targetDate.getDate())}T${pad(targetDate.getHours())}:${pad(targetDate.getMinutes())}`;
+
+    setContent((prev) => ({
+      ...prev,
+      countdownBanner: {
+        ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+        enabled: true,
+        title: preset.title,
+        subtitle: preset.subtitle,
+        ctaText: preset.ctaText,
+        ctaAnchor: preset.ctaAnchor,
+        theme: preset.theme,
+        endDate: localIso,
+        autoHideOnEnd: true,
+        expiredMessage: 'DROP FINALIZADO',
+      },
+    }));
+    onShowToast?.(`Plantilla "${preset.label}" aplicada y activada.`);
+  };
+
+  const toDatetimeLocal = (dateStr?: string): string => {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '';
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  };
+
+  const formatRemainingPreview = (dateStr?: string): string => {
+    if (!dateStr) return 'Fecha no definida';
+    const target = new Date(dateStr).getTime();
+    if (isNaN(target)) return 'Fecha inválida';
+    const diff = target - Date.now();
+    if (diff <= 0) return '⏰ Tiempo expirado';
+    const seconds = Math.floor((diff / 1000) % 60);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${days > 0 ? `${days}d ` : ''}${pad(hours)}h : ${pad(minutes)}m : ${pad(seconds)}s`;
   };
 
   const homeBlocksList: HomeBlockItem[] = (
@@ -1073,8 +1160,8 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
               : 'text-white/70 hover:bg-white/5 hover:text-white'
           }`}
         >
-          <MessageCircle className="w-4 h-4 flex-shrink-0 text-emerald-300" />
-          <span>4. Anuncios & WhatsApp</span>
+          <Flame className="w-4 h-4 flex-shrink-0 text-amber-400" />
+          <span>4. ⏳ Flash Drops, Anuncios & WhatsApp</span>
         </button>
 
         <button
@@ -2477,6 +2564,255 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
       {/* ============================================================== */}
       {activeSubTab === 'announcements-whatsapp' && (
         <div className="space-y-5 max-w-3xl">
+          {/* MÓDULO: BARRA DE CUENTA REGRESIVA & MODO FLASH DROP */}
+          <div className="bg-[#14151D] p-5 sm:p-6 rounded-xl border border-white/10 space-y-4 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-white/10 gap-3">
+              <div>
+                <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-400 mb-1">
+                  <Flame className="w-4 h-4 text-amber-400 animate-pulse" />
+                  <span>CUENTA REGRESIVA & MODO FLASH DROP (URGENCIA STREETWEAR)</span>
+                </div>
+                <h3 className="text-base sm:text-lg font-black uppercase text-white tracking-tight">
+                  Reloj Temporizador de Drop en Portada
+                </h3>
+                <p className="text-xs text-white/60 mt-0.5 leading-relaxed">
+                  Activa un cintillo en el tope de la tienda con un reloj en cuenta regresiva para drops limitados, siluetas de fin de semana o beneficios express al detal.
+                </p>
+              </div>
+
+              {/* Botón Encender / Apagar */}
+              <button
+                type="button"
+                onClick={() =>
+                  setContent((prev) => ({
+                    ...prev,
+                    countdownBanner: {
+                      ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+                      enabled: !prev.countdownBanner?.enabled,
+                    },
+                  }))
+                }
+                className={`px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition flex items-center space-x-2 cursor-pointer border self-start sm:self-center shadow-md ${
+                  content.countdownBanner?.enabled
+                    ? 'bg-amber-400 text-black border-amber-300'
+                    : 'bg-white/5 border-white/15 text-white/50 hover:text-white'
+                }`}
+              >
+                <Eye className={`w-4 h-4 ${content.countdownBanner?.enabled ? 'text-black' : 'text-white/40'}`} />
+                <span>{content.countdownBanner?.enabled ? 'Drop Activo' : 'Drop Inactivo'}</span>
+              </button>
+            </div>
+
+            {/* Plantillas Rápidas de 1 Clic (Presets) */}
+            <div className="space-y-2 pt-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-white/70 block">
+                ⚡ Plantillas Rápidas de 1 Clic (Activa un Drop al Detal en Segundos):
+              </span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {COUNTDOWN_PRESETS.map((preset) => (
+                  <button
+                    key={preset.label}
+                    type="button"
+                    onClick={() => handleApplyCountdownPreset(preset)}
+                    className="p-2.5 rounded-lg bg-black/40 hover:bg-black/80 border border-white/10 hover:border-amber-400/50 transition text-left cursor-pointer group flex flex-col justify-between"
+                  >
+                    <span className="text-xs font-bold text-white group-hover:text-amber-300 transition">
+                      {preset.label}
+                    </span>
+                    <span className="text-[9.5px] text-white/50 mt-1 block truncate">
+                      {preset.title}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Configuración Detallada */}
+            <div className="space-y-4 pt-2 border-t border-white/10">
+              {/* Fecha y Hora de Cierre */}
+              <div className="p-4 bg-black/40 rounded-xl border border-white/10 space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <label className="text-xs font-bold text-white uppercase tracking-wide flex items-center space-x-1.5">
+                    <Clock className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Fecha y Hora de Cierre del Drop:</span>
+                  </label>
+                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-400/15 text-amber-300 border border-amber-400/30 self-start sm:self-auto">
+                    Restante: {formatRemainingPreview(content.countdownBanner?.endDate)}
+                  </span>
+                </div>
+
+                <input
+                  type="datetime-local"
+                  value={toDatetimeLocal(content.countdownBanner?.endDate)}
+                  onChange={(e) =>
+                    setContent((prev) => ({
+                      ...prev,
+                      countdownBanner: {
+                        ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+                        endDate: e.target.value ? new Date(e.target.value).toISOString() : new Date().toISOString(),
+                      },
+                    }))
+                  }
+                  className="w-full bg-black/60 border border-white/15 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-mono text-white focus:outline-none focus:border-amber-400 transition"
+                />
+              </div>
+
+              {/* Título y Subtítulo */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-white/80 mb-1.5 uppercase tracking-wide">
+                    Título Principal del Banner
+                  </label>
+                  <input
+                    type="text"
+                    value={content.countdownBanner?.title || 'FLASH DROP STREETWEAR'}
+                    onChange={(e) =>
+                      setContent((prev) => ({
+                        ...prev,
+                        countdownBanner: {
+                          ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+                          title: e.target.value,
+                        },
+                      }))
+                    }
+                    placeholder="Ej. FLASH DROP STREETWEAR"
+                    className="w-full bg-black/50 border border-white/15 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-black uppercase text-white focus:outline-none focus:border-amber-400 transition"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-white/80 mb-1.5 uppercase tracking-wide">
+                    Texto del Botón (CTA)
+                  </label>
+                  <input
+                    type="text"
+                    value={content.countdownBanner?.ctaText || 'VER DROP AHORA →'}
+                    onChange={(e) =>
+                      setContent((prev) => ({
+                        ...prev,
+                        countdownBanner: {
+                          ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+                          ctaText: e.target.value,
+                        },
+                      }))
+                    }
+                    placeholder="Ej. VER DROP AHORA →"
+                    className="w-full bg-black/50 border border-white/15 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-bold uppercase text-white focus:outline-none focus:border-amber-400 transition"
+                  />
+                </div>
+              </div>
+
+              {/* Subtítulo Detallado */}
+              <div>
+                <label className="block text-xs font-bold text-white/80 mb-1.5 uppercase tracking-wide">
+                  Subtítulo / Mensaje de Urgencia al Detal
+                </label>
+                <input
+                  type="text"
+                  value={content.countdownBanner?.subtitle || ''}
+                  onChange={(e) =>
+                    setContent((prev) => ({
+                      ...prev,
+                      countdownBanner: {
+                        ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+                        subtitle: e.target.value,
+                      },
+                    }))
+                  }
+                  placeholder="Ej. Siluetas boxy de alto gramaje con inventario limitado al detal"
+                  className="w-full bg-black/50 border border-white/15 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-amber-400 transition"
+                />
+              </div>
+
+              {/* Tema Visual */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-white/80 mb-1.5 uppercase tracking-wide">
+                    Estilo Visual (Tema Streetwear)
+                  </label>
+                  <select
+                    value={content.countdownBanner?.theme || 'gold'}
+                    onChange={(e) =>
+                      setContent((prev) => ({
+                        ...prev,
+                        countdownBanner: {
+                          ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+                          theme: e.target.value as any,
+                        },
+                      }))
+                    }
+                    className="w-full bg-black/60 border border-white/15 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-white focus:outline-none focus:border-amber-400 transition cursor-pointer"
+                  >
+                    <option value="gold">🟡 Dorado Streetwear (High-End)</option>
+                    <option value="neon">🟢 Verde Neón (Cyber Acid)</option>
+                    <option value="dark">⚫ Negro Minimalista (Monochrome)</option>
+                    <option value="red">🔴 Rojo Alerta (Máxima Urgencia)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-white/80 mb-1.5 uppercase tracking-wide">
+                    Destino al Presionar el Botón
+                  </label>
+                  <input
+                    type="text"
+                    value={content.countdownBanner?.ctaAnchor || '#latest-drops'}
+                    onChange={(e) =>
+                      setContent((prev) => ({
+                        ...prev,
+                        countdownBanner: {
+                          ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+                          ctaAnchor: e.target.value,
+                        },
+                      }))
+                    }
+                    placeholder="Ej. #latest-drops"
+                    className="w-full bg-black/50 border border-white/15 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-mono text-white focus:outline-none focus:border-amber-400 transition"
+                  />
+                </div>
+              </div>
+
+              {/* Comportamiento al Expirar */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-black/30 rounded-lg border border-white/10">
+                <label className="flex items-center space-x-2 text-xs font-bold text-white/90 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={content.countdownBanner?.autoHideOnEnd !== false}
+                    onChange={(e) =>
+                      setContent((prev) => ({
+                        ...prev,
+                        countdownBanner: {
+                          ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+                          autoHideOnEnd: e.target.checked,
+                        },
+                      }))
+                    }
+                    className="w-4 h-4 rounded text-amber-400 focus:ring-0 focus:ring-offset-0 bg-black/60 border-white/20 cursor-pointer"
+                  />
+                  <span>Ocultar automáticamente el banner cuando el reloj llegue a 00:00:00</span>
+                </label>
+
+                {content.countdownBanner?.autoHideOnEnd === false && (
+                  <input
+                    type="text"
+                    placeholder="Mensaje al expirar (ej. DROP FINALIZADO)"
+                    value={content.countdownBanner?.expiredMessage || 'DROP FINALIZADO'}
+                    onChange={(e) =>
+                      setContent((prev) => ({
+                        ...prev,
+                        countdownBanner: {
+                          ...(prev.countdownBanner || DEFAULT_COUNTDOWN_BANNER),
+                          expiredMessage: e.target.value,
+                        },
+                      }))
+                    }
+                    className="bg-black/60 border border-white/15 rounded px-2.5 py-1 text-xs text-white"
+                  />
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="bg-[#14151D] p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
             <div className="border-b border-white/10 pb-3">
               <h3 className="font-bold text-xs uppercase tracking-wider text-white/90 flex items-center space-x-2">

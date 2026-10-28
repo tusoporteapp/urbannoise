@@ -1,4 +1,4 @@
-import { SiteContentConfig, HeroSlide, HomeBlockItem } from '../types';
+import { SiteContentConfig, HeroSlide, HomeBlockItem, CountdownBannerConfig } from '../types';
 import { HERO_SLIDES } from '../data/products';
 import { getFileSha, getGitHubConfig, GitHubConfig } from './githubStorage';
 import { getAdminHeaders } from './loyverse';
@@ -77,6 +77,18 @@ export const DEFAULT_HOME_BLOCKS: HomeBlockItem[] = [
     order: 9,
   },
 ];
+
+export const DEFAULT_COUNTDOWN_BANNER: CountdownBannerConfig = {
+  enabled: false,
+  title: 'FLASH DROP STREETWEAR',
+  subtitle: 'Siluetas oversize exclusivas • Confección en Bogotá al detal',
+  endDate: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString(),
+  ctaText: 'VER DROP AHORA →',
+  ctaAnchor: '#latest-drops',
+  theme: 'gold',
+  autoHideOnEnd: true,
+  expiredMessage: 'DROP FINALIZADO',
+};
 
 export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
   heroSlides: HERO_SLIDES.map((s) => ({
@@ -202,6 +214,7 @@ export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
     damaOversizeKicker: 'SILUETAS RELAJADAS',
     damaOversizeTitle: 'DAMA OVERSIZE',
   },
+  countdownBanner: DEFAULT_COUNTDOWN_BANNER,
   homeBlocks: DEFAULT_HOME_BLOCKS,
   featuredSkus: [],
   lastUpdated: new Date().toISOString(),
@@ -262,6 +275,11 @@ export function getStoredSiteContent(): SiteContentConfig {
             ...DEFAULT_SITE_CONTENT.sections,
             ...(parsed.sections || {}),
           },
+          countdownBanner: {
+            ...DEFAULT_COUNTDOWN_BANNER,
+            ...(parsed.countdownBanner || {}),
+            enabled: Boolean(parsed.countdownBanner?.enabled),
+          },
           featuredSkus: Array.isArray(parsed.featuredSkus) ? parsed.featuredSkus : [],
         };
       }
@@ -270,6 +288,14 @@ export function getStoredSiteContent(): SiteContentConfig {
     console.warn('[SiteContent] Error leyendo de localStorage:', e);
   }
   return DEFAULT_SITE_CONTENT;
+}
+
+/**
+ * Retorna la configuración del banner de cuenta regresiva (Flash Drop)
+ */
+export function getCountdownBanner(): CountdownBannerConfig {
+  const content = getStoredSiteContent();
+  return content.countdownBanner || DEFAULT_COUNTDOWN_BANNER;
 }
 
 /**

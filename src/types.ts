@@ -193,9 +193,22 @@ export interface HomeBlockItem {
   order: number;
 }
 
+export interface CountdownBannerConfig {
+  enabled: boolean;
+  title: string;
+  subtitle?: string;
+  endDate: string; // ISO string o formato YYYY-MM-DDTHH:mm
+  ctaText?: string;
+  ctaAnchor?: string;
+  theme?: 'gold' | 'neon' | 'dark' | 'red';
+  autoHideOnEnd?: boolean;
+  expiredMessage?: string;
+}
+
 export interface SiteContentConfig {
   heroSlides: HeroSlide[];
   announcements?: AnnouncementContent;
+  countdownBanner?: CountdownBannerConfig;
   flagship?: FlagshipContent;
   categories?: CategoryCardContent[];
   manifesto?: BrandManifestoContent;

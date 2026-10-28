@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { CountdownBanner } from './components/CountdownBanner';
 import { AnnouncementBar } from './components/AnnouncementBar';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
@@ -907,8 +908,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-[#101013] font-sans antialiased selection:bg-[#101013] selection:text-[#F5F2E4]">
-      {/* Contenedor Fijo Unificado: Agrupa la barra de anuncios y la cabecera */}
+      {/* Contenedor Fijo Unificado: Agrupa el banner de flash drop, la barra de anuncios y la cabecera */}
       <div id="header-wrapper" className="fixed top-0 inset-x-0 z-40 transition-all duration-300">
+        <CountdownBanner
+          onCtaClick={(anchor) => {
+            const clean = (anchor || '#latest-drops').replace('#', '');
+            const el = document.getElementById(clean);
+            if (el) {
+              const headerEl = document.getElementById('header-wrapper');
+              const headerHeight = headerEl ? Math.round(headerEl.getBoundingClientRect().height) : 96;
+              const targetPos = el.getBoundingClientRect().top + window.pageYOffset;
+              window.scrollTo({ top: Math.max(0, targetPos - headerHeight + 2), behavior: 'smooth' });
+            } else {
+              handleOpenMarketplace('latest-drops');
+            }
+          }}
+        />
         <AnnouncementBar
           isScrolled={isScrolled}
           isSolid={currentView === 'marketplace' || currentView === 'account'}

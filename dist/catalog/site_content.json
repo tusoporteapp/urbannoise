@@ -144,6 +144,17 @@
     "damaOversizeKicker": "SILUETAS RELAJADAS",
     "damaOversizeTitle": "DAMA OVERSIZE"
   },
-  "lastUpdated": "2026-10-28T21:05:48.093Z",
-  "featuredSkus": []
+  "lastUpdated": "2026-10-28T21:21:27.757Z",
+  "featuredSkus": [],
+  "countdownBanner": {
+    "enabled": false,
+    "title": "FLASH DROP STREETWEAR",
+    "subtitle": "Siluetas oversize exclusivas • Confección en Bogotá al detal",
+    "endDate": "2026-10-30T21:21:27.756Z",
+    "ctaText": "VER DROP AHORA →",
+    "ctaAnchor": "#latest-drops",
+    "theme": "gold",
+    "autoHideOnEnd": true,
+    "expiredMessage": "DROP FINALIZADO"
+  }
 }
