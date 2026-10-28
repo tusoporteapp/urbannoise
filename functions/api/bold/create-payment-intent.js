@@ -1,8 +1,9 @@
 export async function onRequestPost({ request }) {
   try {
     const { orderId, amount, currency = "COP", customer, description, redirectionUrl } = await request.json();
-    if (!orderId || !amount) {
-      return new Response(JSON.stringify({ error: "Faltan datos requeridos (orderId, amount)" }), {
+    const numAmount = Math.round(Number(amount));
+    if (!orderId || isNaN(numAmount) || numAmount < 1000) {
+      return new Response(JSON.stringify({ error: "Faltan datos requeridos o el monto es menor al mínimo permitido (orderId, amount >= 1000 COP)" }), {
         status: 400,
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
       });
@@ -12,7 +13,7 @@ export async function onRequestPost({ request }) {
     const secretKey = "zGivRzn0ym4CDxGErtEtYQ";
 
     // Fórmula oficial Bold: SHA256(orderId + amount + currency + secretKey)
-    const rawStringToSign = `${orderId}${amount}${currency}${secretKey}`;
+    const rawStringToSign = `${orderId}${numAmount}${currency}${secretKey}`;
     const encoder = new TextEncoder();
     const hashBuf = await crypto.subtle.digest("SHA-256", encoder.encode(rawStringToSign));
     const integritySignature = Array.from(new Uint8Array(hashBuf))

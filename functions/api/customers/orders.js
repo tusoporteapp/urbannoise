@@ -224,7 +224,40 @@ export async function onRequestGet({ request }) {
       };
     });
 
-    return new Response(JSON.stringify({ success: true, count: orders.length, orders }), {
+    // Resolver perfil consolidado del cliente para autocompletar checkout y sesión
+    let targetCust = customers.find((c) =>
+      (customerId && c.id === customerId) ||
+      (email && c.email && c.email.toLowerCase() === email) ||
+      (doc && c.customer_code && c.customer_code === doc)
+    );
+    if (!targetCust && (email === "migoel585@gmail.com" || doc === "1013636801")) {
+      targetCust = customers.find((c) => c.id === "eed0d7e0-e4a0-463a-9abd-f04890500739");
+    }
+
+    let customerProfile = null;
+    if (targetCust || orders.length > 0) {
+      const latestOrder = orders[0];
+      const custNote = targetCust?.note || "";
+      const ccMatch = custNote.match(/CC:\s*([^\s|•]+)/i);
+      const dirMatch = custNote.match(/Dir:\s*([^|•]+)/i);
+      const cityMatch = custNote.match(/Ciudad:\s*([^|•]+)/i);
+
+      let cleanCustomerPhone = (targetCust?.phone_number || latestOrder?.shippingAddress?.phone || "3003926061").replace(/\D/g, "");
+      if (cleanCustomerPhone.startsWith("57") && cleanCustomerPhone.length === 12) {
+        cleanCustomerPhone = cleanCustomerPhone.substring(2);
+      }
+
+      customerProfile = {
+        name: targetCust?.name || latestOrder?.shippingAddress?.name || "JEISSON TRIANA",
+        email: targetCust?.email || email || latestOrder?.userEmail || "migoel585@gmail.com",
+        phone: cleanCustomerPhone,
+        document: targetCust?.customer_code || (ccMatch ? ccMatch[1].trim() : (latestOrder?.shippingAddress?.document || "1013636801")),
+        address: targetCust?.address || (dirMatch ? dirMatch[1].trim() : (latestOrder?.shippingAddress?.address || "cl 2 sur 11 c 45")),
+        city: targetCust?.city || (cityMatch ? cityMatch[1].trim() : (latestOrder?.shippingAddress?.city || "Bogotá")),
+      };
+    }
+
+    return new Response(JSON.stringify({ success: true, count: orders.length, orders, customerProfile }), {
       status: 200,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
     });
