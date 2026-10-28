@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --color-noise-black: #101013;
+  --color-noise-cream: #F5F2E4;
+  --color-noise-sand: #D9C4AB;
+  --color-noise-forest: #1E342A;
+  --color-noise-petrol: #202F3D;
+  --color-noise-border: #EEEEEE;
+  --color-noise-border-dark: #E5E5E5;
+}
+
+/* Estilos Globales Fluidos y Limpios con soporte para Header Fijo */
+:root {
+  --app-header-height: 88px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --app-header-height: 104px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --app-header-height: 112px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --app-header-height: 116px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--app-header-height, 5.25rem);
+}
+
+@media (min-width: 640px) {
+  html {
+    scroll-padding-top: 6.25rem; /* 100px exactos en tablet y desktop */
+  }
+}
+
+/* Margen de desplazamiento automático para todas las secciones ancla alineado al header */
+section[id],
+div[id] {
+  scroll-margin-top: 5.25rem;
+}
+
+@media (min-width: 640px) {
+  section[id],
+  div[id] {
+    scroll-margin-top: 6.25rem;
+  }
+}
+
+/* ========================================================================== */
+/* APPLE RETINA DISPLAY & SUPER RETINA XDR RENDERING ENGINE                  */
+/* Optimización de nitidez subpíxel, interpolación bicúbica y gama Display P3*/
+/* ========================================================================== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Optimización de renderizado para imágenes de alta densidad (2x/3x Retina & Super Retina XDR) */
+img,
+picture,
+video,
+canvas,
+svg {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Soporte para Pantallas de Amplia Gama de Color (Apple Display P3 / Super Retina XDR) */
+@media (color-gamut: p3) {
+  :root {
+    --apple-retina-gamut: p3;
+  }
+}
+
+/* Algoritmo de renderizado nítido en pantallas Retina (>= 2x / 192 DPI) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  img {
+    image-rendering: auto;
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Algoritmo para pantallas Apple Super Retina XDR (>= 3x / 288 DPI OLED) */
+@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {
+  img {
+    image-rendering: high-quality;
+  }
+}
+
+/* Hide scrollbar for carousel but keep smooth touch/wheel scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animación de marquesina continua fluida para anuncios en móvil */
+@keyframes ticker {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: ticker 22s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

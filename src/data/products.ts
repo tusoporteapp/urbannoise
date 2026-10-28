@@ -1,0 +1,28871 @@
+import { Product, HeroSlide } from '../types';
+import { resolvePaginaWebPrice } from '../lib/catalogFilters';
+
+// =========================================================================
+// CATÁLOGO OFICIAL URBANNOISE POS (SINCRONIZADO 100% CON NOISE URBAN)
+// Total prendas reales: 289
+// =========================================================================
+export const PRODUCTS_DATA: Product[] = [
+  {
+    "id": "63eb5cac-2ede-4c16-a7aa-57ecb6a67f86",
+    "name": "⚡ PRENDA TEST BOLD WEB $1.500",
+    "category": "latest-drops",
+    "price": 1500,
+    "image": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "desc": "Prenda de prueba oficial creada directamente en Loyverse POS para certificación de pago real con Bold.co ($1.500 COP) y descuento automático de inventario.",
+    "sku": "TEST-BOLD-1500",
+    "categoryLabel": "Prueba Bold $1.500",
+    "loyverseItemId": "63eb5cac-2ede-4c16-a7aa-57ecb6a67f86",
+    "loyverseVariantId": "52eafdd2-dbfa-4d02-aa3b-43224190430c",
+    "stock": 5,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "52eafdd2-dbfa-4d02-aa3b-43224190430c",
+        "sku": "TEST-BOLD-1500",
+        "barcode": "TEST1500",
+        "price": 1500,
+        "cost": 0,
+        "option1_value": "M",
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 5
+      }
+    ]
+  },
+  {
+    "id": "930fce1c-6ed8-4cbf-8cae-1b56dd45a418",
+    "name": "GRAFITURBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/930fce1c-6ed8-4cbf-8cae-1b56dd45a418",
+    "images": [
+      "https://api.loyverse.com/image/930fce1c-6ed8-4cbf-8cae-1b56dd45a418"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L.",
+    "sku": "11565",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "930fce1c-6ed8-4cbf-8cae-1b56dd45a418",
+    "loyverseVariantId": "5032a481-6141-4307-9e93-cb8fba343042",
+    "stock": 13,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5032a481-6141-4307-9e93-cb8fba343042",
+        "sku": "11565",
+        "barcode": "11565SNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "db751bbe-4516-4c4d-8216-c134981524b1",
+        "sku": "11566",
+        "barcode": "11566MNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "21d38af0-7619-4e56-ae78-546d8840ef39",
+        "sku": "11567",
+        "barcode": "11567LNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 5
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "937c0e85-c802-411c-a298-f22876f54494",
+    "name": "GRAFITURBAN • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/937c0e85-c802-411c-a298-f22876f54494",
+    "images": [
+      "https://api.loyverse.com/image/937c0e85-c802-411c-a298-f22876f54494"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L.",
+    "sku": "11559",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "937c0e85-c802-411c-a298-f22876f54494",
+    "loyverseVariantId": "e68fdf94-2c4d-46db-bd75-72b65744f4af",
+    "stock": 36,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e68fdf94-2c4d-46db-bd75-72b65744f4af",
+        "sku": "11559",
+        "barcode": "11559SMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "0f4db5aa-f3ce-4231-9345-b3fe0162469e",
+        "sku": "11560",
+        "barcode": "11560SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "ef775c84-4de4-4862-8eee-4672fa96a833",
+        "sku": "11561",
+        "barcode": "11561MMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "7ae96750-3793-4436-9b4d-17fcad9ed5f0",
+        "sku": "11562",
+        "barcode": "11562MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "c6015a6f-2fc7-4423-ba0d-70a83bfb63f0",
+        "sku": "11563",
+        "barcode": "11563LMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "cb70de7e-b54c-4f96-b793-cb423e2d53e7",
+        "sku": "11564",
+        "barcode": "11564LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 6
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "baba9269-6d2f-47e4-b18d-fe5e4f9baa98",
+    "name": "MANIFESTO URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/baba9269-6d2f-47e4-b18d-fe5e4f9baa98",
+    "images": [
+      "https://api.loyverse.com/image/baba9269-6d2f-47e4-b18d-fe5e4f9baa98"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Azul, Cafe. Tallas disponibles: S, M, L.",
+    "sku": "11553",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "baba9269-6d2f-47e4-b18d-fe5e4f9baa98",
+    "loyverseVariantId": "30840eaf-8b50-4fc3-8be5-6c01915334f9",
+    "stock": 14,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "30840eaf-8b50-4fc3-8be5-6c01915334f9",
+        "sku": "11553",
+        "barcode": "11553SAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "b36aa8c5-c707-4cbd-bd5d-2375b9b56e8c",
+        "sku": "11554",
+        "barcode": "11554SCa",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "aa4e811b-4482-4655-8fe4-4b5b271492c2",
+        "sku": "11555",
+        "barcode": "11555MAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "420d1eb4-fdeb-4a91-b183-7a31cd243afa",
+        "sku": "11556",
+        "barcode": "11556MCa",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cafe",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "38cf5659-967c-41ac-b516-db8e8840ab5c",
+        "sku": "11557",
+        "barcode": "11557LAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "c7d5e564-0f2e-4f75-b1c1-30fe80184038",
+        "sku": "11558",
+        "barcode": "11558LCa",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cafe",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Azul",
+      "Cafe"
+    ]
+  },
+  {
+    "id": "342f2248-ab19-4b36-8f07-c1f96aac21d2",
+    "name": "MANIFESTO URBAN • ESQUELETO ACIDWASH",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/342f2248-ab19-4b36-8f07-c1f96aac21d2",
+    "images": [
+      "https://api.loyverse.com/image/342f2248-ab19-4b36-8f07-c1f96aac21d2"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Azul. Tallas disponibles: S, M, L.",
+    "sku": "11550",
+    "categoryLabel": "Esqueleto AcidWash",
+    "loyverseItemId": "342f2248-ab19-4b36-8f07-c1f96aac21d2",
+    "loyverseVariantId": "842f47a0-1b01-4a62-beaf-375b456e4f70",
+    "stock": 14,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "842f47a0-1b01-4a62-beaf-375b456e4f70",
+        "sku": "11550",
+        "barcode": "11550SAz",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "09656ac5-ca81-4205-8b94-49e2e826804d",
+        "sku": "11551",
+        "barcode": "11551MAz",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "4d3aae28-959b-49a3-9da7-a4e2ae4dbca4",
+        "sku": "11552",
+        "barcode": "11552LAz",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 5
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Azul"
+    ]
+  },
+  {
+    "id": "b1ec533f-b0bb-44a3-a5ca-421424c0ca34",
+    "name": "MANIFESTO URBAN • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/b1ec533f-b0bb-44a3-a5ca-421424c0ca34",
+    "images": [
+      "https://api.loyverse.com/image/b1ec533f-b0bb-44a3-a5ca-421424c0ca34"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L.",
+    "sku": "11547",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "b1ec533f-b0bb-44a3-a5ca-421424c0ca34",
+    "loyverseVariantId": "b5c28f8f-aed2-4b51-b976-ba91b6cc30a6",
+    "stock": 7,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b5c28f8f-aed2-4b51-b976-ba91b6cc30a6",
+        "sku": "11547",
+        "barcode": "11547SGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "c1e2de55-474e-4fce-a239-ddfb00aa30d2",
+        "sku": "11548",
+        "barcode": "11548MGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "3893704f-9ae2-4aa4-8ecc-68c4fe674c7d",
+        "sku": "11549",
+        "barcode": "11549LGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "f6173756-d667-4dd1-95f4-dd0c423fd526",
+    "name": "ANGELPRESTIGE • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/f6173756-d667-4dd1-95f4-dd0c423fd526",
+    "images": [
+      "https://api.loyverse.com/image/f6173756-d667-4dd1-95f4-dd0c423fd526"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre, Gris. Tallas disponibles: S, M, L.",
+    "sku": "11540",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "f6173756-d667-4dd1-95f4-dd0c423fd526",
+    "loyverseVariantId": "5c0fe76d-e17b-44f5-abbe-c5085d7b91b9",
+    "stock": 6,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5c0fe76d-e17b-44f5-abbe-c5085d7b91b9",
+        "sku": "11540",
+        "barcode": "11540SCo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7f0a4966-b357-4c0d-bf9d-9f3bb8da2452",
+        "sku": "11541",
+        "barcode": "11541SGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "f39bb5a8-6fd6-4f83-81b8-37f96eeb02ed",
+        "sku": "11542",
+        "barcode": "11542MCo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "29189660-463b-4591-8a9a-c58f8c5d9ee2",
+        "sku": "11543",
+        "barcode": "11543MGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5ec1be88-bf55-4f39-91dd-4a8071ed8bff",
+        "sku": "11544",
+        "barcode": "11544LCo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "e2ec7536-ce36-428a-9fa1-b6bb9e56fb1f",
+        "sku": "11545",
+        "barcode": "11545LGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Cobre",
+      "Gris"
+    ]
+  },
+  {
+    "id": "0f586fb6-f55a-48a1-ab90-b049dd15c0c3",
+    "name": "ANGELPRESTIGE • ESQUELETO ACIDWASH",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/0f586fb6-f55a-48a1-ab90-b049dd15c0c3",
+    "images": [
+      "https://api.loyverse.com/image/0f586fb6-f55a-48a1-ab90-b049dd15c0c3"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre. Tallas disponibles: S, M, L.",
+    "sku": "11537",
+    "categoryLabel": "Esqueleto AcidWash",
+    "loyverseItemId": "0f586fb6-f55a-48a1-ab90-b049dd15c0c3",
+    "loyverseVariantId": "a79fc74d-7d93-40c7-8704-1c562d3e2eba",
+    "stock": 9,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a79fc74d-7d93-40c7-8704-1c562d3e2eba",
+        "sku": "11537",
+        "barcode": "11537SCo",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e4a0d30a-0e83-42df-99dc-0dde0bf646ed",
+        "sku": "11538",
+        "barcode": "11538MCo",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "b0ce85fc-6d68-4d63-adff-377c2be106e8",
+        "sku": "11539",
+        "barcode": "11539LCo",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 5
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Cobre"
+    ]
+  },
+  {
+    "id": "9510519a-7f4c-4069-8892-82d0b732b561",
+    "name": "ANGELPRESTIGE • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/9510519a-7f4c-4069-8892-82d0b732b561",
+    "images": [
+      "https://api.loyverse.com/image/9510519a-7f4c-4069-8892-82d0b732b561"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L.",
+    "sku": "11534",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "9510519a-7f4c-4069-8892-82d0b732b561",
+    "loyverseVariantId": "3987176e-366f-4847-9538-fcf306a1bf70",
+    "stock": 14,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3987176e-366f-4847-9538-fcf306a1bf70",
+        "sku": "11534",
+        "barcode": "11534SNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "b2cf03c3-76bc-45cb-9b3d-9a294e8433a6",
+        "sku": "11535",
+        "barcode": "11535MNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "477747d7-7b02-4be3-ba5e-58451208dada",
+        "sku": "11536",
+        "barcode": "11536LNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 6
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "68c4b95d-42cd-4b1b-a4d9-078ba81893bd",
+    "name": "URBANPOINT • OVERSIZE ACIDWASH",
+    "category": "young-free",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/68c4b95d-42cd-4b1b-a4d9-078ba81893bd",
+    "images": [
+      "https://api.loyverse.com/image/68c4b95d-42cd-4b1b-a4d9-078ba81893bd"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L.",
+    "sku": "11528",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "68c4b95d-42cd-4b1b-a4d9-078ba81893bd",
+    "loyverseVariantId": "b9de25d9-a35f-4701-9cab-9d359832ee28",
+    "stock": 9,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b9de25d9-a35f-4701-9cab-9d359832ee28",
+        "sku": "11528",
+        "barcode": "11528SGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "d35a0505-ac1a-42f5-9dc5-f99db1a3e54f",
+        "sku": "11529",
+        "barcode": "11529SNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "09b1a0f8-945b-48bd-b03b-2cb15bfaa0f8",
+        "sku": "11530",
+        "barcode": "11530MGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4c63cdf5-da17-40ef-b991-2312ca93f2f5",
+        "sku": "11531",
+        "barcode": "11531MNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "04d18058-416d-4c14-930b-fcd68a0876c4",
+        "sku": "11532",
+        "barcode": "11532LGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "6fe743f4-f115-472c-b500-bbf13f7a480c",
+        "sku": "11533",
+        "barcode": "11533LNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "d01f5f48-3be3-4217-8f94-335fdd600dbc",
+    "name": "URBANPOINT • OVERSIZE ALGODON",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/d01f5f48-3be3-4217-8f94-335fdd600dbc",
+    "images": [
+      "https://api.loyverse.com/image/d01f5f48-3be3-4217-8f94-335fdd600dbc"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L.",
+    "sku": "11522",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "d01f5f48-3be3-4217-8f94-335fdd600dbc",
+    "loyverseVariantId": "eba20b7f-3a09-4d24-ac88-3f91048de90a",
+    "stock": 45,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "eba20b7f-3a09-4d24-ac88-3f91048de90a",
+        "sku": "11522",
+        "barcode": "11522SMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 9
+      },
+      {
+        "variant_id": "07f77c15-4110-47c8-98dd-7f41ef345eaa",
+        "sku": "11523",
+        "barcode": "11523SNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "43a55caa-de5e-42f1-aa2d-b3114985fbbf",
+        "sku": "11524",
+        "barcode": "11524MMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 9
+      },
+      {
+        "variant_id": "37c93f29-de15-4c37-904a-01f33096e7d8",
+        "sku": "11525",
+        "barcode": "11525MNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 7
+      },
+      {
+        "variant_id": "1fe049b6-cee8-4f2e-9d31-312017b62a8e",
+        "sku": "11526",
+        "barcode": "11526LMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 8
+      },
+      {
+        "variant_id": "d3b909b4-79bc-49fc-92ee-5653f90fee8d",
+        "sku": "11527",
+        "barcode": "11527LNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 6
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "fa4323d4-0ef9-483d-9d79-037a21ed2e64",
+    "name": "URBANPOINT • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/fa4323d4-0ef9-483d-9d79-037a21ed2e64",
+    "images": [
+      "https://api.loyverse.com/image/fa4323d4-0ef9-483d-9d79-037a21ed2e64"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil. Tallas disponibles: S, M, L.",
+    "sku": "11519",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "fa4323d4-0ef9-483d-9d79-037a21ed2e64",
+    "loyverseVariantId": "71276933-df53-4fe1-b987-8a6695dfedfb",
+    "stock": 14,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "71276933-df53-4fe1-b987-8a6695dfedfb",
+        "sku": "11519",
+        "barcode": "11519SMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "768516f3-4532-4573-911d-ea145af6762c",
+        "sku": "11520",
+        "barcode": "11520MMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "01b81bd0-2349-4fdb-b605-ca2fe8f060dc",
+        "sku": "11521",
+        "barcode": "11521LMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 6
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Marfil"
+    ]
+  },
+  {
+    "id": "01e0f6f8-d121-438c-900a-5fb28dd48c82",
+    "name": "RIB/POLO DAM • CONJUNTOS",
+    "category": "dama-oversize",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/01e0f6f8-d121-438c-900a-5fb28dd48c82",
+    "images": [
+      "https://api.loyverse.com/image/01e0f6f8-d121-438c-900a-5fb28dd48c82"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Camell. Tallas disponibles: S, M, L, XL.",
+    "sku": "11517",
+    "categoryLabel": "Conjuntos",
+    "loyverseItemId": "01e0f6f8-d121-438c-900a-5fb28dd48c82",
+    "loyverseVariantId": "bdc2601c-e2eb-40be-b1e9-40a5ab49f1df",
+    "stock": 137,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "bdc2601c-e2eb-40be-b1e9-40a5ab49f1df",
+        "sku": "11517",
+        "barcode": "11517UNe",
+        "price": 0,
+        "cost": 33200,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 63
+      },
+      {
+        "variant_id": "154f46f3-8692-44c2-9265-cbe600df7233",
+        "sku": "11518",
+        "barcode": "11518UNe",
+        "price": 0,
+        "cost": 33200,
+        "option1_value": "U",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "U",
+        "color": "Camell",
+        "in_stock": 74
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Camell"
+    ]
+  },
+  {
+    "id": "c24e511b-b5da-4ed2-b39a-5ad795cdd298",
+    "name": "WINGS UN GRAFITY • BUZO GOLD",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/c24e511b-b5da-4ed2-b39a-5ad795cdd298",
+    "images": [
+      "https://api.loyverse.com/image/c24e511b-b5da-4ed2-b39a-5ad795cdd298"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11516",
+    "categoryLabel": "Buzo Gold",
+    "loyverseItemId": "c24e511b-b5da-4ed2-b39a-5ad795cdd298",
+    "loyverseVariantId": "c409b455-3ae7-41a2-98e0-a028c6e0283b",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c409b455-3ae7-41a2-98e0-a028c6e0283b",
+        "sku": "11516",
+        "barcode": "11516UGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "U",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "U",
+        "color": "Gris",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "3a8bd8ee-bbec-41ab-bef3-4d94c140c749",
+    "name": "WINGS UN GRAFITY • ESQUELETO ACIDWASH",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/3a8bd8ee-bbec-41ab-bef3-4d94c140c749",
+    "images": [
+      "https://api.loyverse.com/image/3a8bd8ee-bbec-41ab-bef3-4d94c140c749"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L.",
+    "sku": "11513",
+    "categoryLabel": "Esqueleto AcidWash",
+    "loyverseItemId": "3a8bd8ee-bbec-41ab-bef3-4d94c140c749",
+    "loyverseVariantId": "4a9a67de-313c-4306-856b-9ac1802581e5",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "4a9a67de-313c-4306-856b-9ac1802581e5",
+        "sku": "11513",
+        "barcode": "11513SGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "efa619bc-aec0-456e-a8c2-830e7a1bc0c5",
+        "sku": "11514",
+        "barcode": "11514MGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "b47c2c25-daab-4626-8e27-64402ba39a52",
+        "sku": "11515",
+        "barcode": "11515LGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "8394007f-4cc1-4d21-8cab-7d85bd7c3f95",
+    "name": "WINGS UN GRAFITY • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/8394007f-4cc1-4d21-8cab-7d85bd7c3f95",
+    "images": [
+      "https://api.loyverse.com/image/8394007f-4cc1-4d21-8cab-7d85bd7c3f95"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11427",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "8394007f-4cc1-4d21-8cab-7d85bd7c3f95",
+    "loyverseVariantId": "75ecec2c-f1e5-4181-93eb-ecf5d5f022d1",
+    "stock": 11,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "75ecec2c-f1e5-4181-93eb-ecf5d5f022d1",
+        "sku": "11427",
+        "barcode": "11427SMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "49c3704f-b651-47ab-8f3e-0f0c792a5d68",
+        "sku": "11428",
+        "barcode": "11428SNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "59c2269a-306d-46c5-9a05-f0c19f80f87d",
+        "sku": "11429",
+        "barcode": "11429MMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "22f2de3d-1ae0-43da-94c6-444ab312f645",
+        "sku": "11430",
+        "barcode": "11430MNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "9e6f3d6e-04fd-46b8-86be-feb4d229087e",
+        "sku": "11431",
+        "barcode": "11431LMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "09fb738a-8977-4c54-9b4f-76744890b14b",
+        "sku": "11432",
+        "barcode": "11432LNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "4eb4eb8a-e644-4d95-901d-1538461677e2",
+        "sku": "11433",
+        "barcode": "11433XLMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "7054ef06-fbf3-4fd7-98e5-5ad9bb72b61b",
+        "sku": "11434",
+        "barcode": "11434XLNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "c552041d-3bcc-4e32-81f5-d9f7e8c4b4d8",
+    "name": "CLOTHING 07 • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/c552041d-3bcc-4e32-81f5-d9f7e8c4b4d8",
+    "images": [
+      "https://api.loyverse.com/image/c552041d-3bcc-4e32-81f5-d9f7e8c4b4d8"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11505",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "c552041d-3bcc-4e32-81f5-d9f7e8c4b4d8",
+    "loyverseVariantId": "639ff432-8280-438c-bcb2-1958f8f512df",
+    "stock": 19,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "639ff432-8280-438c-bcb2-1958f8f512df",
+        "sku": "11505",
+        "barcode": "11505SMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "38539015-a9fa-4b2a-b2de-72199ad81d5c",
+        "sku": "11506",
+        "barcode": "11506SNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "01af5330-4a9b-4c32-ad36-301e0dad56ab",
+        "sku": "11507",
+        "barcode": "11507MMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "4669449c-b50e-47b9-9a09-08c19bcfc693",
+        "sku": "11508",
+        "barcode": "11508MNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "1cd01186-7b07-40fb-9900-53d313cf2c32",
+        "sku": "11509",
+        "barcode": "11509LMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "0ac80927-3bc3-4a39-9945-5b6ae4b6e7c4",
+        "sku": "11510",
+        "barcode": "11510LNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "d7674f6a-f33b-4f33-b6a0-306c7d3315ec",
+        "sku": "11511",
+        "barcode": "11511XLMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "35b65352-3fb9-403a-ab2e-e532374af662",
+        "sku": "11512",
+        "barcode": "11512XLNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "9c1c3f74-ddd4-49a8-b571-9d5688d0b374",
+    "name": "NO RISK URBAN • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/9c1c3f74-ddd4-49a8-b571-9d5688d0b374",
+    "images": [
+      "https://api.loyverse.com/image/9c1c3f74-ddd4-49a8-b571-9d5688d0b374"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11497",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "9c1c3f74-ddd4-49a8-b571-9d5688d0b374",
+    "loyverseVariantId": "d5eb66af-1a21-4fcd-857d-a1f306eb9bb5",
+    "stock": 20,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d5eb66af-1a21-4fcd-857d-a1f306eb9bb5",
+        "sku": "11497",
+        "barcode": "11497SMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "fbf59698-2984-4bfd-ad82-1bbe5ea23abf",
+        "sku": "11498",
+        "barcode": "11498SNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "06647566-8c93-499c-8191-2f51e28cf3ae",
+        "sku": "11499",
+        "barcode": "11499MMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "2b4388bf-9301-45fd-9727-9e7904b0b57f",
+        "sku": "11500",
+        "barcode": "11500MNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "463fbf23-b734-4ead-82bf-43739669c6b2",
+        "sku": "11501",
+        "barcode": "11501LMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "70e34638-fd76-4eee-9ad7-ebda10991563",
+        "sku": "11502",
+        "barcode": "11502LNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "00d56451-3fa7-4e2b-b2ec-7e7e76117a79",
+        "sku": "11503",
+        "barcode": "11503XLMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "86c8b218-be51-4248-af99-99c379c282d7",
+        "sku": "11504",
+        "barcode": "11504XLNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "537eae00-4b6d-4b6e-be0a-0c2eabc7f548",
+    "name": "CLOTHING 07 • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/537eae00-4b6d-4b6e-be0a-0c2eabc7f548",
+    "images": [
+      "https://api.loyverse.com/image/537eae00-4b6d-4b6e-be0a-0c2eabc7f548"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre, Azul. Tallas disponibles: S, M, L, XL.",
+    "sku": "11477",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "537eae00-4b6d-4b6e-be0a-0c2eabc7f548",
+    "loyverseVariantId": "3bf7d84b-2e06-454e-95c1-97a383c8b1dc",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3bf7d84b-2e06-454e-95c1-97a383c8b1dc",
+        "sku": "11477",
+        "barcode": "11477SCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "b2f5bf03-de0c-4aa3-9f57-25f65ff6e8ac",
+        "sku": "11478",
+        "barcode": "11478SAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f8290b17-db7a-48b0-9fa2-8250a1034abb",
+        "sku": "11479",
+        "barcode": "11479MCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d19d686b-63ff-4e1e-9946-d3615dd9e955",
+        "sku": "11480",
+        "barcode": "11480MAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f316c8a2-a0e4-416d-9e09-e26b9fa563c0",
+        "sku": "11481",
+        "barcode": "11481LCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a9b8b2bd-065f-4fe3-912a-9c51431ce4a8",
+        "sku": "11482",
+        "barcode": "11482LAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b49444df-b83f-4b4e-badc-0ff750918718",
+        "sku": "11483",
+        "barcode": "11483XLCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "131313c6-9b6d-4ba0-8351-0d203d45f36f",
+        "sku": "11484",
+        "barcode": "11484XLAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0f7322f5-1f27-42d3-a23e-b3a7a47c5a98",
+        "sku": "11485",
+        "barcode": "11485XXLCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8b803352-f3e7-47ec-80be-2e6722d163d4",
+        "sku": "11486",
+        "barcode": "11486XXLAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Azul",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre",
+      "Azul"
+    ]
+  },
+  {
+    "id": "4b6185e5-b504-4bfc-b11e-1107015b7fcf",
+    "name": "NO RISK URBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/4b6185e5-b504-4bfc-b11e-1107015b7fcf",
+    "images": [
+      "https://api.loyverse.com/image/4b6185e5-b504-4bfc-b11e-1107015b7fcf"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre, Azul. Tallas disponibles: S, M, L, XL.",
+    "sku": "11487",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "4b6185e5-b504-4bfc-b11e-1107015b7fcf",
+    "loyverseVariantId": "957ae369-59db-4080-94c4-786a7a06fed7",
+    "stock": 21,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "957ae369-59db-4080-94c4-786a7a06fed7",
+        "sku": "11487",
+        "barcode": "11487SCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "3d622d80-d169-437b-b88e-e4d8142cf8d1",
+        "sku": "11488",
+        "barcode": "11488SAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "7e132d7f-d5e1-4879-8178-4a17f1fa5e8d",
+        "sku": "11489",
+        "barcode": "11489MCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "b26e8c23-6808-4bfa-ac5a-f53373512fae",
+        "sku": "11490",
+        "barcode": "11490MAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "b492099a-29d4-42d3-b8b5-7f45d06397f4",
+        "sku": "11491",
+        "barcode": "11491LCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "8c695182-56e0-4d7d-a884-5e6dbebdd9e2",
+        "sku": "11492",
+        "barcode": "11492LAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "95aa0ed9-6cd0-47b7-86c7-8e1488ba7848",
+        "sku": "11493",
+        "barcode": "11493XLCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "d5ab6f39-9daa-4185-943f-b5cb2eceb615",
+        "sku": "11494",
+        "barcode": "11494XLAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "d0b65abb-65a7-4784-b5fc-024aac67268a",
+        "sku": "11495",
+        "barcode": "11495XXLCo",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Cobre",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "fc6c0b0f-9942-42fe-a7ab-119f54643611",
+        "sku": "11496",
+        "barcode": "11496XXLAz",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Azul",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre",
+      "Azul"
+    ]
+  },
+  {
+    "id": "b1f4e86c-3abd-48d4-ae35-53c6c2b329ad",
+    "name": "NO RISK URBAN • ESQUELETO ACIDWASH",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/b1f4e86c-3abd-48d4-ae35-53c6c2b329ad",
+    "images": [
+      "https://api.loyverse.com/image/b1f4e86c-3abd-48d4-ae35-53c6c2b329ad"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L.",
+    "sku": "11471",
+    "categoryLabel": "Esqueleto AcidWash",
+    "loyverseItemId": "b1f4e86c-3abd-48d4-ae35-53c6c2b329ad",
+    "loyverseVariantId": "52c0e486-bc76-4a4d-9a39-997eb6736221",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "52c0e486-bc76-4a4d-9a39-997eb6736221",
+        "sku": "11471",
+        "barcode": "11471SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8c90f2fb-c7b2-4711-ac66-e4c54396197e",
+        "sku": "11472",
+        "barcode": "11472SGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "0070d382-ac79-417e-aa67-8c44523c396a",
+        "sku": "11473",
+        "barcode": "11473MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1df4def7-4df9-4e4b-9f24-8a52e313a088",
+        "sku": "11474",
+        "barcode": "11474MGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "c49d5679-8287-4c84-829c-129bf7d91032",
+        "sku": "11475",
+        "barcode": "11475LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "f8e96d4e-32e4-41ec-9340-e980e80a613b",
+        "sku": "11476",
+        "barcode": "11476LGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "25622134-c9c4-486c-a8ab-9712cb3c5c63",
+    "name": "NO RISK URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/25622134-c9c4-486c-a8ab-9712cb3c5c63",
+    "images": [
+      "https://api.loyverse.com/image/25622134-c9c4-486c-a8ab-9712cb3c5c63"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: MoraLeche. Tallas disponibles: S, M, L, XL.",
+    "sku": "11467",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "25622134-c9c4-486c-a8ab-9712cb3c5c63",
+    "loyverseVariantId": "d9b5f6d3-5799-48b0-9389-06c9b92bc5ab",
+    "stock": 5,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d9b5f6d3-5799-48b0-9389-06c9b92bc5ab",
+        "sku": "11467",
+        "barcode": "11467SMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "09087e55-fa18-4c80-b807-71fdd334ead6",
+        "sku": "11468",
+        "barcode": "11468MMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5b9688fa-63b9-4839-8cfd-a73e85dd47dd",
+        "sku": "11469",
+        "barcode": "11469LMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "201f4d8e-0889-4c29-9d43-6c66d70b3d54",
+        "sku": "11470",
+        "barcode": "11470XLMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "MoraLeche"
+    ]
+  },
+  {
+    "id": "855c5ed4-20a6-44b1-8173-1523352793eb",
+    "name": "BERMUDA ACIDWASH • BERMUDAS",
+    "category": "young-free",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/855c5ed4-20a6-44b1-8173-1523352793eb",
+    "images": [
+      "https://api.loyverse.com/image/855c5ed4-20a6-44b1-8173-1523352793eb"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11459",
+    "categoryLabel": "Bermudas",
+    "loyverseItemId": "855c5ed4-20a6-44b1-8173-1523352793eb",
+    "loyverseVariantId": "cb593f54-e918-4051-89ed-0cb3c228b1f5",
+    "stock": 9,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cb593f54-e918-4051-89ed-0cb3c228b1f5",
+        "sku": "11459",
+        "barcode": "11459SNe",
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9445ca3d-6603-44a8-912c-ef26f954a496",
+        "sku": "11460",
+        "barcode": "11460SGr",
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4f93fd7c-ee93-436d-8a1f-845475afddba",
+        "sku": "11461",
+        "barcode": "11461MNe",
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "1c158df4-0322-45c3-8d97-2f034280a445",
+        "sku": "11462",
+        "barcode": "11462MGr",
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "127c42b4-2ac0-4222-8caf-a5c7062a3beb",
+        "sku": "11463",
+        "barcode": "11463LMo",
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "35bc47e8-1ea1-4175-8c11-95ad235637e3",
+        "sku": "11464",
+        "barcode": "11464LMo",
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9618a2bd-01b1-4d69-9513-3d1f220bbd62",
+        "sku": "11465",
+        "barcode": "11465XLMo",
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 7
+      },
+      {
+        "variant_id": "002a591b-772d-4a96-9211-2a26fe60cb3e",
+        "sku": "11466",
+        "barcode": "11466XLMo",
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "6ee5aaae-349e-4694-90ec-ed63a9d44daf",
+    "name": "PANTALON ACIDWASH • CONJUNTO SUDADERA",
+    "category": "weird-oversize",
+    "price": 85000,
+    "image": "https://api.loyverse.com/image/6ee5aaae-349e-4694-90ec-ed63a9d44daf",
+    "images": [
+      "https://api.loyverse.com/image/6ee5aaae-349e-4694-90ec-ed63a9d44daf"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11451",
+    "categoryLabel": "CONJUNTO SUDADERA",
+    "loyverseItemId": "6ee5aaae-349e-4694-90ec-ed63a9d44daf",
+    "loyverseVariantId": "dc74b4d1-92c6-4ead-b9ed-5c2ff45e9cca",
+    "stock": 21,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "dc74b4d1-92c6-4ead-b9ed-5c2ff45e9cca",
+        "sku": "11451",
+        "barcode": "11451SNe",
+        "price": 0,
+        "cost": 60000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "45fb518c-b251-40d0-9c3e-f21d61924889",
+        "sku": "11452",
+        "barcode": "11452SGr",
+        "price": 0,
+        "cost": 60000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f95378e8-1dd5-4c9d-b72d-1df816ff02ec",
+        "sku": "11453",
+        "barcode": "11453MNe",
+        "price": 0,
+        "cost": 60000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 15
+      },
+      {
+        "variant_id": "67e3ac74-3ed4-4b2f-a43e-5fa778f02cac",
+        "sku": "11454",
+        "barcode": "11454MGr",
+        "price": 0,
+        "cost": 60000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "347b5854-f0d7-41a3-aa5b-b615c5d0784f",
+        "sku": "11455",
+        "barcode": "11455LNe",
+        "price": 0,
+        "cost": 60000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ecce4f06-f9ae-455f-9b2a-ac2bbe3c5f78",
+        "sku": "11456",
+        "barcode": "11456LGr",
+        "price": 0,
+        "cost": 60000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "368de225-1ab4-4486-9c20-767ef75f97e3",
+        "sku": "11457",
+        "barcode": "11457XLNe",
+        "price": 0,
+        "cost": 60000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "f4b69010-b0d3-4647-bd0b-f701631bcee8",
+        "sku": "11458",
+        "barcode": "11458XLGr",
+        "price": 0,
+        "cost": 60000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "5fc2bea9-3222-4aa2-b55c-e2298f19f5be",
+    "name": "CLOTHING 07 • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/5fc2bea9-3222-4aa2-b55c-e2298f19f5be",
+    "images": [
+      "https://api.loyverse.com/image/5fc2bea9-3222-4aa2-b55c-e2298f19f5be"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: MoraLeche. Tallas disponibles: S, M, L, XL.",
+    "sku": "11447",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "5fc2bea9-3222-4aa2-b55c-e2298f19f5be",
+    "loyverseVariantId": "b53477f9-3144-4085-8009-7b35039ad828",
+    "stock": 6,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b53477f9-3144-4085-8009-7b35039ad828",
+        "sku": "11447",
+        "barcode": "11447SMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "7d4097d0-ed57-4f8b-83ff-d85ac3f5dcaf",
+        "sku": "11448",
+        "barcode": "11448MMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "48a394c5-42d6-4c29-a103-449a4ae6def1",
+        "sku": "11449",
+        "barcode": "11449LMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "746b2714-f693-4b1f-a368-657d8a9df1d6",
+        "sku": "11450",
+        "barcode": "11450XLMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "MoraLeche"
+    ]
+  },
+  {
+    "id": "14be4863-0c49-4113-8320-0ef8c3403ddc",
+    "name": "CLOTHING 07 • ESQUELETO ACIDWASH",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/14be4863-0c49-4113-8320-0ef8c3403ddc",
+    "images": [
+      "https://api.loyverse.com/image/14be4863-0c49-4113-8320-0ef8c3403ddc"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L.",
+    "sku": "11441",
+    "categoryLabel": "Esqueleto AcidWash",
+    "loyverseItemId": "14be4863-0c49-4113-8320-0ef8c3403ddc",
+    "loyverseVariantId": "78308815-3ea5-41e1-86fc-7b4a9f6bd0b7",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "78308815-3ea5-41e1-86fc-7b4a9f6bd0b7",
+        "sku": "11441",
+        "barcode": "11441SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "329e9691-ae3a-4543-b9e2-cb4178e26e6b",
+        "sku": "11442",
+        "barcode": "11442SGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "015a4a62-b967-463d-9b8f-1f116e485c50",
+        "sku": "11443",
+        "barcode": "11443MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "96a9af40-43b6-42f0-870e-0348bb9cfbee",
+        "sku": "11444",
+        "barcode": "11444MGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1515d569-f856-4ac8-a2e5-649cd52faf62",
+        "sku": "11445",
+        "barcode": "11445LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8e43bc25-43d7-4542-b858-dd7f4ea1bfe1",
+        "sku": "11446",
+        "barcode": "11446LGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "e05d1ff3-8cab-4c15-93ae-dd2b42ee7813",
+    "name": "URBNSTD • ESQUELETO ACIDWASH",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/e05d1ff3-8cab-4c15-93ae-dd2b42ee7813",
+    "images": [
+      "https://api.loyverse.com/image/e05d1ff3-8cab-4c15-93ae-dd2b42ee7813"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre, Negro. Tallas disponibles: S, M, L.",
+    "sku": "11435",
+    "categoryLabel": "Esqueleto AcidWash",
+    "loyverseItemId": "e05d1ff3-8cab-4c15-93ae-dd2b42ee7813",
+    "loyverseVariantId": "b8ce276c-abcf-4be2-955c-bfe161b46c47",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b8ce276c-abcf-4be2-955c-bfe161b46c47",
+        "sku": "11435",
+        "barcode": "11435SCo",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4c37e6b1-93c8-426b-8282-c986b3eb48f7",
+        "sku": "11436",
+        "barcode": "11436SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "70b54372-d34d-47cd-94b9-b79a15a358de",
+        "sku": "11437",
+        "barcode": "11437MCo",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "64dc0d5c-fb2c-42b8-a765-25a07effc58a",
+        "sku": "11438",
+        "barcode": "11438MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b5f610f8-98df-47f8-a7ba-865930145405",
+        "sku": "11439",
+        "barcode": "11439LCo",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4edcd77a-490c-4b41-9217-07238cec090f",
+        "sku": "11440",
+        "barcode": "11440LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Cobre",
+      "Negro"
+    ]
+  },
+  {
+    "id": "6d564857-76c2-4ec6-8b00-617770ef188d",
+    "name": "BUZO DOBLE CREM • CONJUNTO SUDADERA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/6d564857-76c2-4ec6-8b00-617770ef188d",
+    "images": [
+      "https://api.loyverse.com/image/6d564857-76c2-4ec6-8b00-617770ef188d"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Crema, Beige. Tallas disponibles: S, M, L, XL.",
+    "sku": "11423",
+    "categoryLabel": "CONJUNTO SUDADERA",
+    "loyverseItemId": "6d564857-76c2-4ec6-8b00-617770ef188d",
+    "loyverseVariantId": "c21ccc83-a7cc-4b37-94db-0a5b5544515c",
+    "stock": 12,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c21ccc83-a7cc-4b37-94db-0a5b5544515c",
+        "sku": "11423",
+        "barcode": "11423S/MCr",
+        "price": 0,
+        "cost": 25500,
+        "option1_value": "S/M",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Crema",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "95694aff-a7c1-438c-a42f-3f78c9c00c47",
+        "sku": "11424",
+        "barcode": "11424S/MBe",
+        "price": 0,
+        "cost": 25500,
+        "option1_value": "S/M",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Beige",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "d4fab041-59b6-4be3-a447-bdc5a2df1942",
+        "sku": "11425",
+        "barcode": "11425L/XLCr",
+        "price": 0,
+        "cost": 25500,
+        "option1_value": "L/XL",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Crema",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "700febc4-8751-45f3-ab78-fe909647343d",
+        "sku": "11426",
+        "barcode": "11426L/XLBe",
+        "price": 0,
+        "cost": 25500,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 5
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Crema",
+      "Beige"
+    ]
+  },
+  {
+    "id": "f93280e4-35d3-4a77-8f22-c7b6f82d0775",
+    "name": "PANTALON UNISEX ESTAM • CONJUNTO SUDADERA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/f93280e4-35d3-4a77-8f22-c7b6f82d0775",
+    "images": [
+      "https://api.loyverse.com/image/f93280e4-35d3-4a77-8f22-c7b6f82d0775"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Crema, Beige. Tallas disponibles: S, M, L, XL.",
+    "sku": "11419",
+    "categoryLabel": "CONJUNTO SUDADERA",
+    "loyverseItemId": "f93280e4-35d3-4a77-8f22-c7b6f82d0775",
+    "loyverseVariantId": "f8735360-c072-4e0a-ac28-152741bb1971",
+    "stock": 5,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "f8735360-c072-4e0a-ac28-152741bb1971",
+        "sku": "11419",
+        "barcode": "11419S/MCr",
+        "price": 0,
+        "cost": 23500,
+        "option1_value": "S/M",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Crema",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "9d1aa7bb-e452-4391-af20-20c45371f71f",
+        "sku": "11420",
+        "barcode": "11420S/MBe",
+        "price": 0,
+        "cost": 23500,
+        "option1_value": "S/M",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Beige",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "0b0649eb-639c-4b08-841e-4a8cca7a3b5c",
+        "sku": "11421",
+        "barcode": "11421L/XLCr",
+        "price": 0,
+        "cost": 23500,
+        "option1_value": "L/XL",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d21cfa97-5e65-4f4b-8aab-c6aed48f188a",
+        "sku": "11422",
+        "barcode": "11422L/XLBe",
+        "price": 0,
+        "cost": 23500,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Crema",
+      "Beige"
+    ]
+  },
+  {
+    "id": "474cb990-012e-4dcb-a26c-b396c117616c",
+    "name": "POLO DAMA • T-SHIRT",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/474cb990-012e-4dcb-a26c-b396c117616c",
+    "images": [
+      "https://api.loyverse.com/image/474cb990-012e-4dcb-a26c-b396c117616c"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Verde. Tallas disponibles: S, M, L, XL.",
+    "sku": "11417",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "474cb990-012e-4dcb-a26c-b396c117616c",
+    "loyverseVariantId": "a7fe9ef2-acfb-4b70-87b0-daae1985fa4b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a7fe9ef2-acfb-4b70-87b0-daae1985fa4b",
+        "sku": "11417",
+        "barcode": "11417UNe",
+        "price": 0,
+        "cost": 28500,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bee76161-daee-4627-84d8-3c03994b6fa7",
+        "sku": "11418",
+        "barcode": "11418UVe",
+        "price": 0,
+        "cost": 28500,
+        "option1_value": "U",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "U",
+        "color": "Verde",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Verde"
+    ]
+  },
+  {
+    "id": "3cf76027-5cf8-47d0-9f66-c44de641b616",
+    "name": "MADE IN COLOMBIA • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/3cf76027-5cf8-47d0-9f66-c44de641b616",
+    "images": [
+      "https://api.loyverse.com/image/3cf76027-5cf8-47d0-9f66-c44de641b616"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11407",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "3cf76027-5cf8-47d0-9f66-c44de641b616",
+    "loyverseVariantId": "5565bdc5-fc71-4fa3-be94-0bb7585d9dca",
+    "stock": 16,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5565bdc5-fc71-4fa3-be94-0bb7585d9dca",
+        "sku": "11407",
+        "barcode": "11407SGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "46d4d08f-e9cf-456a-a7a7-3ffe18e474b6",
+        "sku": "11408",
+        "barcode": "11408SNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2d7ab716-e791-48d6-9cce-52231a8e3529",
+        "sku": "11409",
+        "barcode": "11409MGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7641f6ab-ec3e-4d52-90d2-1d1397d7523d",
+        "sku": "11410",
+        "barcode": "11410MNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "11808a2b-ec0a-46e3-88f1-80b6efa5e4e9",
+        "sku": "11411",
+        "barcode": "11411LGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8dc9b32a-1415-4518-b4db-a3db9684510c",
+        "sku": "11412",
+        "barcode": "11412LNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "a94dafa3-ca09-4ff1-a51d-418f37887a7c",
+        "sku": "11413",
+        "barcode": "11413XLGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "2f696534-88e6-4c0d-a75c-6f1c872abae1",
+        "sku": "11414",
+        "barcode": "11414XLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "79dbedc3-1300-4458-b658-dde6b4217c7b",
+        "sku": "11415",
+        "barcode": "11415XXLGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "c809efc8-fe03-4d2b-a774-84bf8dac33d7",
+        "sku": "11416",
+        "barcode": "11416XXLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "09bf0107-021e-4188-b8a8-4792d0a5bd94",
+    "name": "MADE IN COLOMBIA • BUZO GOLDCREM",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/09bf0107-021e-4188-b8a8-4792d0a5bd94",
+    "images": [
+      "https://api.loyverse.com/image/09bf0107-021e-4188-b8a8-4792d0a5bd94"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Beige. Tallas disponibles: S, M, L, XL.",
+    "sku": "11403",
+    "categoryLabel": "Buzo GoldCrem",
+    "loyverseItemId": "09bf0107-021e-4188-b8a8-4792d0a5bd94",
+    "loyverseVariantId": "42df1d7e-474d-4513-9a62-16b0fdbdd7b8",
+    "stock": 27,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "42df1d7e-474d-4513-9a62-16b0fdbdd7b8",
+        "sku": "11403",
+        "barcode": "11403S/MNe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "5868e168-add1-4059-a1a2-13819bb61148",
+        "sku": "11404",
+        "barcode": "11404S/MBe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "S/M",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Beige",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "c1c86543-cf0e-457f-8cfb-57df07ed704d",
+        "sku": "11405",
+        "barcode": "11405L/XLNe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "0dede53d-afff-448c-8178-435269a7ae0b",
+        "sku": "11406",
+        "barcode": "11406L/XLBe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 9
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Beige"
+    ]
+  },
+  {
+    "id": "e3a13515-5285-49ce-8a71-2a6c8ce50ad9",
+    "name": "NOISE TRACK • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/e3a13515-5285-49ce-8a71-2a6c8ce50ad9",
+    "images": [
+      "https://api.loyverse.com/image/e3a13515-5285-49ce-8a71-2a6c8ce50ad9"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11393",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "e3a13515-5285-49ce-8a71-2a6c8ce50ad9",
+    "loyverseVariantId": "9fd49592-0d24-4e74-8584-4450c866306c",
+    "stock": 9,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9fd49592-0d24-4e74-8584-4450c866306c",
+        "sku": "11393",
+        "barcode": "11393SGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b8b34f79-b2ce-41f2-8ca2-1ff0f027784f",
+        "sku": "11394",
+        "barcode": "11394SNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1cfcda7d-5f55-48fa-ba58-3037a3270093",
+        "sku": "11395",
+        "barcode": "11395MGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b664744f-3aa2-49ba-8922-727db4194184",
+        "sku": "11396",
+        "barcode": "11396MNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7ed86d29-def3-46bb-94e3-f3442ab4a675",
+        "sku": "11397",
+        "barcode": "11397LGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "85c11c97-b050-4f20-9119-303eb5f5b0cc",
+        "sku": "11398",
+        "barcode": "11398LNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0c706b4a-307a-4aec-9c2a-d16da36463e3",
+        "sku": "11399",
+        "barcode": "11399XLGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "bcda9322-f318-494d-b7cd-66d93c5c2418",
+        "sku": "11400",
+        "barcode": "11400XLNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "473a0103-d5e7-4afb-9c59-244d5c7049ac",
+        "sku": "11401",
+        "barcode": "11401XXLGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "8a697806-17c1-49f3-a322-933ad248c9c1",
+        "sku": "11402",
+        "barcode": "11402XXLNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "aebf86c1-62f0-4d28-a0b1-91a6f0d81403",
+    "name": "URBNSTD • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/aebf86c1-62f0-4d28-a0b1-91a6f0d81403",
+    "images": [
+      "https://api.loyverse.com/image/aebf86c1-62f0-4d28-a0b1-91a6f0d81403"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11383",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "aebf86c1-62f0-4d28-a0b1-91a6f0d81403",
+    "loyverseVariantId": "43fc2b61-e8a5-4c78-9bba-cebbcdf8c95e",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "43fc2b61-e8a5-4c78-9bba-cebbcdf8c95e",
+        "sku": "11383",
+        "barcode": "11383SGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5f18f79d-0b1b-4633-9eb1-91a7f5d826ae",
+        "sku": "11384",
+        "barcode": "11384SNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c1645a5a-f5ee-4ea3-85ab-cc317737749d",
+        "sku": "11385",
+        "barcode": "11385MGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e3a03cc8-11ce-43cf-8ff6-f8adb7da33bc",
+        "sku": "11386",
+        "barcode": "11386MNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4da933a7-695a-4049-9a2a-15043fad9731",
+        "sku": "11387",
+        "barcode": "11387LGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "10981b6a-4451-4cd4-860f-150045e8de4d",
+        "sku": "11388",
+        "barcode": "11388LNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c4a849af-6fb6-468f-8097-dce87578f61a",
+        "sku": "11389",
+        "barcode": "11389XLGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "8496f2c7-0f2f-4a17-a91f-65ef0f56bb7f",
+        "sku": "11390",
+        "barcode": "11390XLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dd4b1652-58ff-4002-b349-e9c094839b0c",
+        "sku": "11391",
+        "barcode": "11391XXLGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a08d4983-01ce-4470-ab03-14633aa4f1d2",
+        "sku": "11392",
+        "barcode": "11392XXLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "62f62947-2843-438b-9747-b24e91124f72",
+    "name": "CAMISA TEX • CONJUNTOS",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/62f62947-2843-438b-9747-b24e91124f72",
+    "images": [
+      "https://api.loyverse.com/image/62f62947-2843-438b-9747-b24e91124f72"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11379",
+    "categoryLabel": "Conjuntos",
+    "loyverseItemId": "62f62947-2843-438b-9747-b24e91124f72",
+    "loyverseVariantId": "9d7d104b-cc81-4492-b995-2d6489f01410",
+    "stock": 31,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9d7d104b-cc81-4492-b995-2d6489f01410",
+        "sku": "11379",
+        "barcode": "11379S/MMa",
+        "price": 0,
+        "cost": 26200,
+        "option1_value": "S/M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Marfil",
+        "in_stock": 9
+      },
+      {
+        "variant_id": "e5ef194b-22f5-472c-b940-1cc64bf17ec1",
+        "sku": "11380",
+        "barcode": "11380S/MNe",
+        "price": 0,
+        "cost": 26200,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "98496452-603d-4920-a76b-06a0f6d04bc0",
+        "sku": "11381",
+        "barcode": "11381L/XLMa",
+        "price": 0,
+        "cost": 26200,
+        "option1_value": "L/XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Marfil",
+        "in_stock": 10
+      },
+      {
+        "variant_id": "216dc202-3796-4f2c-9e22-722af34a7573",
+        "sku": "11382",
+        "barcode": "11382L/XLNe",
+        "price": 0,
+        "cost": 26200,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 6
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "21ad4e93-d44e-49be-9e19-44ca71ccb63e",
+    "name": "NOISE TRACK • BUZO GOLDCREM",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/21ad4e93-d44e-49be-9e19-44ca71ccb63e",
+    "images": [
+      "https://api.loyverse.com/image/21ad4e93-d44e-49be-9e19-44ca71ccb63e"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Beige. Tallas disponibles: S, M, L, XL.",
+    "sku": "11371",
+    "categoryLabel": "Buzo GoldCrem",
+    "loyverseItemId": "21ad4e93-d44e-49be-9e19-44ca71ccb63e",
+    "loyverseVariantId": "5d2055c6-8b82-443b-9262-e98b20d4466b",
+    "stock": 13,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5d2055c6-8b82-443b-9262-e98b20d4466b",
+        "sku": "11371",
+        "barcode": "11371S/MNe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "654c34d6-7740-44ef-9f7a-845fe841283b",
+        "sku": "11372",
+        "barcode": "11372S/MBe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "S/M",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Beige",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "4430f7d1-321f-4aa0-bf0f-109c097b0861",
+        "sku": "11377",
+        "barcode": "11377L/XLNe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "a4f9d2a7-2378-4c24-977c-4ce5f0d5232b",
+        "sku": "11378",
+        "barcode": "11378L/XLBe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Beige"
+    ]
+  },
+  {
+    "id": "497b92be-eb31-499e-8a9e-42325d87efb4",
+    "name": "URBNSTD • BUZO GOLDCREM",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/497b92be-eb31-499e-8a9e-42325d87efb4",
+    "images": [
+      "https://api.loyverse.com/image/497b92be-eb31-499e-8a9e-42325d87efb4"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Beige. Tallas disponibles: S, M, L, XL.",
+    "sku": "11373",
+    "categoryLabel": "Buzo GoldCrem",
+    "loyverseItemId": "497b92be-eb31-499e-8a9e-42325d87efb4",
+    "loyverseVariantId": "b1b4721d-9336-4784-8324-ea277aa15b4a",
+    "stock": 12,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b1b4721d-9336-4784-8324-ea277aa15b4a",
+        "sku": "11373",
+        "barcode": "11373S/MNe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "ee56368f-9151-4bfe-94d6-995c7353a41f",
+        "sku": "11374",
+        "barcode": "11374S/MBe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "S/M",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Beige",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "b59157f2-a399-4ee2-b4b8-b1be4eb89b00",
+        "sku": "11375",
+        "barcode": "11375L/XLNe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "9c2feaaf-ef66-4e60-a8c6-4444a8e03d06",
+        "sku": "11376",
+        "barcode": "11376L/XLBe",
+        "price": 0,
+        "cost": 76200,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Beige"
+    ]
+  },
+  {
+    "id": "925415f4-1b66-4241-beb7-6702128edbe8",
+    "name": "DESERTERURBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/925415f4-1b66-4241-beb7-6702128edbe8",
+    "images": [
+      "https://api.loyverse.com/image/925415f4-1b66-4241-beb7-6702128edbe8"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11366",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "925415f4-1b66-4241-beb7-6702128edbe8",
+    "loyverseVariantId": "12c1c12a-8223-4a0a-878a-73a3522b0316",
+    "stock": 8,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "12c1c12a-8223-4a0a-878a-73a3522b0316",
+        "sku": "11366",
+        "barcode": "11366SNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "a050bcbc-e335-4236-92de-64b13ed9b4c1",
+        "sku": "11367",
+        "barcode": "11367MNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "6469e940-9770-432c-91c9-43deeba32448",
+        "sku": "11368",
+        "barcode": "11368LNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "580cc1b8-f3e4-4850-811e-1f2ba5191a0e",
+        "sku": "11369",
+        "barcode": "11369XLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "df7d740a-b201-4b76-bb7c-a5d5dc5430e5",
+        "sku": "11370",
+        "barcode": "11370XXLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "d3d115ee-31ea-4cbd-a858-d7882fb0491e",
+    "name": "GRAFITY URBANO • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/d3d115ee-31ea-4cbd-a858-d7882fb0491e",
+    "images": [
+      "https://api.loyverse.com/image/d3d115ee-31ea-4cbd-a858-d7882fb0491e"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11361",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "d3d115ee-31ea-4cbd-a858-d7882fb0491e",
+    "loyverseVariantId": "f648071d-6c84-4f91-aa0b-f7d6dd78c794",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "f648071d-6c84-4f91-aa0b-f7d6dd78c794",
+        "sku": "11361",
+        "barcode": "11361SNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "40ab62e0-9c75-415e-a024-b864049b612c",
+        "sku": "11362",
+        "barcode": "11362MNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0ed2db82-ae6f-419a-82c3-84147de62d53",
+        "sku": "11363",
+        "barcode": "11363LNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0d00e606-7c3a-4194-9794-de17fe8cd390",
+        "sku": "11364",
+        "barcode": "11364XLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bc0ed97d-bb55-48ad-bf31-96e7cf24aa06",
+        "sku": "11365",
+        "barcode": "11365XXLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "01b8ccf9-7cad-45a5-855d-f743276b2eca",
+    "name": "GRAFITY URBANO • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/01b8ccf9-7cad-45a5-855d-f743276b2eca",
+    "images": [
+      "https://api.loyverse.com/image/01b8ccf9-7cad-45a5-855d-f743276b2eca"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Camell, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11353",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "01b8ccf9-7cad-45a5-855d-f743276b2eca",
+    "loyverseVariantId": "911ac718-cd15-4804-bb0f-6fb51fd3a6ed",
+    "stock": 5,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "911ac718-cd15-4804-bb0f-6fb51fd3a6ed",
+        "sku": "11353",
+        "barcode": "11353SCa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "66d2b3f9-3a65-495b-9308-0684fccacbeb",
+        "sku": "11354",
+        "barcode": "11354SMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3a7c21fd-5b50-477f-827e-5f505d1f2a32",
+        "sku": "11355",
+        "barcode": "11355MCa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ae451e1a-d72f-4db1-885f-fc2c1dbf0a9d",
+        "sku": "11356",
+        "barcode": "11356MMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1c46051d-19ea-414d-89ab-2178702b2f22",
+        "sku": "11357",
+        "barcode": "11357LCa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "56b3d231-6e60-48fb-a8a1-844a6868ff40",
+        "sku": "11358",
+        "barcode": "11358LMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "7eaf036c-4d0c-4d73-9f5b-7c4ab2d0520e",
+        "sku": "11359",
+        "barcode": "11359XLCa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b69f5bbb-5355-4aff-841f-8608717d0f7a",
+        "sku": "11360",
+        "barcode": "11360XLMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Camell",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "344c20c1-9e36-4494-8c33-dda8fef46fb8",
+    "name": "GRAFITY URBANO • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/344c20c1-9e36-4494-8c33-dda8fef46fb8",
+    "images": [
+      "https://api.loyverse.com/image/344c20c1-9e36-4494-8c33-dda8fef46fb8"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: MoraLeche, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11345",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "344c20c1-9e36-4494-8c33-dda8fef46fb8",
+    "loyverseVariantId": "0b77245b-c1b6-44e4-964d-edb19cc8e015",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "0b77245b-c1b6-44e4-964d-edb19cc8e015",
+        "sku": "11345",
+        "barcode": "11345SMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8c5c4aa6-8c85-45ec-9072-42a70fd694a4",
+        "sku": "11346",
+        "barcode": "11346SGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4fcab2af-50b5-408e-b1a2-fe2422d8370d",
+        "sku": "11347",
+        "barcode": "11347MMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "9e1c9b94-cf48-446c-907a-581881e7cb56",
+        "sku": "11348",
+        "barcode": "11348MGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c32dab1a-181b-4e80-82f8-755218e3b362",
+        "sku": "11349",
+        "barcode": "11349LMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "860bcbb2-5591-4712-82d6-3f7c94d586e2",
+        "sku": "11350",
+        "barcode": "11350LGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9069ef05-97f7-4665-9c1c-ed34ec97eba8",
+        "sku": "11351",
+        "barcode": "11351XLMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ca8708a6-361b-4d6a-b4f9-dece1a2230d0",
+        "sku": "11352",
+        "barcode": "11352XLGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "MoraLeche",
+      "Gris"
+    ]
+  },
+  {
+    "id": "adfd1823-268b-4145-a3a7-af4cd0a2d0f2",
+    "name": "URB PASLEY PERSA • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/adfd1823-268b-4145-a3a7-af4cd0a2d0f2",
+    "images": [
+      "https://api.loyverse.com/image/adfd1823-268b-4145-a3a7-af4cd0a2d0f2"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11340",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "adfd1823-268b-4145-a3a7-af4cd0a2d0f2",
+    "loyverseVariantId": "9e2ae531-0e2c-41a2-96e8-768fd5aaa6fb",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9e2ae531-0e2c-41a2-96e8-768fd5aaa6fb",
+        "sku": "11340",
+        "barcode": "11340SNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e141a754-25f7-4827-97de-1dbe8fd1ecf0",
+        "sku": "11341",
+        "barcode": "11341MNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f518d26f-74b8-4651-a81e-ced0d7d3ed63",
+        "sku": "11342",
+        "barcode": "11342LNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c98fc5e2-bb98-4e77-b1b0-827d0f0186a4",
+        "sku": "11343",
+        "barcode": "11343XLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "a56e6936-16c6-4d84-89a9-1f81c74a68e9",
+        "sku": "11344",
+        "barcode": "11344XXLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "d6afe05f-4d6e-4b9a-93e3-b763303b1d22",
+    "name": "CALAVERA FLOWER • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/d6afe05f-4d6e-4b9a-93e3-b763303b1d22",
+    "images": [
+      "https://api.loyverse.com/image/d6afe05f-4d6e-4b9a-93e3-b763303b1d22"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: M, L, XL.",
+    "sku": "11336",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "d6afe05f-4d6e-4b9a-93e3-b763303b1d22",
+    "loyverseVariantId": "a1b3625a-471a-4f27-a6a0-09c23f0e5c70",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a1b3625a-471a-4f27-a6a0-09c23f0e5c70",
+        "sku": "11336",
+        "barcode": "11336MNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "17561608-121a-4f88-af03-b65b64833434",
+        "sku": "11337",
+        "barcode": "11337LMa",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8b752714-dadb-447b-bdbd-61f7070db359",
+        "sku": "11338",
+        "barcode": "11338XLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "32990256-fec6-4a91-a3c0-2e7d7315fbf5",
+        "sku": "11339",
+        "barcode": "11339XXLMa",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "92af4827-7923-4685-96d4-0f746dd02516",
+    "name": "URB PASLEY PERSA • OVERSIZE ACIDWASH",
+    "category": "weird-oversize",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/92af4827-7923-4685-96d4-0f746dd02516",
+    "images": [
+      "https://api.loyverse.com/image/92af4827-7923-4685-96d4-0f746dd02516"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cafe, Azul. Tallas disponibles: S, M, L, XL.",
+    "sku": "11328",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "92af4827-7923-4685-96d4-0f746dd02516",
+    "loyverseVariantId": "363c1548-cb50-4b1f-ba2d-cf67e2f74669",
+    "stock": 6,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "363c1548-cb50-4b1f-ba2d-cf67e2f74669",
+        "sku": "11328",
+        "barcode": "11328SCa",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cafe",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "d3f1cee6-261f-417e-8c03-9477d9f9a611",
+        "sku": "11329",
+        "barcode": "11329SAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "9aba932f-2680-4708-803c-04d2594ca025",
+        "sku": "11330",
+        "barcode": "11330MCa",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9236b453-cc72-4fde-92b7-c26717daf234",
+        "sku": "11331",
+        "barcode": "11331MAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "d30b9e2f-fe6e-461e-9b65-481d592c4704",
+        "sku": "11332",
+        "barcode": "11332LCa",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "62ed0ef0-0341-48ba-bd2f-52e2af7b9305",
+        "sku": "11333",
+        "barcode": "11333LAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "829b44d8-ad33-4738-b5ea-09ecf81619d2",
+        "sku": "11334",
+        "barcode": "11334XLCa",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "77eaa3cc-d0ae-4128-baf1-43dfb1c48d74",
+        "sku": "11335",
+        "barcode": "11335XLAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cafe",
+      "Azul"
+    ]
+  },
+  {
+    "id": "dd67bc3c-313f-4466-851a-cdba99ed36db",
+    "name": "URB PASLEY PERSA • ESQUELETO",
+    "category": "weird-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/dd67bc3c-313f-4466-851a-cdba99ed36db",
+    "images": [
+      "https://api.loyverse.com/image/dd67bc3c-313f-4466-851a-cdba99ed36db"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11324",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "dd67bc3c-313f-4466-851a-cdba99ed36db",
+    "loyverseVariantId": "6703e4c3-4fd4-4ad1-bd04-ca97cb7e7137",
+    "stock": 8,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6703e4c3-4fd4-4ad1-bd04-ca97cb7e7137",
+        "sku": "11324",
+        "barcode": "11324SNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "6a42a90d-e40b-431b-951a-5bd0328877f6",
+        "sku": "11325",
+        "barcode": "11325MNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "90277616-a364-45bc-8091-b9b28d529944",
+        "sku": "11326",
+        "barcode": "11326LNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "54c358f7-720e-4718-b18c-4e3ea6107166",
+        "sku": "11327",
+        "barcode": "11327XLNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 7
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "ab1a19d0-1d31-44f7-9159-7b38eb799596",
+    "name": "URB PASLEY PERSA • OVERSIZE ALGODON",
+    "category": "weird-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/ab1a19d0-1d31-44f7-9159-7b38eb799596",
+    "images": [
+      "https://api.loyverse.com/image/ab1a19d0-1d31-44f7-9159-7b38eb799596"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11316",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "ab1a19d0-1d31-44f7-9159-7b38eb799596",
+    "loyverseVariantId": "2b74bced-4cd9-4926-9106-9553fb1c68aa",
+    "stock": 25,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "2b74bced-4cd9-4926-9106-9553fb1c68aa",
+        "sku": "11316",
+        "barcode": "11316SNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "92111f1d-0a6c-453e-a6c9-634b01b9cb06",
+        "sku": "11317",
+        "barcode": "11317SMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "7562ed7b-f709-4169-a5a4-ce6ec1aebbdc",
+        "sku": "11318",
+        "barcode": "11318MNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7fad7061-8ee6-4d3b-90ec-74271132e8dd",
+        "sku": "11319",
+        "barcode": "11319MMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "d662eafd-327e-40e0-992b-267206545bac",
+        "sku": "11320",
+        "barcode": "11320LNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "70904630-24c3-4f50-9ae2-b2b16502099c",
+        "sku": "11321",
+        "barcode": "11321LMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "23059852-ff06-4b9a-baac-f7f5c6aa78db",
+        "sku": "11322",
+        "barcode": "11322XLNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "1d57c9af-9b4a-4001-9850-54dd1b046488",
+        "sku": "11323",
+        "barcode": "11323XLMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 6
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "bc83d2b4-9d50-4736-9008-309d31f5daf9",
+    "name": "CALAVERA FLOWER • ESQUELETO",
+    "category": "weird-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/bc83d2b4-9d50-4736-9008-309d31f5daf9",
+    "images": [
+      "https://api.loyverse.com/image/bc83d2b4-9d50-4736-9008-309d31f5daf9"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11312",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "bc83d2b4-9d50-4736-9008-309d31f5daf9",
+    "loyverseVariantId": "0b7391b3-8f70-4384-8fba-ea203ac0d958",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "0b7391b3-8f70-4384-8fba-ea203ac0d958",
+        "sku": "11312",
+        "barcode": "11312SMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "652d54c0-7847-40ee-93b8-f36f5669fdb4",
+        "sku": "11313",
+        "barcode": "11313MMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8205e99c-9ff5-4f76-882f-2e19f8c49f5b",
+        "sku": "11314",
+        "barcode": "11314LMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c55726cb-ef78-4b76-9b62-70273e7a0958",
+        "sku": "11315",
+        "barcode": "11315XLMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil"
+    ]
+  },
+  {
+    "id": "929a2a54-d336-467c-a74d-a9a159b65eb8",
+    "name": "CALAVERA FLOWER • OVERSIZE ACIDWASH",
+    "category": "weird-oversize",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/929a2a54-d336-467c-a74d-a9a159b65eb8",
+    "images": [
+      "https://api.loyverse.com/image/929a2a54-d336-467c-a74d-a9a159b65eb8"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11304",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "929a2a54-d336-467c-a74d-a9a159b65eb8",
+    "loyverseVariantId": "e729ce56-e1b6-40bc-9791-fb25f643e190",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e729ce56-e1b6-40bc-9791-fb25f643e190",
+        "sku": "11304",
+        "barcode": "11304SGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0b8d1456-52f3-489d-a1fc-846abd9c0f67",
+        "sku": "11305",
+        "barcode": "11305SNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2bd6cf9e-7c09-4dc0-b687-c42ef4f05b87",
+        "sku": "11306",
+        "barcode": "11306MGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a340e8e5-19e2-4adc-917f-ef90e96dc145",
+        "sku": "11307",
+        "barcode": "11307MNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "27ea0074-6bbd-44d4-a892-6731312b8afe",
+        "sku": "11308",
+        "barcode": "11308LGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d0181089-541e-4220-81aa-e9fc5bddd838",
+        "sku": "11309",
+        "barcode": "11309LNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "381132d0-f7b2-42ae-8a50-a095a875424e",
+        "sku": "11310",
+        "barcode": "11310XLGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c3687bd1-c36e-4ea3-b655-485ffacee360",
+        "sku": "11311",
+        "barcode": "11311XLNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "dabc60d1-108f-485d-8851-f058adc564eb",
+    "name": "CALAVERA FLOWER • OVERSIZE ALGODON",
+    "category": "weird-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/dabc60d1-108f-485d-8851-f058adc564eb",
+    "images": [
+      "https://api.loyverse.com/image/dabc60d1-108f-485d-8851-f058adc564eb"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11300",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "dabc60d1-108f-485d-8851-f058adc564eb",
+    "loyverseVariantId": "a4de8bec-d4c2-4e2c-b22f-8c5067c92c05",
+    "stock": 6,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a4de8bec-d4c2-4e2c-b22f-8c5067c92c05",
+        "sku": "11300",
+        "barcode": "11300SMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "453b5df3-d793-43ce-bafa-2ecd27ffd937",
+        "sku": "11301",
+        "barcode": "11301MMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "dcdfdb05-f34b-42a2-9250-f1424aa98441",
+        "sku": "11302",
+        "barcode": "11302LMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "0b29c3a5-867f-4431-a5a8-e27bd4c1ae2a",
+        "sku": "11303",
+        "barcode": "11303XLMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil"
+    ]
+  },
+  {
+    "id": "ba3be14e-8526-4b82-affc-bd352c3ea09e",
+    "name": "PURSUIT • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/ba3be14e-8526-4b82-affc-bd352c3ea09e",
+    "images": [
+      "https://api.loyverse.com/image/ba3be14e-8526-4b82-affc-bd352c3ea09e"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11292",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "ba3be14e-8526-4b82-affc-bd352c3ea09e",
+    "loyverseVariantId": "3a42cb62-f391-4051-8bfc-58767c41a9d4",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3a42cb62-f391-4051-8bfc-58767c41a9d4",
+        "sku": "11292",
+        "barcode": "11292SGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "86e24273-c2bf-4587-84e7-2f1f834a1d1c",
+        "sku": "11293",
+        "barcode": "11293MGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "efa605eb-c5cd-45d5-9f5e-69dcb1b43502",
+        "sku": "11294",
+        "barcode": "11294LGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2a0d46ca-14f7-4bf7-ba7b-a6b5dfb70c51",
+        "sku": "11295",
+        "barcode": "11295XLGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "6acfe0bf-cf43-4634-bb63-fa60afe0a74a",
+    "name": "PURSUIT • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/6acfe0bf-cf43-4634-bb63-fa60afe0a74a",
+    "images": [
+      "https://api.loyverse.com/image/6acfe0bf-cf43-4634-bb63-fa60afe0a74a"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Verde. Tallas disponibles: S, M, L, XL.",
+    "sku": "11284",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "6acfe0bf-cf43-4634-bb63-fa60afe0a74a",
+    "loyverseVariantId": "80c9df30-e1a0-47f8-b9da-1d547681b525",
+    "stock": 6,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "80c9df30-e1a0-47f8-b9da-1d547681b525",
+        "sku": "11284",
+        "barcode": "11284SVe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "b1cab808-26c9-4461-8fdf-f4fc95f2f633",
+        "sku": "11285",
+        "barcode": "11285MVe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fca9cc38-2cd5-4b8c-9ce3-b65f78298d29",
+        "sku": "11286",
+        "barcode": "11286LVe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "8af28ca7-9efd-4a1e-9afe-123f3ec51ec4",
+        "sku": "11287",
+        "barcode": "11287XLVe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Verde",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Verde"
+    ]
+  },
+  {
+    "id": "68d6f844-4193-4fce-a5f9-bde762535ba3",
+    "name": "PURSUIT • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/68d6f844-4193-4fce-a5f9-bde762535ba3",
+    "images": [
+      "https://api.loyverse.com/image/68d6f844-4193-4fce-a5f9-bde762535ba3"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11280",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "68d6f844-4193-4fce-a5f9-bde762535ba3",
+    "loyverseVariantId": "ccf43736-d3a0-43c1-8e64-c46987ceb880",
+    "stock": 25,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "ccf43736-d3a0-43c1-8e64-c46987ceb880",
+        "sku": "11280",
+        "barcode": "11280SNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "8c22438b-d716-4f85-abd7-22205c5f3897",
+        "sku": "11281",
+        "barcode": "11281MNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "5240dde2-d22a-4cba-bfca-65474a2705ee",
+        "sku": "11289",
+        "barcode": "11289SMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "5e8992c4-815f-4bd0-9ccf-a78ff9d53da7",
+        "sku": "11282",
+        "barcode": "11282LNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "604389c5-745b-47ca-854a-3714fc52c2a8",
+        "sku": "11283",
+        "barcode": "11283XLNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "cbda0a15-7dec-4dd7-8433-748631f0d0f0",
+        "sku": "11290",
+        "barcode": "11290MMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b31c2d94-8293-4d1c-9471-8fd7dc88f0f1",
+        "sku": "11291",
+        "barcode": "11291LMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "12522e83-e164-49ef-b0fe-ebcc557f0689",
+        "sku": "11296",
+        "barcode": "11296XLMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 7
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "c2058ae6-ffd0-47eb-aede-1ced17448cb3",
+    "name": "PURSUIT • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/c2058ae6-ffd0-47eb-aede-1ced17448cb3",
+    "images": [
+      "https://api.loyverse.com/image/c2058ae6-ffd0-47eb-aede-1ced17448cb3"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Camell, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11276",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "c2058ae6-ffd0-47eb-aede-1ced17448cb3",
+    "loyverseVariantId": "b48e7d70-06b5-429a-b9d9-42974fb7a280",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b48e7d70-06b5-429a-b9d9-42974fb7a280",
+        "sku": "11276",
+        "barcode": "11276SCa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e5b504cf-c017-4e5b-9424-e5d2aecfe0db",
+        "sku": "11277",
+        "barcode": "11277MCa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "64c17ad7-375c-423c-81ad-9a5ef1b744f2",
+        "sku": "11288",
+        "barcode": "11288SMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b9ed6c3d-0762-451c-82f6-4a2a12880533",
+        "sku": "11278",
+        "barcode": "11278LCa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3aa71d58-2fb1-47b7-9586-3265d868711b",
+        "sku": "11279",
+        "barcode": "11279XLCa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8e779d0e-c540-4e30-9b83-2302dca016c7",
+        "sku": "11297",
+        "barcode": "11297MMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "977d9253-bf85-406b-bfcc-28559042626b",
+        "sku": "11298",
+        "barcode": "11298LMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ec572e3c-e2ed-4c95-8573-90186d19ba73",
+        "sku": "11299",
+        "barcode": "11299XLMa",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Camell",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "1655b2c5-9501-4508-a7fb-504795585dcb",
+    "name": "PURSUIT • ESQUELETO ACIDWASH",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/1655b2c5-9501-4508-a7fb-504795585dcb",
+    "images": [
+      "https://api.loyverse.com/image/1655b2c5-9501-4508-a7fb-504795585dcb"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11272",
+    "categoryLabel": "Esqueleto AcidWash",
+    "loyverseItemId": "1655b2c5-9501-4508-a7fb-504795585dcb",
+    "loyverseVariantId": "c79c8ce1-595a-45c3-9771-d7d1bc00c82e",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c79c8ce1-595a-45c3-9771-d7d1bc00c82e",
+        "sku": "11272",
+        "barcode": "11272SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e065222e-f323-46f1-9bf5-923e085467a8",
+        "sku": "11273",
+        "barcode": "11273MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a88cf889-4760-4cc2-b280-c2e2090c1842",
+        "sku": "11274",
+        "barcode": "11274LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9a8278b9-62e6-46e2-949b-3a0adb417cab",
+        "sku": "11275",
+        "barcode": "11275XLNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "faff7ff2-f705-4f1d-874a-f9da87f7ab3d",
+    "name": "COASH PEDRERIA • OVERSIZE PEDRERIA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/faff7ff2-f705-4f1d-874a-f9da87f7ab3d",
+    "images": [
+      "https://api.loyverse.com/image/faff7ff2-f705-4f1d-874a-f9da87f7ab3d"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11268",
+    "categoryLabel": "Oversize Pedreria",
+    "loyverseItemId": "faff7ff2-f705-4f1d-874a-f9da87f7ab3d",
+    "loyverseVariantId": "61356be6-bd7f-4c3d-9357-412ca30fed4b",
+    "stock": 16,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "61356be6-bd7f-4c3d-9357-412ca30fed4b",
+        "sku": "11268",
+        "barcode": "11268SNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "31b62c9d-2fa2-4869-8d9a-453a2e4eaddc",
+        "sku": "11269",
+        "barcode": "11269MNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "016214c9-32f0-4de1-ab65-c1200dfb81cc",
+        "sku": "11270",
+        "barcode": "11270LNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "258e3dcf-9510-4203-8c20-1b2883a10d43",
+        "sku": "11271",
+        "barcode": "11271XLNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 6
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "ed481b51-64cd-4db1-8bd8-68a082e82fd5",
+    "name": "SUPREME • OVERSIZE PEDRERIA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/ed481b51-64cd-4db1-8bd8-68a082e82fd5",
+    "images": [
+      "https://api.loyverse.com/image/ed481b51-64cd-4db1-8bd8-68a082e82fd5"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11260",
+    "categoryLabel": "Oversize Pedreria",
+    "loyverseItemId": "ed481b51-64cd-4db1-8bd8-68a082e82fd5",
+    "loyverseVariantId": "c8169101-7993-4542-b823-a070227be37d",
+    "stock": 16,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c8169101-7993-4542-b823-a070227be37d",
+        "sku": "11260",
+        "barcode": "11260SNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "173e9654-d203-472e-b91d-2e42b6d35dca",
+        "sku": "11261",
+        "barcode": "11261MNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "76e3435e-8ad9-4b3d-96a2-828a47edc6d0",
+        "sku": "11262",
+        "barcode": "11262LNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "46e3216c-74e1-454a-a18c-67bd91544b03",
+        "sku": "11263",
+        "barcode": "11263XLNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 7
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "71c2ea18-cf2a-45d9-9734-49d01484b2dc",
+    "name": "COMPANY URBAN PEDRERIA • OVERSIZE PEDRERIA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/71c2ea18-cf2a-45d9-9734-49d01484b2dc",
+    "images": [
+      "https://api.loyverse.com/image/71c2ea18-cf2a-45d9-9734-49d01484b2dc"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11264",
+    "categoryLabel": "Oversize Pedreria",
+    "loyverseItemId": "71c2ea18-cf2a-45d9-9734-49d01484b2dc",
+    "loyverseVariantId": "187ae01c-4b6a-457c-a756-2367a9394808",
+    "stock": 16,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "187ae01c-4b6a-457c-a756-2367a9394808",
+        "sku": "11264",
+        "barcode": "11264SNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "8167a527-8bfb-4063-8398-458299927325",
+        "sku": "11265",
+        "barcode": "11265MNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "aca5bd26-7479-490d-90b4-2d908b173540",
+        "sku": "11266",
+        "barcode": "11266LNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "0817dc14-3ee3-497c-b7c8-47432b36f24c",
+        "sku": "11267",
+        "barcode": "11267XLNe",
+        "price": 0,
+        "cost": 29000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 5
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "90e0de6e-a58d-4eed-b561-056563dafb7d",
+    "name": "BORN TO LOUN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/90e0de6e-a58d-4eed-b561-056563dafb7d",
+    "images": [
+      "https://api.loyverse.com/image/90e0de6e-a58d-4eed-b561-056563dafb7d"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: M, L, XL.",
+    "sku": "11256",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "90e0de6e-a58d-4eed-b561-056563dafb7d",
+    "loyverseVariantId": "84c8fbf3-bf7b-4b8a-ae32-3cb93a8168c1",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "84c8fbf3-bf7b-4b8a-ae32-3cb93a8168c1",
+        "sku": "11256",
+        "barcode": "11256MNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a7594837-dd0f-4db2-b603-74452831df3d",
+        "sku": "11257",
+        "barcode": "11257LNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fc6a65c2-aeda-40cb-9698-a872afd0a5ca",
+        "sku": "11258",
+        "barcode": "11258XLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5880c8bb-149d-485b-a6ff-49552e39a825",
+        "sku": "11259",
+        "barcode": "11259XXLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "28f57d39-7c77-49ee-944d-d07f4512b9b4",
+    "name": "BORN TO LOUN • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/28f57d39-7c77-49ee-944d-d07f4512b9b4",
+    "images": [
+      "https://api.loyverse.com/image/28f57d39-7c77-49ee-944d-d07f4512b9b4"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11248",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "28f57d39-7c77-49ee-944d-d07f4512b9b4",
+    "loyverseVariantId": "654ca6ba-6394-4b28-8a43-c20eb0cf3403",
+    "stock": 9,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "654ca6ba-6394-4b28-8a43-c20eb0cf3403",
+        "sku": "11248",
+        "barcode": "11248SNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "42eb4c98-25fe-4858-915b-b9f886fcaeaf",
+        "sku": "11249",
+        "barcode": "11249SMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "a94540cd-a909-44d7-80ea-a7c16f2e8099",
+        "sku": "11250",
+        "barcode": "11250MNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "87f09b2e-8e2c-41b8-ae20-01adfd43442c",
+        "sku": "11251",
+        "barcode": "11251MMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "f6dcfc07-b99b-49b1-904d-5ca638844e27",
+        "sku": "11252",
+        "barcode": "11252LNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "beeaea34-fb08-4233-9582-a66a839e9414",
+        "sku": "11253",
+        "barcode": "11253LMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "f62ea35a-3450-47aa-8ae8-f69025234c71",
+        "sku": "11254",
+        "barcode": "11254XLNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ea0d11f7-87f0-409f-9204-4a8cb75d347c",
+        "sku": "11255",
+        "barcode": "11255XLMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "1fc200d6-f232-45b9-9024-a8e23d9d8b89",
+    "name": "BORN TO LOUN • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/1fc200d6-f232-45b9-9024-a8e23d9d8b89",
+    "images": [
+      "https://api.loyverse.com/image/1fc200d6-f232-45b9-9024-a8e23d9d8b89"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11244",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "1fc200d6-f232-45b9-9024-a8e23d9d8b89",
+    "loyverseVariantId": "3602d565-95de-4d03-b618-d38d047e4cbb",
+    "stock": 7,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3602d565-95de-4d03-b618-d38d047e4cbb",
+        "sku": "11244",
+        "barcode": "11244SNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "71b6da05-caf4-4482-9093-9855d6bbe49a",
+        "sku": "11245",
+        "barcode": "11245MNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "98464a07-61df-4fe6-acd6-532836b10570",
+        "sku": "11246",
+        "barcode": "11246LNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "eb3bff00-c545-494c-8f10-a471f6b16c05",
+        "sku": "11247",
+        "barcode": "11247XLNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "4825f4f0-9791-4c6e-9144-2d09bb0b5565",
+    "name": "BORN TO LOUN • ESQUELETO ACIDWASH",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/4825f4f0-9791-4c6e-9144-2d09bb0b5565",
+    "images": [
+      "https://api.loyverse.com/image/4825f4f0-9791-4c6e-9144-2d09bb0b5565"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11240",
+    "categoryLabel": "Esqueleto AcidWash",
+    "loyverseItemId": "4825f4f0-9791-4c6e-9144-2d09bb0b5565",
+    "loyverseVariantId": "8617437d-14c1-41b0-b8ce-8e583591e083",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "8617437d-14c1-41b0-b8ce-8e583591e083",
+        "sku": "11240",
+        "barcode": "11240SGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0a2da2f6-6183-431d-9a73-d6b40dadaf07",
+        "sku": "11241",
+        "barcode": "11241MGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "931b0b11-1ee9-413c-90ed-99de0001700a",
+        "sku": "11242",
+        "barcode": "11242LGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "731f7b7f-d172-4366-9aab-35abf4c6b6b7",
+        "sku": "11243",
+        "barcode": "11243XLGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "7369a514-00fa-402d-8231-00319bc4fd80",
+    "name": "BORN TO LOUN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/7369a514-00fa-402d-8231-00319bc4fd80",
+    "images": [
+      "https://api.loyverse.com/image/7369a514-00fa-402d-8231-00319bc4fd80"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: MoraLeche, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11232",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "7369a514-00fa-402d-8231-00319bc4fd80",
+    "loyverseVariantId": "c3a866ce-bced-450d-812e-16aa083fca05",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c3a866ce-bced-450d-812e-16aa083fca05",
+        "sku": "11232",
+        "barcode": "11232SMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "3d245b16-479f-4492-bae4-1232753a97ad",
+        "sku": "11233",
+        "barcode": "11233SGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "da718035-bbcc-402a-8970-c20931efbf33",
+        "sku": "11234",
+        "barcode": "11234MMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f173c9ae-b79f-4e4d-a0d1-de733e02ba6b",
+        "sku": "11235",
+        "barcode": "11235MGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "03c45e4b-b5d9-4d10-844b-f0ffc701ffc5",
+        "sku": "11236",
+        "barcode": "11236LMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "26a98ef4-7a15-46cb-b665-92ba5b7567a5",
+        "sku": "11237",
+        "barcode": "11237LGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d506c71a-3e2f-4c52-abb6-17c6cf4c2f29",
+        "sku": "11238",
+        "barcode": "11238XLMo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "8fbad8c6-1681-4308-aa23-d590762a2d62",
+        "sku": "11239",
+        "barcode": "11239XLGr",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "MoraLeche",
+      "Gris"
+    ]
+  },
+  {
+    "id": "829e9f59-29e5-491e-8f23-c21a13ebe194",
+    "name": "COASH BUZO ACIDWASH • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/829e9f59-29e5-491e-8f23-c21a13ebe194",
+    "images": [
+      "https://api.loyverse.com/image/829e9f59-29e5-491e-8f23-c21a13ebe194"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11227",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "829e9f59-29e5-491e-8f23-c21a13ebe194",
+    "loyverseVariantId": "6dfd4ce0-d412-42ae-a43d-14c126647bd0",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6dfd4ce0-d412-42ae-a43d-14c126647bd0",
+        "sku": "11227",
+        "barcode": "11227SNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c88f26c8-e64b-42d1-84a1-4f26eb2e24bb",
+        "sku": "11228",
+        "barcode": "11228MNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "acf285ba-87c8-4755-a017-566f90a78a83",
+        "sku": "11229",
+        "barcode": "11229LNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "20a36574-e877-4c59-a19f-427c828a42cf",
+        "sku": "11230",
+        "barcode": "11230XLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "30aa98c8-0b2c-4362-a976-7d88e5ba979e",
+        "sku": "11231",
+        "barcode": "11231xxlNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "b69a8bae-196d-4db4-b6f8-d7fccc705c59",
+    "name": "COASH ACIDWASH • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/b69a8bae-196d-4db4-b6f8-d7fccc705c59",
+    "images": [
+      "https://api.loyverse.com/image/b69a8bae-196d-4db4-b6f8-d7fccc705c59"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Azul, Verde. Tallas disponibles: S, M, L, XL.",
+    "sku": "11219",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "b69a8bae-196d-4db4-b6f8-d7fccc705c59",
+    "loyverseVariantId": "00950c72-25ab-49be-aa9b-f0c6c7c7122d",
+    "stock": 5,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "00950c72-25ab-49be-aa9b-f0c6c7c7122d",
+        "sku": "11219",
+        "barcode": "11219SAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d27ad0c2-1214-4d89-8340-558e92ae0743",
+        "sku": "11220",
+        "barcode": "11220SVe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "5046b11c-5a55-44a5-9beb-085f012ca741",
+        "sku": "11221",
+        "barcode": "11221MAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "679233d7-8dce-4926-9ccd-280d5b5b2456",
+        "sku": "11222",
+        "barcode": "11222MVe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1ab855e3-3744-4a15-920c-b65b78e7279b",
+        "sku": "11223",
+        "barcode": "11223LAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fa78693a-d243-4f81-8945-79df0a500da6",
+        "sku": "11224",
+        "barcode": "11224LVe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c5fe0892-8333-4880-816c-6f2c623fb2c9",
+        "sku": "11225",
+        "barcode": "11225XLAz",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1fcacc6b-b105-4d71-945e-565f27b706c7",
+        "sku": "11226",
+        "barcode": "11226XLVe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Verde",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "Verde"
+    ]
+  },
+  {
+    "id": "b0f42c6b-ea04-42c8-9c06-f1201ee0f1c1",
+    "name": "COMPANY URBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/b0f42c6b-ea04-42c8-9c06-f1201ee0f1c1",
+    "images": [
+      "https://api.loyverse.com/image/b0f42c6b-ea04-42c8-9c06-f1201ee0f1c1"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11209",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "b0f42c6b-ea04-42c8-9c06-f1201ee0f1c1",
+    "loyverseVariantId": "3205fe61-8090-4493-9536-0c2b723e6fc0",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3205fe61-8090-4493-9536-0c2b723e6fc0",
+        "sku": "11209",
+        "barcode": "11209SGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f3d3655e-0de9-4d29-9be8-4bad484e07e2",
+        "sku": "11210",
+        "barcode": "11210SNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fb80afd2-34d8-404b-bf59-da5a1f4fe40e",
+        "sku": "11211",
+        "barcode": "11211MGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c0ed870c-d03f-479b-8831-721663c950ab",
+        "sku": "11212",
+        "barcode": "11212MNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "44c25513-d413-45b2-b729-fd4b4b09ddbf",
+        "sku": "11213",
+        "barcode": "11213LGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7b060dc9-b785-4853-985c-7b62bd04864b",
+        "sku": "11214",
+        "barcode": "11214LNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dcc7e2d6-1692-49d4-b3fb-4930dcfdcd3a",
+        "sku": "11215",
+        "barcode": "11215XLGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d8e305a0-6290-424c-8d4e-4b0a6e2e9ff5",
+        "sku": "11216",
+        "barcode": "11216XLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "784f1af7-5626-4f78-9f71-9413f1af55bc",
+        "sku": "11217",
+        "barcode": "11217XXLGr",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fef98a4e-437a-4738-acaf-64b206d977a4",
+        "sku": "11218",
+        "barcode": "11218XXLNe",
+        "price": 0,
+        "cost": 79000,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "42041318-8059-46f7-81bb-e4e9e4db76b4",
+    "name": "COMPANY URBAN • ESQUELETO ACIDWASH",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/42041318-8059-46f7-81bb-e4e9e4db76b4",
+    "images": [
+      "https://api.loyverse.com/image/42041318-8059-46f7-81bb-e4e9e4db76b4"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11201",
+    "categoryLabel": "Esqueleto AcidWash",
+    "loyverseItemId": "42041318-8059-46f7-81bb-e4e9e4db76b4",
+    "loyverseVariantId": "453b6e79-cbe4-4602-8176-dcdcd6e485a2",
+    "stock": 6,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "453b6e79-cbe4-4602-8176-dcdcd6e485a2",
+        "sku": "11201",
+        "barcode": "11201SGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "65357e52-bfa3-4579-90b8-0d27ad887aef",
+        "sku": "11202",
+        "barcode": "11202SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "56f9d2cf-0798-461e-84a3-851e8b481005",
+        "sku": "11203",
+        "barcode": "11203MGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "46dfa088-69b9-486a-9c73-b4d8c65dacb6",
+        "sku": "11204",
+        "barcode": "11204MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "65d83ec3-26f0-4826-8c00-6c950890fe31",
+        "sku": "11205",
+        "barcode": "11205LGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "19d41aaf-04ce-455c-9abf-2f3170504c6a",
+        "sku": "11206",
+        "barcode": "11206LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "a9dacb84-9d84-49f3-ba0c-8bf953e6b468",
+        "sku": "11207",
+        "barcode": "11207XLGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "ef2691bf-356e-4110-a705-dba89274f870",
+        "sku": "11208",
+        "barcode": "11208XLNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "ec1e7b11-03f6-4d7e-9889-aa35e20e001e",
+    "name": "COMPANY URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/ec1e7b11-03f6-4d7e-9889-aa35e20e001e",
+    "images": [
+      "https://api.loyverse.com/image/ec1e7b11-03f6-4d7e-9889-aa35e20e001e"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11197",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "ec1e7b11-03f6-4d7e-9889-aa35e20e001e",
+    "loyverseVariantId": "900a9165-bcbb-4181-8231-01078efe4fc0",
+    "stock": 8,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "900a9165-bcbb-4181-8231-01078efe4fc0",
+        "sku": "11197",
+        "barcode": "11197SNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "eb3806de-206a-4a2f-a2ae-e1b2339eaee1",
+        "sku": "11198",
+        "barcode": "11198MNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5be0ee74-98a6-4450-824a-ae9bee35b4ab",
+        "sku": "11199",
+        "barcode": "11199LNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "d3845209-a251-4ab2-862a-3a89dabacd7b",
+        "sku": "11200",
+        "barcode": "11200XLNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "a325a186-ca3b-4780-866c-ba4b831dc645",
+    "name": "CRUZ URBNS • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/a325a186-ca3b-4780-866c-ba4b831dc645",
+    "images": [
+      "https://api.loyverse.com/image/a325a186-ca3b-4780-866c-ba4b831dc645"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre. Tallas disponibles: S, M, L, XL.",
+    "sku": "11193",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "a325a186-ca3b-4780-866c-ba4b831dc645",
+    "loyverseVariantId": "d944fd46-a53b-4c1a-b838-98c2f98e2305",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d944fd46-a53b-4c1a-b838-98c2f98e2305",
+        "sku": "11193",
+        "barcode": "11193SCo",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "279167a8-39d4-4fcd-8d01-4b0f8cf14e5c",
+        "sku": "11194",
+        "barcode": "11194MCo",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c385bc56-f0f1-4ab2-89cd-dc9876945e70",
+        "sku": "11195",
+        "barcode": "11195LCo",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5c91cb85-2683-4baa-826d-13ebb7af928c",
+        "sku": "11196",
+        "barcode": "11196XLCo",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre"
+    ]
+  },
+  {
+    "id": "a6a9caa9-a2cc-460a-9e3a-332fa6aed660",
+    "name": "CRUZ URBNS • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/a6a9caa9-a2cc-460a-9e3a-332fa6aed660",
+    "images": [
+      "https://api.loyverse.com/image/a6a9caa9-a2cc-460a-9e3a-332fa6aed660"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11189",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "a6a9caa9-a2cc-460a-9e3a-332fa6aed660",
+    "loyverseVariantId": "4c98255a-b820-4061-baf1-8a40350d2e99",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "4c98255a-b820-4061-baf1-8a40350d2e99",
+        "sku": "11189",
+        "barcode": "11189SNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "0d6bb13d-4dbf-4bbe-ae24-aa0c30c0fcc1",
+        "sku": "11190",
+        "barcode": "11190MNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ebdc984e-758f-4dd0-8bc8-db2afd48ff36",
+        "sku": "11191",
+        "barcode": "11191LNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "70b80acf-28f4-421d-9498-22e43156e71a",
+        "sku": "11192",
+        "barcode": "11192XLNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "5ae87b1c-dcc1-4ece-b6ed-45ef71ada9cd",
+    "name": "CRUZ URBNS • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/5ae87b1c-dcc1-4ece-b6ed-45ef71ada9cd",
+    "images": [
+      "https://api.loyverse.com/image/5ae87b1c-dcc1-4ece-b6ed-45ef71ada9cd"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Ngero, Cobre. Tallas disponibles: S, M, L, XL.",
+    "sku": "11181",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "5ae87b1c-dcc1-4ece-b6ed-45ef71ada9cd",
+    "loyverseVariantId": "a5b840d8-d441-4f6d-ae80-272aaf3c94cd",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a5b840d8-d441-4f6d-ae80-272aaf3c94cd",
+        "sku": "11181",
+        "barcode": "11181SNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Ngero",
+        "option3_value": null,
+        "size": "S",
+        "color": "Ngero",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a26cf62e-2afd-41a2-aad1-c245bf69ec7e",
+        "sku": "11182",
+        "barcode": "11182SCo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "36dd1b57-6e1c-4121-bc20-52f077d6f1c0",
+        "sku": "11183",
+        "barcode": "11183MNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Ngero",
+        "option3_value": null,
+        "size": "M",
+        "color": "Ngero",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c04bb5bd-72e1-4b7f-9063-90f23e6b7d87",
+        "sku": "11184",
+        "barcode": "11184MCo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f9df9a2b-fcd8-4a4a-8af2-164f3b78cbcc",
+        "sku": "11185",
+        "barcode": "11185LNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Ngero",
+        "option3_value": null,
+        "size": "L",
+        "color": "Ngero",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6ff01a8f-f1e9-4878-a724-f52a89fa5675",
+        "sku": "11186",
+        "barcode": "11186LCo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fb8bc2de-34aa-4198-9a2d-39af0bbed7a8",
+        "sku": "11187",
+        "barcode": "11187XLNe",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Ngero",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Ngero",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "3c208ded-2e9c-4923-81c0-5cfbf160d434",
+        "sku": "11188",
+        "barcode": "11188XLCo",
+        "price": 0,
+        "cost": 30500,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Ngero",
+      "Cobre"
+    ]
+  },
+  {
+    "id": "9b709908-e01c-407c-9af1-61365258d333",
+    "name": "CRUZ URBNS • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/9b709908-e01c-407c-9af1-61365258d333",
+    "images": [
+      "https://api.loyverse.com/image/9b709908-e01c-407c-9af1-61365258d333"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11173",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "9b709908-e01c-407c-9af1-61365258d333",
+    "loyverseVariantId": "fa32608a-9219-48bc-905b-c11ea1503ba5",
+    "stock": 7,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "fa32608a-9219-48bc-905b-c11ea1503ba5",
+        "sku": "11173",
+        "barcode": "11173SNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a468feec-d4af-4115-a9a0-30609c6d2766",
+        "sku": "11174",
+        "barcode": "11174SMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "100f88c9-80d9-434e-8111-92451d827efa",
+        "sku": "11175",
+        "barcode": "11175MNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "98c1fac4-f012-4386-a222-696ab39b6d4a",
+        "sku": "11176",
+        "barcode": "11176MMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7909c75d-b193-46dc-80bd-63d879ad8043",
+        "sku": "11177",
+        "barcode": "11177LNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "9ce368f0-fde0-465a-90fb-72ee3f57bdf3",
+        "sku": "11178",
+        "barcode": "11178LMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "881babab-4a75-4e4b-a649-d3656a9aef6a",
+        "sku": "11179",
+        "barcode": "11179XLNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f181998a-e4ba-486b-842e-67f2d61d5ea8",
+        "sku": "11180",
+        "barcode": "11180XLMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "ea27a108-df80-451a-b5b1-7cb28ebd211b",
+    "name": "HOPELES DAM • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L.",
+    "sku": "11170",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "ea27a108-df80-451a-b5b1-7cb28ebd211b",
+    "loyverseVariantId": "a420f50c-4dd3-4ab5-bf58-822f8beb4238",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a420f50c-4dd3-4ab5-bf58-822f8beb4238",
+        "sku": "11170",
+        "barcode": "11170SGr",
+        "price": 0,
+        "cost": 78000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d1b601e4-3f2e-497b-84f0-29f2d6005003",
+        "sku": "11171",
+        "barcode": "11171MGr",
+        "price": 0,
+        "cost": 78000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b019d057-4131-4d37-954a-08b35076a6f7",
+        "sku": "11172",
+        "barcode": "11172LGr",
+        "price": 0,
+        "cost": 78000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "f2bac87e-7d9e-43e9-b888-7f7ca1f37691",
+    "name": "HOPELES • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/f2bac87e-7d9e-43e9-b888-7f7ca1f37691",
+    "images": [
+      "https://api.loyverse.com/image/f2bac87e-7d9e-43e9-b888-7f7ca1f37691"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Blanco. Tallas disponibles: S, M, L, XL.",
+    "sku": "11166",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "f2bac87e-7d9e-43e9-b888-7f7ca1f37691",
+    "loyverseVariantId": "6228c0ab-a4a4-42ed-a505-64319012cfa4",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6228c0ab-a4a4-42ed-a505-64319012cfa4",
+        "sku": "11166",
+        "barcode": "11166SBl",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "S",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7aecb33c-97e6-4d85-a123-99aedbf71f1d",
+        "sku": "11167",
+        "barcode": "11167MBl",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "M",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b8ade1d0-69c6-4387-b3f3-206d80ef1fb3",
+        "sku": "11168",
+        "barcode": "11168LBl",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "L",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d38b85f4-05ef-44d9-8a3c-cdad3b989753",
+        "sku": "11169",
+        "barcode": "11169XLBl",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Blanco",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Blanco"
+    ]
+  },
+  {
+    "id": "38c884bd-2366-4da3-a4e7-17a7dd6beaa0",
+    "name": "HOPELESS URBNS • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/38c884bd-2366-4da3-a4e7-17a7dd6beaa0",
+    "images": [
+      "https://api.loyverse.com/image/38c884bd-2366-4da3-a4e7-17a7dd6beaa0"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11162",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "38c884bd-2366-4da3-a4e7-17a7dd6beaa0",
+    "loyverseVariantId": "d1011aad-ead8-44b3-8add-1060149b4191",
+    "stock": 14,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d1011aad-ead8-44b3-8add-1060149b4191",
+        "sku": "11162",
+        "barcode": "11162SMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "f22dd240-7ff5-4a51-9f48-0bbdf74aa9f3",
+        "sku": "11163",
+        "barcode": "11163MMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "50ee5a4a-40b5-4814-9a6f-b1d3879d1571",
+        "sku": "11164",
+        "barcode": "11164LMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "6dd2d3b8-298b-48b3-858b-fc5ef62b8796",
+        "sku": "11165",
+        "barcode": "11165XLMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 8
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil"
+    ]
+  },
+  {
+    "id": "ec3e63dc-b959-4c16-916b-7841b7b45152",
+    "name": "HOPELES • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/ec3e63dc-b959-4c16-916b-7841b7b45152",
+    "images": [
+      "https://api.loyverse.com/image/ec3e63dc-b959-4c16-916b-7841b7b45152"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11154",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "ec3e63dc-b959-4c16-916b-7841b7b45152",
+    "loyverseVariantId": "43bd61c9-b8a8-41b2-b94d-9b7e4b305473",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "43bd61c9-b8a8-41b2-b94d-9b7e4b305473",
+        "sku": "11154",
+        "barcode": "11154SCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "ae4e60ea-4e15-437d-b44d-c783b9362752",
+        "sku": "11155",
+        "barcode": "11155SGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d9728838-c577-49d3-9f1d-5bb0046789a9",
+        "sku": "11156",
+        "barcode": "11156MCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "10209f52-f863-4f43-ae1f-97fe5c33c02b",
+        "sku": "11157",
+        "barcode": "11157MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1bbffb98-5a48-4180-b062-9e56ad0a5d14",
+        "sku": "11158",
+        "barcode": "11158LCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "890b6544-5b9b-48e7-9e3a-0e3c7474638b",
+        "sku": "11159",
+        "barcode": "11159LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a41eeacd-2689-4a34-97d4-99fe3289cbc8",
+        "sku": "11160",
+        "barcode": "11160XLCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "16025681-2ace-467d-966a-38f2509a8f1e",
+        "sku": "11161",
+        "barcode": "11161XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre",
+      "Gris"
+    ]
+  },
+  {
+    "id": "52558b7b-62c7-4fd4-8ae0-73e85ccb1c4c",
+    "name": "NO CENSURE • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/52558b7b-62c7-4fd4-8ae0-73e85ccb1c4c",
+    "images": [
+      "https://api.loyverse.com/image/52558b7b-62c7-4fd4-8ae0-73e85ccb1c4c"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11150",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "52558b7b-62c7-4fd4-8ae0-73e85ccb1c4c",
+    "loyverseVariantId": "5ca897db-c3d0-44c9-9fd0-17cd9f1b00ed",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5ca897db-c3d0-44c9-9fd0-17cd9f1b00ed",
+        "sku": "11150",
+        "barcode": "11150SNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3e14d2f6-5351-43a9-a651-e4ea307346dd",
+        "sku": "11151",
+        "barcode": "11151MNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d8b6e2a1-91f0-4f42-a328-263333718130",
+        "sku": "11152",
+        "barcode": "11152LNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e1c007b1-0c1a-4984-839b-39af30b588e2",
+        "sku": "11153",
+        "barcode": "11153XLNe",
+        "price": 0,
+        "cost": 26500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "590e58b3-be5e-498d-89b1-3b983601f813",
+    "name": "NO CENSURE • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/590e58b3-be5e-498d-89b1-3b983601f813",
+    "images": [
+      "https://api.loyverse.com/image/590e58b3-be5e-498d-89b1-3b983601f813"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Camell. Tallas disponibles: S, M, L, XL.",
+    "sku": "11140",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "590e58b3-be5e-498d-89b1-3b983601f813",
+    "loyverseVariantId": "cd480882-fc44-49db-add2-b84553eef191",
+    "stock": 11,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cd480882-fc44-49db-add2-b84553eef191",
+        "sku": "11140",
+        "barcode": "11140SNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a888e633-bc67-4a38-901e-8a7efeb83003",
+        "sku": "11142",
+        "barcode": "11142SCa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camell",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "b82cf66c-11b0-4f05-80f7-cf2ea0626ef9",
+        "sku": "11144",
+        "barcode": "11144MNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7fbd8845-62ee-4117-a585-cd0aaa48b0e4",
+        "sku": "11145",
+        "barcode": "11145MCa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camell",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "29b6ff87-f4ba-48c7-8937-fdbe51acd352",
+        "sku": "11146",
+        "barcode": "11146LNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "508419bf-ccc1-45f6-8ef3-b783272b6bc4",
+        "sku": "11147",
+        "barcode": "11147LCa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camell",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "a0cb9042-3e40-44b3-b7ed-7d1f4f9960ce",
+        "sku": "11148",
+        "barcode": "11148XLNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "b50ea31e-7cea-4c70-824e-be2c19f5e7f4",
+        "sku": "11149",
+        "barcode": "11149XLCa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camell",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Camell"
+    ]
+  },
+  {
+    "id": "a9afc049-8670-4f5f-93e7-6ba38aa4796c",
+    "name": "SUPREME DAMA • BUZO ACIDWASH",
+    "category": "dama-oversize",
+    "price": 85000,
+    "image": "https://api.loyverse.com/image/a9afc049-8670-4f5f-93e7-6ba38aa4796c",
+    "images": [
+      "https://api.loyverse.com/image/a9afc049-8670-4f5f-93e7-6ba38aa4796c"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L.",
+    "sku": "11139",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "a9afc049-8670-4f5f-93e7-6ba38aa4796c",
+    "loyverseVariantId": "b9651fde-24b2-49cb-bd18-36d3bf78e2c2",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b9651fde-24b2-49cb-bd18-36d3bf78e2c2",
+        "sku": "11139",
+        "barcode": "11139SMa",
+        "price": 0,
+        "cost": 65000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9c513279-140e-4f2d-b77b-024e5a14da35",
+        "sku": "11141",
+        "barcode": "11140MMa",
+        "price": 0,
+        "cost": 65000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fd1da9e7-9d32-4bf1-8f8b-d7aca807cbc5",
+        "sku": "11143",
+        "barcode": "11141LNe",
+        "price": 0,
+        "cost": 65000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "aa528cb6-2324-47c2-890f-5b1d8802fd9e",
+    "name": "BODY • BODY",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/aa528cb6-2324-47c2-890f-5b1d8802fd9e",
+    "images": [
+      "https://api.loyverse.com/image/aa528cb6-2324-47c2-890f-5b1d8802fd9e"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "11135",
+    "categoryLabel": "Body",
+    "loyverseItemId": "aa528cb6-2324-47c2-890f-5b1d8802fd9e",
+    "loyverseVariantId": "9fae9343-5185-4174-a3f4-7325ed3b646f",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9fae9343-5185-4174-a3f4-7325ed3b646f",
+        "sku": "11135",
+        "barcode": "11135UMa",
+        "price": 0,
+        "cost": 17000,
+        "option1_value": "Marfil/cafe",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "Marfil/cafe",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6bb42814-fb92-44bd-9ae6-7b387d9dfe3c",
+        "sku": "11136",
+        "barcode": "11136UMa",
+        "price": 0,
+        "cost": 17000,
+        "option1_value": "Marfil/Camell",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "Marfil/Camell",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "85b93621-00b3-4278-9122-9d4b0f7b6b64",
+        "sku": "11137",
+        "barcode": "11137UNe",
+        "price": 0,
+        "cost": 17000,
+        "option1_value": "Negro",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "Negro",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3f45bdfe-9b8c-44ba-8fbe-fd3abcdad4d4",
+        "sku": "11138",
+        "barcode": "11138UVe",
+        "price": 0,
+        "cost": 17000,
+        "option1_value": "Verde",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "Verde",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "0753855f-2c3e-44c3-b6be-25a3fa1b9fae",
+    "name": "SUPREME • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/0753855f-2c3e-44c3-b6be-25a3fa1b9fae",
+    "images": [
+      "https://api.loyverse.com/image/0753855f-2c3e-44c3-b6be-25a3fa1b9fae"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Blanco, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11127",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "0753855f-2c3e-44c3-b6be-25a3fa1b9fae",
+    "loyverseVariantId": "11b8837f-e0a7-4d95-b2ee-2cb37a4c6143",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "11b8837f-e0a7-4d95-b2ee-2cb37a4c6143",
+        "sku": "11127",
+        "barcode": "11127SBl",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "S",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7f945957-05ed-4f8c-8215-7072a86dcb1b",
+        "sku": "11128",
+        "barcode": "11128SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8236a9b0-9c8a-45fc-aacf-a6e43c82ef29",
+        "sku": "11129",
+        "barcode": "11129MBl",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "M",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "19ef4f70-eb47-4f1d-b2a2-fe35a44c6fdf",
+        "sku": "11130",
+        "barcode": "11130MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0468ae91-2040-402d-9a2c-0bb948b5dc20",
+        "sku": "11131",
+        "barcode": "11131LBl",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "L",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b3e105b8-aff5-45a0-bb5e-760f462383b2",
+        "sku": "11132",
+        "barcode": "11132LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "390d8b52-975d-4256-88db-82366ddc3dbc",
+        "sku": "11133",
+        "barcode": "11133XLBl",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Blanco",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "c0ab4833-1ea8-4f83-abf6-9fb718010e21",
+        "sku": "11134",
+        "barcode": "11134XLNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Blanco",
+      "Negro"
+    ]
+  },
+  {
+    "id": "ba34794f-1c4c-4ca8-a4ea-dea3828b6a9a",
+    "name": "SUPREME • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/ba34794f-1c4c-4ca8-a4ea-dea3828b6a9a",
+    "images": [
+      "https://api.loyverse.com/image/ba34794f-1c4c-4ca8-a4ea-dea3828b6a9a"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11123",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "ba34794f-1c4c-4ca8-a4ea-dea3828b6a9a",
+    "loyverseVariantId": "e378e270-53a9-45be-9efc-373a0558ec8c",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e378e270-53a9-45be-9efc-373a0558ec8c",
+        "sku": "11123",
+        "barcode": "11123SMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "43032969-814a-4046-9a26-f7af95a7cc02",
+        "sku": "11124",
+        "barcode": "11124MMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "748f85fe-0868-40ca-b8a6-55b49b423c32",
+        "sku": "11125",
+        "barcode": "11125LMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fe52092e-a841-45d9-83bc-5304af9ce42e",
+        "sku": "11126",
+        "barcode": "11126XLMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil"
+    ]
+  },
+  {
+    "id": "f590c58c-0d21-47ec-8ed9-04a44823d923",
+    "name": "TOBE HUMAN • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/f590c58c-0d21-47ec-8ed9-04a44823d923",
+    "images": [
+      "https://api.loyverse.com/image/f590c58c-0d21-47ec-8ed9-04a44823d923"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Blanco, Camell. Tallas disponibles: S, M, L, XL.",
+    "sku": "11115",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "f590c58c-0d21-47ec-8ed9-04a44823d923",
+    "loyverseVariantId": "2dc6bdc3-a25e-4282-a7c7-8a81215d214e",
+    "stock": 25,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "2dc6bdc3-a25e-4282-a7c7-8a81215d214e",
+        "sku": "11115",
+        "barcode": "11115SBl",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "S",
+        "color": "Blanco",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "e4fd1de2-7a57-464c-8d89-bcbfecc02b16",
+        "sku": "11116",
+        "barcode": "11116SCa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camell",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "58d77d30-47c1-4572-aeae-a364b059b061",
+        "sku": "11117",
+        "barcode": "11117MBl",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "M",
+        "color": "Blanco",
+        "in_stock": 7
+      },
+      {
+        "variant_id": "c283256d-35ee-43ad-a642-bbe63e7e65a8",
+        "sku": "11118",
+        "barcode": "11118MCa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camell",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "4b13fe62-0909-4f01-84c7-ad4ea7ea9732",
+        "sku": "11119",
+        "barcode": "11119LBl",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "L",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "812f0f8e-1d9c-4424-9462-a792f254df43",
+        "sku": "11120",
+        "barcode": "11120LCa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camell",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "1c1a7052-a449-4da7-a9b2-21d5054b3c88",
+        "sku": "11121",
+        "barcode": "11121XLBl",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Blanco",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "4446325f-0374-48b0-b0a5-d473852ebe65",
+        "sku": "11122",
+        "barcode": "11122XLCa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camell",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Blanco",
+      "Camell"
+    ]
+  },
+  {
+    "id": "ca907d7f-6941-495d-b247-beffb7baa9be",
+    "name": "WINGS URB • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/ca907d7f-6941-495d-b247-beffb7baa9be",
+    "images": [
+      "https://api.loyverse.com/image/ca907d7f-6941-495d-b247-beffb7baa9be"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11111",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "ca907d7f-6941-495d-b247-beffb7baa9be",
+    "loyverseVariantId": "5e2d0a30-9408-482a-9f85-563db36f70e9",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5e2d0a30-9408-482a-9f85-563db36f70e9",
+        "sku": "11111",
+        "barcode": "11111SNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ac146ee0-bb89-42ca-b52c-ae309aa3c8af",
+        "sku": "11112",
+        "barcode": "11112MNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3c2eb4dd-b73d-4762-8984-3ed897da404b",
+        "sku": "11113",
+        "barcode": "11113LNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7c332547-0791-4ff5-bbe4-739ee0e1fdd7",
+        "sku": "11114",
+        "barcode": "11114XLNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "03c15d17-6246-469f-8264-e8a1bb94733b",
+    "name": "URBAN POWER REAL • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/03c15d17-6246-469f-8264-e8a1bb94733b",
+    "images": [
+      "https://api.loyverse.com/image/03c15d17-6246-469f-8264-e8a1bb94733b"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11103",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "03c15d17-6246-469f-8264-e8a1bb94733b",
+    "loyverseVariantId": "f30718ec-879a-4d3e-9e90-e891cea27071",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "f30718ec-879a-4d3e-9e90-e891cea27071",
+        "sku": "11103",
+        "barcode": "11103SMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0882de52-9733-480e-ac32-93b68e9d2d62",
+        "sku": "11104",
+        "barcode": "11104SNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f72b6ecd-b2ea-437d-b019-4fd3b3b2f331",
+        "sku": "11105",
+        "barcode": "11105MMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "276b05a8-7139-4147-82aa-096c08e25988",
+        "sku": "11106",
+        "barcode": "11106MNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "588d8e82-7bdd-43a5-a240-71b2c6ec2c1b",
+        "sku": "11107",
+        "barcode": "11107LMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "eae8ed9d-ddea-4700-bd86-99766ac8181d",
+        "sku": "11108",
+        "barcode": "11108LNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ef9a299f-8727-4567-8f8a-23713cc67ff0",
+        "sku": "11109",
+        "barcode": "11109XLMa",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "7c290b2c-6643-4fb3-b08a-7a7490e81c77",
+        "sku": "11110",
+        "barcode": "11110XLNe",
+        "price": 0,
+        "cost": 21000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "0f90aec8-e360-4f87-91ea-9ff136e5fa4e",
+    "name": "ANGELNOISE • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/0f90aec8-e360-4f87-91ea-9ff136e5fa4e",
+    "images": [
+      "https://api.loyverse.com/image/0f90aec8-e360-4f87-91ea-9ff136e5fa4e"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre, MoraLeche, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11091",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "0f90aec8-e360-4f87-91ea-9ff136e5fa4e",
+    "loyverseVariantId": "84d2c37c-7f9c-4384-8b15-79721745f6e4",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "84d2c37c-7f9c-4384-8b15-79721745f6e4",
+        "sku": "11091",
+        "barcode": "11091SCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3f153e4e-d7f4-4d5f-bf9c-b161906f2f45",
+        "sku": "11092",
+        "barcode": "11092SMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4a24b384-8ce6-4e4c-8911-da262a62b8d9",
+        "sku": "11093",
+        "barcode": "11093SGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0ce74b1f-1bbb-4e15-a2a4-0decb9def1ae",
+        "sku": "11094",
+        "barcode": "11094MCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9e5084d1-5d4a-4286-8df9-0b90307d2e13",
+        "sku": "11095",
+        "barcode": "11095MMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2e310308-4414-4b33-b02c-db1c33152f2a",
+        "sku": "11096",
+        "barcode": "11096MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "492d3364-e7d2-4850-952a-51a1d7e7f1ae",
+        "sku": "11097",
+        "barcode": "11097LCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "001fe7c3-c929-42c7-8ec7-a14241bd64ca",
+        "sku": "11098",
+        "barcode": "11098LMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "12ae6d33-599f-4ec0-98d0-0a61cf8ddcec",
+        "sku": "11099",
+        "barcode": "11099LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "aff8fb0e-126b-4378-a9a8-82fb1e112852",
+        "sku": "11100",
+        "barcode": "11100XLCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2c5167c8-c386-4ce9-8982-a673e4dc3d57",
+        "sku": "11101",
+        "barcode": "11101XLMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7a1a307f-e2ff-4aa7-9f7d-03d5e3fa6da6",
+        "sku": "11102",
+        "barcode": "11102XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre",
+      "MoraLeche",
+      "Gris"
+    ]
+  },
+  {
+    "id": "836036b2-102f-4c8b-a64e-741a9dcf49ae",
+    "name": "FACE DEMON • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/836036b2-102f-4c8b-a64e-741a9dcf49ae",
+    "images": [
+      "https://api.loyverse.com/image/836036b2-102f-4c8b-a64e-741a9dcf49ae"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11083",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "836036b2-102f-4c8b-a64e-741a9dcf49ae",
+    "loyverseVariantId": "a88be656-5e1d-402c-b34d-f76d4ac09a1c",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a88be656-5e1d-402c-b34d-f76d4ac09a1c",
+        "sku": "11083",
+        "barcode": "11083SGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cf29a6b8-7c77-4f63-88be-17425e7a9868",
+        "sku": "11084",
+        "barcode": null,
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "83527343-26c0-4b03-a8d3-c08d4c20c83d",
+        "sku": "11085",
+        "barcode": "11085MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c3945a5a-e133-47fc-b130-8c7fdc3170a6",
+        "sku": "11086",
+        "barcode": "11086MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "597b15f9-9cee-4fce-8e5e-83d77775a2c8",
+        "sku": "11087",
+        "barcode": "11087LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "61054d02-0abe-4e4e-af9e-f5e51c68ebbd",
+        "sku": "11088",
+        "barcode": "11088LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c582263d-55ee-4a6d-8fd1-2618322ca776",
+        "sku": "11089",
+        "barcode": "11089XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "40273e17-bb21-4fb0-be3b-7e150c4d7a15",
+        "sku": "11090",
+        "barcode": "11090XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "9c2336b9-d7cb-4e1d-8716-5faa5e75ffe9",
+    "name": "FACE DEMON • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/9c2336b9-d7cb-4e1d-8716-5faa5e75ffe9",
+    "images": [
+      "https://api.loyverse.com/image/9c2336b9-d7cb-4e1d-8716-5faa5e75ffe9"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11075",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "9c2336b9-d7cb-4e1d-8716-5faa5e75ffe9",
+    "loyverseVariantId": "a8b80d04-383d-4a41-b8b7-ae928abd146e",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a8b80d04-383d-4a41-b8b7-ae928abd146e",
+        "sku": "11075",
+        "barcode": "11075SGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7a4b857b-2964-4853-b1fb-6dbf23ef8fcb",
+        "sku": "11076",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7bac79b3-170c-488d-921d-e7bb0c237a16",
+        "sku": "11077",
+        "barcode": "11077MGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e653bbf9-037a-440a-a5e1-1d77b7a9c17e",
+        "sku": "11078",
+        "barcode": "11078MMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "91bf597c-1de1-4958-bcdb-65969d7258ed",
+        "sku": "11079",
+        "barcode": "11079LGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "45331af1-3743-4f0f-b9c7-0b4f32d744b8",
+        "sku": "11080",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cb376453-3dc7-40dd-9090-71ec9ef3b264",
+        "sku": "11081",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "614bf60d-5dcf-471e-b585-9273d6b57b2f",
+        "sku": "11082",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "9277df94-f46c-4d8d-a598-6023ee51e517",
+    "name": "BORN IN SILENCE • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/9277df94-f46c-4d8d-a598-6023ee51e517",
+    "images": [
+      "https://api.loyverse.com/image/9277df94-f46c-4d8d-a598-6023ee51e517"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11071",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "9277df94-f46c-4d8d-a598-6023ee51e517",
+    "loyverseVariantId": "34bd3108-c816-4e4e-9d31-e81aae1631b0",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "34bd3108-c816-4e4e-9d31-e81aae1631b0",
+        "sku": "11071",
+        "barcode": "11071SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1da12fb5-086a-4b74-a865-901a7c34b21b",
+        "sku": "11072",
+        "barcode": "11072MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "877e51d2-7666-4020-b993-7c8dcfcecd60",
+        "sku": "11073",
+        "barcode": "11073LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2046f5b3-62be-4be7-b20f-965ee474a6fa",
+        "sku": "11074",
+        "barcode": "11074XLNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "8fb3a200-db93-4870-a2ca-d23a1ae60644",
+    "name": "BORN IN SILENCE • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/8fb3a200-db93-4870-a2ca-d23a1ae60644",
+    "images": [
+      "https://api.loyverse.com/image/8fb3a200-db93-4870-a2ca-d23a1ae60644"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, MoraLeche. Tallas disponibles: S, M, L, XL.",
+    "sku": "11063",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "8fb3a200-db93-4870-a2ca-d23a1ae60644",
+    "loyverseVariantId": "c2226490-21b5-4993-918b-58003cbf614a",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c2226490-21b5-4993-918b-58003cbf614a",
+        "sku": "11063",
+        "barcode": "11063SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "41adeb57-c29d-46ca-9ffa-fd8a5bd4295e",
+        "sku": "11064",
+        "barcode": "11064SMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fbe1e8a7-c934-4474-9ec7-3595c684fa44",
+        "sku": "11065",
+        "barcode": "11065MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ebfa585b-8e7b-419e-9b98-1ab6837af5b3",
+        "sku": "11066",
+        "barcode": "11066MMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c1101935-3c84-4e5c-963a-588a61804b5a",
+        "sku": "11067",
+        "barcode": "11067LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4fb1995c-257b-49e5-a7d7-95f113604ff1",
+        "sku": "11068",
+        "barcode": "11068LMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d02c88ab-5f18-4866-ba71-7e741cd26191",
+        "sku": "11069",
+        "barcode": "11069XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "020535a6-e621-43ab-aa0d-6689c1152b91",
+        "sku": "11070",
+        "barcode": "11070XLMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "MoraLeche"
+    ]
+  },
+  {
+    "id": "fa6ef351-225c-46d5-aa01-958152358c77",
+    "name": "BORN IN SILENCE • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/fa6ef351-225c-46d5-aa01-958152358c77",
+    "images": [
+      "https://api.loyverse.com/image/fa6ef351-225c-46d5-aa01-958152358c77"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "11053",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "fa6ef351-225c-46d5-aa01-958152358c77",
+    "loyverseVariantId": "bfb4919c-9dfb-4897-9c03-cf10e60339b7",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "bfb4919c-9dfb-4897-9c03-cf10e60339b7",
+        "sku": "11053",
+        "barcode": "11053SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "84bdc5f7-aa03-4f3b-af8b-bb8711da00fb",
+        "sku": "11054",
+        "barcode": "11054SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0abc2d0c-bf42-4210-a3c3-eb89d90d140b",
+        "sku": "11055",
+        "barcode": "11055MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "73ef11c5-5d59-4e5f-a020-f706106d3e69",
+        "sku": "11056",
+        "barcode": "11056MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6c9943ba-45a5-4c26-bd1d-6fda05276e43",
+        "sku": "11057",
+        "barcode": "11057LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "464996e9-1d2a-4290-8729-37931d01b42d",
+        "sku": "11058",
+        "barcode": "11058LGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d8954615-598d-4568-ac64-fc4bad7a7639",
+        "sku": "11059",
+        "barcode": "11059XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "01b5f583-0f05-4bdf-a546-2a214f5d1eaf",
+        "sku": "11060",
+        "barcode": "11060XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1185085c-1974-4922-be71-239e5319d9a7",
+        "sku": "11061",
+        "barcode": "11061XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cdccbc6c-a575-4e63-9af5-20a430b9b245",
+        "sku": "11062",
+        "barcode": "11062XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "99227b73-ab97-4fb3-9d26-3bb095d998ed",
+    "name": "WINGS URB • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/99227b73-ab97-4fb3-9d26-3bb095d998ed",
+    "images": [
+      "https://api.loyverse.com/image/99227b73-ab97-4fb3-9d26-3bb095d998ed"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11043",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "99227b73-ab97-4fb3-9d26-3bb095d998ed",
+    "loyverseVariantId": "d7856589-7f3c-4852-bfee-98b33338e9dc",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d7856589-7f3c-4852-bfee-98b33338e9dc",
+        "sku": "11043",
+        "barcode": "11043SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "932ea49b-3009-46ae-88fe-c6496ab6a208",
+        "sku": "11044",
+        "barcode": "11044SNg",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fe204463-0aa9-4e75-ad06-6fc1db40605c",
+        "sku": "11045",
+        "barcode": "11045MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "26d834aa-4b1d-4479-ba3c-cbaa4b30f690",
+        "sku": "11046",
+        "barcode": "11046MNg",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a95e0bc1-30a2-4aa7-a5b6-56f32e038073",
+        "sku": "11047",
+        "barcode": "11047LGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3d7daa92-e732-4d49-a32a-a5582f8b1541",
+        "sku": "11048",
+        "barcode": "11048LNg",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "80fa2b33-bb5e-422b-882b-dcaf7e0a98fd",
+        "sku": "11049",
+        "barcode": "11049XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "22fdfc32-469b-4f0d-9bab-54e57ba00ffb",
+        "sku": "11050",
+        "barcode": "11050XLNg",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "936c0075-9fd7-4d7f-8e48-9cedec725acf",
+        "sku": "11051",
+        "barcode": "11051XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c2c042c0-bb8c-4c91-9a72-7ccd24cb21b1",
+        "sku": "11052",
+        "barcode": "11052XXLNg",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "3d47f574-1d15-436c-9607-35b595f016bf",
+    "name": "WINGS URB • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/3d47f574-1d15-436c-9607-35b595f016bf",
+    "images": [
+      "https://api.loyverse.com/image/3d47f574-1d15-436c-9607-35b595f016bf"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Cobre. Tallas disponibles: S, M, L, XL.",
+    "sku": "11028",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "3d47f574-1d15-436c-9607-35b595f016bf",
+    "loyverseVariantId": "8cad031f-5795-47e9-9774-9685fa75f944",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "8cad031f-5795-47e9-9774-9685fa75f944",
+        "sku": "11028",
+        "barcode": "11028SGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cfe1830c-0974-49f4-8585-65a7af56a3a3",
+        "sku": "11030",
+        "barcode": "11030SCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f0391249-9f05-4779-a4f6-9c8791c0dada",
+        "sku": "11032",
+        "barcode": "11032MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d71df0b1-3b74-45d9-b5e9-7251b2325001",
+        "sku": "11034",
+        "barcode": "11034MCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bb727ae6-7400-4e1c-8d43-2d6f039962a5",
+        "sku": "11035",
+        "barcode": "11035LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e3cb46fe-732c-46f0-b787-3b2fedd03f08",
+        "sku": "11037",
+        "barcode": "11037LCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "de43c35a-013d-4c4e-91c6-6466f47f8810",
+        "sku": "11039",
+        "barcode": "11039XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9b633a9c-1d83-45d6-9d28-b4f0e8012206",
+        "sku": "11041",
+        "barcode": "11041XLCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Cobre"
+    ]
+  },
+  {
+    "id": "677b8a75-9124-4681-8df3-46cb7376b877",
+    "name": "WINGS URB • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/677b8a75-9124-4681-8df3-46cb7376b877",
+    "images": [
+      "https://api.loyverse.com/image/677b8a75-9124-4681-8df3-46cb7376b877"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Blanco. Tallas disponibles: S, M, L, XL.",
+    "sku": "11027",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "677b8a75-9124-4681-8df3-46cb7376b877",
+    "loyverseVariantId": "5c8b9c97-172e-4caf-a3c4-f2e245b6ecb4",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5c8b9c97-172e-4caf-a3c4-f2e245b6ecb4",
+        "sku": "11027",
+        "barcode": "11027SGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b63c4d70-2644-4383-8c49-0dc6783ed5eb",
+        "sku": "11036",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "S",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9c4312ca-5a59-45f1-be66-04156632aeeb",
+        "sku": "11029",
+        "barcode": "11029MGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1da78343-b4db-428a-946d-bfc2bd56a114",
+        "sku": "11038",
+        "barcode": "11038MBl",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "M",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8b7aaa0f-0088-49f8-a31a-e0d0c3c04b68",
+        "sku": "11031",
+        "barcode": "11031LGr",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ef7c7ca1-2b51-4588-a0ad-6f02e5f0846b",
+        "sku": "11040",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "L",
+        "color": "Blanco",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d79ea51b-7f64-4253-8e14-4c773ac14231",
+        "sku": "11033",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "363b297f-fd5f-4ddb-a0c5-4fd7ee39b17c",
+        "sku": "11042",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Blanco",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Blanco",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Blanco"
+    ]
+  },
+  {
+    "id": "fd5481aa-d300-4a38-8ec5-621a15122f1e",
+    "name": "CONJ. PANTALÓN • CONJUNTOS",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/fd5481aa-d300-4a38-8ec5-621a15122f1e",
+    "images": [
+      "https://api.loyverse.com/image/fd5481aa-d300-4a38-8ec5-621a15122f1e"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Camell, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11021",
+    "categoryLabel": "Conjuntos",
+    "loyverseItemId": "fd5481aa-d300-4a38-8ec5-621a15122f1e",
+    "loyverseVariantId": "237f069c-2d04-4232-9315-27f809f2995a",
+    "stock": 27,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "237f069c-2d04-4232-9315-27f809f2995a",
+        "sku": "11021",
+        "barcode": "11021S/MNe",
+        "price": 0,
+        "cost": 41000,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "284dcd38-1442-4657-b10b-a73076d91a69",
+        "sku": "11022",
+        "barcode": "11022S/MCa",
+        "price": 0,
+        "cost": 41000,
+        "option1_value": "S/M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Camell",
+        "in_stock": 9
+      },
+      {
+        "variant_id": "79f890ee-bc8c-484f-b61a-299f2527ed75",
+        "sku": "11023",
+        "barcode": "11023S/MMa",
+        "price": 0,
+        "cost": 41000,
+        "option1_value": "S/M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "5ba00760-ad30-49f8-9354-24d81bdd32cc",
+        "sku": "11024",
+        "barcode": "11024L/XLNe",
+        "price": 0,
+        "cost": 41000,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "c947f12b-c43c-4ff7-beb5-4cac7a2f8368",
+        "sku": "11025",
+        "barcode": "11025L/XLCa",
+        "price": 0,
+        "cost": 41000,
+        "option1_value": "L/XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Camell",
+        "in_stock": 10
+      },
+      {
+        "variant_id": "eb0c037c-271c-4e97-8d18-8bea30baffd2",
+        "sku": "11026",
+        "barcode": "11026L/XLMa",
+        "price": 0,
+        "cost": 41000,
+        "option1_value": "L/XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Camell",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "064a9500-424a-4249-bab7-c430fc1e56eb",
+    "name": "TOBE HUMAN DAMA • OVERSIZE PREMIUM",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/064a9500-424a-4249-bab7-c430fc1e56eb",
+    "images": [
+      "https://api.loyverse.com/image/064a9500-424a-4249-bab7-c430fc1e56eb"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11020",
+    "categoryLabel": "Oversize Premium",
+    "loyverseItemId": "064a9500-424a-4249-bab7-c430fc1e56eb",
+    "loyverseVariantId": "b859e7eb-e64c-4000-82fd-339e3ae094dc",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b859e7eb-e64c-4000-82fd-339e3ae094dc",
+        "sku": "11020",
+        "barcode": "11020UNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "267af233-1b84-498f-a825-460a47d73d27",
+    "name": "TOBE HUMAN • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/267af233-1b84-498f-a825-460a47d73d27",
+    "images": [
+      "https://api.loyverse.com/image/267af233-1b84-498f-a825-460a47d73d27"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "11012",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "267af233-1b84-498f-a825-460a47d73d27",
+    "loyverseVariantId": "06cb9596-974d-446e-9275-ba6d2126b706",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "06cb9596-974d-446e-9275-ba6d2126b706",
+        "sku": "11012",
+        "barcode": "11012SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a437d309-e79b-47bd-97a8-4b602ba5ac53",
+        "sku": "11013",
+        "barcode": "11013SMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "97eeae5f-3304-455e-afa1-1eb6fb890aea",
+        "sku": "11014",
+        "barcode": "11014MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7c6fd103-695a-4d38-90b4-87b6100dbdfe",
+        "sku": "11015",
+        "barcode": "11015MMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fe00e58f-9af8-4d27-bd6d-c33f0c56f150",
+        "sku": "11016",
+        "barcode": "11016LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c22521cc-69f4-4b2a-9725-c40b8bae0166",
+        "sku": "11017",
+        "barcode": "11017LMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f4e6d324-b370-46ea-9a0c-7337db33973a",
+        "sku": "11018",
+        "barcode": "11018XLNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f5093e21-2c3e-4ea6-b163-67cd43040509",
+        "sku": "11019",
+        "barcode": "11019XLMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "5cf4828f-f9a8-4030-ab49-01d03381eab9",
+    "name": "TOBE HUMAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/5cf4828f-f9a8-4030-ab49-01d03381eab9",
+    "images": [
+      "https://api.loyverse.com/image/5cf4828f-f9a8-4030-ab49-01d03381eab9"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: MoraLeche, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "11004",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "5cf4828f-f9a8-4030-ab49-01d03381eab9",
+    "loyverseVariantId": "c70c0a85-776c-4318-8a49-529eec74d605",
+    "stock": -1,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c70c0a85-776c-4318-8a49-529eec74d605",
+        "sku": "11004",
+        "barcode": "11004SMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "adde754a-1657-48f9-addf-05f641b75a86",
+        "sku": "11005",
+        "barcode": "11005SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "84f5af08-ec57-46e7-ac5b-d2297c0fd51b",
+        "sku": "11006",
+        "barcode": "11006MMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b11ef605-60a4-4e8b-8268-650fbefeb2a2",
+        "sku": "11007",
+        "barcode": "11007MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a23b8965-aa9a-48df-9393-9c719b961a30",
+        "sku": "11008",
+        "barcode": "11008LMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "983dde98-0dd3-48fa-9868-512cac167825",
+        "sku": "11009",
+        "barcode": "11009LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "279ea03c-f057-47c6-ab67-f8834ee6f211",
+        "sku": "11010",
+        "barcode": "11010XLMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "51c50ce3-ea38-43d6-85d2-e49c43310f55",
+        "sku": "11011",
+        "barcode": "11011XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": -1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "MoraLeche",
+      "Negro"
+    ]
+  },
+  {
+    "id": "be2fbcde-b6dc-42ab-a2a3-81af6c5b12b6",
+    "name": "TOBE HUMAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/be2fbcde-b6dc-42ab-a2a3-81af6c5b12b6",
+    "images": [
+      "https://api.loyverse.com/image/be2fbcde-b6dc-42ab-a2a3-81af6c5b12b6"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10994",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "be2fbcde-b6dc-42ab-a2a3-81af6c5b12b6",
+    "loyverseVariantId": "8081abda-286b-48d8-816e-b887dcbebfb2",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "8081abda-286b-48d8-816e-b887dcbebfb2",
+        "sku": "10994",
+        "barcode": "10994SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5d730e1d-3c9a-46f0-afb1-738158ec5bc7",
+        "sku": "10995",
+        "barcode": "10995SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "41de363f-de9e-42d6-9ded-28656578796f",
+        "sku": "10996",
+        "barcode": "10996MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "337c5a37-1e9e-40ca-ba1e-42d511ba6543",
+        "sku": "10997",
+        "barcode": "10997MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e302c42b-ac57-4765-8735-4a11d4caa76a",
+        "sku": "10998",
+        "barcode": "10998LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "246e94a3-56d2-4881-ad60-780cf1d66bcb",
+        "sku": "10999",
+        "barcode": "10999LGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a725ea81-2f5f-4fde-abd3-f18ecc9b8f06",
+        "sku": "11000",
+        "barcode": "11000XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "51da68c5-d52b-4b61-9e7a-e0f349f47b50",
+        "sku": "11001",
+        "barcode": "11001XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e9b72047-d6e3-46c2-969a-31ae21bcf63a",
+        "sku": "11002",
+        "barcode": "11002XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "db2598ad-a5f9-4703-a177-ca36d3f86e43",
+        "sku": "11003",
+        "barcode": "11003XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "1722f12a-a954-420d-8ce6-67d7a848236a",
+    "name": "FORGED IN CHAOS URBAN • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10993",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "1722f12a-a954-420d-8ce6-67d7a848236a",
+    "loyverseVariantId": "9b625a22-d790-4d83-9f9c-c7a3bcfe02a3",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9b625a22-d790-4d83-9f9c-c7a3bcfe02a3",
+        "sku": "10993",
+        "barcode": "10993UNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "f9a85cd5-3213-439f-859a-d618795edf7c",
+    "name": "OTROS • OVERSIZE PREMIUM",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Varios. Tallas disponibles: S, M, L, XL.",
+    "sku": "10989",
+    "categoryLabel": "Oversize Premium",
+    "loyverseItemId": "f9a85cd5-3213-439f-859a-d618795edf7c",
+    "loyverseVariantId": "0076e546-16a3-4d3a-b43c-1f33a0953303",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "0076e546-16a3-4d3a-b43c-1f33a0953303",
+        "sku": "10989",
+        "barcode": "10989SVa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "S",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "S",
+        "color": "Varios",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "93be7e37-9ece-484f-9d97-6e903480dc68",
+        "sku": "10990",
+        "barcode": "10990MVa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "M",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "M",
+        "color": "Varios",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "354468a2-e9cb-4f48-b739-d15c7f44e33c",
+        "sku": "10991",
+        "barcode": "10991LVa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "L",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "L",
+        "color": "Varios",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b576394b-82b1-432c-8480-9828326beb6b",
+        "sku": "10992",
+        "barcode": "10992XLVa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "XL",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Varios",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Varios"
+    ]
+  },
+  {
+    "id": "74ee583d-c95c-4a91-bb0e-d5eacfacc2d7",
+    "name": "SPACE URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/74ee583d-c95c-4a91-bb0e-d5eacfacc2d7",
+    "images": [
+      "https://api.loyverse.com/image/74ee583d-c95c-4a91-bb0e-d5eacfacc2d7"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, MoraLeche. Tallas disponibles: S, M, L, XL.",
+    "sku": "10981",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "74ee583d-c95c-4a91-bb0e-d5eacfacc2d7",
+    "loyverseVariantId": "70d5529c-b4fb-49a9-9821-f42e5846d5a0",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "70d5529c-b4fb-49a9-9821-f42e5846d5a0",
+        "sku": "10981",
+        "barcode": "10981SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0601165c-c257-493f-a4ab-fe9353cb5ef3",
+        "sku": "10982",
+        "barcode": "10982SMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7bbc0050-299c-422f-a983-048039d64aad",
+        "sku": "10983",
+        "barcode": "10983MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b02e32c2-2ba5-447a-8ebd-8328c636baaf",
+        "sku": "10984",
+        "barcode": "10984MMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d232bf69-0c90-48aa-82e8-56304dcf8e3d",
+        "sku": "10985",
+        "barcode": "10985LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "905a872a-9218-441d-8517-3039e2d2a596",
+        "sku": "10986",
+        "barcode": "10986LMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9a9e51b3-5aab-410b-b48e-a5a022c14ad1",
+        "sku": "10987",
+        "barcode": "10987XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1426f9a4-7a71-47c1-8f21-8cdf69a06daf",
+        "sku": "10988",
+        "barcode": "10988XLMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "MoraLeche"
+    ]
+  },
+  {
+    "id": "0f1692b8-fd91-46b8-b6a0-2c4752ae92fc",
+    "name": "FORGED IN CHAOS • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/0f1692b8-fd91-46b8-b6a0-2c4752ae92fc",
+    "images": [
+      "https://api.loyverse.com/image/0f1692b8-fd91-46b8-b6a0-2c4752ae92fc"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10973",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "0f1692b8-fd91-46b8-b6a0-2c4752ae92fc",
+    "loyverseVariantId": "82b1d4d2-2780-46b7-9f9c-3a601bd34a40",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "82b1d4d2-2780-46b7-9f9c-3a601bd34a40",
+        "sku": "10973",
+        "barcode": "10973SCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "a59cdeef-9640-4acc-bcfe-83e3b4b4d110",
+        "sku": "10974",
+        "barcode": "10974SGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "869e85fa-6b01-4496-b34b-3874d9a4d99e",
+        "sku": "10975",
+        "barcode": "10975MCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ba52f09e-bfe7-4747-8e8d-a7e911bcccd0",
+        "sku": "10976",
+        "barcode": "10976MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c7239cbd-c8be-4589-b90d-7b08ffcc3cd3",
+        "sku": "10977",
+        "barcode": "10977LCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "72f9cd2d-cd23-4abd-9c21-6dc386c7fae7",
+        "sku": "10978",
+        "barcode": "10978LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "31979f34-f363-43d4-9888-047dd52ca039",
+        "sku": "10979",
+        "barcode": "10979XLCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0f99d506-4d2d-43e2-9e42-631db4b0a3db",
+        "sku": "10980",
+        "barcode": "10980XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre",
+      "Gris"
+    ]
+  },
+  {
+    "id": "53485099-2953-46b9-9219-555841b9df6e",
+    "name": "FORGED IN CHAOS • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/53485099-2953-46b9-9219-555841b9df6e",
+    "images": [
+      "https://api.loyverse.com/image/53485099-2953-46b9-9219-555841b9df6e"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10963",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "53485099-2953-46b9-9219-555841b9df6e",
+    "loyverseVariantId": "f17d2a05-18a3-4be0-8040-f1dc176e4414",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "f17d2a05-18a3-4be0-8040-f1dc176e4414",
+        "sku": "10963",
+        "barcode": "10963SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dbad796e-c8da-4470-84a7-a507a60573b0",
+        "sku": "10964",
+        "barcode": "10964SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "208345af-52f6-4dcb-813f-227ca5ce862a",
+        "sku": "10965",
+        "barcode": "10965MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "584e669e-f380-498b-bb0e-2bc73eec75a9",
+        "sku": "10966",
+        "barcode": "10966MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "50ee47bf-dd8e-468b-839d-72df4410a820",
+        "sku": "10967",
+        "barcode": "10967LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "01f751d5-660a-46ee-9f4b-07bfae4700b1",
+        "sku": "10968",
+        "barcode": "10968LGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ae77ade0-2eef-4ba5-94f0-d672531c4a72",
+        "sku": "10969",
+        "barcode": "10969XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bbeb47fa-f7af-458e-b7e5-42b4df57305e",
+        "sku": "10970",
+        "barcode": "10970XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "473d7bfe-1f14-47f6-82b6-57a339aca7c7",
+        "sku": "10971",
+        "barcode": "10971XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b757ae57-00af-45dd-96b3-9f60a51a4467",
+        "sku": "10972",
+        "barcode": "10972XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "02fc2488-6c32-4a1b-b677-944610fb4fc3",
+    "name": "SPACE URBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/02fc2488-6c32-4a1b-b677-944610fb4fc3",
+    "images": [
+      "https://api.loyverse.com/image/02fc2488-6c32-4a1b-b677-944610fb4fc3"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10953",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "02fc2488-6c32-4a1b-b677-944610fb4fc3",
+    "loyverseVariantId": "288c2f2a-1773-4727-9fc2-4c8700202416",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "288c2f2a-1773-4727-9fc2-4c8700202416",
+        "sku": "10953",
+        "barcode": "10953SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "057324c9-b8c3-4dea-9fad-c733fc3ac332",
+        "sku": "10954",
+        "barcode": "10954SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9b9345b6-347b-4f22-ba59-00e05403a4f8",
+        "sku": "10955",
+        "barcode": "10955MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2b8db8d5-0211-4dcf-a860-67cb4bbe511b",
+        "sku": "10956",
+        "barcode": "10956MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ef7da711-bf7c-4383-814a-f4b2d14e7687",
+        "sku": "10957",
+        "barcode": "10957LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8b53a3c4-22c3-44f4-8e60-b551274b1804",
+        "sku": "10958",
+        "barcode": "10958LGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c2519ccf-fa95-45b3-8990-09fdef09112f",
+        "sku": "10959",
+        "barcode": "10959XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1fad6055-627e-4fb4-a873-396c79a6772a",
+        "sku": "10960",
+        "barcode": "10960XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7a7cd336-f5d6-4946-bc2e-1b664f20b605",
+        "sku": "10961",
+        "barcode": "10961XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "689d29ca-eb6b-49fa-befc-93e23d7368cd",
+        "sku": "10962",
+        "barcode": "10962XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "de0f9287-dd44-4428-a9e7-4511285ddc42",
+    "name": "URBAN CLUB • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/de0f9287-dd44-4428-a9e7-4511285ddc42",
+    "images": [
+      "https://api.loyverse.com/image/de0f9287-dd44-4428-a9e7-4511285ddc42"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10943",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "de0f9287-dd44-4428-a9e7-4511285ddc42",
+    "loyverseVariantId": "5d0f015c-d16f-4bf2-9f3b-7230048a4095",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5d0f015c-d16f-4bf2-9f3b-7230048a4095",
+        "sku": "10943",
+        "barcode": "10943SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "364e87cb-b3b0-4c9d-944f-7a9e610377d3",
+        "sku": "10944",
+        "barcode": "10944SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cd767483-21da-4c62-ac45-389b19be8302",
+        "sku": "10945",
+        "barcode": "10945MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6a32fea5-9bb9-4a16-8232-5c022565cb2c",
+        "sku": "10946",
+        "barcode": "10946MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9ddebeb2-197d-4479-98cb-1032ffefd637",
+        "sku": "10947",
+        "barcode": "10947LGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6b15d77d-20d9-47b3-bf31-627f06a5746f",
+        "sku": "10948",
+        "barcode": "10948LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8713339f-435a-4119-b5bb-95e2b3b3547c",
+        "sku": "10949",
+        "barcode": "10949XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2198cb63-6527-40b5-9fb1-419b5771f98a",
+        "sku": "10950",
+        "barcode": "10950XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f6808ca5-1da7-483b-b6c4-a707343f7df5",
+        "sku": "10951",
+        "barcode": "10951XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5cacc244-55d4-41f1-b85a-183548de7dc1",
+        "sku": "10952",
+        "barcode": "10952XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "35431a9e-a049-4dec-b1d9-cdad86a58501",
+    "name": "SAVEYOUR • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "10940",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "35431a9e-a049-4dec-b1d9-cdad86a58501",
+    "loyverseVariantId": "f2471aa6-a235-4ee9-9fd9-1ff6bae618b1",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "f2471aa6-a235-4ee9-9fd9-1ff6bae618b1",
+        "sku": "10940",
+        "barcode": "10940UNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "121169f3-2ba1-411c-aa99-eeab36db054f",
+        "sku": "10942",
+        "barcode": "10942UMa",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "U",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "af0120db-b131-4ee3-9fcb-f34712d3c3f0",
+    "name": "BREADSTREET • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "10939",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "af0120db-b131-4ee3-9fcb-f34712d3c3f0",
+    "loyverseVariantId": "71b0dfcf-402a-4b6b-a65c-5bf54229028a",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "71b0dfcf-402a-4b6b-a65c-5bf54229028a",
+        "sku": "10939",
+        "barcode": "10939UNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "428751c8-4dbf-40a6-8795-7e7a35e4a516",
+        "sku": "10941",
+        "barcode": "10941UMa",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "U",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "e6510357-85e4-410f-8685-f546b73b8500",
+    "name": "BREADSTREET • OVERSIZE PEDRERIA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10935",
+    "categoryLabel": "Oversize Pedreria",
+    "loyverseItemId": "e6510357-85e4-410f-8685-f546b73b8500",
+    "loyverseVariantId": "b15d3ad0-4f84-4a52-8d71-21fe9e7f2b00",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b15d3ad0-4f84-4a52-8d71-21fe9e7f2b00",
+        "sku": "10935",
+        "barcode": "10935SNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "12e472a5-5112-433d-95b0-d51070c9fb50",
+        "sku": "10936",
+        "barcode": "10936MNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e6282609-dd50-4338-af7c-980c0f27e0ae",
+        "sku": "10937",
+        "barcode": "10937LNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fe4d07e5-f168-4ec2-a137-8573edd18bc6",
+        "sku": "10938",
+        "barcode": "10938XLNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "7c6c7340-f7c3-4076-aef8-823bbc565f9b",
+    "name": "URBAN CLUB • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/7c6c7340-f7c3-4076-aef8-823bbc565f9b",
+    "images": [
+      "https://api.loyverse.com/image/7c6c7340-f7c3-4076-aef8-823bbc565f9b"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Azul, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10927",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "7c6c7340-f7c3-4076-aef8-823bbc565f9b",
+    "loyverseVariantId": "36625509-4a6a-47db-bc87-fca82aec607a",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "36625509-4a6a-47db-bc87-fca82aec607a",
+        "sku": "10927",
+        "barcode": "10927SAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7d4e46f7-5078-467f-8efe-ad0f7f8df49b",
+        "sku": "10928",
+        "barcode": "10928SGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b2826e45-dc8d-4d1e-b077-57ee572c12a6",
+        "sku": "10929",
+        "barcode": "10929MAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9fbe1ec0-b4ec-42f5-9422-b1796346e039",
+        "sku": "10930",
+        "barcode": "10930MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "49ff8e2a-8eba-4609-8c95-673b376c1b3a",
+        "sku": "10931",
+        "barcode": "10931LAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "23fb6f0a-7d34-4589-8c1c-b0e5c33b0ade",
+        "sku": "10932",
+        "barcode": "10932LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4f9dd2f7-1f70-44f1-b070-17e235ad5502",
+        "sku": "10933",
+        "barcode": "10933XLAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8cd3e113-707c-4544-8848-c8ef14ec79b9",
+        "sku": "10934",
+        "barcode": "10934XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "Gris"
+    ]
+  },
+  {
+    "id": "93138547-0ed7-4708-aeff-e795a7f5d993",
+    "name": "URBAN CLUB • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/93138547-0ed7-4708-aeff-e795a7f5d993",
+    "images": [
+      "https://api.loyverse.com/image/93138547-0ed7-4708-aeff-e795a7f5d993"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "10923",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "93138547-0ed7-4708-aeff-e795a7f5d993",
+    "loyverseVariantId": "bb92fefc-a9c2-489b-b81e-4858664e30fc",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "bb92fefc-a9c2-489b-b81e-4858664e30fc",
+        "sku": "10923",
+        "barcode": "10923SMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "04f38446-1c91-4c66-b1af-f76dcdeb118a",
+        "sku": "10924",
+        "barcode": "10924MMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6b7f4286-0d0f-45a4-a5b5-2125db9e10cc",
+        "sku": "10925",
+        "barcode": "10925LMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "34b4d8ef-428b-4f65-b58d-59a145433f8b",
+        "sku": "10926",
+        "barcode": "10926XLMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil"
+    ]
+  },
+  {
+    "id": "aa42c8ba-0177-4455-9ca7-ac27f7a828f8",
+    "name": "ANGEL MONEY • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/aa42c8ba-0177-4455-9ca7-ac27f7a828f8",
+    "images": [
+      "https://api.loyverse.com/image/aa42c8ba-0177-4455-9ca7-ac27f7a828f8"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Camell. Tallas disponibles: S, M, L, XL.",
+    "sku": "10919",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "aa42c8ba-0177-4455-9ca7-ac27f7a828f8",
+    "loyverseVariantId": "9c6fb07c-c67e-457e-bdf7-9e74cd1c510a",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9c6fb07c-c67e-457e-bdf7-9e74cd1c510a",
+        "sku": "10919",
+        "barcode": "10919SCa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b4eddff9-6b58-4f8d-bca8-d4eaf6295828",
+        "sku": "10920",
+        "barcode": "10920MCa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8501caf8-e49c-4e73-b0be-89f8079ea718",
+        "sku": "10921",
+        "barcode": "10921LCa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "09261f33-fafe-4f39-b74a-99a6fb5ef1a5",
+        "sku": "10922",
+        "barcode": "10922XLCa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camell",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Camell"
+    ]
+  },
+  {
+    "id": "7e9c2a4e-2822-485b-a11f-0667ff55a0a2",
+    "name": "ANGEL MONEY • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/7e9c2a4e-2822-485b-a11f-0667ff55a0a2",
+    "images": [
+      "https://api.loyverse.com/image/7e9c2a4e-2822-485b-a11f-0667ff55a0a2"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, MoraLeche. Tallas disponibles: S, M, L, XL.",
+    "sku": "10911",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "7e9c2a4e-2822-485b-a11f-0667ff55a0a2",
+    "loyverseVariantId": "7d86ba06-4fa7-4a57-b32b-16189e28e969",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "7d86ba06-4fa7-4a57-b32b-16189e28e969",
+        "sku": "10911",
+        "barcode": "10911SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6df0ce55-b0f1-421a-898a-1b77e92ae4b0",
+        "sku": "10912",
+        "barcode": "10912SMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0266ed6c-9d81-44fe-be46-64864e83a67f",
+        "sku": "10913",
+        "barcode": "10913MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9bf30d13-6d09-49ef-b784-f35602ab51ac",
+        "sku": "10914",
+        "barcode": "10914MMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8c7f739d-dbcd-45ff-94e2-8079542cc2ff",
+        "sku": "10915",
+        "barcode": "10915LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0ac496c2-7381-414e-a00e-cd91d2fd1718",
+        "sku": "10916",
+        "barcode": "10916LMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3c8fbdcb-1925-40ea-a3af-15f0241a1c31",
+        "sku": "10917",
+        "barcode": "10917XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f90a87a4-dc55-4a27-af95-1a7e5e5623c4",
+        "sku": "10918",
+        "barcode": "10918XLMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "MoraLeche"
+    ]
+  },
+  {
+    "id": "c6b55134-f64c-4aaa-88f7-e6e4455cf262",
+    "name": "ANGEL MONEY • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/c6b55134-f64c-4aaa-88f7-e6e4455cf262",
+    "images": [
+      "https://api.loyverse.com/image/c6b55134-f64c-4aaa-88f7-e6e4455cf262"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10906",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "c6b55134-f64c-4aaa-88f7-e6e4455cf262",
+    "loyverseVariantId": "dadd19cc-5393-4df2-9d09-c26c7ac59455",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "dadd19cc-5393-4df2-9d09-c26c7ac59455",
+        "sku": "10906",
+        "barcode": "10906SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b0db9145-809c-44cc-95d4-71daa5ccdaff",
+        "sku": "10907",
+        "barcode": "10907MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d9640da7-2040-4380-8051-75bb910e892f",
+        "sku": "10908",
+        "barcode": "10908LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ebfbe6dc-d146-4aa2-9a93-83a9b38cc281",
+        "sku": "10909",
+        "barcode": "10909XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "77df65e0-8e33-49cf-9f81-8804ace553ba",
+        "sku": "10910",
+        "barcode": "10910XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "9c17f9fa-9196-4ce1-9fe2-d4dfc4668251",
+    "name": "SAVEYOUR • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/9c17f9fa-9196-4ce1-9fe2-d4dfc4668251",
+    "images": [
+      "https://api.loyverse.com/image/9c17f9fa-9196-4ce1-9fe2-d4dfc4668251"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Rosa, Cobre, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10886",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "9c17f9fa-9196-4ce1-9fe2-d4dfc4668251",
+    "loyverseVariantId": "02dcaa58-b5c0-47c5-94c8-5c93a55bc31e",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "02dcaa58-b5c0-47c5-94c8-5c93a55bc31e",
+        "sku": "10886",
+        "barcode": "10886SRo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "S",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e191a775-080a-4c5b-b541-1f84c518b81c",
+        "sku": "10895",
+        "barcode": "10895SCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "38654211-f30e-4d9d-aa57-9e44d85e7218",
+        "sku": "10896",
+        "barcode": "10896SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a4a70c84-8daf-42a5-9c1d-45a699739249",
+        "sku": "10897",
+        "barcode": "10897MRo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "M",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9977906c-4c59-4372-8ba2-d0a8f4fc1f6d",
+        "sku": "10898",
+        "barcode": "10898MCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "32194142-ea05-4e58-8e49-755dd1b8410b",
+        "sku": "10899",
+        "barcode": "10899MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b7126178-b6ab-40d1-9f59-c13283d4172f",
+        "sku": "10900",
+        "barcode": "10900LRo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "33261115-3d55-41a2-84e9-0e6207965456",
+        "sku": "10901",
+        "barcode": "10901LCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8637b3ce-6912-418a-93ff-e93c65c0b86d",
+        "sku": "10902",
+        "barcode": "10902LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8ed179c2-2b6b-44ca-93d0-937064708571",
+        "sku": "10903",
+        "barcode": "10903XLRo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4d6cc64e-3d63-4675-9f44-988f9f0d261f",
+        "sku": "10904",
+        "barcode": "10904XLCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "48091518-36dd-4041-b655-ce39a957af38",
+        "sku": "10905",
+        "barcode": "10905XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Rosa",
+      "Cobre",
+      "Negro"
+    ]
+  },
+  {
+    "id": "5ad2614e-7813-4cf7-85d3-2e5a8c6299cb",
+    "name": "SAVEYOUR • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/5ad2614e-7813-4cf7-85d3-2e5a8c6299cb",
+    "images": [
+      "https://api.loyverse.com/image/5ad2614e-7813-4cf7-85d3-2e5a8c6299cb"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "10887",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "5ad2614e-7813-4cf7-85d3-2e5a8c6299cb",
+    "loyverseVariantId": "c1c588bd-d105-49c6-9f2e-ff2d9ce4a634",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c1c588bd-d105-49c6-9f2e-ff2d9ce4a634",
+        "sku": "10887",
+        "barcode": "10887SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "19394832-d941-4806-98ef-167c86b658fe",
+        "sku": "10888",
+        "barcode": "10888SMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "924225f4-a801-44d2-b677-ae7f89529ff9",
+        "sku": "10889",
+        "barcode": "10889MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2934e8b9-2d0d-4d7f-842c-bfd2b591b727",
+        "sku": "10890",
+        "barcode": "10890MMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6beb8ab2-1d16-45fc-a1c9-32890b8d73bb",
+        "sku": "10891",
+        "barcode": "10891LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8dea8405-66fd-4f53-8288-7b3f4e5d6951",
+        "sku": "10892",
+        "barcode": "10892LMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "027bfc46-5ea4-40d7-97aa-e434b86cb9b0",
+        "sku": "10893",
+        "barcode": "10893XLNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0c226afd-4e02-4457-b2ef-ca50d21d4fd6",
+        "sku": "10894",
+        "barcode": "10894XLMa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "39f1fe1e-c8e3-4694-b0e6-0ae5a6316bd8",
+    "name": "SAVEYOUR • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/39f1fe1e-c8e3-4694-b0e6-0ae5a6316bd8",
+    "images": [
+      "https://api.loyverse.com/image/39f1fe1e-c8e3-4694-b0e6-0ae5a6316bd8"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10881",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "39f1fe1e-c8e3-4694-b0e6-0ae5a6316bd8",
+    "loyverseVariantId": "beab3728-388f-4f23-9fff-c9df286fe08e",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "beab3728-388f-4f23-9fff-c9df286fe08e",
+        "sku": "10881",
+        "barcode": "10881SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "231fae55-501c-4ebc-9ab8-5d231cb55b17",
+        "sku": "10882",
+        "barcode": "10882MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "54511799-6a88-49aa-9439-9aaee451ae82",
+        "sku": "10883",
+        "barcode": "10883LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "efb1ee81-ce51-4c49-9335-13ac27b2448a",
+        "sku": "10884",
+        "barcode": "10884XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d5c12a2d-bdc8-46ff-80ba-5176affef19b",
+        "sku": "10885",
+        "barcode": "10885XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "c65163b9-6167-40d2-a4ff-fc6a2824cffb",
+    "name": "OTROS • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/c65163b9-6167-40d2-a4ff-fc6a2824cffb",
+    "images": [
+      "https://api.loyverse.com/image/c65163b9-6167-40d2-a4ff-fc6a2824cffb"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Varios. Tallas disponibles: S, M, L, XL.",
+    "sku": "10877",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "c65163b9-6167-40d2-a4ff-fc6a2824cffb",
+    "loyverseVariantId": "b9d8d0ee-267c-496e-a9d9-ec868e523337",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b9d8d0ee-267c-496e-a9d9-ec868e523337",
+        "sku": "10877",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "S",
+        "color": "Varios",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "105c874c-8b6d-41fa-8db7-c180e9030e64",
+        "sku": "10878",
+        "barcode": "10878MVa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "M",
+        "color": "Varios",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fcd1eee3-8461-41de-a764-eb8dc418486b",
+        "sku": "10879",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "L",
+        "color": "Varios",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2922d750-904c-425b-bf3c-c8a841e9311e",
+        "sku": "10880",
+        "barcode": "10880XLVa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Varios",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Varios"
+    ]
+  },
+  {
+    "id": "a3875dcb-0fe7-4b27-b6c1-46c4e7cca460",
+    "name": "ANGEL YOU CAN • ESQUELETO",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/a3875dcb-0fe7-4b27-b6c1-46c4e7cca460",
+    "images": [
+      "https://api.loyverse.com/image/a3875dcb-0fe7-4b27-b6c1-46c4e7cca460"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Camell, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10869",
+    "categoryLabel": "Esqueleto",
+    "loyverseItemId": "a3875dcb-0fe7-4b27-b6c1-46c4e7cca460",
+    "loyverseVariantId": "6d933523-62e1-4938-8996-164580676322",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6d933523-62e1-4938-8996-164580676322",
+        "sku": "10869",
+        "barcode": "10869SCa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d2440d89-a069-4f32-aa77-2484d4e64b97",
+        "sku": "10870",
+        "barcode": "10870SNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a2974049-95a9-49a6-aa1b-76d4e294dc89",
+        "sku": "10871",
+        "barcode": "10871MCa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2c6ed68f-e5d2-4ea1-a629-0f2762c98aa6",
+        "sku": "10872",
+        "barcode": "10872MNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3f686b40-c0df-4a47-9f5d-23d41800fa73",
+        "sku": "10873",
+        "barcode": "10873LCa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f8073f86-a0c1-472f-8215-b3781e3d0800",
+        "sku": "10874",
+        "barcode": "10874LNe",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "856c5d8b-f9ab-4b60-9e9b-00c871bdb600",
+        "sku": "10875",
+        "barcode": "10875XLCa",
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "45e91f7d-fa32-486b-a7a0-7bc9faeed1ea",
+        "sku": "10876",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Camell",
+      "Negro"
+    ]
+  },
+  {
+    "id": "6ffb575b-9bf6-4d2c-96ef-1a580e24fb6b",
+    "name": "ANGEL YOU CAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/6ffb575b-9bf6-4d2c-96ef-1a580e24fb6b",
+    "images": [
+      "https://api.loyverse.com/image/6ffb575b-9bf6-4d2c-96ef-1a580e24fb6b"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Rosado, Negro, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10857",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "6ffb575b-9bf6-4d2c-96ef-1a580e24fb6b",
+    "loyverseVariantId": "a5100306-0ce8-484e-8be7-a593197480e1",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a5100306-0ce8-484e-8be7-a593197480e1",
+        "sku": "10857",
+        "barcode": "10857SRo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "S",
+        "color": "Rosado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d366a209-0983-497a-9510-18f2f52f5150",
+        "sku": "10858",
+        "barcode": null,
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "223f2de3-de89-4010-a7bd-c5c718a55848",
+        "sku": "10859",
+        "barcode": null,
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "401868c3-d439-445a-826d-e23d2e81cd84",
+        "sku": "10860",
+        "barcode": "10860MRo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "M",
+        "color": "Rosado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "69e893ce-2dee-4532-8f6d-cb6633181ac8",
+        "sku": "10861",
+        "barcode": "10861MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "25eaf09c-b145-422b-91c6-82290ab8b50a",
+        "sku": "10862",
+        "barcode": "10862MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0f07a5d1-abd7-4008-afd5-f68144bf4d6d",
+        "sku": "10863",
+        "barcode": "10863LRo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rosado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2e3a8b69-595b-407f-8b92-2412e5d41dd9",
+        "sku": "10864",
+        "barcode": "10864LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c51c465e-13af-4a6b-91e2-c54bf2294e92",
+        "sku": "10865",
+        "barcode": "10865LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "84307cfa-5f14-4e86-9bd0-ff366030d79e",
+        "sku": "10866",
+        "barcode": "10866XLRo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rosado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6d0adcbc-037b-43e4-8dc0-2d33601331cc",
+        "sku": "10867",
+        "barcode": null,
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2649beac-6d2c-4678-8526-f44dd866876f",
+        "sku": "10868",
+        "barcode": "10868XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Rosado",
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "baf488d2-2044-4684-acff-e40b5ca2ba5c",
+    "name": "ANGEL YOU CAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/baf488d2-2044-4684-acff-e40b5ca2ba5c",
+    "images": [
+      "https://api.loyverse.com/image/baf488d2-2044-4684-acff-e40b5ca2ba5c"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10849",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "baf488d2-2044-4684-acff-e40b5ca2ba5c",
+    "loyverseVariantId": "6080cc01-3c5f-4b37-9bd4-84697a9cb22b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6080cc01-3c5f-4b37-9bd4-84697a9cb22b",
+        "sku": "10849",
+        "barcode": "10849SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b96fdb1a-2448-4715-ba63-c351c3ee5b14",
+        "sku": "10853",
+        "barcode": "10853MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bad7cd2a-1b43-4008-8016-69f79c9e4c68",
+        "sku": "10854",
+        "barcode": "10854LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0d362ba0-e181-418e-86da-a35b13e478e8",
+        "sku": "10855",
+        "barcode": "10855XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4ec778ce-0bc2-4b4a-adad-05123351d081",
+        "sku": "10856",
+        "barcode": "10856XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "219dbb26-191f-40b1-aa0f-aabfc478bb42",
+    "name": "URBAN ONDAS • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/219dbb26-191f-40b1-aa0f-aabfc478bb42",
+    "images": [
+      "https://api.loyverse.com/image/219dbb26-191f-40b1-aa0f-aabfc478bb42"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, XL.",
+    "sku": "10837",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "219dbb26-191f-40b1-aa0f-aabfc478bb42",
+    "loyverseVariantId": "cc195ccb-182e-40fb-9949-d9ab7db923e1",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cc195ccb-182e-40fb-9949-d9ab7db923e1",
+        "sku": "10837",
+        "barcode": "10837SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cd102459-a882-4534-b35a-ceed9b3dde96",
+        "sku": "10838",
+        "barcode": "10838MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3d66bd99-cc24-403f-8092-20166bac6ec3",
+        "sku": "10842",
+        "barcode": "10842XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "049c6187-f80a-417b-acd9-d8b163024148",
+        "sku": "10843",
+        "barcode": "10843XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4d2f85b0-d4eb-491d-a32d-eaf7212895d4",
+        "sku": "10847",
+        "barcode": "10847XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "f1a3ee69-aacc-4b24-8962-3a8dea6e955b",
+    "name": "URBAN ONDAS • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/f1a3ee69-aacc-4b24-8962-3a8dea6e955b",
+    "images": [
+      "https://api.loyverse.com/image/f1a3ee69-aacc-4b24-8962-3a8dea6e955b"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Verde, MoraLeche, Negro, Cobre. Tallas disponibles: S, M, L, XL.",
+    "sku": "10836",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "f1a3ee69-aacc-4b24-8962-3a8dea6e955b",
+    "loyverseVariantId": "6c760b7a-6890-4a09-a5e0-77b5f7cfe2df",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6c760b7a-6890-4a09-a5e0-77b5f7cfe2df",
+        "sku": "10836",
+        "barcode": "10836SGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "88934f45-9fc8-4c25-8942-78957f2cb6f3",
+        "sku": "10839",
+        "barcode": "10839SVe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "aebf4760-053f-495a-a6c7-9dc3300edbda",
+        "sku": "10840",
+        "barcode": "10840SMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "30d597d8-4f91-4b79-9227-7f834b6b6334",
+        "sku": "10841",
+        "barcode": "10841MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d9c19a07-b68c-4068-bbfa-f0ff313ec623",
+        "sku": "10844",
+        "barcode": "10844MVe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "648087c0-0579-4a9e-85a5-e4dde085dda8",
+        "sku": "10845",
+        "barcode": "10845MMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "083e01c8-78cb-4296-8801-efd30cd41e7a",
+        "sku": "10846",
+        "barcode": "10846LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "950106ae-7677-4d26-ada6-b20142cb35bd",
+        "sku": "10848",
+        "barcode": "10848LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b34eca8c-cea4-45f4-9dd5-caa609d7d81d",
+        "sku": "10850",
+        "barcode": "10850LMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ce29fa07-a65a-4555-9968-12cda1863f1e",
+        "sku": "10851",
+        "barcode": "10851XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1daa4577-1c2c-44ec-ae5f-18185781e12d",
+        "sku": "10852",
+        "barcode": "10852XLCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Verde",
+      "MoraLeche",
+      "Negro",
+      "Cobre"
+    ]
+  },
+  {
+    "id": "a384f582-7e6a-44f7-b4d4-b36c82464a23",
+    "name": "URBAN ONDAS • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/a384f582-7e6a-44f7-b4d4-b36c82464a23",
+    "images": [
+      "https://api.loyverse.com/image/a384f582-7e6a-44f7-b4d4-b36c82464a23"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "10831",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "a384f582-7e6a-44f7-b4d4-b36c82464a23",
+    "loyverseVariantId": "97ed579e-5a30-4148-a907-0f7b0e22ee61",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "97ed579e-5a30-4148-a907-0f7b0e22ee61",
+        "sku": "10831",
+        "barcode": "10831uNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "63ccb93a-6193-43eb-82a8-bec78d62f605",
+        "sku": "10835",
+        "barcode": "10835uMa",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "U",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "8d582871-3fcd-493c-bc60-fba7ececddcd",
+    "name": "URBAN ONDAS • BOXI FIT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/8d582871-3fcd-493c-bc60-fba7ececddcd",
+    "images": [
+      "https://api.loyverse.com/image/8d582871-3fcd-493c-bc60-fba7ececddcd"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L.",
+    "sku": "10576",
+    "categoryLabel": "Boxi Fit",
+    "loyverseItemId": "8d582871-3fcd-493c-bc60-fba7ececddcd",
+    "loyverseVariantId": "dee7ea31-c526-40a6-bbc4-3a39dd0ee823",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "dee7ea31-c526-40a6-bbc4-3a39dd0ee823",
+        "sku": "10576",
+        "barcode": "10576SMa",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2f8f7559-097b-44f7-b9c4-cd3bd13e6f69",
+        "sku": "10830",
+        "barcode": "10830SNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1ce5ca76-8022-4d10-8746-32b45c3ac819",
+        "sku": "10832",
+        "barcode": "10832MNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1d0066a1-e99d-4dd6-a63e-269e6e310c24",
+        "sku": "10833",
+        "barcode": null,
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d5620d35-ff51-4edb-89ff-4fc52b347e12",
+        "sku": "10834",
+        "barcode": "10834LNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "d6cc5e74-fffe-48ab-bd86-7d070b545e6d",
+    "name": "OTROS • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10829",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "d6cc5e74-fffe-48ab-bd86-7d070b545e6d",
+    "loyverseVariantId": "b46448c9-a6ab-4c68-8f6d-e4773953372b",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b46448c9-a6ab-4c68-8f6d-e4773953372b",
+        "sku": "10829",
+        "barcode": "10829L/XLNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "68962ab5-6e8d-494d-b8a1-5d8f162fac3d",
+    "name": "URBAN GOD • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/68962ab5-6e8d-494d-b8a1-5d8f162fac3d",
+    "images": [
+      "https://api.loyverse.com/image/68962ab5-6e8d-494d-b8a1-5d8f162fac3d"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cobre, Negro. Tallas disponibles: M, L, XL.",
+    "sku": "10823",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "68962ab5-6e8d-494d-b8a1-5d8f162fac3d",
+    "loyverseVariantId": "690180e8-f893-43b9-ac9e-3b3edbbb2b7b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "690180e8-f893-43b9-ac9e-3b3edbbb2b7b",
+        "sku": "10823",
+        "barcode": "10823MCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4045d3e2-bbbd-44e0-9f7f-426a5a13caa1",
+        "sku": "10824",
+        "barcode": "10824MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f990e100-3a6b-4ed8-b645-86fc2d50f78e",
+        "sku": "10825",
+        "barcode": "10825LCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b18ab75b-d963-4c44-8354-58cac7ecafeb",
+        "sku": "10826",
+        "barcode": "10826LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1ee8e1b8-1dba-4c3a-8cf5-f42a7d8c26c5",
+        "sku": "10827",
+        "barcode": "10827XLCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "99b7689c-a9a0-4612-b1ed-f4d95f6c3219",
+        "sku": "10828",
+        "barcode": "10828XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre",
+      "Negro"
+    ]
+  },
+  {
+    "id": "4989c941-1ab9-4b54-bf74-70f211681c6a",
+    "name": "URBNS CITY • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/4989c941-1ab9-4b54-bf74-70f211681c6a",
+    "images": [
+      "https://api.loyverse.com/image/4989c941-1ab9-4b54-bf74-70f211681c6a"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Azul. Tallas disponibles: S, M, L, XL.",
+    "sku": "10805",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "4989c941-1ab9-4b54-bf74-70f211681c6a",
+    "loyverseVariantId": "bdf2d61e-f733-486a-864f-33747382edfd",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "bdf2d61e-f733-486a-864f-33747382edfd",
+        "sku": "10805",
+        "barcode": "10805SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "28fde032-6caf-4671-8537-4483246c6534",
+        "sku": "10808",
+        "barcode": "10808SAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b3e76c76-6af8-4ce2-9a62-97d2c73d3aa1",
+        "sku": "10811",
+        "barcode": "10811MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "53d43fdd-8e93-4db6-b74c-5016b0e59966",
+        "sku": "10814",
+        "barcode": "10814MAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "027cfa8b-83cd-4f39-a9e1-dea1b2664324",
+        "sku": "10817",
+        "barcode": "10817LGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5c52f292-b870-4cbc-a83f-29ca231fa64f",
+        "sku": "10818",
+        "barcode": "10818LAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fa5795a1-433f-487f-81d1-83497625dfc3",
+        "sku": "10819",
+        "barcode": "10819XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6dee763f-3d44-4e2d-a6b9-746d9b4819ba",
+        "sku": "10820",
+        "barcode": "10820XLAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b3fb083f-482c-40d0-a2ed-e777697ba4bd",
+        "sku": "10821",
+        "barcode": "10821XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "23f7c58e-8c97-4192-91d3-00e2470cf414",
+        "sku": "10822",
+        "barcode": "10822XXLAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Azul",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Azul"
+    ]
+  },
+  {
+    "id": "25f246e2-c7c8-4146-a4c5-515137604a93",
+    "name": "URBAN GOD • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/25f246e2-c7c8-4146-a4c5-515137604a93",
+    "images": [
+      "https://api.loyverse.com/image/25f246e2-c7c8-4146-a4c5-515137604a93"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Azul, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10803",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "25f246e2-c7c8-4146-a4c5-515137604a93",
+    "loyverseVariantId": "ddc0b3c0-1a31-4fbc-bb2f-1d0df782550d",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "ddc0b3c0-1a31-4fbc-bb2f-1d0df782550d",
+        "sku": "10803",
+        "barcode": "10803SAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cd446aef-e90b-4c23-a5e5-95c744877637",
+        "sku": "10804",
+        "barcode": "10804SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0db79b86-48a7-4d42-b39f-e82cd49bcb7c",
+        "sku": "10806",
+        "barcode": "10806MAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "af48a750-8573-4a8e-ae57-d95c345bc119",
+        "sku": "10807",
+        "barcode": "10807MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "81260dd2-797f-42f8-8e5b-54b0a549aaff",
+        "sku": "10809",
+        "barcode": "10809LAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6962fe95-655e-43f8-bd5e-6778ea889031",
+        "sku": "10810",
+        "barcode": "10810LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6869d4d2-6f62-4ac1-af63-e79e87fbcd7b",
+        "sku": "10812",
+        "barcode": "10812XLAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "85a4d845-746d-4e58-aabe-c3f646fa3ea6",
+        "sku": "10813",
+        "barcode": "10813XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bf46f301-462e-4626-ab57-bc59ea3d164c",
+        "sku": "10815",
+        "barcode": "10815XXLAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "75de45d0-49c0-4ac9-bc5c-9cc893535a5f",
+        "sku": "10816",
+        "barcode": "10816XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "Negro"
+    ]
+  },
+  {
+    "id": "a11c58b8-1e6a-4ad7-a3a0-275123f56e22",
+    "name": "MINIMALIST • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/a11c58b8-1e6a-4ad7-a3a0-275123f56e22",
+    "images": [
+      "https://api.loyverse.com/image/a11c58b8-1e6a-4ad7-a3a0-275123f56e22"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "10801",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "a11c58b8-1e6a-4ad7-a3a0-275123f56e22",
+    "loyverseVariantId": "7d65d15d-8083-434c-9427-5df823a7bb62",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "7d65d15d-8083-434c-9427-5df823a7bb62",
+        "sku": "10801",
+        "barcode": "10801UNe",
+        "price": 0,
+        "cost": 29500,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cf7d5858-a70b-42ab-a6a7-5f697f5828e0",
+        "sku": "10802",
+        "barcode": "10802UMa",
+        "price": 0,
+        "cost": 29500,
+        "option1_value": "U",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "U",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "6aae6b79-1ca2-4fb8-ae74-233239c50d22",
+    "name": "MINIMALIST • BOXI FIT",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/6aae6b79-1ca2-4fb8-ae74-233239c50d22",
+    "images": [
+      "https://api.loyverse.com/image/6aae6b79-1ca2-4fb8-ae74-233239c50d22"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L.",
+    "sku": "10792",
+    "categoryLabel": "Boxi Fit",
+    "loyverseItemId": "6aae6b79-1ca2-4fb8-ae74-233239c50d22",
+    "loyverseVariantId": "9724302d-c064-4290-abe8-b2e2f4e7484f",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9724302d-c064-4290-abe8-b2e2f4e7484f",
+        "sku": "10792",
+        "barcode": "10792SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "80e5a54c-d3f8-4f92-8f56-59e2c8ee843c",
+        "sku": "10794",
+        "barcode": "10794SMa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f23e6c98-155b-4773-8d55-7648b0cfe7af",
+        "sku": "10796",
+        "barcode": "10796MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dcbfa398-9a9c-4063-bafb-2d0d48a33047",
+        "sku": "10798",
+        "barcode": "10798MMa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2e377ff9-7a6b-40e0-9ed6-84645795d3ea",
+        "sku": "10799",
+        "barcode": "10799LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3e0c00e9-c72b-4568-b1b7-3c1d75733272",
+        "sku": "10800",
+        "barcode": "10800LMa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "42a194a2-5e7c-4ff8-a19f-663aa301a89f",
+    "name": "CLASSIC • OVERSIZE PEDRERIA",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10783",
+    "categoryLabel": "Oversize Pedreria",
+    "loyverseItemId": "42a194a2-5e7c-4ff8-a19f-663aa301a89f",
+    "loyverseVariantId": "d6f76eb8-9e73-4eea-9b29-4a342d2de333",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d6f76eb8-9e73-4eea-9b29-4a342d2de333",
+        "sku": "10783",
+        "barcode": "10783SNe",
+        "price": 0,
+        "cost": 35800,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0dc8ca86-e2ce-4679-a693-a2edea2dceb2",
+        "sku": "10785",
+        "barcode": "10785MNe",
+        "price": 0,
+        "cost": 35800,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "86dbda9b-95e1-4ef0-8981-dc0163850420",
+        "sku": "10787",
+        "barcode": "10787LNe",
+        "price": 0,
+        "cost": 35800,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "89e95a0b-f627-4556-accb-4a1ca024e7e5",
+        "sku": "10788",
+        "barcode": "10788XLNe",
+        "price": 0,
+        "cost": 35800,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "d0f94cc1-2260-48f0-9ce0-88981158b2a5",
+        "sku": "10790",
+        "barcode": "10790UNe",
+        "price": 0,
+        "cost": 35800,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "25906f6d-81b2-47ab-8f2e-7f512979635d",
+    "name": "ALL THINGS URBAN • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/25906f6d-81b2-47ab-8f2e-7f512979635d",
+    "images": [
+      "https://api.loyverse.com/image/25906f6d-81b2-47ab-8f2e-7f512979635d"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10779",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "25906f6d-81b2-47ab-8f2e-7f512979635d",
+    "loyverseVariantId": "0ab58a4b-101f-446e-bef2-edb83c9be771",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "0ab58a4b-101f-446e-bef2-edb83c9be771",
+        "sku": "10779",
+        "barcode": "10779UMa",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "U",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8467722b-7c3a-412d-b24e-0506618e12af",
+        "sku": "10781",
+        "barcode": "10781UNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "1a798779-4003-4d50-b078-0f66a0d3e582",
+    "name": "ALL THINGS URBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/1a798779-4003-4d50-b078-0f66a0d3e582",
+    "images": [
+      "https://api.loyverse.com/image/1a798779-4003-4d50-b078-0f66a0d3e582"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Azul, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10778",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "1a798779-4003-4d50-b078-0f66a0d3e582",
+    "loyverseVariantId": "5c4ed113-e115-4b2a-8afc-b1082c29ec79",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5c4ed113-e115-4b2a-8afc-b1082c29ec79",
+        "sku": "10778",
+        "barcode": "10778SAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f1bfef92-794f-42f6-9961-ca14811cf349",
+        "sku": "10789",
+        "barcode": "10789SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cfe582d6-d72e-4dd5-97d0-93e9e9d0fe83",
+        "sku": "10780",
+        "barcode": "10780MAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "011d8e7c-9b2f-41d3-ab2e-5bc754b8a3c6",
+        "sku": "10791",
+        "barcode": "10791MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e70dc6df-7419-4d01-9e7e-07c22a505e73",
+        "sku": "10782",
+        "barcode": "10782LAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f573dd44-3061-40bc-8a53-296b811760a9",
+        "sku": "10793",
+        "barcode": "10793LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2c8bd9ab-894e-4acd-b975-a97ae3fa0ddb",
+        "sku": "10784",
+        "barcode": "10784XLAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "86f2e29b-741f-43e0-be08-a0ac807b5656",
+        "sku": "10795",
+        "barcode": "10795XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "171e53d8-aa2d-488f-bc3a-ca5f932bfda6",
+        "sku": "10786",
+        "barcode": "10786XXLAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8a2512dc-8ee8-4ca3-a49b-1221c3760598",
+        "sku": "10797",
+        "barcode": "10797XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "Negro"
+    ]
+  },
+  {
+    "id": "ccdfc9e2-ca04-437b-8c83-e4d8d7d6fa7a",
+    "name": "ALL THINGS URBAN • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/ccdfc9e2-ca04-437b-8c83-e4d8d7d6fa7a",
+    "images": [
+      "https://api.loyverse.com/image/ccdfc9e2-ca04-437b-8c83-e4d8d7d6fa7a"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Azul, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10770",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "ccdfc9e2-ca04-437b-8c83-e4d8d7d6fa7a",
+    "loyverseVariantId": "cc8992d3-5e32-4589-8014-1375e11b26f5",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cc8992d3-5e32-4589-8014-1375e11b26f5",
+        "sku": "10770",
+        "barcode": "10770SAz",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "2939c1a7-6bb3-4c0d-ac24-3db0b43d6c1c",
+        "sku": "10771",
+        "barcode": "10771SNe",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f573d0d3-ed24-4304-8236-db91383cfecc",
+        "sku": "10772",
+        "barcode": "10772MAz",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1595c138-a295-460d-ba29-b2782c8a5659",
+        "sku": "10773",
+        "barcode": "10773MNe",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e47e2ee5-7188-4759-acac-3b82d17e6810",
+        "sku": "10774",
+        "barcode": "10774LAz",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6e7cfc3f-2d72-488d-8e21-331baca36666",
+        "sku": "10775",
+        "barcode": "10775LNe",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e5509cec-5d7f-43e7-acf0-9d31b7f8e610",
+        "sku": "10776",
+        "barcode": "10776XLAz",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "81943ac2-70d4-4087-8094-fb9254470b45",
+        "sku": "10777",
+        "barcode": "10777XLNe",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "Negro"
+    ]
+  },
+  {
+    "id": "6df4655f-c470-4bb4-b09a-15f7b9d57d8f",
+    "name": "ALL THINGS URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/6df4655f-c470-4bb4-b09a-15f7b9d57d8f",
+    "images": [
+      "https://api.loyverse.com/image/6df4655f-c470-4bb4-b09a-15f7b9d57d8f"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Azul, MoraLeche, Negro, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10749",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "6df4655f-c470-4bb4-b09a-15f7b9d57d8f",
+    "loyverseVariantId": "ee1db730-27a4-4e1b-bb03-c9372f00c612",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "ee1db730-27a4-4e1b-bb03-c9372f00c612",
+        "sku": "10749",
+        "barcode": "10749SAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a4ad4a09-a45a-47d0-af78-ae35c4cec538",
+        "sku": "10750",
+        "barcode": "10750SMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "91977221-6f46-4773-b2ee-5f9cc84d8fc8",
+        "sku": "10751",
+        "barcode": "10751SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "aa074be4-df0a-45a8-9518-a9948eed4d83",
+        "sku": "10752",
+        "barcode": "10752SGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "0c76869f-9abb-49e0-9249-7f252c7bcef8",
+        "sku": "10753",
+        "barcode": "10753MAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0fe83fc4-e446-4413-9f7e-d354f058d200",
+        "sku": "10759",
+        "barcode": "10759MMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1cb580d7-0f02-48e0-9531-74293dc4ae04",
+        "sku": "10760",
+        "barcode": "10760MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8ac7b0fd-7f41-4d51-a53f-bf7a7a20b69d",
+        "sku": "10761",
+        "barcode": "10761MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "60b38b6b-3417-49b6-a3f7-c531a9c6f5b6",
+        "sku": "10762",
+        "barcode": "10762LAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e24e662e-b7da-44ca-a9f5-0e6e9f507232",
+        "sku": "10763",
+        "barcode": "10763LMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9d52a2a0-b73d-4525-b3ad-44ebca992cb2",
+        "sku": "10764",
+        "barcode": "10764LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "59417d3f-2105-4b84-a1e0-8e38708f59fe",
+        "sku": "10765",
+        "barcode": "10765LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f95eccc6-db33-496e-a42e-10bd2d28b0d6",
+        "sku": "10766",
+        "barcode": "10766XLAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "922a95fa-c13f-4fa6-97be-45fbf8d67681",
+        "sku": "10767",
+        "barcode": "10767XLMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2831bc07-cf93-4eb4-bb9b-5bcf2abbae0f",
+        "sku": "10768",
+        "barcode": "10768XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4f4b1919-87f8-47e2-a929-38d8ae6ba2b2",
+        "sku": "10769",
+        "barcode": "10769XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "MoraLeche",
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "d9d692d2-1fc2-458a-a0e2-bf222f80b17e",
+    "name": "URBN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/d9d692d2-1fc2-458a-a0e2-bf222f80b17e",
+    "images": [
+      "https://api.loyverse.com/image/d9d692d2-1fc2-458a-a0e2-bf222f80b17e"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10754",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "d9d692d2-1fc2-458a-a0e2-bf222f80b17e",
+    "loyverseVariantId": "20f791f6-d752-4f39-ab96-31931b4a369f",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "20f791f6-d752-4f39-ab96-31931b4a369f",
+        "sku": "10754",
+        "barcode": "10754SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "087e74da-6762-4de6-8d3d-65011bf132ae",
+        "sku": "10755",
+        "barcode": "10755MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "37b03aab-19ee-49e2-96a9-8e83d83ac334",
+        "sku": "10756",
+        "barcode": "10756LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d9db83f9-7bb5-45a8-8f05-6ddde3eb61e1",
+        "sku": "10757",
+        "barcode": "10757XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bc9ff734-b0a2-445b-83f6-c8e3633958d0",
+        "sku": "10758",
+        "barcode": "10758XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "2e91c7d4-70f1-4649-bfe1-b072075a215b",
+    "name": "MEDITERRÁNEO URBANO • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/2e91c7d4-70f1-4649-bfe1-b072075a215b",
+    "images": [
+      "https://api.loyverse.com/image/2e91c7d4-70f1-4649-bfe1-b072075a215b"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10744",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "2e91c7d4-70f1-4649-bfe1-b072075a215b",
+    "loyverseVariantId": "75d87874-18c2-4347-9063-861f5d0578e2",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "75d87874-18c2-4347-9063-861f5d0578e2",
+        "sku": "10744",
+        "barcode": "10744SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4f1c4ea1-13de-4418-998d-dc36648162fa",
+        "sku": "10745",
+        "barcode": "10745MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e74fea80-63c2-4872-8e8d-4ab6c9ccb1c8",
+        "sku": "10746",
+        "barcode": "10746LGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a15aab67-28d8-4d32-b77d-453f0f6b5d4a",
+        "sku": "10747",
+        "barcode": "10747XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d62a8da0-3d99-4588-8eb3-f45194e674c1",
+        "sku": "10748",
+        "barcode": "10748XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "33e1e9e6-fba4-4185-9b74-325011e355df",
+    "name": "MEDITERRÁNEO URBANO • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/33e1e9e6-fba4-4185-9b74-325011e355df",
+    "images": [
+      "https://api.loyverse.com/image/33e1e9e6-fba4-4185-9b74-325011e355df"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Azul. Tallas disponibles: S, M, L, XL.",
+    "sku": "10733",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "33e1e9e6-fba4-4185-9b74-325011e355df",
+    "loyverseVariantId": "60c90c22-3e0f-44af-95fa-4f116c054f07",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "60c90c22-3e0f-44af-95fa-4f116c054f07",
+        "sku": "10733",
+        "barcode": "10733SGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c8fc0cc0-579e-495d-992e-c48af6876953",
+        "sku": "10734",
+        "barcode": "10734SAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3f416efd-274c-4cbd-a9fc-a95e086e1f67",
+        "sku": "10736",
+        "barcode": "10735MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8cf5340b-a9c2-4cbf-bf93-81eaad100035",
+        "sku": "10737",
+        "barcode": "10736MAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "72d30ee9-1ee1-4fcb-8b1b-75ceca5e1c3c",
+        "sku": "10739",
+        "barcode": "10737LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9bd4da74-ac3e-4d0a-9d02-4183368a3604",
+        "sku": "10740",
+        "barcode": "10738LAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1cab5095-3128-4a7a-99d0-f5c36ae6dd9f",
+        "sku": "10742",
+        "barcode": "10739XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "90a34fcd-5615-49f1-89d9-20a50c7da1a9",
+        "sku": "10743",
+        "barcode": "10740XLAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Azul"
+    ]
+  },
+  {
+    "id": "87bb7980-d905-483e-9a69-13311b300d33",
+    "name": "STREETWEAR • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negra. Tallas disponibles: S, M, L, XL.",
+    "sku": "10731",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "87bb7980-d905-483e-9a69-13311b300d33",
+    "loyverseVariantId": "7a56f0d4-3de5-4fc5-b5a1-1851b5115b04",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "7a56f0d4-3de5-4fc5-b5a1-1851b5115b04",
+        "sku": "10731",
+        "barcode": "10731UMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "U",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "U",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "84ce972a-3449-46df-8b42-5c9c5277064b",
+        "sku": "11546",
+        "barcode": "11546UNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "U",
+        "option2_value": "Negra",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negra",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negra"
+    ]
+  },
+  {
+    "id": "13dbce4b-966d-45ef-9026-9b4ed66826f7",
+    "name": "CHILDREN • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, AzulBB. Tallas disponibles: S, M, L, XL.",
+    "sku": "10729",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "13dbce4b-966d-45ef-9026-9b4ed66826f7",
+    "loyverseVariantId": "e4c33d57-9c6f-4368-a279-1ee5667ce9a9",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e4c33d57-9c6f-4368-a279-1ee5667ce9a9",
+        "sku": "10729",
+        "barcode": "10729UMa",
+        "price": 0,
+        "cost": 24500,
+        "option1_value": "U",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "U",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e7bbd8bd-344a-4ff3-8266-7ff2147499ea",
+        "sku": "10730",
+        "barcode": "10730UAz",
+        "price": 0,
+        "cost": 24500,
+        "option1_value": "U",
+        "option2_value": "AzulBB",
+        "option3_value": null,
+        "size": "U",
+        "color": "AzulBB",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "AzulBB"
+    ]
+  },
+  {
+    "id": "b82ac0e3-f5c8-49fb-b8e4-8d2341672980",
+    "name": "YOUCAN • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10409",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "b82ac0e3-f5c8-49fb-b8e4-8d2341672980",
+    "loyverseVariantId": "b77f30d6-715e-4dce-ae6a-d6a37e9e721b",
+    "stock": 7,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b77f30d6-715e-4dce-ae6a-d6a37e9e721b",
+        "sku": "10409",
+        "barcode": "10409UMa",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "U",
+        "color": "Marfil",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "2409dd77-a5d6-4381-9d74-18cfbee2183e",
+        "sku": "10727",
+        "barcode": "10727UNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "70d3ebbb-dd5e-4938-9072-09cb9f77ebb9",
+    "name": "YOUCAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/70d3ebbb-dd5e-4938-9072-09cb9f77ebb9",
+    "images": [
+      "https://api.loyverse.com/image/70d3ebbb-dd5e-4938-9072-09cb9f77ebb9"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Azul. Tallas disponibles: S, M, L, XL.",
+    "sku": "10551",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "70d3ebbb-dd5e-4938-9072-09cb9f77ebb9",
+    "loyverseVariantId": "c699e5f2-e1c6-4226-8aed-8cc359c0e975",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c699e5f2-e1c6-4226-8aed-8cc359c0e975",
+        "sku": "10551",
+        "barcode": "10551SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fb1d744e-4348-4957-9aa1-c766861fd0f7",
+        "sku": "10678",
+        "barcode": "10678SAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e5055e8c-54dd-4338-9d0c-f5c68917f603",
+        "sku": "10713",
+        "barcode": "10713MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1abff84f-b309-4b53-bb20-9d0868858120",
+        "sku": "10722",
+        "barcode": "10722MAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "099e08ca-4e83-4599-b0d4-18c3e47a0a3b",
+        "sku": "10723",
+        "barcode": "10723LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "608afced-59b5-4144-9628-4bdafd5c61a9",
+        "sku": "10724",
+        "barcode": "10724LAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c7d92428-9c3a-4001-a01d-c48d20d004a4",
+        "sku": "10726",
+        "barcode": "10726XLAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0bc489cf-6981-4bae-9609-a8ede8ca1981",
+        "sku": "10728",
+        "barcode": "10728XXLAz",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Azul",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Azul"
+    ]
+  },
+  {
+    "id": "fb7d0860-51a3-4ddd-8ad6-73c17c12982b",
+    "name": "YOUCAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/fb7d0860-51a3-4ddd-8ad6-73c17c12982b",
+    "images": [
+      "https://api.loyverse.com/image/fb7d0860-51a3-4ddd-8ad6-73c17c12982b"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Cobre. Tallas disponibles: S, XL, M.",
+    "sku": "10550",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "fb7d0860-51a3-4ddd-8ad6-73c17c12982b",
+    "loyverseVariantId": "9364c213-e145-40a5-aadc-c97133555d7e",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9364c213-e145-40a5-aadc-c97133555d7e",
+        "sku": "10550",
+        "barcode": "10550SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b7c84f86-61db-48cb-adb1-5877123c5621",
+        "sku": "10552",
+        "barcode": "10552XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7dd3a99a-b0c0-405b-bf3e-76f702d84d3e",
+        "sku": "10553",
+        "barcode": "10553XLCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "461133eb-338f-4527-9673-dc8420178355",
+        "sku": "10554",
+        "barcode": "10554MCo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "XL",
+      "M"
+    ],
+    "availableColors": [
+      "Negro",
+      "Cobre"
+    ]
+  },
+  {
+    "id": "be10ad63-fd32-4a9a-a447-77f9d22fed4d",
+    "name": "YOUCAN • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/be10ad63-fd32-4a9a-a447-77f9d22fed4d",
+    "images": [
+      "https://api.loyverse.com/image/be10ad63-fd32-4a9a-a447-77f9d22fed4d"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L, XL.",
+    "sku": "10410",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "be10ad63-fd32-4a9a-a447-77f9d22fed4d",
+    "loyverseVariantId": "714c0f70-1bfe-4c3c-a8d7-9423c545f777",
+    "stock": 6,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "714c0f70-1bfe-4c3c-a8d7-9423c545f777",
+        "sku": "10410",
+        "barcode": "10410SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f4aadd9f-fe55-4f61-bf6d-cbf491b350e7",
+        "sku": "10411",
+        "barcode": "10411SMa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "e8a2a356-8ad2-424d-ac50-a3c38f20146b",
+        "sku": "10480",
+        "barcode": "10480MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fb6ca8c9-725f-4d97-a48c-127bbee77674",
+        "sku": "10481",
+        "barcode": "10481MMa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2dcc0a41-7a6d-4284-8d2d-a53b09f4e966",
+        "sku": "10482",
+        "barcode": "10482LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "57d39d93-7481-40b9-b68f-b7187ac7bccd",
+        "sku": "10483",
+        "barcode": "10483LMa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "2b2150a9-3948-4dad-8da2-4b9966511ba7",
+        "sku": "10504",
+        "barcode": "10504XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d0002bf2-64e6-430b-9aee-ffa39c0b97f0",
+        "sku": "10505",
+        "barcode": "10505XLMa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "aa788241-419f-4c52-b206-ce420b23149f",
+    "name": "CHILDREN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/aa788241-419f-4c52-b206-ce420b23149f",
+    "images": [
+      "https://api.loyverse.com/image/aa788241-419f-4c52-b206-ce420b23149f"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Verde. Tallas disponibles: M, L, XL, S.",
+    "sku": "10404",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "aa788241-419f-4c52-b206-ce420b23149f",
+    "loyverseVariantId": "4cd18dcc-b5b3-44ff-aef9-6197bb770236",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "4cd18dcc-b5b3-44ff-aef9-6197bb770236",
+        "sku": "10404",
+        "barcode": "10404MGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cb0bc555-70d2-4140-8b7c-c495d8b23f94",
+        "sku": "10405",
+        "barcode": "10405MVe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bce7fb3c-2d80-4b2d-bce4-4fd8231310da",
+        "sku": "10406",
+        "barcode": "10406LGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9e8ffb6c-66f8-4719-9ec1-1a168c2a26e6",
+        "sku": "10407",
+        "barcode": "10407LVe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "49fb7f93-1c73-40dc-ad20-8aa12c8c1c7b",
+        "sku": "10408",
+        "barcode": "10408XLGr",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "aad9f225-c965-4ede-b53d-8d33eca036bf",
+        "sku": "10725",
+        "barcode": "10725SVe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "M",
+      "L",
+      "XL",
+      "S"
+    ],
+    "availableColors": [
+      "Gris",
+      "Verde"
+    ]
+  },
+  {
+    "id": "0b3b820e-e33d-4f79-89a9-e13f937f8e9b",
+    "name": "CHILDREN • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/0b3b820e-e33d-4f79-89a9-e13f937f8e9b",
+    "images": [
+      "https://api.loyverse.com/image/0b3b820e-e33d-4f79-89a9-e13f937f8e9b"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, AzulBB. Tallas disponibles: S, M, L, XL.",
+    "sku": "10300",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "0b3b820e-e33d-4f79-89a9-e13f937f8e9b",
+    "loyverseVariantId": "58c8b01b-94d8-44a2-a804-f52fe6732179",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "58c8b01b-94d8-44a2-a804-f52fe6732179",
+        "sku": "10300",
+        "barcode": "10300SMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2e4c0d29-0896-4644-890e-d54f8a1f3ce4",
+        "sku": "10305",
+        "barcode": "10305SAz",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "AzulBB",
+        "option3_value": null,
+        "size": "S",
+        "color": "AzulBB",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "34f7e612-2ed1-4b33-9237-9cf0cac2ece2",
+        "sku": "10306",
+        "barcode": "10306MMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7da28e57-93cb-44c2-976d-398d2fc77396",
+        "sku": "10307",
+        "barcode": "10307MAz",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "AzulBB",
+        "option3_value": null,
+        "size": "M",
+        "color": "AzulBB",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7b65278a-8576-45b4-a50d-068f229244ad",
+        "sku": "10340",
+        "barcode": "10340LMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "36428c50-5d75-47a1-b291-015602c41a49",
+        "sku": "10341",
+        "barcode": "10341LAz",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "AzulBB",
+        "option3_value": null,
+        "size": "L",
+        "color": "AzulBB",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "faad985b-dd1b-4596-8ee8-d907e804bc14",
+        "sku": "10342",
+        "barcode": "10342XLMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a843a586-3fd5-428e-b3de-50423b5d8eed",
+        "sku": "10343",
+        "barcode": "10343XLAz",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "AzulBB",
+        "option3_value": null,
+        "size": "XL",
+        "color": "AzulBB",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "AzulBB"
+    ]
+  },
+  {
+    "id": "435dd600-886b-4f09-8e6a-199f65cd6948",
+    "name": "FACEURBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/435dd600-886b-4f09-8e6a-199f65cd6948",
+    "images": [
+      "https://api.loyverse.com/image/435dd600-886b-4f09-8e6a-199f65cd6948"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Azul, MoraLeche, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10714",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "435dd600-886b-4f09-8e6a-199f65cd6948",
+    "loyverseVariantId": "a3c3b3e0-bb5b-4849-a059-578e93f5428e",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a3c3b3e0-bb5b-4849-a059-578e93f5428e",
+        "sku": "10714",
+        "barcode": "10714SAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "33a9f9d3-0330-425a-8e22-fb8f3151888e",
+        "sku": "10715",
+        "barcode": "10715SMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "272e570b-a102-4f53-a3c2-a7d821a4fe39",
+        "sku": "10716",
+        "barcode": "10716MAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "72c1a5c1-b887-4b08-b7a0-25acc1668d38",
+        "sku": "10717",
+        "barcode": "10717MMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c2365d14-66b5-4c3f-a54e-f6f316d8ea30",
+        "sku": "10718",
+        "barcode": "10718LAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1b62b315-bb79-4f3f-90b8-cfb34545d9cf",
+        "sku": "10719",
+        "barcode": "10719LMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3bb04185-302f-4b82-96ab-43dbb998e872",
+        "sku": "10720",
+        "barcode": "10720XLAz",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "37fd74ab-6ccc-49ee-9db7-02e95f055ebe",
+        "sku": "10721",
+        "barcode": "10721XLMo",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8df33da9-f666-49ae-b75e-060fe2e2c4da",
+        "sku": "10732",
+        "barcode": "10732SNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b4fc990b-9168-4587-a31d-07aaf811b06a",
+        "sku": "10735",
+        "barcode": "10735MNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6769851a-3765-445e-a12a-6387a66fac7a",
+        "sku": "10738",
+        "barcode": "10738LNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fb03882b-b523-4a74-941f-b90f1d664b3f",
+        "sku": "10741",
+        "barcode": "10741XLNe",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "MoraLeche",
+      "Negro"
+    ]
+  },
+  {
+    "id": "91a940f9-3cd0-409a-832c-d3ddf80cd59c",
+    "name": "FACEURBAN • BOXI FIT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/91a940f9-3cd0-409a-832c-d3ddf80cd59c",
+    "images": [
+      "https://api.loyverse.com/image/91a940f9-3cd0-409a-832c-d3ddf80cd59c"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L.",
+    "sku": "10712",
+    "categoryLabel": "Boxi Fit",
+    "loyverseItemId": "91a940f9-3cd0-409a-832c-d3ddf80cd59c",
+    "loyverseVariantId": "85676dff-c9c0-4eb2-9ca5-2db32b75c272",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "85676dff-c9c0-4eb2-9ca5-2db32b75c272",
+        "sku": "10712",
+        "barcode": "10712SNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9f36dcb1-0a4a-4266-84f6-2f3bf006e0ff",
+        "sku": "10711",
+        "barcode": "10711SMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "42af7feb-90c9-4ad0-858a-364f7e5ab1c2",
+        "sku": "10707",
+        "barcode": "10707MNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f15ff89c-ceb5-4f94-9b12-3f2bca4bb3e5",
+        "sku": "10708",
+        "barcode": "10708MMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "607119bc-24c5-4110-82c7-cd38095f538d",
+        "sku": "10709",
+        "barcode": "10709LNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f8da2d0a-b369-4f3e-a51e-bdba76a17070",
+        "sku": "10710",
+        "barcode": "10710LMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "5d285b55-decf-4982-b113-e3b582f795a1",
+    "name": "FACEURBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/5d285b55-decf-4982-b113-e3b582f795a1",
+    "images": [
+      "https://api.loyverse.com/image/5d285b55-decf-4982-b113-e3b582f795a1"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10660",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "5d285b55-decf-4982-b113-e3b582f795a1",
+    "loyverseVariantId": "cca36349-c847-487c-bab2-65dd21ac79d1",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cca36349-c847-487c-bab2-65dd21ac79d1",
+        "sku": "10660",
+        "barcode": "10660SGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b72109ca-5649-4995-8cfa-22b5badc7d7f",
+        "sku": "10696",
+        "barcode": "10696SNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5f2562e3-c5ed-46fa-8ef2-ead6ed4086ab",
+        "sku": "10699",
+        "barcode": "10699MGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "90cbc8d9-19d4-43e7-959e-f584706663d8",
+        "sku": "10700",
+        "barcode": "10700MNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e8eb83f8-f23e-4244-827c-ac88a36b0ad8",
+        "sku": "10701",
+        "barcode": "10701LGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1aa720a4-4881-4d6a-aaec-3f8b71e359da",
+        "sku": "10702",
+        "barcode": "10702LNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b899de45-ff36-4f4d-97bb-9559766137b5",
+        "sku": "10703",
+        "barcode": "10703XLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "55700713-6c3f-4cd8-bd20-d21ef723a935",
+        "sku": "10704",
+        "barcode": "10704XLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d784d034-1523-4e62-b24a-29278a405014",
+        "sku": "10705",
+        "barcode": "10705XXLGr",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "63d3048b-efde-4e20-bbbe-9267ebb8feec",
+        "sku": "10706",
+        "barcode": "10706XXLNe",
+        "price": 0,
+        "cost": 80600,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Negro"
+    ]
+  },
+  {
+    "id": "343b3a31-aeaf-4365-8a4d-f69a2603f24b",
+    "name": "OTROS • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Varios. Tallas disponibles: S, M, L, XL.",
+    "sku": "10692",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "343b3a31-aeaf-4365-8a4d-f69a2603f24b",
+    "loyverseVariantId": "c2ecc842-675a-46ef-b3d0-dae7fd0453d4",
+    "stock": -1,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c2ecc842-675a-46ef-b3d0-dae7fd0453d4",
+        "sku": "10692",
+        "barcode": "10692SVa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "S",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "S",
+        "color": "Varios",
+        "in_stock": -1
+      },
+      {
+        "variant_id": "08701030-0662-4c25-bca9-6b847b300f03",
+        "sku": "10693",
+        "barcode": "10693MVa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "M",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "M",
+        "color": "Varios",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7255f0c5-e2aa-4994-955e-3c9ae2bb96b0",
+        "sku": "10694",
+        "barcode": "10694LVa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "L",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "L",
+        "color": "Varios",
+        "in_stock": -1
+      },
+      {
+        "variant_id": "87f3de4a-7e92-4b0f-b0e2-6ec9f21781b1",
+        "sku": "10695",
+        "barcode": "10695XLVa",
+        "price": 0,
+        "cost": 30200,
+        "option1_value": "XL",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Varios",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Varios"
+    ]
+  },
+  {
+    "id": "33222955-7e82-452f-aa15-57c5db1fa3de",
+    "name": "ALWAYS FOREVER URBAN • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/33222955-7e82-452f-aa15-57c5db1fa3de",
+    "images": [
+      "https://api.loyverse.com/image/33222955-7e82-452f-aa15-57c5db1fa3de"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Cafe. Tallas disponibles: S, M, L, XL.",
+    "sku": "10688",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "33222955-7e82-452f-aa15-57c5db1fa3de",
+    "loyverseVariantId": "e2928b9d-f1b7-4b07-ba0e-0573d4369bbd",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e2928b9d-f1b7-4b07-ba0e-0573d4369bbd",
+        "sku": "10688",
+        "barcode": "10690SCa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e8357822-ffbb-4b93-ada5-e2ef335ac06a",
+        "sku": "10689",
+        "barcode": "10689MCa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "52ccc5c4-95d7-4fee-9627-b3204ac0f32e",
+        "sku": "10690",
+        "barcode": "10688LCa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e0e0ff3b-970d-452f-9f74-934266637f88",
+        "sku": "10691",
+        "barcode": "10691XLCa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cafe"
+    ]
+  },
+  {
+    "id": "5d4bb607-0047-4b44-86df-d734a4b0c091",
+    "name": "HEAVE MADE • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/5d4bb607-0047-4b44-86df-d734a4b0c091",
+    "images": [
+      "https://api.loyverse.com/image/5d4bb607-0047-4b44-86df-d734a4b0c091"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10299",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "5d4bb607-0047-4b44-86df-d734a4b0c091",
+    "loyverseVariantId": "92501859-7584-40c2-a5c0-42a0a630c3c6",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "92501859-7584-40c2-a5c0-42a0a630c3c6",
+        "sku": "10299",
+        "barcode": "10686SGr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "eef47c70-6947-49b0-9db0-c632b0e4590d",
+        "sku": "10685",
+        "barcode": "10685MGr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "54144f77-abc2-4ee2-9125-663cd6336310",
+        "sku": "10686",
+        "barcode": "10299LGr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "30ca1a75-23e6-45c9-b292-95446afd973c",
+        "sku": "10687",
+        "barcode": "10687XLGr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "974ec040-b6a0-412c-8d03-2580ab8a57e6",
+    "name": "OVERSIZE • NIÑO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Varios. Tallas disponibles: S, M, L, XL.",
+    "sku": "10295",
+    "categoryLabel": "Niño",
+    "loyverseItemId": "974ec040-b6a0-412c-8d03-2580ab8a57e6",
+    "loyverseVariantId": "b0efd897-01ed-4b2f-9819-dad3f443a911",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b0efd897-01ed-4b2f-9819-dad3f443a911",
+        "sku": "10295",
+        "barcode": "10295VariasVa",
+        "price": 0,
+        "cost": 10000,
+        "option1_value": "Varias",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "Varias",
+        "color": "Varios",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Varios"
+    ]
+  },
+  {
+    "id": "a9e7a64c-fe74-4414-8bab-32b11709d5bb",
+    "name": "COINCIDE • BUZO NEW/B",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/a9e7a64c-fe74-4414-8bab-32b11709d5bb",
+    "images": [
+      "https://api.loyverse.com/image/a9e7a64c-fe74-4414-8bab-32b11709d5bb"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Beige, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10289",
+    "categoryLabel": "Buzo New/B",
+    "loyverseItemId": "a9e7a64c-fe74-4414-8bab-32b11709d5bb",
+    "loyverseVariantId": "3bcae340-8eaa-4a38-b3e7-cd11d1f5fb1c",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3bcae340-8eaa-4a38-b3e7-cd11d1f5fb1c",
+        "sku": "10289",
+        "barcode": "10567S/MNe",
+        "price": 0,
+        "cost": 78500,
+        "option1_value": "S/M",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Beige",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8435efc9-fe37-4b6e-bd78-f38800d8dc38",
+        "sku": "10291",
+        "barcode": "10291S/MNe",
+        "price": 0,
+        "cost": 78500,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3245ccdb-89ce-42f6-9513-c3dbea6e4f5e",
+        "sku": "10293",
+        "barcode": "10293L/XLBe",
+        "price": 0,
+        "cost": 78500,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "82d712dc-d24b-4803-862c-7a2ff07a0484",
+        "sku": "10294",
+        "barcode": "10294L/XLNe",
+        "price": 0,
+        "cost": 78500,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Beige",
+      "Negro"
+    ]
+  },
+  {
+    "id": "6327a804-3a77-476b-8d5c-f0aba1dc9935",
+    "name": "VIKINGO URBANO • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Beige. Tallas disponibles: S, M, L, XL.",
+    "sku": "10283",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "6327a804-3a77-476b-8d5c-f0aba1dc9935",
+    "loyverseVariantId": "678df684-274a-4c82-b9a1-1a0e4712abcb",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "678df684-274a-4c82-b9a1-1a0e4712abcb",
+        "sku": "10283",
+        "barcode": "10283S/MBe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Beige",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "00c7fdff-e0c6-4e59-9e9a-2cb9a6c33604",
+        "sku": "10287",
+        "barcode": "10287L/XLBe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Beige"
+    ]
+  },
+  {
+    "id": "bf3032cb-8d80-4d92-9794-735621e03f7c",
+    "name": "UNION • BOXI FIT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/bf3032cb-8d80-4d92-9794-735621e03f7c",
+    "images": [
+      "https://api.loyverse.com/image/bf3032cb-8d80-4d92-9794-735621e03f7c"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Marfil. Tallas disponibles: S, M, L.",
+    "sku": "10274",
+    "categoryLabel": "Boxi Fit",
+    "loyverseItemId": "bf3032cb-8d80-4d92-9794-735621e03f7c",
+    "loyverseVariantId": "ba6bb8a6-a707-4d9a-a104-17059366a056",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "ba6bb8a6-a707-4d9a-a104-17059366a056",
+        "sku": "10274",
+        "barcode": "10274SNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8e4c8bf4-80f0-497e-9cdd-58731829fa78",
+        "sku": "10275",
+        "barcode": "10275SMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6829ee7e-f69a-456a-8af8-67dc065fc8ef",
+        "sku": "10276",
+        "barcode": "10276MNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d961ad28-feb0-4bea-8270-8d73031ecfd1",
+        "sku": "10278",
+        "barcode": "10278MMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a0e6bc71-9c6d-484c-bb7a-a4cf173ca565",
+        "sku": "10280",
+        "barcode": "10280LNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f82669e7-ff04-44b0-894e-a8f1a68a3f25",
+        "sku": "10282",
+        "barcode": "10282LMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "e6ded485-a783-4895-97e6-0fc952000e25",
+    "name": "OTROS • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Varios. Tallas disponibles: S, M, L, XL.",
+    "sku": "10681",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "e6ded485-a783-4895-97e6-0fc952000e25",
+    "loyverseVariantId": "d26406a4-f9d3-4bbf-9517-9324075bd592",
+    "stock": 13,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d26406a4-f9d3-4bbf-9517-9324075bd592",
+        "sku": "10681",
+        "barcode": "10681SVa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "S",
+        "color": "Varios",
+        "in_stock": 8
+      },
+      {
+        "variant_id": "ecf5752c-bc3d-4d9c-8ba8-583438bd3df3",
+        "sku": "10682",
+        "barcode": "10682MVa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "M",
+        "color": "Varios",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "14666df8-bfd0-4c7c-b398-97dbed10566a",
+        "sku": "10683",
+        "barcode": "10683LVa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "L",
+        "color": "Varios",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9573bf27-43f6-449f-9abc-f066e12b4b5b",
+        "sku": "10684",
+        "barcode": "10684XLVa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Varios",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Varios",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Varios"
+    ]
+  },
+  {
+    "id": "3ea169ad-4cd2-4d88-9495-e335123fb8ff",
+    "name": "EVERTHING • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: M.",
+    "sku": "10680",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "3ea169ad-4cd2-4d88-9495-e335123fb8ff",
+    "loyverseVariantId": "45d345f1-f146-4a3f-bb44-ee4331f49c67",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "45d345f1-f146-4a3f-bb44-ee4331f49c67",
+        "sku": "10680",
+        "barcode": "10680MGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "M"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "607ac8f5-92fb-4cd3-bd69-a53537faf1dd",
+    "name": "ROME • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/607ac8f5-92fb-4cd3-bd69-a53537faf1dd",
+    "images": [
+      "https://api.loyverse.com/image/607ac8f5-92fb-4cd3-bd69-a53537faf1dd"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris. Tallas disponibles: L.",
+    "sku": "10679",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "607ac8f5-92fb-4cd3-bd69-a53537faf1dd",
+    "loyverseVariantId": "1082aae3-a6b2-42b6-8724-f970dd64f60d",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "1082aae3-a6b2-42b6-8724-f970dd64f60d",
+        "sku": "10679",
+        "barcode": "10679LGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "L"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "c893d651-0fa2-4591-8f0c-87b31bd04e38",
+    "name": "GOODVIBES • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/c893d651-0fa2-4591-8f0c-87b31bd04e38",
+    "images": [
+      "https://api.loyverse.com/image/c893d651-0fa2-4591-8f0c-87b31bd04e38"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Gris, Guayaba. Tallas disponibles: S, M, L.",
+    "sku": "10672",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "c893d651-0fa2-4591-8f0c-87b31bd04e38",
+    "loyverseVariantId": "09551253-6ec7-4333-8d61-7060c4e6ecc8",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "09551253-6ec7-4333-8d61-7060c4e6ecc8",
+        "sku": "10672",
+        "barcode": "10672SGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "46ea8d62-fea8-40a0-b92e-7dede6a33554",
+        "sku": "10673",
+        "barcode": "10673SGu",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Guayaba",
+        "option3_value": null,
+        "size": "S",
+        "color": "Guayaba",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "eb68b3da-a6ff-4792-9e45-1e3149b61250",
+        "sku": "10674",
+        "barcode": "10674MGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7adb8b6d-4efc-41ab-bf9a-2b8d7d305919",
+        "sku": "10675",
+        "barcode": "10675MGu",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Guayaba",
+        "option3_value": null,
+        "size": "M",
+        "color": "Guayaba",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5eb728eb-c38a-46a2-a43d-06c43b0c7800",
+        "sku": "10676",
+        "barcode": "10676LGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "35fe9f21-2007-43dd-b2a8-82de9e9c2512",
+        "sku": "10677",
+        "barcode": "10677LGu",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Guayaba",
+        "option3_value": null,
+        "size": "L",
+        "color": "Guayaba",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Gris",
+      "Guayaba"
+    ]
+  },
+  {
+    "id": "d96524fa-4970-4f89-9560-46fa2c583d23",
+    "name": "LA • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/d96524fa-4970-4f89-9560-46fa2c583d23",
+    "images": [
+      "https://api.loyverse.com/image/d96524fa-4970-4f89-9560-46fa2c583d23"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Lila. Tallas disponibles: L.",
+    "sku": "10671",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "d96524fa-4970-4f89-9560-46fa2c583d23",
+    "loyverseVariantId": "cd27be6b-01a4-4a71-81ed-2f943d389fe3",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cd27be6b-01a4-4a71-81ed-2f943d389fe3",
+        "sku": "10671",
+        "barcode": "10671LLi",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Lila",
+        "option3_value": null,
+        "size": "L",
+        "color": "Lila",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "L"
+    ],
+    "availableColors": [
+      "Lila"
+    ]
+  },
+  {
+    "id": "c3b44fb2-b096-45d7-84a7-d6a0c445f312",
+    "name": "HAVENMADE • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/c3b44fb2-b096-45d7-84a7-d6a0c445f312",
+    "images": [
+      "https://api.loyverse.com/image/c3b44fb2-b096-45d7-84a7-d6a0c445f312"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Verde. Tallas disponibles: L.",
+    "sku": "10670",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "c3b44fb2-b096-45d7-84a7-d6a0c445f312",
+    "loyverseVariantId": "d9b202e6-5bb2-48bb-8382-2fcc2e21c0f0",
+    "stock": 6,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d9b202e6-5bb2-48bb-8382-2fcc2e21c0f0",
+        "sku": "10670",
+        "barcode": "10670LVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 6
+      }
+    ],
+    "availableSizes": [
+      "L"
+    ],
+    "availableColors": [
+      "Verde"
+    ]
+  },
+  {
+    "id": "18e9de55-d68f-47aa-b33a-5eb469d60295",
+    "name": "SPLATINSECT • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/18e9de55-d68f-47aa-b33a-5eb469d60295",
+    "images": [
+      "https://api.loyverse.com/image/18e9de55-d68f-47aa-b33a-5eb469d60295"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: VerdeOliva. Tallas disponibles: L.",
+    "sku": "10669",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "18e9de55-d68f-47aa-b33a-5eb469d60295",
+    "loyverseVariantId": "e1fbb669-c1ff-4648-902b-eb2c2bb1e83a",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e1fbb669-c1ff-4648-902b-eb2c2bb1e83a",
+        "sku": "10669",
+        "barcode": "10669LVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "L",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "L"
+    ],
+    "availableColors": [
+      "VerdeOliva"
+    ]
+  },
+  {
+    "id": "3ce7e047-3792-4651-801b-f823fab6cd0b",
+    "name": "URBANMOTO • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/3ce7e047-3792-4651-801b-f823fab6cd0b",
+    "images": [
+      "https://api.loyverse.com/image/3ce7e047-3792-4651-801b-f823fab6cd0b"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Lila. Tallas disponibles: L, M, S.",
+    "sku": "10666",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "3ce7e047-3792-4651-801b-f823fab6cd0b",
+    "loyverseVariantId": "09371e5a-64d3-4f08-b0e6-b4518c964968",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "09371e5a-64d3-4f08-b0e6-b4518c964968",
+        "sku": "10666",
+        "barcode": "10666LLi",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Lila",
+        "option3_value": null,
+        "size": "L",
+        "color": "Lila",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e3eca561-7cb7-4d15-b43f-0a171d65a684",
+        "sku": "10667",
+        "barcode": "10667MLi",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Lila",
+        "option3_value": null,
+        "size": "M",
+        "color": "Lila",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "070afae3-1731-462b-8ae4-6a5b112b456d",
+        "sku": "10668",
+        "barcode": "10668SLi",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Lila",
+        "option3_value": null,
+        "size": "S",
+        "color": "Lila",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "L",
+      "M",
+      "S"
+    ],
+    "availableColors": [
+      "Lila"
+    ]
+  },
+  {
+    "id": "19bf556e-b465-4c02-be58-c9126220b01f",
+    "name": "FIND YOUR • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/19bf556e-b465-4c02-be58-c9126220b01f",
+    "images": [
+      "https://api.loyverse.com/image/19bf556e-b465-4c02-be58-c9126220b01f"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Rosa. Tallas disponibles: XL, L.",
+    "sku": "10664",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "19bf556e-b465-4c02-be58-c9126220b01f",
+    "loyverseVariantId": "a7378007-4fe3-49c8-bd27-557a8478e7a0",
+    "stock": 5,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a7378007-4fe3-49c8-bd27-557a8478e7a0",
+        "sku": "10664",
+        "barcode": "10664XLRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rosa",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "532f4ec2-cd63-438a-a00e-93e46ce1be86",
+        "sku": "10665",
+        "barcode": "10665LRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rosa",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "XL",
+      "L"
+    ],
+    "availableColors": [
+      "Rosa"
+    ]
+  },
+  {
+    "id": "4106ead2-a260-4157-b303-fcb8d7e7f54d",
+    "name": "NOICE RUTINE • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/4106ead2-a260-4157-b303-fcb8d7e7f54d",
+    "images": [
+      "https://api.loyverse.com/image/4106ead2-a260-4157-b303-fcb8d7e7f54d"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Rosa. Tallas disponibles: XL.",
+    "sku": "10663",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "4106ead2-a260-4157-b303-fcb8d7e7f54d",
+    "loyverseVariantId": "f7c96764-03b3-4d65-b533-7488f575b286",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "f7c96764-03b3-4d65-b533-7488f575b286",
+        "sku": "10663",
+        "barcode": "10663XLRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rosa",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "XL"
+    ],
+    "availableColors": [
+      "Rosa"
+    ]
+  },
+  {
+    "id": "f8bfb318-211f-44a0-96fa-c9136472d7ec",
+    "name": "AUTHENTIC • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/f8bfb318-211f-44a0-96fa-c9136472d7ec",
+    "images": [
+      "https://api.loyverse.com/image/f8bfb318-211f-44a0-96fa-c9136472d7ec"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Rosa. Tallas disponibles: S, M, L, XL.",
+    "sku": "10209",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "f8bfb318-211f-44a0-96fa-c9136472d7ec",
+    "loyverseVariantId": "de26461f-ead7-4975-9a9c-7eaf6611df56",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "de26461f-ead7-4975-9a9c-7eaf6611df56",
+        "sku": "10209",
+        "barcode": "10209SRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "S",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dd7e72d5-543f-4ead-8d56-d72666cf78cb",
+        "sku": "10211",
+        "barcode": "10211MRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "M",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "10e4912d-e52b-41c0-8f07-47e037dc0738",
+        "sku": "10213",
+        "barcode": "10213LRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rosa",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "5bdcbd96-4d1a-43f1-90c4-0262092682b6",
+        "sku": "10215",
+        "barcode": "10215XLRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rosa",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Rosa"
+    ]
+  },
+  {
+    "id": "2cc1e28d-e638-47ed-94c5-30b86369b587",
+    "name": "ATTITUDE • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/2cc1e28d-e638-47ed-94c5-30b86369b587",
+    "images": [
+      "https://api.loyverse.com/image/2cc1e28d-e638-47ed-94c5-30b86369b587"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: VerdeOliva, Gris. Tallas disponibles: S, M, L, XL.",
+    "sku": "10168",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "2cc1e28d-e638-47ed-94c5-30b86369b587",
+    "loyverseVariantId": "5f516faa-1976-4274-8878-2e565855045c",
+    "stock": 19,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "5f516faa-1976-4274-8878-2e565855045c",
+        "sku": "10168",
+        "barcode": "10168SVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "S",
+        "color": "VerdeOliva",
+        "in_stock": 7
+      },
+      {
+        "variant_id": "3de0b080-b0e3-4029-b156-edbf4efc6f94",
+        "sku": "10169",
+        "barcode": "10168SGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "675038ce-12cf-4b2c-85e4-b4e0a9c0a0aa",
+        "sku": "10170",
+        "barcode": "10170MVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "M",
+        "color": "VerdeOliva",
+        "in_stock": 9
+      },
+      {
+        "variant_id": "c3ccb87d-b1f6-465a-a54c-9b494fa3a8d4",
+        "sku": "10171",
+        "barcode": "10171MGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dc2570fa-8d2a-434c-8642-55077e564003",
+        "sku": "10184",
+        "barcode": "10184LVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "L",
+        "color": "VerdeOliva",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "1b84027d-f727-48c5-8abd-275dd9f958eb",
+        "sku": "10185",
+        "barcode": "10185LGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "158872da-8874-449b-9d77-7733003ee8df",
+        "sku": "10186",
+        "barcode": "10186XLVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "XL",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "348c9565-1572-408b-a675-72b73d0b7912",
+        "sku": "10187",
+        "barcode": "10186XLVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "VerdeOliva",
+      "Gris"
+    ]
+  },
+  {
+    "id": "f907b40c-573e-45aa-840f-cae7d6de9d4c",
+    "name": "URBNNS • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/f907b40c-573e-45aa-840f-cae7d6de9d4c",
+    "images": [
+      "https://api.loyverse.com/image/f907b40c-573e-45aa-840f-cae7d6de9d4c"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Crema, Gris, Chocolate. Tallas disponibles: S, M, L, XL.",
+    "sku": "10064",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "f907b40c-573e-45aa-840f-cae7d6de9d4c",
+    "loyverseVariantId": "11f6053a-0fd1-46d3-ad8a-411ef25ad547",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "11f6053a-0fd1-46d3-ad8a-411ef25ad547",
+        "sku": "10064",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "S",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4cf48052-ded1-4c92-8b7b-aff9da833f38",
+        "sku": "10065",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "79e788d3-41d7-4630-896e-7cacb4ff2d7d",
+        "sku": "10066",
+        "barcode": "10066SCh",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "S",
+        "color": "Chocolate",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "6130115d-6a08-45d7-a390-b772afe9959e",
+        "sku": "10071",
+        "barcode": "10071MCr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "M",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "76022dda-03ae-4427-a449-1befdea7848d",
+        "sku": "10080",
+        "barcode": "10080MGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "edee6fae-8718-48dd-8677-16a237a4509b",
+        "sku": "10084",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "M",
+        "color": "Chocolate",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0e2df613-9770-48f8-b46a-83cb227fa545",
+        "sku": "10085",
+        "barcode": "10085LCr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "L",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a92adb5e-de07-4236-aa2f-55cb4c8f8b46",
+        "sku": "10087",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2b2882e4-01e2-4cde-8702-0543621ad43e",
+        "sku": "10089",
+        "barcode": "10089LCh",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "L",
+        "color": "Chocolate",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dbab0853-6b7c-420c-8d87-9a2c1f3b797d",
+        "sku": "10106",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cb7b06d7-b466-43e5-8b21-b00b217257b8",
+        "sku": "10108",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "98a06c95-3171-4278-827b-a29bf4a64155",
+        "sku": "10110",
+        "barcode": "10110XLCh",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Chocolate",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Crema",
+      "Gris",
+      "Chocolate"
+    ]
+  },
+  {
+    "id": "b7ce0f08-61bb-46e0-b8d5-5f809abf3485",
+    "name": "STAY IN MOTION • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/b7ce0f08-61bb-46e0-b8d5-5f809abf3485",
+    "images": [
+      "https://api.loyverse.com/image/b7ce0f08-61bb-46e0-b8d5-5f809abf3485"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Camell. Tallas disponibles: S, M, L, XL.",
+    "sku": "10035",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "b7ce0f08-61bb-46e0-b8d5-5f809abf3485",
+    "loyverseVariantId": "3eea1696-2b50-4190-8685-51153f66cc74",
+    "stock": 11,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3eea1696-2b50-4190-8685-51153f66cc74",
+        "sku": "10035",
+        "barcode": "10035SCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camell",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "6f82016b-1084-4377-a1e1-650078928a5f",
+        "sku": "10058",
+        "barcode": "10058MCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camell",
+        "in_stock": 7
+      },
+      {
+        "variant_id": "dd711190-011f-442b-8d10-b37dbb1b1187",
+        "sku": "10062",
+        "barcode": "10052LCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b1490d75-f5d4-4ad7-bb47-3c2aa09733e0",
+        "sku": "10063",
+        "barcode": "10063XLCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camell",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Camell"
+    ]
+  },
+  {
+    "id": "5efdaa36-3a04-495c-8cd2-66463afc9278",
+    "name": "PROMO • UNISEX",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10662",
+    "categoryLabel": "Unisex",
+    "loyverseItemId": "5efdaa36-3a04-495c-8cd2-66463afc9278",
+    "loyverseVariantId": "d7c48973-8a25-4d4d-bd33-0bf8feeff4ab",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d7c48973-8a25-4d4d-bd33-0bf8feeff4ab",
+        "sku": "10662",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": null,
+        "option2_value": null,
+        "option3_value": null,
+        "size": "",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "d125d679-dd31-4b9c-ac9c-04e0bf103076",
+    "name": "PESQUERO • UNISEX",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10661",
+    "categoryLabel": "Unisex",
+    "loyverseItemId": "d125d679-dd31-4b9c-ac9c-04e0bf103076",
+    "loyverseVariantId": "87f37232-4190-42c5-b05f-dd4db59ed355",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "87f37232-4190-42c5-b05f-dd4db59ed355",
+        "sku": "10661",
+        "barcode": "10661",
+        "price": 0,
+        "cost": 27000,
+        "option1_value": null,
+        "option2_value": null,
+        "option3_value": null,
+        "size": "",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "e0195b48-28b6-4f4b-9b1a-ce86a44e9ec8",
+    "name": "GORRA • UNISEX",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10697",
+    "categoryLabel": "Unisex",
+    "loyverseItemId": "e0195b48-28b6-4f4b-9b1a-ce86a44e9ec8",
+    "loyverseVariantId": "3db8f29b-9f45-4e79-b6a3-f8b4e7505e9c",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3db8f29b-9f45-4e79-b6a3-f8b4e7505e9c",
+        "sku": "10697",
+        "barcode": "106971,1",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "1.1",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "1.1",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f52294d0-0bd2-47cb-b9f6-05aba3e5568d",
+        "sku": "10698",
+        "barcode": "106981",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "1.0",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "1.0",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "6a3be319-3265-4f64-9357-3250c633d45d",
+    "name": "OVERSIZE NIÑO • UNISEX",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Todos. Tallas disponibles: S, M, L, XL.",
+    "sku": "10655",
+    "categoryLabel": "Unisex",
+    "loyverseItemId": "6a3be319-3265-4f64-9357-3250c633d45d",
+    "loyverseVariantId": "c4a58213-3ad8-41a8-928a-49fa44df9b5b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c4a58213-3ad8-41a8-928a-49fa44df9b5b",
+        "sku": "10655",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "4",
+        "option2_value": "Todos",
+        "option3_value": null,
+        "size": "4",
+        "color": "Todos",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c3f2cce7-2c0f-43da-a9d3-38409e5d94aa",
+        "sku": "10656",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "6",
+        "option2_value": "Todos",
+        "option3_value": null,
+        "size": "6",
+        "color": "Todos",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "58e3f9a2-965f-4664-839b-55ed43ed5593",
+        "sku": "10657",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "8",
+        "option2_value": "Todos",
+        "option3_value": null,
+        "size": "8",
+        "color": "Todos",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4231b6a8-6c20-4082-9df6-46a464a406f4",
+        "sku": "10658",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "10",
+        "option2_value": "Todos",
+        "option3_value": null,
+        "size": "10",
+        "color": "Todos",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "44956849-f1a7-4e7b-8ebf-7256e3a6ebbd",
+        "sku": "10659",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "12",
+        "option2_value": "Todos",
+        "option3_value": null,
+        "size": "12",
+        "color": "Todos",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Todos"
+    ]
+  },
+  {
+    "id": "4a05c28a-acdb-425a-ba4d-80cb02645d9d",
+    "name": "CAMISA NIÑO • CONJUNTOS",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Marfil, Negro. Tallas disponibles: S, M, L, XL.",
+    "sku": "10647",
+    "categoryLabel": "Conjuntos",
+    "loyverseItemId": "4a05c28a-acdb-425a-ba4d-80cb02645d9d",
+    "loyverseVariantId": "b3a5e21c-8de2-4113-b954-651e6ac00f1f",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b3a5e21c-8de2-4113-b954-651e6ac00f1f",
+        "sku": "10647",
+        "barcode": "106476Ma",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "6",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "6",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2d7d3100-7c60-4054-a6fd-4b5001ef0f0f",
+        "sku": "10648",
+        "barcode": "106486Ne",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "6",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "6",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2b9b7631-e633-4dfa-b3cc-da123047b3c2",
+        "sku": "10649",
+        "barcode": "106498Ma",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "8",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "8",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e00fe209-7128-4eef-b3b4-24a5a7d25cde",
+        "sku": "10650",
+        "barcode": "106508Ne",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "8",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "8",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "21fb5553-6bce-429e-8543-5c460ca16c6d",
+        "sku": "10651",
+        "barcode": "1065110Ma",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "10",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "10",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "241877b9-ff26-4770-8602-6917be25d44d",
+        "sku": "10652",
+        "barcode": "1065210Ne",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "10",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "10",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ce4ca30d-5811-4db4-ac1d-fa6c962ab0b1",
+        "sku": "10653",
+        "barcode": "1065312Ma",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "12",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "12",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d6401185-aabd-46fb-8147-5ece168a7e35",
+        "sku": "10654",
+        "barcode": "1065412Ne",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "12",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "12",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "98ec92cb-6502-4014-befc-0455fddbb269",
+    "name": "RIB CAMISETA • OVER DAMA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Todos. Tallas disponibles: S, L.",
+    "sku": "10645",
+    "categoryLabel": "Over Dama",
+    "loyverseItemId": "98ec92cb-6502-4014-befc-0455fddbb269",
+    "loyverseVariantId": "2ac9fa3e-0726-4499-933c-528a0f83964b",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "2ac9fa3e-0726-4499-933c-528a0f83964b",
+        "sku": "10645",
+        "barcode": "10645STo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Todos",
+        "option3_value": null,
+        "size": "S",
+        "color": "Todos",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bdc3a3dc-d1d3-4427-aa30-f3e583880073",
+        "sku": "10646",
+        "barcode": "10646LTo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Todos",
+        "option3_value": null,
+        "size": "L",
+        "color": "Todos",
+        "in_stock": 3
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "L"
+    ],
+    "availableColors": [
+      "Todos"
+    ]
+  },
+  {
+    "id": "cde13165-6915-41b5-a9a7-9123320e18ed",
+    "name": "CARGO • PANTALON DM",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Camell. Tallas disponibles: S, M, L, XL.",
+    "sku": "10641",
+    "categoryLabel": "Pantalon Dm",
+    "loyverseItemId": "cde13165-6915-41b5-a9a7-9123320e18ed",
+    "loyverseVariantId": "9382c075-6d14-463b-a96f-f4392574d7a2",
+    "stock": 17,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9382c075-6d14-463b-a96f-f4392574d7a2",
+        "sku": "10641",
+        "barcode": "106416Ne",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "6",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "6",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5fa1ca59-cf92-4bad-9beb-82460f0c21b7",
+        "sku": "10642",
+        "barcode": "106426Ca",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "6",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "6",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "eb13a482-0422-439f-b930-ad72b7446018",
+        "sku": "10643",
+        "barcode": "1064310Ne",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "10",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "10",
+        "color": "Negro",
+        "in_stock": 13
+      },
+      {
+        "variant_id": "5a6088f6-2e23-4b1c-8f42-82d6a57ef5cd",
+        "sku": "10644",
+        "barcode": "1064410Ca",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "10",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "10",
+        "color": "Camell",
+        "in_stock": 4
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Camell"
+    ]
+  },
+  {
+    "id": "df7f760d-cd94-4fb6-b8cb-05e5212fb448",
+    "name": "BUZO GOLD • BUZO GOLD",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Negro, Crema, Verde, Cafe. Tallas disponibles: S, M, L, XL.",
+    "sku": "10633",
+    "categoryLabel": "Buzo Gold",
+    "loyverseItemId": "df7f760d-cd94-4fb6-b8cb-05e5212fb448",
+    "loyverseVariantId": "55785fee-e85c-4380-99e9-627cedf20dba",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "55785fee-e85c-4380-99e9-627cedf20dba",
+        "sku": "10633",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "06f31559-6681-4355-b275-e326ca6c92fe",
+        "sku": "10634",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a7fc892b-51ca-46c0-a78f-453ec4c80c85",
+        "sku": "10635",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4567d5d1-3908-45f1-b938-9e29fe50c1e1",
+        "sku": "10636",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2beb05dd-a838-4e83-97ed-3acf324fd6b9",
+        "sku": "10637",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1104b60f-1d01-4565-80dc-20e50564d8a6",
+        "sku": "10638",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c7c544b8-64d9-4498-95d6-d64d9790efad",
+        "sku": "10639",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9532bb1a-14d7-4c30-9ba7-5881286097b5",
+        "sku": "10640",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Crema",
+      "Verde",
+      "Cafe"
+    ]
+  },
+  {
+    "id": "9c61ad68-ded4-47a8-9643-8157ff5f24a7",
+    "name": "PANATALONETA DM • BERMUDAS",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Todos. Tallas disponibles: S, M, L, XL.",
+    "sku": "10632",
+    "categoryLabel": "Bermudas",
+    "loyverseItemId": "9c61ad68-ded4-47a8-9643-8157ff5f24a7",
+    "loyverseVariantId": "2301f36e-c731-47cb-8a7a-ebac91006471",
+    "stock": 11,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "2301f36e-c731-47cb-8a7a-ebac91006471",
+        "sku": "10632",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "U",
+        "option2_value": "Todos",
+        "option3_value": null,
+        "size": "U",
+        "color": "Todos",
+        "in_stock": 11
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Todos"
+    ]
+  },
+  {
+    "id": "1bc19985-f85d-434d-8884-88873783ff36",
+    "name": "BERMUDA CLASICA • BERMUDAS",
+    "category": "young-free",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "<p>Burda de 20grs</p>",
+    "sku": "10592",
+    "categoryLabel": "Bermudas",
+    "loyverseItemId": "1bc19985-f85d-434d-8884-88873783ff36",
+    "loyverseVariantId": "c003a15d-1675-4d85-95c3-823a56a83ba4",
+    "stock": 94,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c003a15d-1675-4d85-95c3-823a56a83ba4",
+        "sku": "10592",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ab25d526-737f-455b-8937-f8ac17be1368",
+        "sku": "10605",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4a918722-9d8d-4c24-a780-2103fd141442",
+        "sku": "10606",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "57764278-f33d-4ed1-a674-79eb59a911fe",
+        "sku": "10607",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 43
+      },
+      {
+        "variant_id": "5d07dc37-9049-4666-bfa3-e3d5af4803e5",
+        "sku": "10608",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ed730eb6-6602-4576-b338-3b85987d1e1b",
+        "sku": "10609",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "43c99161-bf47-477c-bcce-3b21c6ce93f9",
+        "sku": "10610",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Roada",
+        "option3_value": null,
+        "size": "S",
+        "color": "Roada",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3dabf645-6905-4e7e-b22b-9a441e6891f1",
+        "sku": "10611",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f14ee4f3-1cdd-48fb-9134-cd3e2203ca93",
+        "sku": "10612",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c0e99a8d-36f4-4384-b4ba-5f1c4c95fc1f",
+        "sku": "10613",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5e0f0f08-e0c3-4d93-a1c4-22e0a1d45484",
+        "sku": "10614",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 25
+      },
+      {
+        "variant_id": "17fa6fc1-2602-45b3-af29-a9282c044a7b",
+        "sku": "10615",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ed4992b6-aaea-4c9c-8f5e-de0eb98eb458",
+        "sku": "10616",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0c32fb6f-708c-4d15-85f1-c90496936f3d",
+        "sku": "10617",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Roada",
+        "option3_value": null,
+        "size": "M",
+        "color": "Roada",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "440b5d1c-7e5b-45c7-b160-83f35dd67044",
+        "sku": "10618",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "58ee6f35-aeaa-4ace-93f6-b8558383d9b8",
+        "sku": "10619",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b65a589f-4dc9-473d-96e8-94ae83b1dbb0",
+        "sku": "10620",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7f40ad57-215b-4943-921c-0d2957ec424d",
+        "sku": "10621",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 12
+      },
+      {
+        "variant_id": "e52bbace-7e0c-44be-8a50-788a5be7ac19",
+        "sku": "10622",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e999edf0-bb01-4dc8-9fec-0afaf1a3e08c",
+        "sku": "10623",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e2cfc524-5385-4bbc-bc61-036d9e138afa",
+        "sku": "10624",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Roada",
+        "option3_value": null,
+        "size": "L",
+        "color": "Roada",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "79cff193-3832-4e71-a991-a2bc4db1b494",
+        "sku": "10625",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5122d7d2-d43f-4b59-b465-868060b811fd",
+        "sku": "10626",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9f7d8d2e-25da-49e2-b888-59cb7b07e7fb",
+        "sku": "10627",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0551a19b-acf5-40a7-9193-29c2755c80e3",
+        "sku": "10628",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 14
+      },
+      {
+        "variant_id": "74fd9a21-e7a0-435b-862c-2d3f221d8aae",
+        "sku": "10629",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8c8e2574-7dab-4dc6-af58-04316bdfa4bf",
+        "sku": "10630",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3cd76ccd-b2a6-4622-bd53-8365c259d06f",
+        "sku": "10631",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Roada",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Roada",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Verde",
+      "Azul",
+      "MoraLeche",
+      "Marfil",
+      "Camell",
+      "Roada"
+    ]
+  },
+  {
+    "id": "6fe57058-054f-4a9c-9657-9cf54d5125c8",
+    "name": "CARGO • CONJUNTOS",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/6fe57058-054f-4a9c-9657-9cf54d5125c8",
+    "images": [
+      "https://api.loyverse.com/image/6fe57058-054f-4a9c-9657-9cf54d5125c8"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Conjunto Cargo Texturizado 220g</h2>",
+    "sku": "10593",
+    "categoryLabel": "Conjuntos",
+    "loyverseItemId": "6fe57058-054f-4a9c-9657-9cf54d5125c8",
+    "loyverseVariantId": "6cce341a-bb4e-41cb-9140-37512eea20e3",
+    "stock": 46,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6cce341a-bb4e-41cb-9140-37512eea20e3",
+        "sku": "10593",
+        "barcode": "10593SNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 13
+      },
+      {
+        "variant_id": "9725e264-0cd9-48ef-a86e-424f381ed6a8",
+        "sku": "10594",
+        "barcode": "10594SMa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "b2f9a26b-8f57-4a1c-97be-62c4d448956e",
+        "sku": "10595",
+        "barcode": "10595SCa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8d02c2ca-a1e2-4ae8-b3d2-6302e7466e5f",
+        "sku": "10596",
+        "barcode": "10596MNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8499f798-1771-4c67-948d-50a45d3dcac2",
+        "sku": "10597",
+        "barcode": "10597MMa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "f62e3bbd-7233-427e-aa17-c71f02ae42ac",
+        "sku": "10598",
+        "barcode": "10598MCa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b782de9b-7cd5-4ee6-8493-5a7937f88aeb",
+        "sku": "10599",
+        "barcode": "10599LNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "ce417bf1-9335-43c0-8a51-4479ce55f17b",
+        "sku": "10600",
+        "barcode": "10600LMa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "16b39d54-fb3d-4ce5-8368-d1dabe7bb82e",
+        "sku": "10601",
+        "barcode": "10601LCa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ac45e286-8f60-49f2-aafc-8f4f880d2567",
+        "sku": "10602",
+        "barcode": "10604XLCa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b5f89954-a1a8-47de-b6f1-00832ff92260",
+        "sku": "10603",
+        "barcode": "10603XLMa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "11239fb1-eccd-477e-913b-512621d2842d",
+        "sku": "10604",
+        "barcode": "10602XLCa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Camell",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camell",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "90562feb-ab13-43fb-afda-1cc4d6c321f6",
+        "sku": "10301",
+        "barcode": "10301SGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "f64bdce3-e8fd-426c-908f-ff395a9d758d",
+        "sku": "10302",
+        "barcode": "10302MGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 8
+      },
+      {
+        "variant_id": "666deb6d-780f-499e-8bb5-e66eacc2fb2a",
+        "sku": "10303",
+        "barcode": "10303LGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 8
+      },
+      {
+        "variant_id": "38397707-91fd-4476-bfb3-e2b9962e7f60",
+        "sku": "10304",
+        "barcode": "10304XLGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil",
+      "Camell",
+      "Gris"
+    ]
+  },
+  {
+    "id": "bf32fd97-d64d-429a-a4dd-d02828ff1d7c",
+    "name": "MONJA STAR URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/bf32fd97-d64d-429a-a4dd-d02828ff1d7c",
+    "images": [
+      "https://api.loyverse.com/image/bf32fd97-d64d-429a-a4dd-d02828ff1d7c"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10584",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "bf32fd97-d64d-429a-a4dd-d02828ff1d7c",
+    "loyverseVariantId": "10fc55c2-0968-4bb4-b73a-f85ea2a127f9",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "10fc55c2-0968-4bb4-b73a-f85ea2a127f9",
+        "sku": "10584",
+        "barcode": "10584SGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "232b5f59-5e45-44f9-b8e6-5373a85c06e6",
+        "sku": "10585",
+        "barcode": "10585SCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0f642271-172a-448e-b61a-e076b0a5ebde",
+        "sku": "10586",
+        "barcode": "10586MGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2564d2db-5564-41a8-bf0a-42de12ca7e5d",
+        "sku": "10587",
+        "barcode": "10587MCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bf0ab4c3-cc35-43c9-84e2-c4fafe20dab6",
+        "sku": "10588",
+        "barcode": "10588LGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d1c1670a-1bed-4f73-a2cc-fe0eacc45808",
+        "sku": "10589",
+        "barcode": "10589LCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8a350931-5976-4fa1-9c1d-175118cc16ba",
+        "sku": "10590",
+        "barcode": "10590XLGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "37d1a9d8-a54b-4d4d-b6a9-2efccbfa0bb0",
+        "sku": "10591",
+        "barcode": "10591XLCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Cobre"
+    ]
+  },
+  {
+    "id": "96553996-6bfe-4f09-b13b-819f2c25c779",
+    "name": "MONJA START URBAN • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/96553996-6bfe-4f09-b13b-819f2c25c779",
+    "images": [
+      "https://api.loyverse.com/image/96553996-6bfe-4f09-b13b-819f2c25c779"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Camiseta- 310gr Algodon</h2>",
+    "sku": "10577",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "96553996-6bfe-4f09-b13b-819f2c25c779",
+    "loyverseVariantId": "b6b01a33-776e-4a45-be28-2687ee1121bf",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b6b01a33-776e-4a45-be28-2687ee1121bf",
+        "sku": "10577",
+        "barcode": "10577SMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7148bdac-40d6-4bc7-904c-f4de2b654049",
+        "sku": "10578",
+        "barcode": "10578MNe",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "bba1356e-5c56-4f4c-8d51-ce244f4c1f50",
+        "sku": "10579",
+        "barcode": "10579MMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5adc8d67-78b2-4a14-bb72-60a9b8153500",
+        "sku": "10580",
+        "barcode": "10580LNe",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c26a0fc6-3bee-4aa3-b041-2f73fb3296ef",
+        "sku": "10581",
+        "barcode": "10581LMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "611f5ece-66d8-4b43-8e2e-3c37c42d0604",
+        "sku": "10582",
+        "barcode": "10582XLNe",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "74319900-65a9-40a7-92b2-dc711dcadde2",
+        "sku": "10583",
+        "barcode": "10583XLMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Negro"
+    ]
+  },
+  {
+    "id": "45164a62-22b8-4934-8546-ad5752e40711",
+    "name": "BRUIT URBAN • T-SHIRT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/45164a62-22b8-4934-8546-ad5752e40711",
+    "images": [
+      "https://api.loyverse.com/image/45164a62-22b8-4934-8546-ad5752e40711"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">T-Shirt- 250gr Algodon</h2>",
+    "sku": "10573",
+    "categoryLabel": "T-Shirt",
+    "loyverseItemId": "45164a62-22b8-4934-8546-ad5752e40711",
+    "loyverseVariantId": "a4bc3bd4-7d12-4ad7-96a4-842c95f1674b",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a4bc3bd4-7d12-4ad7-96a4-842c95f1674b",
+        "sku": "10573",
+        "barcode": "10573UNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "U",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "U",
+        "color": "Negro",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "c7bf1479-1209-4e0a-bc7a-98aff394ba6a",
+        "sku": "10574",
+        "barcode": "10574UMa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "U",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "U",
+        "color": "Marfil",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "c0fd7cce-8054-4ec2-8742-1c703e472c58",
+        "sku": "10575",
+        "barcode": "10575URo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "U",
+        "option2_value": "Rojo",
+        "option3_value": null,
+        "size": "U",
+        "color": "Rojo",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil",
+      "Rojo"
+    ]
+  },
+  {
+    "id": "086aed9c-ef5b-4baa-aa51-a41ef4e72544",
+    "name": "OVERSIZE DAMA • OVER DAMA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "<p>Burda de 220 Grs</p>",
+    "sku": "10571",
+    "categoryLabel": "Over Dama",
+    "loyverseItemId": "086aed9c-ef5b-4baa-aa51-a41ef4e72544",
+    "loyverseVariantId": "6cd62907-65e8-4b02-b3db-17e2373c1879",
+    "stock": 11,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6cd62907-65e8-4b02-b3db-17e2373c1879",
+        "sku": "10571",
+        "barcode": "10571S/M",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "S/M",
+        "color": "",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "89c286d8-04d9-4701-bacd-7caa051233af",
+        "sku": "10572",
+        "barcode": "10572L/XL",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "",
+        "in_stock": 7
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "f7f28342-865a-401b-9a4d-7bbe75d75d12",
+    "name": "OVNNI URBAN • BUZO NEW/B",
+    "category": "weird-oversize",
+    "price": 110000,
+    "image": "https://api.loyverse.com/image/f7f28342-865a-401b-9a4d-7bbe75d75d12",
+    "images": [
+      "https://api.loyverse.com/image/f7f28342-865a-401b-9a4d-7bbe75d75d12"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo 400g</h2>",
+    "sku": "10567",
+    "categoryLabel": "Buzo New/B",
+    "loyverseItemId": "f7f28342-865a-401b-9a4d-7bbe75d75d12",
+    "loyverseVariantId": "01c1b1dc-0e56-4be6-8ae7-a9618b24130d",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "01c1b1dc-0e56-4be6-8ae7-a9618b24130d",
+        "sku": "10567",
+        "barcode": "10567S/MNe",
+        "price": 0,
+        "cost": 80000,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c293390c-24d9-4062-9644-8d782a3318e1",
+        "sku": "10568",
+        "barcode": "10568S/MBe",
+        "price": 0,
+        "cost": 80000,
+        "option1_value": "S/M",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Beige",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "991d27c3-3879-429c-99c2-9cd4378e8873",
+        "sku": "10569",
+        "barcode": "10569L/XLNe",
+        "price": 0,
+        "cost": 80000,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1d2f6778-7b3f-4ba3-8fac-1a0068b9ab4b",
+        "sku": "10570",
+        "barcode": "10570L/XLBe",
+        "price": 0,
+        "cost": 80000,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Beige"
+    ]
+  },
+  {
+    "id": "6d853690-b309-4e5c-917e-adf4601bb673",
+    "name": "MEDITERRÁNEO URBANO • OVERSIZE PREMIUM",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/6d853690-b309-4e5c-917e-adf4601bb673",
+    "images": [
+      "https://api.loyverse.com/image/6d853690-b309-4e5c-917e-adf4601bb673"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Camiseta- 310gr Algodon</h2>",
+    "sku": "10555",
+    "categoryLabel": "Oversize Premium",
+    "loyverseItemId": "6d853690-b309-4e5c-917e-adf4601bb673",
+    "loyverseVariantId": "7f51595b-4f62-42e3-87c4-c3791341324e",
+    "stock": 5,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "7f51595b-4f62-42e3-87c4-c3791341324e",
+        "sku": "10555",
+        "barcode": "10555SRo",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "S",
+        "option2_value": "Rojo",
+        "option3_value": null,
+        "size": "S",
+        "color": "Rojo",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "db82f631-b566-4bf5-9e88-20b6ea3b6624",
+        "sku": "10556",
+        "barcode": "10556SNe",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7391a2dc-106b-420d-b2a6-b280c088c9e9",
+        "sku": "10557",
+        "barcode": "10557SMa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a6f66802-f5af-4d96-bc21-70eda1a2532b",
+        "sku": "10558",
+        "barcode": "10558MRo",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "M",
+        "option2_value": "Rojo",
+        "option3_value": null,
+        "size": "M",
+        "color": "Rojo",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0c0c33b7-ff97-48ce-b94c-fdae6f553eef",
+        "sku": "10559",
+        "barcode": "10559MNe",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c5688cf6-7c40-430e-bfbf-4ea709de4b89",
+        "sku": "10560",
+        "barcode": "10560MMa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "15c1eb6b-ffe0-419e-a1f9-bef007e19e8f",
+        "sku": "10561",
+        "barcode": "10561LRo",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "L",
+        "option2_value": "Rojo",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rojo",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "048084e3-f921-4598-bdee-5713e6ffa0fc",
+        "sku": "10562",
+        "barcode": "10562LNe",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "f570fe04-887c-45af-8c07-201591e86433",
+        "sku": "10563",
+        "barcode": "10563LMa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b77f46b8-3ce8-443e-9306-afc9326c79fa",
+        "sku": "10564",
+        "barcode": "10564XLRo",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "XL",
+        "option2_value": "Rojo",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rojo",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1aa7c96d-4643-43cf-a5e7-265e9c67f1ab",
+        "sku": "10565",
+        "barcode": "10565XLNe",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "d890e2bc-3f3d-4b63-9829-36f3576ec68e",
+        "sku": "10566",
+        "barcode": "10566XLMa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Rojo",
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "869a64ce-3a2d-48f0-b797-4d487559a3ae",
+    "name": "BRUIT URBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/869a64ce-3a2d-48f0-b797-4d487559a3ae",
+    "images": [
+      "https://api.loyverse.com/image/869a64ce-3a2d-48f0-b797-4d487559a3ae"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Acid Wash 400g</h2>",
+    "sku": "10540",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "869a64ce-3a2d-48f0-b797-4d487559a3ae",
+    "loyverseVariantId": "ac84487c-1ee8-4b12-985e-e5ae9deee766",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "ac84487c-1ee8-4b12-985e-e5ae9deee766",
+        "sku": "10540",
+        "barcode": "10540SNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "75ad1030-dcc4-42e0-ae06-a2601c5e949a",
+        "sku": "10541",
+        "barcode": "10541SCo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bc40a665-8182-43a1-96a1-df666d3b8358",
+        "sku": "10542",
+        "barcode": "10542MNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1485d20a-72e4-4894-9561-0dff4174b938",
+        "sku": "10543",
+        "barcode": "10543MCo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fde4dba8-1879-478d-aebb-68c040aa8ece",
+        "sku": "10544",
+        "barcode": "10544LNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6c2eed24-1246-42f7-8706-953f0549ec38",
+        "sku": "10545",
+        "barcode": "10545LCo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0cf441ca-ce19-4c55-9216-9ebd18dae1b0",
+        "sku": "10546",
+        "barcode": "10546XLNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9b511dd7-1320-4953-8725-d3f8d48331be",
+        "sku": "10547",
+        "barcode": "10547XLCo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6eea8256-d893-4f8a-84f1-f6aecdbc5b24",
+        "sku": "10548",
+        "barcode": "10548XXLNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "70d4d885-a595-4097-b3f4-09f3a581531c",
+        "sku": "10549",
+        "barcode": "10549XXLCo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Cobre",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Cobre"
+    ]
+  },
+  {
+    "id": "85130264-77f7-47d3-be81-bb7311eba7cf",
+    "name": "OVNNI URBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/85130264-77f7-47d3-be81-bb7311eba7cf",
+    "images": [
+      "https://api.loyverse.com/image/85130264-77f7-47d3-be81-bb7311eba7cf"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Buzo. Acid Wash 400g</h2>",
+    "sku": "10535",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "85130264-77f7-47d3-be81-bb7311eba7cf",
+    "loyverseVariantId": "b840f215-00f1-4b90-8b78-ef37f944c882",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b840f215-00f1-4b90-8b78-ef37f944c882",
+        "sku": "10535",
+        "barcode": "10535SNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "521b081d-a4f2-43ad-b23f-9d8d6eced7a4",
+        "sku": "10536",
+        "barcode": "10536MNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "896e9d5c-67fd-465e-9535-928fed7bf62e",
+        "sku": "10537",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8cde8755-275b-493c-8fa6-6d58f1a0feba",
+        "sku": "10538",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2ced4173-d536-4b10-b452-52d5fefcead4",
+        "sku": "10539",
+        "barcode": "10539XXLNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "1a3b7867-575d-4301-92ea-72da3300d691",
+    "name": "ORBIT URBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/1a3b7867-575d-4301-92ea-72da3300d691",
+    "images": [
+      "https://api.loyverse.com/image/1a3b7867-575d-4301-92ea-72da3300d691"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Acid Wash 400g</h2>",
+    "sku": "10530",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "1a3b7867-575d-4301-92ea-72da3300d691",
+    "loyverseVariantId": "23825138-608c-4259-a649-88709dca9db1",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "23825138-608c-4259-a649-88709dca9db1",
+        "sku": "10530",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d51cfdfd-b477-4fdd-9262-5ab138a8693b",
+        "sku": "10531",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "92e8cc10-63c8-4dfc-83a5-2384f246461e",
+        "sku": "10532",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fa20533a-5f0e-4c9e-98b5-a878c703a73e",
+        "sku": "10533",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c42dc62c-96c4-4afc-9728-fdefa52fe950",
+        "sku": "10534",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "294f95f8-62b6-4c36-a04e-4027fc4d5dc7",
+    "name": "UNTIED URBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/294f95f8-62b6-4c36-a04e-4027fc4d5dc7",
+    "images": [
+      "https://api.loyverse.com/image/294f95f8-62b6-4c36-a04e-4027fc4d5dc7"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Acid Wash 400g</h2>",
+    "sku": "10525",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "294f95f8-62b6-4c36-a04e-4027fc4d5dc7",
+    "loyverseVariantId": "998e9a97-747f-4ce2-acbf-9fddbb6e0e18",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "998e9a97-747f-4ce2-acbf-9fddbb6e0e18",
+        "sku": "10525",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "44e17c9d-9d92-4dab-a55d-3be38c208260",
+        "sku": "10526",
+        "barcode": "10526MNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "15d29abe-1b36-4813-b4e8-aed771d67654",
+        "sku": "10527",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f55f279e-1958-4e20-94f7-447678f3a768",
+        "sku": "10528",
+        "barcode": "10528XLNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "93ab7fde-394b-486a-b408-5da912bc01ed",
+        "sku": "10529",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "db2d5b92-2abb-4392-9f6d-d8c29039827f",
+    "name": "ANGEL UNION • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/db2d5b92-2abb-4392-9f6d-d8c29039827f",
+    "images": [
+      "https://api.loyverse.com/image/db2d5b92-2abb-4392-9f6d-d8c29039827f"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Acid Wash 400g</h2>",
+    "sku": "10520",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "db2d5b92-2abb-4392-9f6d-d8c29039827f",
+    "loyverseVariantId": "ac5f0e9c-e8bf-4410-82f2-fdddc6cd8ec8",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "ac5f0e9c-e8bf-4410-82f2-fdddc6cd8ec8",
+        "sku": "10520",
+        "barcode": "10520SGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "924f329b-986c-4e3e-8fcc-03b12db4b3f8",
+        "sku": "10521",
+        "barcode": "10521MGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4d02217a-cd20-41c6-a5e9-cf1da622aeb2",
+        "sku": "10522",
+        "barcode": "10522LGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b38dad89-efae-4979-94fb-7763ab365341",
+        "sku": "10523",
+        "barcode": "10523XLGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7e821dfb-5111-4cd1-adef-b71e4b63980f",
+        "sku": "10524",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "f95f779a-9d1e-4fcb-ad9f-7ef6c80a310e",
+    "name": "BUNNY URBAN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/f95f779a-9d1e-4fcb-ad9f-7ef6c80a310e",
+    "images": [
+      "https://api.loyverse.com/image/f95f779a-9d1e-4fcb-ad9f-7ef6c80a310e"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Acid Wash 400g</h2>",
+    "sku": "10515",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "f95f779a-9d1e-4fcb-ad9f-7ef6c80a310e",
+    "loyverseVariantId": "09e1cc33-d0de-46ae-8634-46c17079dc7a",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "09e1cc33-d0de-46ae-8634-46c17079dc7a",
+        "sku": "10515",
+        "barcode": "10515SGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b8bbb1ff-8a9d-4f7b-afad-c4e997774e56",
+        "sku": "10516",
+        "barcode": "10516MGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "72642260-f15d-4d27-90cd-b29ed3eb4932",
+        "sku": "10517",
+        "barcode": "10517LGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "283c9743-35b9-4779-9ee6-bdaa809ba1f3",
+        "sku": "10518",
+        "barcode": "10518XLGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "09e0b6a4-f7f5-4253-a62d-1f14cc9c34cd",
+        "sku": "10519",
+        "barcode": "10519XXLGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "6daa098a-f5c4-4d1e-8757-1fb7c0e90292",
+    "name": "GREATNESS URBANN • BUZO ACIDWASH",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/6daa098a-f5c4-4d1e-8757-1fb7c0e90292",
+    "images": [
+      "https://api.loyverse.com/image/6daa098a-f5c4-4d1e-8757-1fb7c0e90292"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Acid Wash 400g</h2>",
+    "sku": "10510",
+    "categoryLabel": "Buzo AcidWash",
+    "loyverseItemId": "6daa098a-f5c4-4d1e-8757-1fb7c0e90292",
+    "loyverseVariantId": "04e5e996-fb2a-4034-ae45-a0c146662235",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "04e5e996-fb2a-4034-ae45-a0c146662235",
+        "sku": "10510",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ac7f3378-503a-496c-b752-76d350885488",
+        "sku": "10511",
+        "barcode": "10511MGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f84bc372-149e-43a7-9a42-a82ae640fa51",
+        "sku": "10512",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "13bf26fd-2e0d-415e-a028-3df972757930",
+        "sku": "10513",
+        "barcode": "10513XLGr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d8c535d5-9e9a-41d9-b814-04fcc21920ea",
+        "sku": "10514",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XXL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XXL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "8b05a36c-c32c-4b82-b864-b5ad033ebf62",
+    "name": "FONT CHINE URBAN • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/8b05a36c-c32c-4b82-b864-b5ad033ebf62",
+    "images": [
+      "https://api.loyverse.com/image/8b05a36c-c32c-4b82-b864-b5ad033ebf62"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Buzo. Capotero 250g</h2>",
+    "sku": "10506",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "8b05a36c-c32c-4b82-b864-b5ad033ebf62",
+    "loyverseVariantId": "6affbefe-5501-4d58-9b1c-92e7731c4132",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6affbefe-5501-4d58-9b1c-92e7731c4132",
+        "sku": "10506",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Chocolate",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d05c581d-7301-413f-9fee-713db503e308",
+        "sku": "10507",
+        "barcode": "10507L/XLCh",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Chocolate",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Chocolate"
+    ]
+  },
+  {
+    "id": "c038cb5b-1dca-4aa7-b7f9-939a91b107cd",
+    "name": "HEAVENS GATE URBAN • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/c038cb5b-1dca-4aa7-b7f9-939a91b107cd",
+    "images": [
+      "https://api.loyverse.com/image/c038cb5b-1dca-4aa7-b7f9-939a91b107cd"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Buzo. Capotero 250g</h2>",
+    "sku": "10508",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "c038cb5b-1dca-4aa7-b7f9-939a91b107cd",
+    "loyverseVariantId": "b39a8bcc-aff0-414a-8184-2947225bf4b6",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b39a8bcc-aff0-414a-8184-2947225bf4b6",
+        "sku": "10508",
+        "barcode": "10508S/MCa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "34784d9f-c9ef-40d9-a99c-8e7de03cd4a7",
+        "sku": "10509",
+        "barcode": "10509L/XLCa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cafe"
+    ]
+  },
+  {
+    "id": "928f2fd4-5d11-49f3-bfa9-13a1ff0be315",
+    "name": "MONTSERRAT URBAN • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/928f2fd4-5d11-49f3-bfa9-13a1ff0be315",
+    "images": [
+      "https://api.loyverse.com/image/928f2fd4-5d11-49f3-bfa9-13a1ff0be315"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Buzo. Capotero 250g</h2>",
+    "sku": "10502",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "928f2fd4-5d11-49f3-bfa9-13a1ff0be315",
+    "loyverseVariantId": "bcf74975-1d1b-4aa6-b926-40a393011cd6",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "bcf74975-1d1b-4aa6-b926-40a393011cd6",
+        "sku": "10502",
+        "barcode": "10502SM/Be",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "SM/",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "SM/",
+        "color": "Beige",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cc807eda-b17e-4a3b-909d-f58af5e2fed2",
+        "sku": "10503",
+        "barcode": "10503L/XLBe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Beige"
+    ]
+  },
+  {
+    "id": "82d353fc-1c22-42a6-b6dc-b21ceda80851",
+    "name": "ANGEL MOLESTO URBAN • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/82d353fc-1c22-42a6-b6dc-b21ceda80851",
+    "images": [
+      "https://api.loyverse.com/image/82d353fc-1c22-42a6-b6dc-b21ceda80851"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Capotero 250g</h2>",
+    "sku": "10500",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "82d353fc-1c22-42a6-b6dc-b21ceda80851",
+    "loyverseVariantId": "383efc3b-e823-4f24-94fd-33d03ae07d9b",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "383efc3b-e823-4f24-94fd-33d03ae07d9b",
+        "sku": "10500",
+        "barcode": "10500S/MMr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Mrfil",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Mrfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0a5df5a6-5897-424c-b473-e0f15bcd10e8",
+        "sku": "10501",
+        "barcode": "10501L/XLMr",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Mrfil",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Mrfil",
+        "in_stock": 2
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Mrfil"
+    ]
+  },
+  {
+    "id": "e1cf1cce-dfcb-4e5c-bdc5-60cc6d049b82",
+    "name": "SHIELD URBAN • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/e1cf1cce-dfcb-4e5c-bdc5-60cc6d049b82",
+    "images": [
+      "https://api.loyverse.com/image/e1cf1cce-dfcb-4e5c-bdc5-60cc6d049b82"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Capotero 250g</h2>",
+    "sku": "10498",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "e1cf1cce-dfcb-4e5c-bdc5-60cc6d049b82",
+    "loyverseVariantId": "cafee8a9-e7bb-4cab-81f4-95f0483208de",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cafee8a9-e7bb-4cab-81f4-95f0483208de",
+        "sku": "10498",
+        "barcode": "10498S/MNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "79ef37c0-5f92-4bf0-84f5-03831b55177f",
+        "sku": "10499",
+        "barcode": "10499L/XLNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "4d27b681-4eef-46f6-b198-0338e44c356f",
+    "name": "HEAVEN MADE • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/4d27b681-4eef-46f6-b198-0338e44c356f",
+    "images": [
+      "https://api.loyverse.com/image/4d27b681-4eef-46f6-b198-0338e44c356f"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Capotero 250g</h2>",
+    "sku": "10494",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "4d27b681-4eef-46f6-b198-0338e44c356f",
+    "loyverseVariantId": "946a3384-9030-4ca6-a493-987757caa0b9",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "946a3384-9030-4ca6-a493-987757caa0b9",
+        "sku": "10494",
+        "barcode": "10494S/MVe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2bbeeb5a-ec29-4bf1-853a-88ab3faddcae",
+        "sku": "10496",
+        "barcode": "10496L/XLVe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Verde",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Verde"
+    ]
+  },
+  {
+    "id": "008bf019-9462-4bc7-915f-4eb13746ac52",
+    "name": "ARCANGEL URBANO • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/008bf019-9462-4bc7-915f-4eb13746ac52",
+    "images": [
+      "https://api.loyverse.com/image/008bf019-9462-4bc7-915f-4eb13746ac52"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Buzo. Capotero 250g</h2>",
+    "sku": "10492",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "008bf019-9462-4bc7-915f-4eb13746ac52",
+    "loyverseVariantId": "fb308d36-2a83-4b59-8373-b700ddeed1c0",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "fb308d36-2a83-4b59-8373-b700ddeed1c0",
+        "sku": "10492",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Beige",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f7212e87-8622-43b7-bad8-b560e766b1a8",
+        "sku": "10495",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f5c4a70a-10bf-4cf9-a811-25e5ce93e7f0",
+        "sku": "10493",
+        "barcode": "10493L/XLBe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Beige",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Beige",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a3711a92-2ec2-4793-ba12-961251c5f7bb",
+        "sku": "10497",
+        "barcode": "10497L/XLCa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Beige",
+      "Cafe"
+    ]
+  },
+  {
+    "id": "28d738f2-4d40-4d8c-9675-6f5e49304790",
+    "name": "CLOSURE URBAN • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 95000,
+    "image": "https://api.loyverse.com/image/28d738f2-4d40-4d8c-9675-6f5e49304790",
+    "images": [
+      "https://api.loyverse.com/image/28d738f2-4d40-4d8c-9675-6f5e49304790"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Capotero 250g</h2>",
+    "sku": "10488",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "28d738f2-4d40-4d8c-9675-6f5e49304790",
+    "loyverseVariantId": "21a2212d-5b00-414e-aea0-44e40464a087",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "21a2212d-5b00-414e-aea0-44e40464a087",
+        "sku": "10488",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7c4cb684-a251-4871-bc7f-6fca91253372",
+        "sku": "10489",
+        "barcode": "10489S/MVe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S/M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "32c2f382-f876-49ae-aaa9-98f171e7d2f9",
+        "sku": "10490",
+        "barcode": "10490L/XLCa",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ca499df6-2d9f-4349-b5dc-880cdbfffd93",
+        "sku": "10491",
+        "barcode": "10491L/XLVe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L/XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Verde",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cafe",
+      "Verde"
+    ]
+  },
+  {
+    "id": "e4805abe-43a4-4c55-83e3-2f1760092f89",
+    "name": "GREATNESS URBAN • BUZO CAPOTERO",
+    "category": "weird-oversize",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/e4805abe-43a4-4c55-83e3-2f1760092f89",
+    "images": [
+      "https://api.loyverse.com/image/e4805abe-43a4-4c55-83e3-2f1760092f89"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Buzo. Capotero250g</h2>",
+    "sku": "10484",
+    "categoryLabel": "Buzo Capotero",
+    "loyverseItemId": "e4805abe-43a4-4c55-83e3-2f1760092f89",
+    "loyverseVariantId": "2eab1ac8-b76a-4cb6-b16d-7fdb9adaa49d",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "2eab1ac8-b76a-4cb6-b16d-7fdb9adaa49d",
+        "sku": "10484",
+        "barcode": "10484S/MNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S/M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "82a80489-caef-44a9-bc0d-66c8ae1c6802",
+        "sku": "10485",
+        "barcode": "10485S/MMa",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S/M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S/M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6e71e6b5-8e77-4881-a462-ae2330ee7252",
+        "sku": "10486",
+        "barcode": "10486L/XLNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L/XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "33be7d38-9e91-4a21-b549-f9e6d942c0f8",
+        "sku": "10487",
+        "barcode": "10487L/XLMa",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L/XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L/XL",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "ea99fc21-baed-482f-97c9-387027bd4324",
+    "name": "CALAVERA • OVERSIZE ACIDWASH",
+    "category": "weird-oversize",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/ea99fc21-baed-482f-97c9-387027bd4324",
+    "images": [
+      "https://api.loyverse.com/image/ea99fc21-baed-482f-97c9-387027bd4324"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g&nbsp;</h2>",
+    "sku": "10468",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "ea99fc21-baed-482f-97c9-387027bd4324",
+    "loyverseVariantId": "05ae6049-79db-4048-8254-0f13a296b36f",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "05ae6049-79db-4048-8254-0f13a296b36f",
+        "sku": "10468",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b4f40352-3d88-454f-87e2-2f449403ae72",
+        "sku": "10469",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0f06c42f-35b3-4d25-95bb-8c7b63ede603",
+        "sku": "10470",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2c63819c-3f03-433f-aa85-b8072151d368",
+        "sku": "10471",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c663cf4b-85e0-4cdd-83f4-97ff77e1956e",
+        "sku": "10472",
+        "barcode": "10472MNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0a401454-be78-45f9-9429-3f2919a9445e",
+        "sku": "10473",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bbcc029d-544a-45ab-9478-48abc20bee33",
+        "sku": "10474",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7483f74e-46ea-4f07-b3cf-a408b6d8bb2d",
+        "sku": "10475",
+        "barcode": "10475LNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d5e00208-9839-4ba3-9872-981057979179",
+        "sku": "10476",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f7060edd-b9a6-4615-af63-810d172fd898",
+        "sku": "10477",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "84f11f05-44c6-46af-8bd7-488e35a3122c",
+        "sku": "10478",
+        "barcode": "10478XLNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "be15460d-949c-43f7-be85-80571baf5d7a",
+        "sku": "10479",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "57b26da8-1ffc-4f3d-8f47-d6f348554c05",
+    "name": "DOG URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/57b26da8-1ffc-4f3d-8f47-d6f348554c05",
+    "images": [
+      "https://api.loyverse.com/image/57b26da8-1ffc-4f3d-8f47-d6f348554c05"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10460",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "57b26da8-1ffc-4f3d-8f47-d6f348554c05",
+    "loyverseVariantId": "07ec264b-ab2d-4831-9bc1-229bdc924d59",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "07ec264b-ab2d-4831-9bc1-229bdc924d59",
+        "sku": "10460",
+        "barcode": "10460SNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d54f485b-92e8-4bce-929f-53c9f6d0b659",
+        "sku": "10461",
+        "barcode": "10461SGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d9086504-8c6d-402f-82d8-89e87ae836a2",
+        "sku": "10462",
+        "barcode": "10462MNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "43869034-8898-4aaf-8962-ef4381bf9069",
+        "sku": "10463",
+        "barcode": "10463MGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4529caaf-fbf2-447b-a67b-d9a31822e0fe",
+        "sku": "10464",
+        "barcode": "10464LNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3cc354d9-3bf9-4f7c-af38-92431c13d002",
+        "sku": "10465",
+        "barcode": "10465LGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "60f72db6-eed5-4706-a82c-ffa78113067b",
+        "sku": "10466",
+        "barcode": "10466XLNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "af14f334-432e-494e-bd0a-a2cd76e47963",
+        "sku": "10467",
+        "barcode": "10467XLGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Gris"
+    ]
+  },
+  {
+    "id": "3c1c9921-5e61-482f-80b4-f5319cf0757c",
+    "name": "OVNNI URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/3c1c9921-5e61-482f-80b4-f5319cf0757c",
+    "images": [
+      "https://api.loyverse.com/image/3c1c9921-5e61-482f-80b4-f5319cf0757c"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10452",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "3c1c9921-5e61-482f-80b4-f5319cf0757c",
+    "loyverseVariantId": "fc9c0b30-908e-4c47-917a-f13d42e62f5e",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "fc9c0b30-908e-4c47-917a-f13d42e62f5e",
+        "sku": "10452",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a50128e2-5067-4b7a-99ef-3e3ce7768564",
+        "sku": "10453",
+        "barcode": "10453SMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Morado",
+        "option3_value": null,
+        "size": "S",
+        "color": "Morado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f3f26080-123c-4a89-a0f5-baaf644bcac6",
+        "sku": "10454",
+        "barcode": "10454MNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "14c27035-899b-4dd0-826c-edebc8a0a6b1",
+        "sku": "10455",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Morado",
+        "option3_value": null,
+        "size": "M",
+        "color": "Morado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "20f91163-a34a-4737-95df-3d2f5ddca6f7",
+        "sku": "10456",
+        "barcode": "10456LNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f227ea7f-4978-49fd-8bec-c891c4512475",
+        "sku": "10457",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Morado",
+        "option3_value": null,
+        "size": "L",
+        "color": "Morado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "41c3dc54-bba7-48a8-ab14-cfddafdc4608",
+        "sku": "10458",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9998fe98-d800-4fcf-bc2f-4e9ea89b1f51",
+        "sku": "10459",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Morado",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Morado",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Morado"
+    ]
+  },
+  {
+    "id": "1a2e5abe-726c-483a-a7df-9d02b6ffd01e",
+    "name": "UNTIED URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/1a2e5abe-726c-483a-a7df-9d02b6ffd01e",
+    "images": [
+      "https://api.loyverse.com/image/1a2e5abe-726c-483a-a7df-9d02b6ffd01e"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10436",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "1a2e5abe-726c-483a-a7df-9d02b6ffd01e",
+    "loyverseVariantId": "507e9659-b754-47ee-838b-bd17b26ea016",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "507e9659-b754-47ee-838b-bd17b26ea016",
+        "sku": "10436",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "s",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "s",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5cb66c25-e33f-4caf-b569-11c56c06e0e4",
+        "sku": "10437",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "s",
+        "option2_value": "CObre",
+        "option3_value": null,
+        "size": "s",
+        "color": "CObre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "14f0ba5b-a082-4732-b227-37556e49c167",
+        "sku": "10438",
+        "barcode": "10438SVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "s",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "s",
+        "color": "Verde",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "017a24aa-c75e-4a55-a5d7-d9bed3f24fd7",
+        "sku": "10439",
+        "barcode": "10439SGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "s",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "s",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ea5111c4-b653-4a1a-bf7d-c82edc61df4c",
+        "sku": "10440",
+        "barcode": "10440MNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "m",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "m",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b36a6408-0fb2-4e55-8e90-da7cfdb68073",
+        "sku": "10441",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "m",
+        "option2_value": "CObre",
+        "option3_value": null,
+        "size": "m",
+        "color": "CObre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "685f33cd-772a-4763-befe-7352f4f30a7b",
+        "sku": "10442",
+        "barcode": "10442MVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "m",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "m",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dc037228-e0e3-4150-a968-d0288098494d",
+        "sku": "10443",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "m",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "m",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9fbc1494-38d1-4336-a6f3-80c24b2bcf29",
+        "sku": "10444",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "l",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "l",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "31abdcc3-a62a-4fe0-83c8-b382d559762d",
+        "sku": "10445",
+        "barcode": "10445LCO",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "l",
+        "option2_value": "CObre",
+        "option3_value": null,
+        "size": "l",
+        "color": "CObre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0157179e-9205-4ec9-967e-8c21a0ec7a53",
+        "sku": "10446",
+        "barcode": "10446LVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "l",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "l",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "619a79a8-fd57-4e34-9ff8-12b20a5b04cc",
+        "sku": "10447",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "l",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "l",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8e2f64a4-63cf-401c-be21-6a24411edd0b",
+        "sku": "10448",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "xl",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "xl",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "606ff240-47a0-4c87-a945-3fde62a1c280",
+        "sku": "10449",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "xl",
+        "option2_value": "CObre",
+        "option3_value": null,
+        "size": "xl",
+        "color": "CObre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5b840e2d-8df6-4f3d-ab7b-08eae5696e91",
+        "sku": "10450",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "xl",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "xl",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b6f43df8-c6c4-4b0f-b521-589f666abeca",
+        "sku": "10451",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "xl",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "xl",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "CObre",
+      "Verde",
+      "Gris"
+    ]
+  },
+  {
+    "id": "fd10434a-3759-457b-ac57-6bbc42ca1415",
+    "name": "THE STREET URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/fd10434a-3759-457b-ac57-6bbc42ca1415",
+    "images": [
+      "https://api.loyverse.com/image/fd10434a-3759-457b-ac57-6bbc42ca1415"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10428",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "fd10434a-3759-457b-ac57-6bbc42ca1415",
+    "loyverseVariantId": "438fe598-c3ed-436c-b27d-85b6bf10596a",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "438fe598-c3ed-436c-b27d-85b6bf10596a",
+        "sku": "10428",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "af41a728-841c-45ae-9418-3c4d3ff5c70c",
+        "sku": "10429",
+        "barcode": "10429SMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "55dfb041-49eb-4968-85ab-f45bdcbfe062",
+        "sku": "10430",
+        "barcode": "10430MNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d9f9d53a-70f5-4495-b2ab-67c536f1d1f5",
+        "sku": "10431",
+        "barcode": "10431MMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d27da819-a5d1-4f10-9652-cbe0f9d8a344",
+        "sku": "10432",
+        "barcode": "10432LNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1ce73827-7050-42e3-9f14-e774ef5360b0",
+        "sku": "10433",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2e3ab5d0-b0d9-4de8-bf7b-3f5ca56a280c",
+        "sku": "10434",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2ddb514f-6046-45a6-bc51-a4dfe7a582ca",
+        "sku": "10435",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "MoraLeche"
+    ]
+  },
+  {
+    "id": "884a5b28-7e5a-4926-a14a-fcf0d47d6dfb",
+    "name": "FONT CHINE URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/884a5b28-7e5a-4926-a14a-fcf0d47d6dfb",
+    "images": [
+      "https://api.loyverse.com/image/884a5b28-7e5a-4926-a14a-fcf0d47d6dfb"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10420",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "884a5b28-7e5a-4926-a14a-fcf0d47d6dfb",
+    "loyverseVariantId": "d284ebb6-402d-4b09-9bc4-3fec7cf15c21",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "d284ebb6-402d-4b09-9bc4-3fec7cf15c21",
+        "sku": "10420",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c46b9e8f-ac7c-4c59-8035-11832bf3dbef",
+        "sku": "10421",
+        "barcode": "10421SGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8bd9e81c-b2fc-4584-b40c-0a07d5283925",
+        "sku": "10422",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d8fa48bd-6fc8-4d56-836c-5b0064fd9a26",
+        "sku": "10423",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f4d91348-3620-4957-a254-b695c9b10e3a",
+        "sku": "10424",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a0d272d9-e2a2-46d2-aaa4-b8969dc8b780",
+        "sku": "10425",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1e7b0b56-1a49-423e-8c83-e38786beb372",
+        "sku": "10426",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a3dbb31c-3379-4f22-a9e1-0dcf96803d09",
+        "sku": "10427",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "Gris"
+    ]
+  },
+  {
+    "id": "529081b5-c51e-456d-9904-30bb1c857dc1",
+    "name": "ALWAYS FOREVER URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/529081b5-c51e-456d-9904-30bb1c857dc1",
+    "images": [
+      "https://api.loyverse.com/image/529081b5-c51e-456d-9904-30bb1c857dc1"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10412",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "529081b5-c51e-456d-9904-30bb1c857dc1",
+    "loyverseVariantId": "939d5d50-5059-40e3-9c5d-b784f742dd1f",
+    "stock": 5,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "939d5d50-5059-40e3-9c5d-b784f742dd1f",
+        "sku": "10412",
+        "barcode": "10412SVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "b8c9ec9b-e5f4-41a1-80d3-8db9f95acc7f",
+        "sku": "10413",
+        "barcode": "10413SMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "ba96f233-eecc-45a2-b901-bed5f0e0ca9f",
+        "sku": "10414",
+        "barcode": "10414MVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d6ec71d2-8dcc-43ac-8795-8651e38301c9",
+        "sku": "10415",
+        "barcode": "10415MMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d62ab351-5f22-429c-8d06-3766c5518d0e",
+        "sku": "10416",
+        "barcode": "10416LVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a298ae95-1748-436f-a02f-5299fed9d844",
+        "sku": "10417",
+        "barcode": "10417LMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "286bdcb3-4abc-4d73-af0b-4317085b7086",
+        "sku": "10418",
+        "barcode": "10418XLVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "868c0dd0-f004-4183-b82b-6e72458e73f3",
+        "sku": "10419",
+        "barcode": "10419XLMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Verde",
+      "MoraLeche"
+    ]
+  },
+  {
+    "id": "1431bde0-804a-4a3b-8de5-5cfa4373b4e4",
+    "name": "ARCANGEL URBANO • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/1431bde0-804a-4a3b-8de5-5cfa4373b4e4",
+    "images": [
+      "https://api.loyverse.com/image/1431bde0-804a-4a3b-8de5-5cfa4373b4e4"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10396",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "1431bde0-804a-4a3b-8de5-5cfa4373b4e4",
+    "loyverseVariantId": "e13f6b88-9cbb-417b-a3b0-d8fbb9bd15ad",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e13f6b88-9cbb-417b-a3b0-d8fbb9bd15ad",
+        "sku": "10396",
+        "barcode": "10396SCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2ab0d70c-7966-462a-bd9d-9add54662ec1",
+        "sku": "10397",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5fe3cfd5-a37b-4052-9cae-7e2c78bc55b3",
+        "sku": "10398",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "de3d6b2c-77d1-4beb-822e-5e6bba36ed08",
+        "sku": "10399",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "493a8f61-3ad2-4f3b-bdc4-3210c9c6b6bb",
+        "sku": "10400",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cac0d355-c0e9-4551-8219-af079ea75f9d",
+        "sku": "10401",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "363b1798-afbb-429f-ab22-8f8c13661feb",
+        "sku": "10402",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "77333b86-8130-4c16-b40b-fc9d6bb4d446",
+        "sku": "10403",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre",
+      "Gris"
+    ]
+  },
+  {
+    "id": "65ba9242-b6d5-40d4-970b-0ced5f8d8b78",
+    "name": "HEAVENS GATE URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/65ba9242-b6d5-40d4-970b-0ced5f8d8b78",
+    "images": [
+      "https://api.loyverse.com/image/65ba9242-b6d5-40d4-970b-0ced5f8d8b78"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10388",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "65ba9242-b6d5-40d4-970b-0ced5f8d8b78",
+    "loyverseVariantId": "cae395bf-4dee-4782-b11e-20d12f5327d7",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cae395bf-4dee-4782-b11e-20d12f5327d7",
+        "sku": "10388",
+        "barcode": "10388SMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b70d587d-8c93-4025-bb00-38bc3d311a19",
+        "sku": "10389",
+        "barcode": "10389SNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ff0c6f10-d922-40cf-970a-9ed8e76d559b",
+        "sku": "10390",
+        "barcode": "10390MMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b0e630fd-aeb4-4689-b547-d7ec9e57be93",
+        "sku": "10391",
+        "barcode": "10391MNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ab8ff206-2ab9-4689-8c5e-d8774536b7c6",
+        "sku": "10392",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "87acd4b8-d8f2-439b-bfc3-29686a4f886d",
+        "sku": "10393",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f8c3756f-c241-4118-9242-31e1530f0c72",
+        "sku": "10394",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5ea399dd-0db1-4511-b941-dd64020df249",
+        "sku": "10395",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "MoraLeche",
+      "Negro"
+    ]
+  },
+  {
+    "id": "49ff8925-e8b7-432c-9fdd-25295b072a61",
+    "name": "BUNNY URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/49ff8925-e8b7-432c-9fdd-25295b072a61",
+    "images": [
+      "https://api.loyverse.com/image/49ff8925-e8b7-432c-9fdd-25295b072a61"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10384",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "49ff8925-e8b7-432c-9fdd-25295b072a61",
+    "loyverseVariantId": "fd214f9d-dc70-47f4-98af-1fd90102fa80",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "fd214f9d-dc70-47f4-98af-1fd90102fa80",
+        "sku": "10384",
+        "barcode": "10384SNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fd8d12ca-ec9f-4061-8e42-beef5308b05c",
+        "sku": "10385",
+        "barcode": "10385MNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4925b31f-bf08-40ad-822d-6d0fb5b3d513",
+        "sku": "10386",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "2ee93027-9b56-41d4-ad81-969c0f6b0038",
+        "sku": "10387",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "a004cfc8-67d7-417b-b831-c263ed83bdac",
+    "name": "MONTSERRAT URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/a004cfc8-67d7-417b-b831-c263ed83bdac",
+    "images": [
+      "https://api.loyverse.com/image/a004cfc8-67d7-417b-b831-c263ed83bdac"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10380",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "a004cfc8-67d7-417b-b831-c263ed83bdac",
+    "loyverseVariantId": "97742799-b74a-4580-86e1-c00aaaf7623f",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "97742799-b74a-4580-86e1-c00aaaf7623f",
+        "sku": "10380",
+        "barcode": "10380SVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "be393403-5a57-4319-9d66-1b31f6bcc39b",
+        "sku": "10381",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "69c2c8f2-250c-4bbe-886e-4dcd991f6532",
+        "sku": "10382",
+        "barcode": "10382LVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a98039b8-0216-4743-9fa5-5b09df13e27c",
+        "sku": "10383",
+        "barcode": "10383XLVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Verde",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Verde"
+    ]
+  },
+  {
+    "id": "3decfd37-23c1-4f0a-97dd-3d3ac1a35477",
+    "name": "SHIELD URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://api.loyverse.com/image/3decfd37-23c1-4f0a-97dd-3d3ac1a35477",
+    "images": [
+      "https://api.loyverse.com/image/3decfd37-23c1-4f0a-97dd-3d3ac1a35477"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10364",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "3decfd37-23c1-4f0a-97dd-3d3ac1a35477",
+    "loyverseVariantId": "40f44729-3a01-4ffc-9f0c-70c8077c491b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "40f44729-3a01-4ffc-9f0c-70c8077c491b",
+        "sku": "10364",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "S",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d122f1d5-a517-4a87-a691-f015284fb25c",
+        "sku": "10367",
+        "barcode": "10367SNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "de057f4b-7fcd-4a3e-bd50-da1aa47340c2",
+        "sku": "10370",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "M",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "08ac3f16-f7c7-4e03-ba01-4084a3914829",
+        "sku": "10373",
+        "barcode": "10373MNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5cb4e6ce-5b8d-48a7-be4e-16342ace742b",
+        "sku": "10376",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "L",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c9d34ddf-99ca-47f0-acfb-064a1d4060eb",
+        "sku": "10377",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ca395814-a091-4137-8b6c-0f4b83a13c7a",
+        "sku": "10378",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Azul",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Azul",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e3b6737e-edd8-4093-a371-6e26844e033c",
+        "sku": "10379",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Azul",
+      "Negro"
+    ]
+  },
+  {
+    "id": "13be3421-bfda-4092-adcb-14304c9a5e7e",
+    "name": "HEAVEN MADE • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10360",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "13be3421-bfda-4092-adcb-14304c9a5e7e",
+    "loyverseVariantId": "1af59c35-8fe2-4487-8fb5-aa06b0e5a0d6",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "1af59c35-8fe2-4487-8fb5-aa06b0e5a0d6",
+        "sku": "10360",
+        "barcode": "10360SCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "370d330d-49f1-4fbd-990e-191d3025d39b",
+        "sku": "10365",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ef921386-5603-472e-9206-354e07295fa3",
+        "sku": "10366",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "85c87ddb-01c5-4011-b1f4-554f4a55ee86",
+        "sku": "10361",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "24cdf512-644a-4fce-84bd-ba5b9998727b",
+        "sku": "10368",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fe3c3728-0954-47b7-942c-0dd1029612c1",
+        "sku": "10369",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2a8acd45-722d-4166-8173-dab5bf29c563",
+        "sku": "10362",
+        "barcode": "10362LCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "67eda32a-e221-4484-85d6-a516cdb00ecd",
+        "sku": "10371",
+        "barcode": "10371LVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "41195c6b-43a4-444c-8ae7-a37ba767b42c",
+        "sku": "10372",
+        "barcode": "10372LNe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a75caddb-8503-4216-aa41-5c9eb28ac28b",
+        "sku": "10363",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "563387f8-0f82-4ac8-8a78-fd6c8b981855",
+        "sku": "10374",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f6caea1f-d758-4a29-a543-b1a1d0c8650e",
+        "sku": "10375",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre",
+      "Verde",
+      "Negro"
+    ]
+  },
+  {
+    "id": "22894363-d23b-4956-be60-32b1fc5f2013",
+    "name": "ARCANGEL URBANO • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10352",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "22894363-d23b-4956-be60-32b1fc5f2013",
+    "loyverseVariantId": "235b5456-325a-4e21-9b0e-3d45839eb771",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "235b5456-325a-4e21-9b0e-3d45839eb771",
+        "sku": "10352",
+        "barcode": "10397SGr",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "672cdaf6-cadf-49c3-aa2f-7eea8d15d9f7",
+        "sku": "10353",
+        "barcode": "10353SMo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Morado",
+        "option3_value": null,
+        "size": "S",
+        "color": "Morado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7ba06f2e-f740-4780-a3fc-579c58720bcb",
+        "sku": "10354",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c7fa7d6b-07af-46e2-9c5b-a222d621bc2e",
+        "sku": "10355",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Morado",
+        "option3_value": null,
+        "size": "M",
+        "color": "Morado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e923786e-7793-4397-a206-070139c8f7fa",
+        "sku": "10356",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2098d11e-469f-45aa-9d39-b158c90d061c",
+        "sku": "10357",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Morado",
+        "option3_value": null,
+        "size": "L",
+        "color": "Morado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7afcd029-a7eb-4cce-9ba2-c9f3cee6f2ad",
+        "sku": "10358",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "97461745-0d2b-4f58-9d1a-e922d250964a",
+        "sku": "10359",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Morado",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Morado",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris",
+      "Morado"
+    ]
+  },
+  {
+    "id": "96e1f0bd-8c1d-419f-a2e6-536c4003351e",
+    "name": "EVERYTHING URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g&nbsp;</h2>",
+    "sku": "10348",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "96e1f0bd-8c1d-419f-a2e6-536c4003351e",
+    "loyverseVariantId": "f5d3703c-5465-4f89-9a6f-b4c476cbf861",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "f5d3703c-5465-4f89-9a6f-b4c476cbf861",
+        "sku": "10348",
+        "barcode": "10348SVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f17a8860-00f1-443c-9795-85982e50a0c2",
+        "sku": "10349",
+        "barcode": "10349MVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5a3c0945-e7ac-4e20-a98e-35a7e147bbc0",
+        "sku": "10350",
+        "barcode": "10350LVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d4806175-8555-4e94-b7e7-45e231b3f598",
+        "sku": "10351",
+        "barcode": "10351XLVe",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Verde",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Verde"
+    ]
+  },
+  {
+    "id": "b32189d4-1fb2-4db3-8e12-3ee1ffda0ffc",
+    "name": "GREATNESS URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10344",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "b32189d4-1fb2-4db3-8e12-3ee1ffda0ffc",
+    "loyverseVariantId": "ab9ad60e-8ab2-4cb6-8b25-2acbef2be675",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "ab9ad60e-8ab2-4cb6-8b25-2acbef2be675",
+        "sku": "10344",
+        "barcode": "10344SCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "S",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cobre",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "01c8de3d-681a-482e-9d8d-75f99e13704c",
+        "sku": "10345",
+        "barcode": null,
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "M",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "91fa7919-0a75-48e5-a55f-c45a283a11f6",
+        "sku": "10346",
+        "barcode": "10346LCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "L",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cobre",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "18a8ed2f-7e7f-46a8-acb8-e7f1a7fcdccc",
+        "sku": "10347",
+        "barcode": "10347XLCo",
+        "price": 0,
+        "cost": 31000,
+        "option1_value": "XL",
+        "option2_value": "Cobre",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cobre",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cobre"
+    ]
+  },
+  {
+    "id": "0637c9f4-cc3f-4d5c-a677-78133f2bcbe0",
+    "name": "CLOSURE URBAN • OVERSIZE ACIDWASH",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/0637c9f4-cc3f-4d5c-a677-78133f2bcbe0",
+    "images": [
+      "https://api.loyverse.com/image/0637c9f4-cc3f-4d5c-a677-78133f2bcbe0"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Acid Wash 220g</h2>",
+    "sku": "10328",
+    "categoryLabel": "Oversize AcidWash",
+    "loyverseItemId": "0637c9f4-cc3f-4d5c-a677-78133f2bcbe0",
+    "loyverseVariantId": "31c74c3f-93dd-4b3c-885a-71d32dcaa9ab",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "31c74c3f-93dd-4b3c-885a-71d32dcaa9ab",
+        "sku": "10328",
+        "barcode": "10328SNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c561ccca-7b3d-4ae1-a7a4-37f747f038f7",
+        "sku": "10329",
+        "barcode": "10329SVe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "S",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "72dede1c-e75f-43a7-9100-db01ca949b91",
+        "sku": "10330",
+        "barcode": "10330MNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a39b7e00-624a-4883-817c-a3f9299189f1",
+        "sku": "10331",
+        "barcode": "10331MVe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "M",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f84b24e6-7630-43ca-879b-5dc6f1193b99",
+        "sku": "10336",
+        "barcode": "10336LNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "462ac591-a16b-4a01-b49e-9bae4201f362",
+        "sku": "10337",
+        "barcode": "10337LVe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "L",
+        "color": "Verde",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cf4883db-a7aa-4615-a0eb-be27eecca3ff",
+        "sku": "10338",
+        "barcode": "10338XLNe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5981842c-f776-4540-8ec1-aa514768c534",
+        "sku": "10339",
+        "barcode": "10339XLVe",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Verde",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Verde",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "Verde"
+    ]
+  },
+  {
+    "id": "c3aa6e6b-badf-470d-96ef-edb381a878b1",
+    "name": "URBNS • OVERSIZE PEDRERIA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/c3aa6e6b-badf-470d-96ef-edb381a878b1",
+    "images": [
+      "https://api.loyverse.com/image/c3aa6e6b-badf-470d-96ef-edb381a878b1"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Camiseta Oversize- 250gr Algodon con Piedreria</h2>",
+    "sku": "10332",
+    "categoryLabel": "Oversize Pedreria",
+    "loyverseItemId": "c3aa6e6b-badf-470d-96ef-edb381a878b1",
+    "loyverseVariantId": "1d0cb0fb-b968-4654-8582-71ee449cba7c",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "1d0cb0fb-b968-4654-8582-71ee449cba7c",
+        "sku": "10332",
+        "barcode": "10332SNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b146e92f-02ea-4381-9d15-a2680805c5f5",
+        "sku": "10333",
+        "barcode": "10333MNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "967e40ed-ca12-4356-92ff-e462bfeb7e6f",
+        "sku": "10334",
+        "barcode": "10334LNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f8c625c7-f1d0-4af5-84b3-e88f7198da89",
+        "sku": "10335",
+        "barcode": "10335XLNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "1e9a2b59-5d65-4eaa-9734-8daa05de9cc9",
+    "name": "URBANNOISE STREET • OVERSIZE PEDRERIA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/1e9a2b59-5d65-4eaa-9734-8daa05de9cc9",
+    "images": [
+      "https://api.loyverse.com/image/1e9a2b59-5d65-4eaa-9734-8daa05de9cc9"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Camiseta Oversize- 250gr Algodon con Piedreria</h2>",
+    "sku": "10324",
+    "categoryLabel": "Oversize Pedreria",
+    "loyverseItemId": "1e9a2b59-5d65-4eaa-9734-8daa05de9cc9",
+    "loyverseVariantId": "15dfe711-fcfb-490e-acab-bc4bb73699f0",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "15dfe711-fcfb-490e-acab-bc4bb73699f0",
+        "sku": "10324",
+        "barcode": "10324SNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "75a6e368-42ca-42da-8830-b3b727acae2a",
+        "sku": "10325",
+        "barcode": null,
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a0dfd714-349d-4d22-98d2-ad427aaba3f5",
+        "sku": "10326",
+        "barcode": null,
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "876a09e1-bcc2-419b-966d-0e2e0cdad112",
+        "sku": "10327",
+        "barcode": null,
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "54e4453f-80a5-45b9-b068-0c846aa63b73",
+    "name": "HEAVEN MADE • OVERSIZE PEDRERIA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/54e4453f-80a5-45b9-b068-0c846aa63b73",
+    "images": [
+      "https://api.loyverse.com/image/54e4453f-80a5-45b9-b068-0c846aa63b73"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Camiseta Oversize- 250gr Algod&oacute;n con Pedrer&iacute;a</h2>",
+    "sku": "10320",
+    "categoryLabel": "Oversize Pedreria",
+    "loyverseItemId": "54e4453f-80a5-45b9-b068-0c846aa63b73",
+    "loyverseVariantId": "3bf0ab7d-ead4-4caf-8479-8aedc49bd678",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3bf0ab7d-ead4-4caf-8479-8aedc49bd678",
+        "sku": "10320",
+        "barcode": null,
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d1b4de86-21f6-4c01-ac1a-6c7910ec1a3d",
+        "sku": "10321",
+        "barcode": null,
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9192fa8c-94b9-44f6-951c-d3fe2a087ae1",
+        "sku": "10322",
+        "barcode": null,
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b575c63f-0fe9-4d5c-8031-1b12bee898fe",
+        "sku": "10323",
+        "barcode": "10323XLNe",
+        "price": 0,
+        "cost": 27500,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro"
+    ]
+  },
+  {
+    "id": "6b987eae-d0a1-443c-9f46-7c90b9d76a85",
+    "name": "BRUIT URBAN • OVERSIZE PREMIUM",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/6b987eae-d0a1-443c-9f46-7c90b9d76a85",
+    "images": [
+      "https://api.loyverse.com/image/6b987eae-d0a1-443c-9f46-7c90b9d76a85"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Camiseta- 310gr Algodon</h2>",
+    "sku": "10308",
+    "categoryLabel": "Oversize Premium",
+    "loyverseItemId": "6b987eae-d0a1-443c-9f46-7c90b9d76a85",
+    "loyverseVariantId": "9f5b8ae2-387c-4c38-a6fa-958d52f95fc3",
+    "stock": 11,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9f5b8ae2-387c-4c38-a6fa-958d52f95fc3",
+        "sku": "10308",
+        "barcode": "10308SNe",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "S",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "S",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d39425e7-2da4-4ff8-8f4a-44900cdbacd4",
+        "sku": "10309",
+        "barcode": "10309SMa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "S",
+        "option2_value": "MarfiL",
+        "option3_value": null,
+        "size": "S",
+        "color": "MarfiL",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c1a3551a-97ab-4b36-9786-fc70e56abad8",
+        "sku": "10310",
+        "barcode": "10310SRo",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "S",
+        "option2_value": "Rojo",
+        "option3_value": null,
+        "size": "S",
+        "color": "Rojo",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "56679783-afc0-4185-94ae-34324047666a",
+        "sku": "10311",
+        "barcode": "10311MNe",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "M",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "M",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ae9b9be4-007d-4509-8b81-39701b88336b",
+        "sku": "10312",
+        "barcode": "10312MMa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "M",
+        "option2_value": "MarfiL",
+        "option3_value": null,
+        "size": "M",
+        "color": "MarfiL",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4b87acd2-25bf-4752-a93b-234a7db29707",
+        "sku": "10313",
+        "barcode": "10313MRo",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "M",
+        "option2_value": "Rojo",
+        "option3_value": null,
+        "size": "M",
+        "color": "Rojo",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1e34532c-2432-4c1f-8f4f-a07b6a0cecd5",
+        "sku": "10314",
+        "barcode": "10314LNe",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "L",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "L",
+        "color": "Negro",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2d65de21-c884-490b-8f4d-6fc53b751fbe",
+        "sku": "10315",
+        "barcode": "10315LMa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "L",
+        "option2_value": "MarfiL",
+        "option3_value": null,
+        "size": "L",
+        "color": "MarfiL",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3d7fdbfd-bbe0-4adf-b758-e48754cc9a2a",
+        "sku": "10316",
+        "barcode": "10316LRo",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "L",
+        "option2_value": "Rojo",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rojo",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0e764680-e7d5-433f-8250-b0fd915556fc",
+        "sku": "10317",
+        "barcode": "10317XLNe",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "XL",
+        "option2_value": "Negro",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Negro",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "35604ce1-8846-492d-86cc-06293e165358",
+        "sku": "10318",
+        "barcode": "10318XLMa",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "XL",
+        "option2_value": "MarfiL",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MarfiL",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "53b0d99c-ab4a-4a74-b9ee-f524d72240ea",
+        "sku": "10319",
+        "barcode": "10319XLRo",
+        "price": 0,
+        "cost": 29900,
+        "option1_value": "XL",
+        "option2_value": "Rojo",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rojo",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Negro",
+      "MarfiL",
+      "Rojo"
+    ]
+  },
+  {
+    "id": "f9e3eb88-7525-481d-87e0-2a01e5f2c2ea",
+    "name": "CALAVERA • BOXI FIT",
+    "category": "weird-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/f9e3eb88-7525-481d-87e0-2a01e5f2c2ea",
+    "images": [
+      "https://api.loyverse.com/image/f9e3eb88-7525-481d-87e0-2a01e5f2c2ea"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Boxyfit. Camiseta- 250gr Algodon</h2>",
+    "sku": "10296",
+    "categoryLabel": "Boxi Fit",
+    "loyverseItemId": "f9e3eb88-7525-481d-87e0-2a01e5f2c2ea",
+    "loyverseVariantId": "1d0187b8-3e18-4ba7-84bd-b4171fb2ba52",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "1d0187b8-3e18-4ba7-84bd-b4171fb2ba52",
+        "sku": "10296",
+        "barcode": "10296SCa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camel",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "37c4c2d3-565c-4955-b25a-46a4f49a93ed",
+        "sku": "10297",
+        "barcode": "10297MCa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camel",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7d8c26a7-1e9b-446c-abd7-c59a4f705ab8",
+        "sku": "10298",
+        "barcode": "10298LCa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camel",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Camel"
+    ]
+  },
+  {
+    "id": "ad0308fb-c6a9-4c1f-9df9-048168dbca9c",
+    "name": "DOG URBAN • BOXI FIT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/ad0308fb-c6a9-4c1f-9df9-048168dbca9c",
+    "images": [
+      "https://api.loyverse.com/image/ad0308fb-c6a9-4c1f-9df9-048168dbca9c"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Boxyfit. Camiseta- 250gr Algodon</h2>",
+    "sku": "10288",
+    "categoryLabel": "Boxi Fit",
+    "loyverseItemId": "ad0308fb-c6a9-4c1f-9df9-048168dbca9c",
+    "loyverseVariantId": "3017b3b6-577e-48e8-b34e-4963a6c9c294",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3017b3b6-577e-48e8-b34e-4963a6c9c294",
+        "sku": "10288",
+        "barcode": "10288SMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "976b9e01-8b1c-4abb-bdc8-5d9685fa0790",
+        "sku": "10290",
+        "barcode": "10290MMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8f140198-aa75-4ad3-9ddc-812beaaa2920",
+        "sku": "10292",
+        "barcode": "10292LMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Marfil"
+    ]
+  },
+  {
+    "id": "3c1bcefb-5209-433a-9ac0-c92dbfda73cc",
+    "name": "OVNNI URBAN • BOXI FIT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/3c1bcefb-5209-433a-9ac0-c92dbfda73cc",
+    "images": [
+      "https://api.loyverse.com/image/3c1bcefb-5209-433a-9ac0-c92dbfda73cc"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Boxyfit. Camiseta- 250gr Algodon</h2>",
+    "sku": "10284",
+    "categoryLabel": "Boxi Fit",
+    "loyverseItemId": "3c1bcefb-5209-433a-9ac0-c92dbfda73cc",
+    "loyverseVariantId": "4db933fc-9cad-4003-800d-293455353f04",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "4db933fc-9cad-4003-800d-293455353f04",
+        "sku": "10284",
+        "barcode": "10284SCa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camel",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ff11dc65-6a7a-4bce-8eee-5f03c3ebe342",
+        "sku": "10285",
+        "barcode": "10285MCa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camel",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8c0e487c-63f8-41b1-956b-f5203879c02c",
+        "sku": "10286",
+        "barcode": "10286LCa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camel",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Camel"
+    ]
+  },
+  {
+    "id": "40d6e244-7052-4b23-9b0e-c57a1f6efc7c",
+    "name": "ORBIT URBAN • BOXI FIT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/40d6e244-7052-4b23-9b0e-c57a1f6efc7c",
+    "images": [
+      "https://api.loyverse.com/image/40d6e244-7052-4b23-9b0e-c57a1f6efc7c"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Boxyfit. Camiseta- 250gr Algodon</h2>",
+    "sku": "10277",
+    "categoryLabel": "Boxi Fit",
+    "loyverseItemId": "40d6e244-7052-4b23-9b0e-c57a1f6efc7c",
+    "loyverseVariantId": "0290ef50-7d68-44c2-946c-ce2ce41a771d",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "0290ef50-7d68-44c2-946c-ce2ce41a771d",
+        "sku": "10277",
+        "barcode": "10277SMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6565750a-de3c-4d16-8ec1-73cf9aa0d870",
+        "sku": "10279",
+        "barcode": null,
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ab25cc01-8973-4b64-b2c6-58efe8a24c9e",
+        "sku": "10281",
+        "barcode": null,
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Marfil"
+    ]
+  },
+  {
+    "id": "1b713eaf-a527-4f05-a3f8-a3c24440d890",
+    "name": "UNTIED URBAN • BOXI FIT",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/1b713eaf-a527-4f05-a3f8-a3c24440d890",
+    "images": [
+      "https://api.loyverse.com/image/1b713eaf-a527-4f05-a3f8-a3c24440d890"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Boxyfit. Camiseta- 250gr Algodon</h2>",
+    "sku": "10268",
+    "categoryLabel": "Boxi Fit",
+    "loyverseItemId": "1b713eaf-a527-4f05-a3f8-a3c24440d890",
+    "loyverseVariantId": "4ab9a564-aee0-49a1-ba63-365aa5dd3e89",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "4ab9a564-aee0-49a1-ba63-365aa5dd3e89",
+        "sku": "10268",
+        "barcode": "10268SNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Nero",
+        "option3_value": null,
+        "size": "S",
+        "color": "Nero",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cccf5733-b765-4ba7-a731-358e597dfd8e",
+        "sku": "10269",
+        "barcode": "10269SMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "24f079e1-6869-408c-92cc-27f2ce087a66",
+        "sku": "10270",
+        "barcode": "10270MNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Nero",
+        "option3_value": null,
+        "size": "M",
+        "color": "Nero",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7c04cc08-6735-46e1-a0b5-3a56c399d13c",
+        "sku": "10271",
+        "barcode": "10271MMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "66c8ff59-8293-45b0-8679-b9d1ec4773ad",
+        "sku": "10272",
+        "barcode": "10272LNe",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Nero",
+        "option3_value": null,
+        "size": "L",
+        "color": "Nero",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0a3dd1ba-e5aa-464d-ae30-99d405d27dac",
+        "sku": "10273",
+        "barcode": "10273LMa",
+        "price": 0,
+        "cost": 24400,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "availableColors": [
+      "Nero",
+      "Marfil"
+    ]
+  },
+  {
+    "id": "3f1ce825-9e79-40e7-be05-26b18e730b28",
+    "name": "VIKINGO URBANO • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/3f1ce825-9e79-40e7-be05-26b18e730b28",
+    "images": [
+      "https://api.loyverse.com/image/3f1ce825-9e79-40e7-be05-26b18e730b28"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Camiseta-220g Algodon</h2>",
+    "sku": "10264",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "3f1ce825-9e79-40e7-be05-26b18e730b28",
+    "loyverseVariantId": "fdaaea6f-710e-4ec4-b964-f7b015897b59",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "fdaaea6f-710e-4ec4-b964-f7b015897b59",
+        "sku": "10264",
+        "barcode": "10264SGr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "S",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c8ebc7b2-5375-4a7c-8883-9dcc764e82ca",
+        "sku": "10265",
+        "barcode": "10265MGr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "M",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "89079945-878c-4506-91d8-eecf7eaeedc3",
+        "sku": "10266",
+        "barcode": "10266LGr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "L",
+        "color": "Gris",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fef3299f-46da-4384-a0c0-e669c0d8eac1",
+        "sku": "10267",
+        "barcode": "10267XLGr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Gris",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Gris",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Gris"
+    ]
+  },
+  {
+    "id": "c0026685-8cf3-4df1-ac46-67acbe50f89b",
+    "name": "MONTSERRAT • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/c0026685-8cf3-4df1-ac46-67acbe50f89b",
+    "images": [
+      "https://api.loyverse.com/image/c0026685-8cf3-4df1-ac46-67acbe50f89b"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Camiseta Oversize -220g Algodon</h2>",
+    "sku": "10260",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "c0026685-8cf3-4df1-ac46-67acbe50f89b",
+    "loyverseVariantId": "6182add2-5f34-40ba-8cf6-18e68c308ee1",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6182add2-5f34-40ba-8cf6-18e68c308ee1",
+        "sku": "10260",
+        "barcode": "10260SCa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "94e117ff-9538-40ac-b556-7837f84e5ac0",
+        "sku": "10261",
+        "barcode": "10261MCa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0110b1ba-4df5-4143-8686-9fca77548710",
+        "sku": "10262",
+        "barcode": "10262LCa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "05c60103-7ba3-4a0e-bc25-5e6acf039775",
+        "sku": "10263",
+        "barcode": "10263XLCa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cafe"
+    ]
+  },
+  {
+    "id": "a964dfae-dca5-4700-b1bc-f0e555940bec",
+    "name": "ANNOYED ANGEL • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/a964dfae-dca5-4700-b1bc-f0e555940bec",
+    "images": [
+      "https://api.loyverse.com/image/a964dfae-dca5-4700-b1bc-f0e555940bec"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Camiseta Oversize-220g Algodon</h2>",
+    "sku": "10252",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "a964dfae-dca5-4700-b1bc-f0e555940bec",
+    "loyverseVariantId": "9054ae44-a9d5-4db2-a9d9-40614ab2791b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9054ae44-a9d5-4db2-a9d9-40614ab2791b",
+        "sku": "10252",
+        "barcode": "10252SMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1994156f-15e8-4ba3-b8a7-d35386cbd191",
+        "sku": "10253",
+        "barcode": "10253SCr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "S",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a887c415-cc33-43a8-a013-eebb091b1d44",
+        "sku": "10254",
+        "barcode": "10254MMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e74a4e48-ffbf-4545-b41d-bffddb850df8",
+        "sku": "10255",
+        "barcode": "10255MCr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "M",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9e24bb7d-e059-42a7-b472-b7909f5a13e4",
+        "sku": "10256",
+        "barcode": "10256LMa",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0cc66a63-9c68-474c-b7bd-2e63bbce3ec2",
+        "sku": "10257",
+        "barcode": "10257LCr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "L",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d3672e80-300a-4d24-a071-657b18e10996",
+        "sku": "10258",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8122b489-822a-482c-b805-17b58a8c8857",
+        "sku": "10259",
+        "barcode": "10259XLCr",
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Crema",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Crema"
+    ]
+  },
+  {
+    "id": "63559bf3-b712-4a53-a0a2-7d4d66ee5c71",
+    "name": "SHIELD URBAN • OVERSIZE ALGODON",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/63559bf3-b712-4a53-a0a2-7d4d66ee5c71",
+    "images": [
+      "https://api.loyverse.com/image/63559bf3-b712-4a53-a0a2-7d4d66ee5c71"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Camiseta Oversize-220g Algodon</h2>",
+    "sku": "10244",
+    "categoryLabel": "Oversize Algodon",
+    "loyverseItemId": "63559bf3-b712-4a53-a0a2-7d4d66ee5c71",
+    "loyverseVariantId": "0e66695f-30c9-4bc2-9914-313e07e3df0d",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "0e66695f-30c9-4bc2-9914-313e07e3df0d",
+        "sku": "10244",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "S",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "699ae31f-4f7a-4f8e-9c63-ebf73f61aacb",
+        "sku": "10245",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "S",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "S",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f3a061ac-34ae-4600-8041-ebd125e1eab2",
+        "sku": "10246",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "M",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "80fa2f8b-0b39-4b1c-936b-3b8b6f51fc86",
+        "sku": "10247",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "M",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "M",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f9971cf2-9fa6-4c29-8841-8e2e50522bcc",
+        "sku": "10248",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "L",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1b918e99-7faf-4211-b650-d6db86398b27",
+        "sku": "10249",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "L",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "L",
+        "color": "Crema",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6eefe8e6-eea6-4894-9062-31af8cb61bd7",
+        "sku": "10250",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Marfil",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Marfil",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "58ec317c-717f-48be-bb2f-136f6db60ad2",
+        "sku": "10251",
+        "barcode": null,
+        "price": 0,
+        "cost": 20400,
+        "option1_value": "XL",
+        "option2_value": "Crema",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Crema",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Marfil",
+      "Crema"
+    ]
+  },
+  {
+    "id": "280bd28c-bba7-4ec2-bbd1-123dddf1293c",
+    "name": "BLESSED NV URBAN • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/280bd28c-bba7-4ec2-bbd1-123dddf1293c",
+    "images": [
+      "https://api.loyverse.com/image/280bd28c-bba7-4ec2-bbd1-123dddf1293c"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10240",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "280bd28c-bba7-4ec2-bbd1-123dddf1293c",
+    "loyverseVariantId": "705f5a53-c4c5-4093-87d7-6392a8afa68c",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "705f5a53-c4c5-4093-87d7-6392a8afa68c",
+        "sku": "10240",
+        "barcode": "10240SGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "S",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "166d17dd-f5b9-42cc-98d2-d836e9bfeab4",
+        "sku": "10241",
+        "barcode": "10241MGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "M",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d3c35cb1-f4aa-4920-a304-ced88c05b18d",
+        "sku": "10242",
+        "barcode": "10242LGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "L",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c8485e42-4fd1-4c0b-b63e-c09565c705e9",
+        "sku": "10243",
+        "barcode": "10243XLGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "XL",
+        "color": "GrisRaton",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "GrisRaton"
+    ]
+  },
+  {
+    "id": "f741509d-1ea1-4baa-9984-b8ad500c039b",
+    "name": "CLOSURE URBAN • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/f741509d-1ea1-4baa-9984-b8ad500c039b",
+    "images": [
+      "https://api.loyverse.com/image/f741509d-1ea1-4baa-9984-b8ad500c039b"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10236",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "f741509d-1ea1-4baa-9984-b8ad500c039b",
+    "loyverseVariantId": "eaf262fe-fbfa-4fde-99ef-b437726b2184",
+    "stock": 29,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "eaf262fe-fbfa-4fde-99ef-b437726b2184",
+        "sku": "10236",
+        "barcode": "10236SMi",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Miel",
+        "option3_value": null,
+        "size": "S",
+        "color": "Miel",
+        "in_stock": 7
+      },
+      {
+        "variant_id": "7af7e4f3-5d33-4c02-ad0e-8be6bf8f3575",
+        "sku": "10237",
+        "barcode": "10237MMi",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Miel",
+        "option3_value": null,
+        "size": "M",
+        "color": "Miel",
+        "in_stock": 17
+      },
+      {
+        "variant_id": "dc08693a-c912-440f-91db-b936f46ac5f8",
+        "sku": "10238",
+        "barcode": "10238LMi",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Miel",
+        "option3_value": null,
+        "size": "L",
+        "color": "Miel",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "81cff2a6-2823-427a-8cb7-6cc53557714f",
+        "sku": "10239",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Miel",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Miel",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Miel"
+    ]
+  },
+  {
+    "id": "395dcca1-a48b-49e6-a59a-9886c3e9511e",
+    "name": "LEGACY URBAN • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/395dcca1-a48b-49e6-a59a-9886c3e9511e",
+    "images": [
+      "https://api.loyverse.com/image/395dcca1-a48b-49e6-a59a-9886c3e9511e"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10232",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "395dcca1-a48b-49e6-a59a-9886c3e9511e",
+    "loyverseVariantId": "343cbb5b-8db2-4fcf-a969-262f054389f5",
+    "stock": 6,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "343cbb5b-8db2-4fcf-a969-262f054389f5",
+        "sku": "10232",
+        "barcode": "10232SCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camel",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "d953a78d-a249-4cf4-9921-cc0379fa19a3",
+        "sku": "10233",
+        "barcode": "10233MCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camel",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "301f221c-c501-4ca1-bf49-eb8e75df68ec",
+        "sku": "10234",
+        "barcode": "10234LCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camel",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "02d75ce8-981c-4f69-afec-f2fb11dd152d",
+        "sku": "10235",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camel",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Camel"
+    ]
+  },
+  {
+    "id": "c3b2cb5f-8755-40d9-b569-6b2f5d69acf5",
+    "name": "ARCÁNGEL URBANO • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/c3b2cb5f-8755-40d9-b569-6b2f5d69acf5",
+    "images": [
+      "https://api.loyverse.com/image/c3b2cb5f-8755-40d9-b569-6b2f5d69acf5"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10228",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "c3b2cb5f-8755-40d9-b569-6b2f5d69acf5",
+    "loyverseVariantId": "59274ed1-0ddd-4224-a723-27b42edef088",
+    "stock": 2,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "59274ed1-0ddd-4224-a723-27b42edef088",
+        "sku": "10228",
+        "barcode": "10228SCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camel",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7a8c4daa-7c89-477d-8e3d-adbc3f003e9f",
+        "sku": "10229",
+        "barcode": "10229MCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camel",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "6dc10798-1fa5-47a1-ad10-4539e859a958",
+        "sku": "10230",
+        "barcode": "10230LCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camel",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "afa46cae-c8b3-497a-9cc9-ae21d445e015",
+        "sku": "10231",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camel",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Camel"
+    ]
+  },
+  {
+    "id": "bf3cef2b-4853-452e-86d0-9923cafb1dcc",
+    "name": "URBAN 2NN • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/bf3cef2b-4853-452e-86d0-9923cafb1dcc",
+    "images": [
+      "https://api.loyverse.com/image/bf3cef2b-4853-452e-86d0-9923cafb1dcc"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10224",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "bf3cef2b-4853-452e-86d0-9923cafb1dcc",
+    "loyverseVariantId": "6f9a106e-16a0-4c25-aa87-93eefb40aa80",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "6f9a106e-16a0-4c25-aa87-93eefb40aa80",
+        "sku": "10224",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "AzulBebe",
+        "option3_value": null,
+        "size": "S",
+        "color": "AzulBebe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "019bb0f5-50b7-4941-b087-48f3c2fa9b9f",
+        "sku": "10225",
+        "barcode": "10225MAz",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "AzulBebe",
+        "option3_value": null,
+        "size": "M",
+        "color": "AzulBebe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5b5cf095-d6c4-42c5-b215-850eaa2da84b",
+        "sku": "10226",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "AzulBebe",
+        "option3_value": null,
+        "size": "L",
+        "color": "AzulBebe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b1d86850-06f5-41b8-b738-afb80ae3a2ea",
+        "sku": "10227",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "AzulBebe",
+        "option3_value": null,
+        "size": "XL",
+        "color": "AzulBebe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "AzulBebe"
+    ]
+  },
+  {
+    "id": "8a303b26-798a-46f5-9e40-7d7c636c08e0",
+    "name": "ANGEL OFFILE • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/8a303b26-798a-46f5-9e40-7d7c636c08e0",
+    "images": [
+      "https://api.loyverse.com/image/8a303b26-798a-46f5-9e40-7d7c636c08e0"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10220",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "8a303b26-798a-46f5-9e40-7d7c636c08e0",
+    "loyverseVariantId": "25fcd4a5-7b5f-419a-b069-db59cd3bc54d",
+    "stock": 14,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "25fcd4a5-7b5f-419a-b069-db59cd3bc54d",
+        "sku": "10220",
+        "barcode": "10220SCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "S",
+        "color": "Camel",
+        "in_stock": 6
+      },
+      {
+        "variant_id": "d84c7b87-8bc4-4b38-ad68-4812744b7fb9",
+        "sku": "10221",
+        "barcode": "10221MCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "M",
+        "color": "Camel",
+        "in_stock": 8
+      },
+      {
+        "variant_id": "9ca29960-eab8-47f9-97b7-576640743435",
+        "sku": "10222",
+        "barcode": "10222LCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "L",
+        "color": "Camel",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2c3e0cbc-f123-4318-a691-0954743bb6ee",
+        "sku": "10223",
+        "barcode": "10223XLCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Camel",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Camel",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Camel"
+    ]
+  },
+  {
+    "id": "cffc62db-4453-43be-8138-3215ffb57b84",
+    "name": "YANKEES NY • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/cffc62db-4453-43be-8138-3215ffb57b84",
+    "images": [
+      "https://api.loyverse.com/image/cffc62db-4453-43be-8138-3215ffb57b84"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10216",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "cffc62db-4453-43be-8138-3215ffb57b84",
+    "loyverseVariantId": "3445bfff-bf68-4c5e-a3dc-67840ec1d1e0",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "3445bfff-bf68-4c5e-a3dc-67840ec1d1e0",
+        "sku": "10216",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "S",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e3d0ff14-76e4-4516-8245-df3724363c65",
+        "sku": "10217",
+        "barcode": "10217MVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "M",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "166d9e87-d458-4a45-951b-87c8a2242b56",
+        "sku": "10218",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "L",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a0e70784-ec98-4f22-9b20-087239867eb3",
+        "sku": "10219",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "XL",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "VerdeOliva"
+    ]
+  },
+  {
+    "id": "75b101b9-59b4-4042-bcc8-2a8ee6e8be4a",
+    "name": "STREET SOCIETY • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/75b101b9-59b4-4042-bcc8-2a8ee6e8be4a",
+    "images": [
+      "https://api.loyverse.com/image/75b101b9-59b4-4042-bcc8-2a8ee6e8be4a"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10208",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "75b101b9-59b4-4042-bcc8-2a8ee6e8be4a",
+    "loyverseVariantId": "2c6e5f31-af1c-41b8-86be-3463f1bb2d13",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "2c6e5f31-af1c-41b8-86be-3463f1bb2d13",
+        "sku": "10208",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "S",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c6b8cba2-258b-41e9-8b51-200025d3595a",
+        "sku": "10210",
+        "barcode": "10210MGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "M",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b8126b88-60e9-4573-85b3-fb429854aff1",
+        "sku": "10212",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "L",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "cc2a2e34-abac-433a-a5fb-041f4269a3fa",
+        "sku": "10214",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "XL",
+        "color": "GrisRaton",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "GrisRaton"
+    ]
+  },
+  {
+    "id": "a36d7679-0541-4ced-8679-a20ad10d6846",
+    "name": "ANGEL URBAN J • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/a36d7679-0541-4ced-8679-a20ad10d6846",
+    "images": [
+      "https://api.loyverse.com/image/a36d7679-0541-4ced-8679-a20ad10d6846"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10204",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "a36d7679-0541-4ced-8679-a20ad10d6846",
+    "loyverseVariantId": "52896137-a4b1-4c0d-841a-14f2d6f84ce1",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "52896137-a4b1-4c0d-841a-14f2d6f84ce1",
+        "sku": "10204",
+        "barcode": "10204SCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cafe",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "7fa5b67c-7fad-404c-a7f7-b51da4931720",
+        "sku": "10205",
+        "barcode": "10205MCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cafe",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "bb9fc83e-6037-4e1c-9827-3b888d677e21",
+        "sku": "10206",
+        "barcode": "10206LCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f0d704fc-d262-4b8a-a019-bc44e27aca10",
+        "sku": "10207",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cafe"
+    ]
+  },
+  {
+    "id": "96495579-7fac-42fd-97b3-3a861b24051f",
+    "name": "ANGEL URBNS • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/96495579-7fac-42fd-97b3-3a861b24051f",
+    "images": [
+      "https://api.loyverse.com/image/96495579-7fac-42fd-97b3-3a861b24051f"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10200",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "96495579-7fac-42fd-97b3-3a861b24051f",
+    "loyverseVariantId": "124b2ddc-a8e0-40d7-a5a4-412e4074827a",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "124b2ddc-a8e0-40d7-a5a4-412e4074827a",
+        "sku": "10200",
+        "barcode": "10200SCh",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "S",
+        "color": "Chocolate",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "34c4e7e5-5b23-4dba-b6b4-5f8de8b9e50d",
+        "sku": "10201",
+        "barcode": "10201MCh",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "M",
+        "color": "Chocolate",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "c0dfa265-ad3e-4ef7-80ef-607c4bbf5db0",
+        "sku": "10202",
+        "barcode": "10202LCh",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "L",
+        "color": "Chocolate",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b1afa693-3305-4dff-8f8c-2378e935296b",
+        "sku": "10203",
+        "barcode": "10203XLCh",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Chocolate",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Chocolate",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Chocolate"
+    ]
+  },
+  {
+    "id": "7413c975-aa2e-45c9-9f2f-ca1b39600aaf",
+    "name": "URBNS • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/7413c975-aa2e-45c9-9f2f-ca1b39600aaf",
+    "images": [
+      "https://api.loyverse.com/image/7413c975-aa2e-45c9-9f2f-ca1b39600aaf"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10196",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "7413c975-aa2e-45c9-9f2f-ca1b39600aaf",
+    "loyverseVariantId": "397bb839-a8e9-4ed8-8249-a1bb280c5976",
+    "stock": 3,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "397bb839-a8e9-4ed8-8249-a1bb280c5976",
+        "sku": "10196",
+        "barcode": "10196SCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cafe",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "4ffc2414-f58c-45de-8a1d-979acc5229f0",
+        "sku": "10197",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "95266b92-42ef-4a30-9a32-bd231f0257a3",
+        "sku": "10198",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b125c025-384c-402c-b415-a8bacf6843a8",
+        "sku": "10199",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cafe"
+    ]
+  },
+  {
+    "id": "b636f89d-6c02-4cc0-a290-fd0bea271f8c",
+    "name": "CALAVERA LIN • OVERSIZE BURDA",
+    "category": "weird-oversize",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/b636f89d-6c02-4cc0-a290-fd0bea271f8c",
+    "images": [
+      "https://api.loyverse.com/image/b636f89d-6c02-4cc0-a290-fd0bea271f8c"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10192",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "b636f89d-6c02-4cc0-a290-fd0bea271f8c",
+    "loyverseVariantId": "c74d5351-2d9a-4653-8224-0e1f7416e721",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "c74d5351-2d9a-4653-8224-0e1f7416e721",
+        "sku": "10192",
+        "barcode": "10192SGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "S",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d95f793c-caae-478b-9094-5bd492e5c7d2",
+        "sku": "10193",
+        "barcode": "10193MGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "M",
+        "color": "GrisRaton",
+        "in_stock": 4
+      },
+      {
+        "variant_id": "64683206-77a8-4563-b9c9-6616f1879681",
+        "sku": "10194",
+        "barcode": "10194LGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "L",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d59afe7a-98fa-4807-81e2-39fc9259715d",
+        "sku": "10195",
+        "barcode": "10195XLGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "XL",
+        "color": "GrisRaton",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "GrisRaton"
+    ]
+  },
+  {
+    "id": "25208805-3025-4fee-80df-86bdcd680303",
+    "name": "PALOMA BRING • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/25208805-3025-4fee-80df-86bdcd680303",
+    "images": [
+      "https://api.loyverse.com/image/25208805-3025-4fee-80df-86bdcd680303"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10188",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "25208805-3025-4fee-80df-86bdcd680303",
+    "loyverseVariantId": "188dcdec-98aa-4d04-b585-788754d387f8",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "188dcdec-98aa-4d04-b585-788754d387f8",
+        "sku": "10188",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "S",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "855ac896-e104-4308-a2f4-ac855e5ce789",
+        "sku": "10189",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "M",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f1d720ea-d4a1-4f00-9043-1e0e7e22d33b",
+        "sku": "10190",
+        "barcode": "10190LGr",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "L",
+        "color": "GrisRaton",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "02ade7d7-3fb9-4aa6-b6de-bea430b09f2d",
+        "sku": "10191",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "GrisRaton",
+        "option3_value": null,
+        "size": "XL",
+        "color": "GrisRaton",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "GrisRaton"
+    ]
+  },
+  {
+    "id": "c7e048c9-97e0-488b-b84a-c1ea3bc12ed1",
+    "name": "HOLLYWOOD • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/c7e048c9-97e0-488b-b84a-c1ea3bc12ed1",
+    "images": [
+      "https://api.loyverse.com/image/c7e048c9-97e0-488b-b84a-c1ea3bc12ed1"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10172",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "c7e048c9-97e0-488b-b84a-c1ea3bc12ed1",
+    "loyverseVariantId": "be9fdfe3-6269-4ad4-883f-98f004e04885",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "be9fdfe3-6269-4ad4-883f-98f004e04885",
+        "sku": "10172",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b08b4c24-8bf7-412f-821c-fae33bc893e9",
+        "sku": "10173",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "S",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "47767b20-82c8-4103-9989-1f2b39aa4776",
+        "sku": "10174",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "562c4035-3d0d-4f92-bcc3-85f3aa0ceaad",
+        "sku": "10175",
+        "barcode": "10175MMo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "44043c7a-fa42-4747-97d8-89ca0e400f3c",
+        "sku": "10176",
+        "barcode": "10176MVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "M",
+        "color": "VerdeOliva",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "794acca0-a2f6-40bb-855c-54b992286eba",
+        "sku": "10177",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e5d9259d-e229-4d9e-b5e2-4bac93f50431",
+        "sku": "10178",
+        "barcode": "10178LMo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bfcd07d5-a438-48fb-bc5e-88f2bad652d6",
+        "sku": "10179",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "L",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "73992e3a-6923-449b-ac56-2aaec5f3ee33",
+        "sku": "10180",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1da9c845-3835-4b40-8b31-c1f525f52cfe",
+        "sku": "10181",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0d57fe55-8903-4ce3-9c49-83627b8573a4",
+        "sku": "10182",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "XL",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "333cee18-52bb-497d-99d5-ccc6c66c0202",
+        "sku": "10183",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "MoraLeche",
+      "VerdeOliva",
+      "Cafe"
+    ]
+  },
+  {
+    "id": "b07776f1-1111-4576-8e27-351ddf47c833",
+    "name": "URBAN GOING • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/b07776f1-1111-4576-8e27-351ddf47c833",
+    "images": [
+      "https://api.loyverse.com/image/b07776f1-1111-4576-8e27-351ddf47c833"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: VerdeOliva. Tallas disponibles: S, M, L, XL.",
+    "sku": "10164",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "b07776f1-1111-4576-8e27-351ddf47c833",
+    "loyverseVariantId": "34dd6535-7a44-430b-947b-8a964e7f7aca",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "34dd6535-7a44-430b-947b-8a964e7f7aca",
+        "sku": "10164",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "S",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8119eefa-9a76-4795-a176-751a5a93111f",
+        "sku": "10165",
+        "barcode": "10165MVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "M",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5dec571a-d166-4c82-bc97-cbaf7e2bf175",
+        "sku": "10166",
+        "barcode": "10166LVe",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "L",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9bf4cb9c-c50a-4281-97c0-f29ca8b5b4c4",
+        "sku": "10167",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "VerdeOliva",
+        "option3_value": null,
+        "size": "XL",
+        "color": "VerdeOliva",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "VerdeOliva"
+    ]
+  },
+  {
+    "id": "a0d9c266-e55b-4653-8e6e-d8fd3d5a6e32",
+    "name": "SCARFACE • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/a0d9c266-e55b-4653-8e6e-d8fd3d5a6e32",
+    "images": [
+      "https://api.loyverse.com/image/a0d9c266-e55b-4653-8e6e-d8fd3d5a6e32"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10151",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "a0d9c266-e55b-4653-8e6e-d8fd3d5a6e32",
+    "loyverseVariantId": "cce15214-83b6-48c5-8c3e-ca6ceee34300",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cce15214-83b6-48c5-8c3e-ca6ceee34300",
+        "sku": "10151",
+        "barcode": "10151SMo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "S",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "eb5c93a2-31a0-40d8-9432-0c781ff73392",
+        "sku": "10152",
+        "barcode": "10152SCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5e9d82f9-38a0-40fc-b0ba-66d1e570cc62",
+        "sku": "10153",
+        "barcode": "10153MMo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "M",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f877cbf4-c778-44cd-ba92-ea5979ce2a28",
+        "sku": "10157",
+        "barcode": "10157MCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9df52759-e7dc-41aa-80a3-a4776b930406",
+        "sku": "10160",
+        "barcode": "10160LMo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "L",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8f051194-ee50-4a40-a024-6d408b030179",
+        "sku": "10161",
+        "barcode": "10161LCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ce40e693-e290-4f57-8c5c-92df319211fd",
+        "sku": "10162",
+        "barcode": "10162XLMo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "MoraLeche",
+        "option3_value": null,
+        "size": "XL",
+        "color": "MoraLeche",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "3128780f-21de-434e-b42a-7ff46f085c00",
+        "sku": "10163",
+        "barcode": "10163XLCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "MoraLeche",
+      "Cafe"
+    ]
+  },
+  {
+    "id": "001b6350-2055-4a12-933a-0bc9e3191164",
+    "name": "DARC PORT • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/001b6350-2055-4a12-933a-0bc9e3191164",
+    "images": [
+      "https://api.loyverse.com/image/001b6350-2055-4a12-933a-0bc9e3191164"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10135",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "001b6350-2055-4a12-933a-0bc9e3191164",
+    "loyverseVariantId": "f19a1285-0d79-42dd-a0fe-62b674e47a7d",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "f19a1285-0d79-42dd-a0fe-62b674e47a7d",
+        "sku": "10135",
+        "barcode": "10135SCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "S",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "12b3a071-4616-48a3-bc6f-9e6ad52a7a5d",
+        "sku": "10144",
+        "barcode": "10144MCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "M",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7615c170-ecc1-499a-bd44-552ce6b57370",
+        "sku": "10149",
+        "barcode": "10149LCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "L",
+        "color": "Cafe",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d3718c98-3432-46c0-b424-f7235e32f863",
+        "sku": "10150",
+        "barcode": "10150XLCa",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Cafe",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Cafe",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Cafe"
+    ]
+  },
+  {
+    "id": "b925292f-c264-4ba9-9bcb-e3aecf7721c3",
+    "name": "MOTOR URBAN • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/b925292f-c264-4ba9-9bcb-e3aecf7721c3",
+    "images": [
+      "https://api.loyverse.com/image/b925292f-c264-4ba9-9bcb-e3aecf7721c3"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10125",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "b925292f-c264-4ba9-9bcb-e3aecf7721c3",
+    "loyverseVariantId": "4416eac0-7427-4bdf-9dcd-4865e7e3605b",
+    "stock": 1,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "4416eac0-7427-4bdf-9dcd-4865e7e3605b",
+        "sku": "10125",
+        "barcode": "10125SRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "S",
+        "color": "Rosa",
+        "in_stock": 1
+      },
+      {
+        "variant_id": "ee8135e6-15d1-41f3-87a3-92b26d04d339",
+        "sku": "10126",
+        "barcode": "10126MRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "M",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0e4ed772-c30e-41f4-96d3-71e8af4c5681",
+        "sku": "10130",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bd70adaa-83a2-4e84-920a-cfcbbba428bd",
+        "sku": "10131",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rosa",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Rosa"
+    ]
+  },
+  {
+    "id": "649a8a56-0251-46cf-8b56-8c6b5720f4cf",
+    "name": "LIFE URBAN NOISE • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/649a8a56-0251-46cf-8b56-8c6b5720f4cf",
+    "images": [
+      "https://api.loyverse.com/image/649a8a56-0251-46cf-8b56-8c6b5720f4cf"
+    ],
+    "desc": "<h2 style='box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem; font-family: \"Plus Jakarta Sans\", sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;' data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10121",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "649a8a56-0251-46cf-8b56-8c6b5720f4cf",
+    "loyverseVariantId": "49848e33-24cb-4487-992b-a902dc65e8b1",
+    "stock": 4,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "49848e33-24cb-4487-992b-a902dc65e8b1",
+        "sku": "10121",
+        "barcode": "10121SRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "S",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "736c2d1b-a290-4326-827f-d83b385708a6",
+        "sku": "10122",
+        "barcode": "10122MRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "M",
+        "color": "Rosa",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dd5f1325-b29d-4246-ac9e-e3ad81d2f489",
+        "sku": "10123",
+        "barcode": "10123LRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rosa",
+        "in_stock": 3
+      },
+      {
+        "variant_id": "0eff04d9-0b84-4822-9716-82eaf336a3dd",
+        "sku": "10124",
+        "barcode": "10124XLRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Rosa",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rosa",
+        "in_stock": 1
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Rosa"
+    ]
+  },
+  {
+    "id": "11dd8b7a-4b72-417a-bb4e-8f7e41c1b7aa",
+    "name": "CARITA FELIZ • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/11dd8b7a-4b72-417a-bb4e-8f7e41c1b7aa",
+    "images": [
+      "https://api.loyverse.com/image/11dd8b7a-4b72-417a-bb4e-8f7e41c1b7aa"
+    ],
+    "desc": "<h2 style=\"box-sizing: border-box; margin-top: 0px; margin-bottom: 0.5rem; font-weight: 500; line-height: 1.2; color: rgb(0, 0, 0); font-size: 2rem;\" data-pasted=\"true\">Over. Burda 220grs</h2>",
+    "sku": "10111",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "11dd8b7a-4b72-417a-bb4e-8f7e41c1b7aa",
+    "loyverseVariantId": "167b2cd6-4768-4859-b956-e6ca6751e46a",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "167b2cd6-4768-4859-b956-e6ca6751e46a",
+        "sku": "10111",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "S",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "S",
+        "color": "Rosado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "40c796b7-ca69-45af-ae2d-eafda7348678",
+        "sku": "10116",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "M",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "M",
+        "color": "Rosado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "e9829160-e266-499b-bb80-1d820be9857a",
+        "sku": "10117",
+        "barcode": "10117LRo",
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "L",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rosado",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2f641bcb-2ef5-467e-8501-ada41eb251ea",
+        "sku": "10118",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "XL",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rosado",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Rosado"
+    ]
+  },
+  {
+    "id": "49169624-f47b-494a-ac4d-8d4eb2c4d770",
+    "name": "ALWAYS READY • OVERSIZE BURDA",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://api.loyverse.com/image/49169624-f47b-494a-ac4d-8d4eb2c4d770",
+    "images": [
+      "https://api.loyverse.com/image/49169624-f47b-494a-ac4d-8d4eb2c4d770"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Colores: Rosado. Tallas disponibles: S, M, L, XL.",
+    "sku": "10088",
+    "categoryLabel": "Oversize Burda",
+    "loyverseItemId": "49169624-f47b-494a-ac4d-8d4eb2c4d770",
+    "loyverseVariantId": "186c18c7-753a-464e-b370-6124164cf464",
+    "stock": 19,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "186c18c7-753a-464e-b370-6124164cf464",
+        "sku": "10088",
+        "barcode": "10088SRo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "S",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "S",
+        "color": "Rosado",
+        "in_stock": 2
+      },
+      {
+        "variant_id": "909d034c-3c89-46da-b447-d32c8bed7e21",
+        "sku": "10105",
+        "barcode": "10105MRo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "M",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "M",
+        "color": "Rosado",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "83e97c99-bb59-406d-9fb7-7659cef613cd",
+        "sku": "10107",
+        "barcode": "10107LRo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "L",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "L",
+        "color": "Rosado",
+        "in_stock": 5
+      },
+      {
+        "variant_id": "62f22864-393e-4c20-a81b-48879c901559",
+        "sku": "10109",
+        "barcode": "10109XLRo",
+        "price": 0,
+        "cost": 0,
+        "option1_value": "XL",
+        "option2_value": "Rosado",
+        "option3_value": null,
+        "size": "XL",
+        "color": "Rosado",
+        "in_stock": 7
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": [
+      "Rosado"
+    ]
+  },
+  {
+    "id": "314574e3-0104-4bcf-adb2-19d8e5300259",
+    "name": "T-SHIRT • DAMA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10052",
+    "categoryLabel": "DAMA",
+    "loyverseItemId": "314574e3-0104-4bcf-adb2-19d8e5300259",
+    "loyverseVariantId": "e3ee9e18-a45e-4d2f-887b-7211a2e71f9c",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e3ee9e18-a45e-4d2f-887b-7211a2e71f9c",
+        "sku": "10052",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1b7011de-7ca1-4571-9b26-fe4bcc9bb1d7",
+        "sku": "10053",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4570d345-679b-400c-876f-dd5e63941445",
+        "sku": "10056",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "316ff087-2790-4c58-a29a-f10c4e16a027",
+        "sku": "10057",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "3fd65cc3-c970-40e9-81a2-f8329da1addd",
+    "name": "BUZO CAPOTERO NEW/B • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10033",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "3fd65cc3-c970-40e9-81a2-f8329da1addd",
+    "loyverseVariantId": "ba140344-1a72-49af-9bf3-2260627a8686",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "ba140344-1a72-49af-9bf3-2260627a8686",
+        "sku": "10033",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0cf53f27-5b6b-43fa-8650-d534c37605a5",
+        "sku": "10010",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "805bab04-894e-48ad-96f0-0ca3f72355c5",
+        "sku": "10034",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "432655b8-e328-488f-89d2-ee395afecbea",
+    "name": "BOXY FIT • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10019",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "432655b8-e328-488f-89d2-ee395afecbea",
+    "loyverseVariantId": "960d479f-5de9-4d87-9639-caba9bc1760e",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "960d479f-5de9-4d87-9639-caba9bc1760e",
+        "sku": "10019",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a92799f3-01c8-4be2-807b-1fe62a875d56",
+        "sku": "10021",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f8b0d022-3686-433b-92fc-d906bebc40f1",
+        "sku": "10025",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fbcc51d3-4f0a-4cbd-b6c5-f28f615f9f6a",
+        "sku": "10032",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "f4b99e51-e825-4610-af10-d91b9d6e502b",
+    "name": "OVERSIZE PREMIUM • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10011",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "f4b99e51-e825-4610-af10-d91b9d6e502b",
+    "loyverseVariantId": "cd6331f7-19fb-4f73-b850-83da435b61ad",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cd6331f7-19fb-4f73-b850-83da435b61ad",
+        "sku": "10011",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4255f260-5ca5-4cca-b49b-dc3ccf0d503c",
+        "sku": "10012",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2ea4b41d-abb3-4d73-91ea-597a2496afd5",
+        "sku": "10013",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a497440d-aaa4-4516-a1f0-b0cb5d07d585",
+        "sku": "10018",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "9872e829-3a05-4c6f-8e12-cb7ab1849ce1",
+    "name": "PIEDRERIA • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10154",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "9872e829-3a05-4c6f-8e12-cb7ab1849ce1",
+    "loyverseVariantId": "be79e5be-2a3c-46d6-8a26-74ef36c11209",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "be79e5be-2a3c-46d6-8a26-74ef36c11209",
+        "sku": "10154",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "38b81a39-2f97-4dff-accf-7ebeb48b86aa",
+        "sku": "10155",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8c44d63c-6a73-4b77-9a3f-e7d0745d00b4",
+        "sku": "10156",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "021069f3-969a-44b2-b427-dd4a97ea9a94",
+        "sku": "10049",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "42edde27-1109-4b84-878d-2cd3f3bf5618",
+    "name": "OVERSIZE ACIDWASH NIÑO • NIÑO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10145",
+    "categoryLabel": "NIÑO",
+    "loyverseItemId": "42edde27-1109-4b84-878d-2cd3f3bf5618",
+    "loyverseVariantId": "60ebe65a-341f-4f28-b487-534b2bda5c00",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "60ebe65a-341f-4f28-b487-534b2bda5c00",
+        "sku": "10145",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "fc8eb773-71af-44f7-886a-bddb006f0453",
+        "sku": "10146",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR 6 und",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR 6 und",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "141e6a32-2d48-4420-a8e7-6334d6ba249b",
+        "sku": "10147",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR 12 und",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR 12 und",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6292d8a9-6b09-4d11-83b2-1a9d6023582c",
+        "sku": "10148",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "865f617e-80ea-4e77-aba2-dd08bcfaaadf",
+    "name": "BERMUDA ACID WASH • CABALLERO",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "<p>Bermuda acid wash&nbsp;</p>",
+    "sku": "10136",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "865f617e-80ea-4e77-aba2-dd08bcfaaadf",
+    "loyverseVariantId": "ef87307b-659f-41c7-aa00-689415bcbe1b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "ef87307b-659f-41c7-aa00-689415bcbe1b",
+        "sku": "10136",
+        "barcode": null,
+        "price": 0,
+        "cost": 34000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8410cd7c-73b1-4c87-ae0b-44a96737f4cb",
+        "sku": "10158",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7a128adb-1898-4ee3-8e9d-4250bae656d0",
+        "sku": "10159",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "Digital",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "Digital",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "4fc81fa0-6d41-46ef-995e-d8907d87f8e1",
+    "name": "BUZO CAPOTERO GOLD • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10138",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "4fc81fa0-6d41-46ef-995e-d8907d87f8e1",
+    "loyverseVariantId": "05e72318-d553-46af-9c65-282cd08a3642",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "05e72318-d553-46af-9c65-282cd08a3642",
+        "sku": "10138",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "92efd68c-93d6-494f-af8e-d05202cf4e9c",
+        "sku": "10141",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f7d1bcf4-f11b-427b-b4d8-06478388ab18",
+        "sku": "10142",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f8751e20-ac44-424a-aefe-5ee23b4a2330",
+        "sku": "10028",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "e7b62b50-bb29-4449-9307-93012e327a65",
+    "name": "BUZO CAPOTERO ACID WASH • CABALLERO",
+    "category": "latest-drops",
+    "price": 110000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10139",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "e7b62b50-bb29-4449-9307-93012e327a65",
+    "loyverseVariantId": "9dbdb897-7bf5-4cc0-8496-3c680dce8851",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "9dbdb897-7bf5-4cc0-8496-3c680dce8851",
+        "sku": "10139",
+        "barcode": null,
+        "price": 0,
+        "cost": 72000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5385b704-7c72-4278-9888-e1b39837e9c3",
+        "sku": "10140",
+        "barcode": null,
+        "price": 0,
+        "cost": 72000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "91cab09b-5938-4d1f-87ba-ff620c2b4673",
+        "sku": "10005",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "10a46dda-8175-4c21-90b1-a9b825dd7c98",
+        "sku": "10006",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "a84970a4-19aa-4157-97a3-cd715796fb35",
+    "name": "PANTALÓN DM CARGO • DAMA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10132",
+    "categoryLabel": "DAMA",
+    "loyverseItemId": "a84970a4-19aa-4157-97a3-cd715796fb35",
+    "loyverseVariantId": "fa9dc98a-4430-4622-b3c4-53ee8283ce54",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "fa9dc98a-4430-4622-b3c4-53ee8283ce54",
+        "sku": "10132",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0e7e6282-a69b-413e-99fb-0e19eecbcf88",
+        "sku": "10133",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2fcc0cca-c330-4427-8327-b7c275d65959",
+        "sku": "10134",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "95675c55-1284-48ad-b351-897e9bd12040",
+    "name": "PANTALO HM • CABALLERO",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10127",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "95675c55-1284-48ad-b351-897e9bd12040",
+    "loyverseVariantId": "8dfe7f62-32b6-4ca8-9dbb-57c56680dac5",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "8dfe7f62-32b6-4ca8-9dbb-57c56680dac5",
+        "sku": "10127",
+        "barcode": null,
+        "price": 0,
+        "cost": 43800,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "505c11a9-1842-4443-aae9-1c19ce70ffb8",
+        "sku": "10128",
+        "barcode": null,
+        "price": 0,
+        "cost": 43800,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "14cb90db-6310-45a0-a866-d0a0506410e4",
+        "sku": "10046",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a0c02f6a-f0d4-474c-a222-933019a6ee92",
+        "sku": "10129",
+        "barcode": null,
+        "price": 0,
+        "cost": 43800,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "3754246f-2e8b-4833-8a63-982faf1f4873",
+    "name": "CAMISA OVERSIZE • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10115",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "3754246f-2e8b-4833-8a63-982faf1f4873",
+    "loyverseVariantId": "52bd1db2-7886-47f3-90cf-66a999e82ee6",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "52bd1db2-7886-47f3-90cf-66a999e82ee6",
+        "sku": "10115",
+        "barcode": null,
+        "price": 0,
+        "cost": 20000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "39a47874-3284-4ac5-a799-38819a8bc4de",
+        "sku": "10119",
+        "barcode": null,
+        "price": 0,
+        "cost": 20000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7dffada2-188b-4e8c-aaae-16e56c728376",
+        "sku": "10120",
+        "barcode": null,
+        "price": 0,
+        "cost": 20000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "bacf32c2-de7a-4f6e-b258-4eb0c56825c8",
+    "name": "CONJUNTO CARGO • CABALLERO",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10112",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "bacf32c2-de7a-4f6e-b258-4eb0c56825c8",
+    "loyverseVariantId": "8e653eec-adc2-4bd6-8dd1-2123201c8d7a",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "8e653eec-adc2-4bd6-8dd1-2123201c8d7a",
+        "sku": "10112",
+        "barcode": null,
+        "price": 0,
+        "cost": 45900,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "511a4113-d398-40a7-90bc-06328ab76316",
+        "sku": "10113",
+        "barcode": null,
+        "price": 0,
+        "cost": 45900,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "dc9a50bb-37b9-4103-a8c4-014e5c88c7f9",
+        "sku": "10114",
+        "barcode": null,
+        "price": 0,
+        "cost": 45900,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "9a1d7431-42e7-4b5f-89df-0234859c2dd8",
+        "sku": "10042",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "44491573-7fc5-4b55-aecb-2d4332288f11",
+    "name": "OTROS • UNISEX",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10104",
+    "categoryLabel": "UNISEX",
+    "loyverseItemId": "44491573-7fc5-4b55-aecb-2d4332288f11",
+    "loyverseVariantId": "560d479c-d80e-4a19-9896-e7d18ab7f934",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "560d479c-d80e-4a19-9896-e7d18ab7f934",
+        "sku": "10104",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": null,
+        "option2_value": null,
+        "option3_value": null,
+        "size": "",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "025e6277-6fac-4d8f-bb7c-41ccdc46e3ed",
+    "name": "BUZO GOLD • CABALLERO",
+    "category": "latest-drops",
+    "price": 85000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10102",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "025e6277-6fac-4d8f-bb7c-41ccdc46e3ed",
+    "loyverseVariantId": "a1a2d3e9-c6ff-438d-8d25-8b05db18ac0a",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a1a2d3e9-c6ff-438d-8d25-8b05db18ac0a",
+        "sku": "10102",
+        "barcode": null,
+        "price": 0,
+        "cost": 52000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5fa76ca8-bd17-4665-8b94-58589bcc9b35",
+        "sku": "10103",
+        "barcode": null,
+        "price": 0,
+        "cost": 52000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "44cdfe1c-39ed-4e8e-9742-d2ed429d1e6b",
+        "sku": "10096",
+        "barcode": null,
+        "price": 0,
+        "cost": 52000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "00c9cf35-3458-435b-b0d8-4251d6b35fb1",
+    "name": "PANTALON OFI-SPO • DAMA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10099",
+    "categoryLabel": "DAMA",
+    "loyverseItemId": "00c9cf35-3458-435b-b0d8-4251d6b35fb1",
+    "loyverseVariantId": "51e81856-86c8-4146-9cac-833694ddd185",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "51e81856-86c8-4146-9cac-833694ddd185",
+        "sku": "10099",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "184c9730-c359-47f6-8bc2-5163d10826e8",
+        "sku": "10100",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a0de6156-8348-43f2-81e7-287e04896ae4",
+        "sku": "10101",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "491f2644-0652-4b39-af7c-06222eb791cc",
+    "name": "CONJUNTO CHUP • DAMA",
+    "category": "dama-oversize",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10092",
+    "categoryLabel": "DAMA",
+    "loyverseItemId": "491f2644-0652-4b39-af7c-06222eb791cc",
+    "loyverseVariantId": "22ba290e-b73b-45a4-846d-fb744e1f7d4b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "22ba290e-b73b-45a4-846d-fb744e1f7d4b",
+        "sku": "10092",
+        "barcode": null,
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "08dd81b9-ccac-4f67-ab90-4f4d59cafb47",
+        "sku": "10097",
+        "barcode": null,
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5574bcb1-b0a0-4a16-aafe-4009f073b0c2",
+        "sku": "10098",
+        "barcode": null,
+        "price": 0,
+        "cost": 45000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "afafd56c-4856-434d-b12e-aa39e3536ed9",
+    "name": "OVERSIZE ACIDWASH • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10093",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "afafd56c-4856-434d-b12e-aa39e3536ed9",
+    "loyverseVariantId": "808961a4-614d-400c-bf0e-b6b854fe0dc8",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "808961a4-614d-400c-bf0e-b6b854fe0dc8",
+        "sku": "10093",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "13aeae51-99b9-4678-adc3-6acbad3a9a79",
+        "sku": "10094",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4ad8e525-ba29-4d2c-9ff6-c6ab99628dcf",
+        "sku": "10095",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b68e6775-4a2b-4a28-ae91-bd4b20b44204",
+        "sku": "10044",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "0b125b8e-0c60-40fc-9378-0fb7b24bea41",
+        "sku": "10137",
+        "barcode": null,
+        "price": 0,
+        "cost": 28000,
+        "option1_value": "X MAYOR 12und",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR 12und",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "66ca3b68-b255-4168-83c5-03420390985c",
+    "name": "PESQUERO • UNISEX",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10091",
+    "categoryLabel": "UNISEX",
+    "loyverseItemId": "66ca3b68-b255-4168-83c5-03420390985c",
+    "loyverseVariantId": "122cff37-8398-4c4c-95c0-0405e09e95ae",
+    "stock": 9,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "122cff37-8398-4c4c-95c0-0405e09e95ae",
+        "sku": "10091",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "31d10878-c116-4f8e-88b8-622d83174e3b",
+        "sku": "10090",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 9
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "08256b96-5da4-42d4-b1a5-4218cb5a30ba",
+    "name": "CONJUNTO CAMISA NIÑO • NIÑO",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10059",
+    "categoryLabel": "NIÑO",
+    "loyverseItemId": "08256b96-5da4-42d4-b1a5-4218cb5a30ba",
+    "loyverseVariantId": "464cb2ce-eceb-4e91-9f63-1584a510ee48",
+    "stock": 10,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "464cb2ce-eceb-4e91-9f63-1584a510ee48",
+        "sku": "10059",
+        "barcode": null,
+        "price": 0,
+        "cost": 42000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 10
+      },
+      {
+        "variant_id": "91617000-a15f-49e6-9515-76a1f9768ef0",
+        "sku": "10060",
+        "barcode": null,
+        "price": 0,
+        "cost": 42000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5552d9d4-17a6-4521-bb29-852f96d105d4",
+        "sku": "10086",
+        "barcode": null,
+        "price": 0,
+        "cost": 42000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "5415a1c8-3b6e-4653-b7cd-6d8c6c7e81ae",
+    "name": "OVERSIZE NIÑO • NIÑO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10054",
+    "categoryLabel": "NIÑO",
+    "loyverseItemId": "5415a1c8-3b6e-4653-b7cd-6d8c6c7e81ae",
+    "loyverseVariantId": "a92901b3-4c0f-407e-9ae0-831ea46c69bb",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a92901b3-4c0f-407e-9ae0-831ea46c69bb",
+        "sku": "10054",
+        "barcode": null,
+        "price": 0,
+        "cost": 13000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "223deb68-c3d2-4baf-b2b7-85fca37b5147",
+        "sku": "10051",
+        "barcode": null,
+        "price": 0,
+        "cost": 13000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "27a0de10-e149-4a4e-9c0a-2cdd8241fb31",
+        "sku": "10078",
+        "barcode": null,
+        "price": 0,
+        "cost": 13000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "0264ae9c-780f-4425-b4a6-9e17b59b3a76",
+    "name": "CONJUNTO CAMISA • CABALLERO",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10055",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "0264ae9c-780f-4425-b4a6-9e17b59b3a76",
+    "loyverseVariantId": "cf3e71a2-2203-4a0e-880d-38174c17fbc9",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "cf3e71a2-2203-4a0e-880d-38174c17fbc9",
+        "sku": "10055",
+        "barcode": null,
+        "price": 0,
+        "cost": 48000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "18403192-88d4-4cb4-9db3-1374b2ec6e38",
+        "sku": "10050",
+        "barcode": null,
+        "price": 0,
+        "cost": 48000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "466c52b6-a03b-4172-aacc-7f3549d0a193",
+        "sku": "10068",
+        "barcode": null,
+        "price": 0,
+        "cost": 48000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "77434f46-b910-43ae-b03b-df3cc2f027d7",
+    "name": "OVERSIZE ALGODÓN • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10047",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "77434f46-b910-43ae-b03b-df3cc2f027d7",
+    "loyverseVariantId": "039d1e8d-d188-4263-8820-03d041ff545e",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "039d1e8d-d188-4263-8820-03d041ff545e",
+        "sku": "10047",
+        "barcode": null,
+        "price": 0,
+        "cost": 20000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a41a5685-77b3-429e-94b5-88580bea13a5",
+        "sku": "10048",
+        "barcode": null,
+        "price": 0,
+        "cost": 20000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b3e152d2-20f0-4d2a-9881-a3b043a278e3",
+        "sku": "10077",
+        "barcode": null,
+        "price": 0,
+        "cost": 20000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "83d6ca7c-2abb-4fc2-b1a2-611f945f69ee",
+        "sku": "10045",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "7a6b5ec3-9949-4302-a4d8-9726767b4247",
+    "name": "OVERIZE EXTRA XL A 4XL • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10040",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "7a6b5ec3-9949-4302-a4d8-9726767b4247",
+    "loyverseVariantId": "8bfbe77c-3c46-44c0-a4b8-3a805ce7c9c5",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "8bfbe77c-3c46-44c0-a4b8-3a805ce7c9c5",
+        "sku": "10040",
+        "barcode": null,
+        "price": 0,
+        "cost": 20000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "f2be374c-2e07-4a1a-a0af-087d7bb108d5",
+        "sku": "10041",
+        "barcode": null,
+        "price": 0,
+        "cost": 20000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "7176a10f-4696-4594-b44f-4eee9595ffd5",
+        "sku": "10074",
+        "barcode": null,
+        "price": 0,
+        "cost": 20000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "6ab2960c-9dc1-4691-9570-1c251c06fd37",
+    "name": "PROMOCION • UNISEX",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10081",
+    "categoryLabel": "UNISEX",
+    "loyverseItemId": "6ab2960c-9dc1-4691-9570-1c251c06fd37",
+    "loyverseVariantId": "a1745d47-117b-4c3a-b043-69564be46b38",
+    "stock": 36,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "a1745d47-117b-4c3a-b043-69564be46b38",
+        "sku": "10081",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "d6f96c8b-e35d-4941-960c-6132be8d53ec",
+        "sku": "10082",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 36
+      },
+      {
+        "variant_id": "3d8213fa-7ae3-47b9-b104-795ba83aa8df",
+        "sku": "10143",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "Niño",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "Niño",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "c32e60ad-9bd2-4b3c-acac-151ca1d8ab13",
+    "name": "GORRA • UNISEX",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10038",
+    "categoryLabel": "UNISEX",
+    "loyverseItemId": "c32e60ad-9bd2-4b3c-acac-151ca1d8ab13",
+    "loyverseVariantId": "02c6c290-1185-45c6-8645-77cec8188976",
+    "stock": 18,
+    "isAvailable": true,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "02c6c290-1185-45c6-8645-77cec8188976",
+        "sku": "10038",
+        "barcode": null,
+        "price": 0,
+        "cost": 26000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 18
+      },
+      {
+        "variant_id": "a28cd94e-2a90-4a9a-8fd8-1963c14d676e",
+        "sku": "10039",
+        "barcode": null,
+        "price": 0,
+        "cost": 26000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "a89166f5-3955-41a0-a03d-1c1a479c52e4",
+        "sku": "10072",
+        "barcode": null,
+        "price": 0,
+        "cost": 26000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "39984cb0-d3e3-4935-bbc9-a60b295e4c09",
+    "name": "JOGGER • DAMA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10036",
+    "categoryLabel": "DAMA",
+    "loyverseItemId": "39984cb0-d3e3-4935-bbc9-a60b295e4c09",
+    "loyverseVariantId": "e9a3b4c8-4532-46e6-b263-c1c1a387fe7b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e9a3b4c8-4532-46e6-b263-c1c1a387fe7b",
+        "sku": "10036",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "55b75182-a476-42fd-bee0-aa7c10d07328",
+        "sku": "10037",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b6d4fb80-7ee7-42d9-89c7-8f7ca862cd02",
+        "sku": "10073",
+        "barcode": null,
+        "price": 0,
+        "cost": 22000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "3c798182-2da8-48f8-bc09-9378a9b52f9f",
+    "name": "PANTALONETA • DAMA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10030",
+    "categoryLabel": "DAMA",
+    "loyverseItemId": "3c798182-2da8-48f8-bc09-9378a9b52f9f",
+    "loyverseVariantId": "e9b6c053-d10c-4496-b035-5c651c264275",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "e9b6c053-d10c-4496-b035-5c651c264275",
+        "sku": "10030",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "4eec5e4e-2504-4c97-bfb2-d3f1b6aba2ff",
+        "sku": "10031",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8f3f98ba-0bb1-40e0-b9ee-0f68337a8ea2",
+        "sku": "10079",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "a8142ad6-3540-45c3-b704-94e6dc3c69fa",
+    "name": "RIB CAMISETA • DAMA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10026",
+    "categoryLabel": "DAMA",
+    "loyverseItemId": "a8142ad6-3540-45c3-b704-94e6dc3c69fa",
+    "loyverseVariantId": "4cc3e5ca-6e2d-4157-8480-93845f8b7c48",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "4cc3e5ca-6e2d-4157-8480-93845f8b7c48",
+        "sku": "10026",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2a4a5efe-a53c-462d-b855-96a0404c1742",
+        "sku": "10027",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "2877f685-0752-42e5-a500-4d8762832930",
+        "sku": "10083",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "e8b2b8c3-f6f7-40ee-bd38-4a26a82491d7",
+    "name": "OVERSIZE • DAMA",
+    "category": "dama-oversize",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10000",
+    "categoryLabel": "DAMA",
+    "loyverseItemId": "e8b2b8c3-f6f7-40ee-bd38-4a26a82491d7",
+    "loyverseVariantId": "7d3a97bc-d04e-4a5e-8040-fd2dd3129174",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "7d3a97bc-d04e-4a5e-8040-fd2dd3129174",
+        "sku": "10000",
+        "barcode": null,
+        "price": 0,
+        "cost": 16000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "65333663-4ea1-45aa-88b0-ddabc64e1c1e",
+        "sku": "10008",
+        "barcode": null,
+        "price": 0,
+        "cost": 16000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "71e6c890-b43b-4ca1-8ebd-f6ee5b450166",
+        "sku": "10076",
+        "barcode": null,
+        "price": 0,
+        "cost": 16000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "2f8ac5dd-deb2-4440-a68c-041469673907",
+    "name": "CONJUNTO GALLETA • CABALLERO",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10023",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "2f8ac5dd-deb2-4440-a68c-041469673907",
+    "loyverseVariantId": "f9777f8d-2882-4878-afb4-0f950b4286b2",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "f9777f8d-2882-4878-afb4-0f950b4286b2",
+        "sku": "10023",
+        "barcode": null,
+        "price": 0,
+        "cost": 42000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "73ce193e-3d23-4897-b31e-95d359d6b6d3",
+        "sku": "10024",
+        "barcode": null,
+        "price": 0,
+        "cost": 42000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "79ec6724-6a91-4970-884a-c5c7014fe50b",
+        "sku": "10069",
+        "barcode": null,
+        "price": 0,
+        "cost": 42000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "580d14a0-adab-44d5-90e1-19a47d25ecbb",
+    "name": "CONJUNTO BURDA • CABALLERO",
+    "category": "latest-drops",
+    "price": 55000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10020",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "580d14a0-adab-44d5-90e1-19a47d25ecbb",
+    "loyverseVariantId": "b556b918-33ca-4b97-af61-7751d25b414d",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "b556b918-33ca-4b97-af61-7751d25b414d",
+        "sku": "10020",
+        "barcode": null,
+        "price": 0,
+        "cost": 36000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ffaa22e4-d274-412d-b022-3e282d5ee292",
+        "sku": "10022",
+        "barcode": null,
+        "price": 0,
+        "cost": 36000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "6b5fd457-e598-4a4f-97ff-701a40668490",
+        "sku": "10067",
+        "barcode": null,
+        "price": 0,
+        "cost": 36000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "f4a4c69d-a40f-4655-a13f-e8483b2f5611",
+    "name": "BERMUDA • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10016",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "f4a4c69d-a40f-4655-a13f-e8483b2f5611",
+    "loyverseVariantId": "34686949-12f9-405a-89b4-f54181dd8bb3",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "34686949-12f9-405a-89b4-f54181dd8bb3",
+        "sku": "10016",
+        "barcode": null,
+        "price": 0,
+        "cost": 18000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "274bf28a-a84f-47cc-be80-388ba6f1f363",
+        "sku": "10017",
+        "barcode": null,
+        "price": 0,
+        "cost": 18000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "5618b39d-fe25-44b4-96df-82ed91345698",
+        "sku": "10029",
+        "barcode": null,
+        "price": 0,
+        "cost": 18000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "42457bde-4572-4439-a5e9-b1fa07727d5c",
+        "sku": "10003",
+        "barcode": null,
+        "price": 0,
+        "cost": 18,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "4f202430-e157-43a2-b9d0-8e729b3f3031",
+    "name": "BUZO CAPOTERO • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10014",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "4f202430-e157-43a2-b9d0-8e729b3f3031",
+    "loyverseVariantId": "548f1da8-eacd-48f0-a3e0-763794d5b44d",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "548f1da8-eacd-48f0-a3e0-763794d5b44d",
+        "sku": "10014",
+        "barcode": null,
+        "price": 0,
+        "cost": 27300,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "bd525518-736b-4c4e-b740-a08dc1530649",
+        "sku": "10015",
+        "barcode": null,
+        "price": 0,
+        "cost": 27300,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "47b988fe-ce24-4ec7-ac02-3834abb5264f",
+        "sku": "10061",
+        "barcode": null,
+        "price": 0,
+        "cost": 27300,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "97bc2c2f-b734-445f-bdaf-fe446a9bd793",
+        "sku": "10004",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "d6377bfc-a073-4928-81fa-e5822d0217ca",
+    "name": "ESQUELETO • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10007",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "d6377bfc-a073-4928-81fa-e5822d0217ca",
+    "loyverseVariantId": "394acbf8-3822-4bc9-9180-4327ab1105a9",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "394acbf8-3822-4bc9-9180-4327ab1105a9",
+        "sku": "10007",
+        "barcode": null,
+        "price": 0,
+        "cost": 11000,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "b4f3bac3-dea5-4b56-8e16-28d5a62db9e4",
+        "sku": "10009",
+        "barcode": null,
+        "price": 0,
+        "cost": 11000,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "1ff8ee08-8de5-4e02-a2ab-479bd739face",
+        "sku": "10070",
+        "barcode": null,
+        "price": 0,
+        "cost": 11000,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  },
+  {
+    "id": "1a264539-8092-4ebd-a696-b83a117e1951",
+    "name": "OVERSIZE • CABALLERO",
+    "category": "latest-drops",
+    "price": 50000,
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop",
+    "images": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=800&auto=format&fit=crop"
+    ],
+    "desc": "Prenda original URBANNOISE confeccionada en Bogotá con algodón de alto gramaje y silueta contemporánea. Tallas disponibles: S, M, L, XL.",
+    "sku": "10002",
+    "categoryLabel": "CABALLERO",
+    "loyverseItemId": "1a264539-8092-4ebd-a696-b83a117e1951",
+    "loyverseVariantId": "932cc417-becf-463c-8b92-178c50851a6b",
+    "stock": 0,
+    "isAvailable": false,
+    "isPublished": true,
+    "variants": [
+      {
+        "variant_id": "932cc417-becf-463c-8b92-178c50851a6b",
+        "sku": "10002",
+        "barcode": null,
+        "price": 0,
+        "cost": 14900,
+        "option1_value": "UND",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "UND",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "ff854ca5-198d-4f66-aafb-93e01848aa2b",
+        "sku": "10001",
+        "barcode": null,
+        "price": 0,
+        "cost": 14900,
+        "option1_value": "X MAYOR",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "X MAYOR",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "8e21d92c-d052-49e4-a981-a43bfd31009b",
+        "sku": "10075",
+        "barcode": null,
+        "price": 0,
+        "cost": 14900,
+        "option1_value": "DIGITAL",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "DIGITAL",
+        "color": "",
+        "in_stock": 0
+      },
+      {
+        "variant_id": "977300d1-6645-4abf-82fa-9abbba2aba30",
+        "sku": "10043",
+        "barcode": null,
+        "price": 0,
+        "cost": 0,
+        "option1_value": "PAGINA WEB",
+        "option2_value": null,
+        "option3_value": null,
+        "size": "PAGINA WEB",
+        "color": "",
+        "in_stock": 0
+      }
+    ],
+    "availableSizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "availableColors": []
+  }
+];
+
+export const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: 0,
+    label: "01",
+    titleLight: "young & free",
+    titleBold: "CÁPSULA",
+    subtitle: "URBANNOISE",
+    desc: "Siluetas boxy de alto gramaje e ilustraciones icónicas diseñadas para conectar con la calle y la expresión auténtica.",
+    img: "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=2000&auto=format&fit=crop",
+    ctaAnchor: "#latest-drops"
+  },
+  {
+    id: 1,
+    label: "02",
+    titleLight: "weird boxy",
+    titleBold: "EDICIÓN",
+    subtitle: "OVERSIZE DROP",
+    desc: "Patrones cuadrados, mangas caídas y confección en algodón pesado de 240g para máxima durabilidad y presencia.",
+    img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=2000&auto=format&fit=crop",
+    ctaAnchor: "#pleasures"
+  },
+  {
+    id: 2,
+    label: "03",
+    titleLight: "dama",
+    titleBold: "CÁPSULA",
+    subtitle: "ESTILO ÚNICO",
+    desc: "Colección femenina con siluetas crop y oversize relajadas creadas en Bogotá para quienes imponen su propio ritmo.",
+    img: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=2000&auto=format&fit=crop",
+    ctaAnchor: "#avavav"
+  }
+];
+
+export const formatCOP = (val: number): string => {
+  return "$" + val.toLocaleString("es-CO");
+};
+
+export const INITIAL_PRODUCTS: Product[] = PRODUCTS_DATA.map(p => ({
+  ...p,
+  price: resolvePaginaWebPrice(p),
+}));
