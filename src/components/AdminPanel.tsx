@@ -2927,6 +2927,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                 <div className="space-y-6 animate-in fade-in duration-200">
                   <SiteContentEditor
                     products={products}
+                    onCatalogUpdated={onCatalogUpdated}
                     onNavigateToCatalog={(catId) => {
                       if (catId) {
                         setSelectedCategory(catId);

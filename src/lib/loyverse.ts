@@ -368,6 +368,63 @@ export async function saveProductCustomization(
   return { success: true, githubSynced: false };
 }
 
+export async function saveBulkProductCustomizations(
+  customizations: ProductCustomization[],
+  syncToGitHub: boolean = true
+): Promise<{ success: boolean; count: number; githubSynced?: boolean; commitSha?: string; error?: string }> {
+  const current = getStoredCustomizations();
+  const now = new Date().toISOString();
+
+  for (const item of customizations) {
+    if (!item.sku) continue;
+    const safeItem = { ...item };
+    if (safeItem.video && typeof safeItem.video === 'string' && safeItem.video.startsWith('data:')) {
+      delete safeItem.video;
+    }
+    if (Array.isArray(safeItem.images)) {
+      safeItem.images = safeItem.images.filter(
+        (img) => typeof img === 'string' && !img.includes('loyverse.com') && !img.startsWith('data:')
+      );
+    }
+    current[item.sku] = {
+      ...(current[item.sku] || {}),
+      ...safeItem,
+      updatedAt: now,
+    };
+  }
+
+  try {
+    localStorage.setItem(STORAGE_CUSTOMIZATIONS_KEY, JSON.stringify(current));
+  } catch (storageErr) {
+    console.warn('Aviso de cuota en localStorage:', storageErr);
+  }
+
+  // Disparar evento para que la tienda se actualice en tiempo real en la pantalla
+  window.dispatchEvent(new CustomEvent('urbannoise_catalog_updated'));
+
+  // Sincronización automática con GitHub si está configurado
+  if (syncToGitHub && isGitHubConfigured()) {
+    try {
+      const cfg = getGitHubConfig();
+      if (cfg.autoCommitOnSave) {
+        const ghRes = await saveCatalogToGitHub(current, cfg);
+        return {
+          success: true,
+          count: customizations.length,
+          githubSynced: ghRes.success,
+          commitSha: ghRes.commitSha,
+          error: ghRes.error,
+        };
+      }
+    } catch (err: any) {
+      console.warn('Advertencia al sincronizar con GitHub:', err);
+      return { success: true, count: customizations.length, githubSynced: false, error: err.message };
+    }
+  }
+
+  return { success: true, count: customizations.length, githubSynced: false };
+}
+
 export async function deleteProductCustomization(
   sku: string,
   syncToGitHub: boolean = true

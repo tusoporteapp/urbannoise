@@ -33,6 +33,12 @@ import {
   Layers,
   Tag,
   Bookmark,
+  Search,
+  CheckSquare,
+  Square,
+  Package,
+  X,
+  Loader2,
 } from 'lucide-react';
 import {
   HeroSlide,
@@ -44,6 +50,7 @@ import {
   WhatsAppFloatingConfig,
   HomeSectionsConfig,
   Product,
+  ProductCustomization,
 } from '../types';
 import {
   getStoredSiteContent,
@@ -52,11 +59,14 @@ import {
   DEFAULT_SITE_CONTENT,
 } from '../lib/siteContent';
 import { getGitHubConfig } from '../lib/githubStorage';
+import { PRODUCTS_DATA, formatCOP } from '../data/products';
+import { getStoredCustomizations, saveBulkProductCustomizations } from '../lib/loyverse';
 
 interface SiteContentEditorProps {
   onShowToast?: (msg: string) => void;
   products?: Product[];
   onNavigateToCatalog?: (categoryId?: string) => void;
+  onCatalogUpdated?: () => void;
 }
 
 type EditorSubTab =
@@ -71,6 +81,7 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
   onShowToast,
   products = [],
   onNavigateToCatalog,
+  onCatalogUpdated,
 }) => {
   const [content, setContent] = useState<SiteContentConfig>(() =>
     getStoredSiteContent()
@@ -179,9 +190,171 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
     return id === 'latest-drops' || id === 'young-free' || id === 'weird-oversize' || id === 'dama-oversize';
   };
 
+  // Estados para el Asignador Masivo de Prendas a Categorías
+  const [bulkModalCategory, setBulkModalCategory] = useState<CategoryCardContent | null>(null);
+  const [bulkSelectedSkus, setBulkSelectedSkus] = useState<Set<string>>(new Set());
+  const [bulkInitialSkus, setBulkInitialSkus] = useState<Set<string>>(new Set());
+  const [bulkSearchTerm, setBulkSearchTerm] = useState<string>('');
+  const [bulkFilter, setBulkFilter] = useState<'all' | 'assigned' | 'other'>('all');
+  const [isSavingBulk, setIsSavingBulk] = useState<boolean>(false);
+  const [bulkFeedback, setBulkFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
   const getProductCountForCategory = (catId?: string) => {
-    if (!catId || !products || products.length === 0) return 0;
-    return products.filter((p) => p.category === catId && p.isPublished !== false).length;
+    if (!catId) return 0;
+    const list = products && products.length > 0 ? products : PRODUCTS_DATA;
+    const storedCustoms = getStoredCustomizations();
+    return list.filter((p) => {
+      const custom = storedCustoms[p.sku || p.id];
+      const effectiveCategory = custom?.category || p.category;
+      return effectiveCategory === catId && p.isPublished !== false;
+    }).length;
+  };
+
+  const handleOpenBulkAssignModal = (category: CategoryCardContent) => {
+    const allAvailableProducts = products && products.length > 0 ? products : PRODUCTS_DATA;
+    const storedCustoms = getStoredCustomizations();
+
+    const initialSkus = new Set<string>();
+    allAvailableProducts.forEach((p) => {
+      const sku = p.sku || p.id;
+      const custom = storedCustoms[sku];
+      const effectiveCategory = custom?.category || p.category;
+      if (effectiveCategory === category.id) {
+        initialSkus.add(sku);
+      }
+    });
+
+    setBulkModalCategory(category);
+    setBulkInitialSkus(new Set(initialSkus));
+    setBulkSelectedSkus(new Set(initialSkus));
+    setBulkSearchTerm('');
+    setBulkFilter('all');
+    setBulkFeedback(null);
+  };
+
+  const handleToggleProductSku = (sku: string) => {
+    setBulkSelectedSkus((prev) => {
+      const next = new Set(prev);
+      if (next.has(sku)) {
+        next.delete(sku);
+      } else {
+        next.add(sku);
+      }
+      return next;
+    });
+  };
+
+  const handleSelectAllVisible = (skus: string[]) => {
+    setBulkSelectedSkus((prev) => {
+      const next = new Set(prev);
+      skus.forEach((s) => next.add(s));
+      return next;
+    });
+  };
+
+  const handleDeselectAllVisible = (skus: string[]) => {
+    setBulkSelectedSkus((prev) => {
+      const next = new Set(prev);
+      skus.forEach((s) => next.delete(s));
+      return next;
+    });
+  };
+
+  const handleSaveBulkAssignment = async () => {
+    if (!bulkModalCategory) return;
+    setIsSavingBulk(true);
+    setBulkFeedback(null);
+
+    try {
+      const allAvailableProducts = products && products.length > 0 ? products : PRODUCTS_DATA;
+      const storedCustoms = getStoredCustomizations();
+      const itemsToUpdate: ProductCustomization[] = [];
+
+      // 1. Prendas que quedaron seleccionadas -> asignarlas a bulkModalCategory.id
+      bulkSelectedSkus.forEach((sku) => {
+        const prod = allAvailableProducts.find((p) => (p.sku || p.id) === sku);
+        if (prod) {
+          const existingCustom = storedCustoms[sku];
+          itemsToUpdate.push({
+            sku,
+            name: existingCustom?.name || prod.name,
+            desc: existingCustom?.desc || prod.desc || '',
+            category: bulkModalCategory.id,
+            categoryLabel: bulkModalCategory.name,
+            price: existingCustom?.price ?? prod.price,
+            images:
+              existingCustom?.images && existingCustom.images.length > 0
+                ? existingCustom.images
+                : prod.images && prod.images.length > 0
+                ? prod.images
+                : [prod.image],
+            video: existingCustom?.video || prod.video,
+            fit: existingCustom?.fit || prod.fit,
+            isPublished: existingCustom?.isPublished ?? prod.isPublished !== false,
+            updatedAt: new Date().toISOString(),
+          });
+        }
+      });
+
+      // 2. Prendas que estaban en esta categoría pero se desmarcaron -> mover a 'latest-drops'
+      bulkInitialSkus.forEach((sku) => {
+        if (!bulkSelectedSkus.has(sku)) {
+          const prod = allAvailableProducts.find((p) => (p.sku || p.id) === sku);
+          if (prod) {
+            const existingCustom = storedCustoms[sku];
+            itemsToUpdate.push({
+              sku,
+              name: existingCustom?.name || prod.name,
+              desc: existingCustom?.desc || prod.desc || '',
+              category: 'latest-drops',
+              categoryLabel: 'Últimos Lanzamientos',
+              price: existingCustom?.price ?? prod.price,
+              images:
+                existingCustom?.images && existingCustom.images.length > 0
+                  ? existingCustom.images
+                  : prod.images && prod.images.length > 0
+                  ? prod.images
+                  : [prod.image],
+              video: existingCustom?.video || prod.video,
+              fit: existingCustom?.fit || prod.fit,
+              isPublished: existingCustom?.isPublished ?? prod.isPublished !== false,
+              updatedAt: new Date().toISOString(),
+            });
+          }
+        }
+      });
+
+      const res = await saveBulkProductCustomizations(itemsToUpdate, true);
+      if (res.success) {
+        if (onCatalogUpdated) {
+          onCatalogUpdated();
+        }
+        if (onShowToast) {
+          onShowToast(`¡${bulkSelectedSkus.size} prendas asignadas con éxito a ${bulkModalCategory.name}!`);
+        }
+        setBulkFeedback({
+          type: 'success',
+          message: `¡Asignación guardada con éxito! ${bulkSelectedSkus.size} prendas ahora pertenecen a "${bulkModalCategory.name}".`,
+        });
+
+        setTimeout(() => {
+          setBulkModalCategory(null);
+          setBulkFeedback(null);
+        }, 1200);
+      } else {
+        setBulkFeedback({
+          type: 'error',
+          message: res.error || 'Ocurrió un error al guardar la asignación.',
+        });
+      }
+    } catch (err: any) {
+      setBulkFeedback({
+        type: 'error',
+        message: err.message || 'Error inesperado al guardar la asignación.',
+      });
+    } finally {
+      setIsSavingBulk(false);
+    }
   };
 
   const handleApplyCategoryPreset = (preset: typeof STREETWEAR_CATEGORY_PRESETS[0]) => {
@@ -509,6 +682,26 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
       url: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=2000&auto=format&fit=crop',
     },
   ];
+
+  const allAvailableProducts = products && products.length > 0 ? products : PRODUCTS_DATA;
+  const storedCustoms = getStoredCustomizations();
+
+  const filteredBulkProducts = allAvailableProducts.filter((p) => {
+    const sku = p.sku || p.id;
+    const custom = storedCustoms[sku];
+
+    // Filtro por selección
+    if (bulkFilter === 'assigned' && !bulkSelectedSkus.has(sku)) return false;
+    if (bulkFilter === 'other' && bulkSelectedSkus.has(sku)) return false;
+
+    // Filtro por término de búsqueda
+    if (!bulkSearchTerm.trim()) return true;
+    const term = bulkSearchTerm.toLowerCase();
+    const nameMatch = (custom?.name || p.name).toLowerCase().includes(term);
+    const skuMatch = sku.toLowerCase().includes(term);
+    const fitMatch = (custom?.fit || p.fit || '').toLowerCase().includes(term);
+    return nameMatch || skuMatch || fitMatch;
+  });
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
@@ -1511,6 +1704,17 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
+                  {/* Botón Asignador Masivo de Prendas */}
+                  <button
+                    type="button"
+                    onClick={() => handleOpenBulkAssignModal(currentCategory)}
+                    className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold uppercase text-[11px] tracking-wider rounded-lg transition flex items-center space-x-1.5 cursor-pointer shadow-md"
+                    title="Asigna o desvincula múltiples prendas de esta categoría en lote con casillas de verificación"
+                  >
+                    <Package className="w-3.5 h-3.5" />
+                    <span>+ Asignar / Mover Prendas</span>
+                  </button>
+
                   {/* Interruptor de Visibilidad */}
                   <button
                     type="button"
@@ -2653,6 +2857,302 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                   }
                   className="w-full bg-black/50 border border-white/15 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-white focus:outline-none focus:border-[#D9C4AB] transition"
                 />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================== */}
+      {/* MODAL: ASIGNADOR MASIVO DE PRENDAS A CATEGORÍAS                 */}
+      {/* ============================================================== */}
+      {bulkModalCategory && (
+        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-hidden animate-in fade-in duration-200">
+          <div className="bg-[#0E0F17] border border-white/20 rounded-2xl w-full max-w-5xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+            {/* Cabecera del Modal */}
+            <div className="bg-[#14151D] px-5 sm:px-6 py-4 border-b border-white/10 flex items-center justify-between gap-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
+                  <Package className="w-5 h-5 text-blue-400" />
+                </div>
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">
+                      ASIGNACIÓN MASIVA DE PRENDAS
+                    </span>
+                    <span className="text-[10px] bg-black/60 text-[#D9C4AB] font-mono px-2 py-0.2 rounded border border-white/10 font-bold">
+                      ID: {bulkModalCategory.id}
+                    </span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-black uppercase text-white tracking-tight flex items-center space-x-2">
+                    <span>{bulkModalCategory.name}</span>
+                  </h3>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (!isSavingBulk) {
+                    setBulkModalCategory(null);
+                    setBulkFeedback(null);
+                  }
+                }}
+                disabled={isSavingBulk}
+                className="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 text-white/60 hover:text-white flex items-center justify-center transition cursor-pointer disabled:opacity-30"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Barra de Filtros y Búsqueda */}
+            <div className="bg-[#10111A] px-5 sm:px-6 py-3.5 border-b border-white/10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+              {/* Buscador */}
+              <div className="relative flex-1">
+                <Search className="w-4 h-4 text-white/40 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={bulkSearchTerm}
+                  onChange={(e) => setBulkSearchTerm(e.target.value)}
+                  placeholder="Buscar por nombre, SKU o silueta (ej: Boxy, Acid Wash, UN-001)..."
+                  className="w-full bg-black/60 border border-white/15 rounded-lg pl-9 pr-8 py-2 text-xs text-white placeholder-white/40 focus:outline-none focus:border-blue-400 transition"
+                />
+                {bulkSearchTerm && (
+                  <button
+                    type="button"
+                    onClick={() => setBulkSearchTerm('')}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-xs cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+
+              {/* Filtros de Pestaña */}
+              <div className="flex items-center space-x-1.5 overflow-x-auto">
+                <button
+                  type="button"
+                  onClick={() => setBulkFilter('all')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                    bulkFilter === 'all'
+                      ? 'bg-blue-600 text-white shadow'
+                      : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  Todas ({allAvailableProducts.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBulkFilter('assigned')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                    bulkFilter === 'assigned'
+                      ? 'bg-emerald-600 text-white shadow'
+                      : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  Seleccionadas ({bulkSelectedSkus.size})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBulkFilter('other')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                    bulkFilter === 'other'
+                      ? 'bg-amber-600 text-white shadow'
+                      : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  No Seleccionadas ({Math.max(0, allAvailableProducts.length - bulkSelectedSkus.size)})
+                </button>
+              </div>
+
+              {/* Botones de Selección Rápida */}
+              <div className="flex items-center space-x-1.5 flex-shrink-0">
+                <button
+                  type="button"
+                  onClick={() => handleSelectAllVisible(filteredBulkProducts.map((p) => p.sku || p.id))}
+                  className="px-2.5 py-1.5 bg-white/5 hover:bg-white/15 text-white/80 hover:text-white border border-white/10 rounded-lg text-[11px] font-bold uppercase transition flex items-center space-x-1 cursor-pointer"
+                  title="Marcar todas las prendas que se muestran en el filtro actual"
+                >
+                  <CheckSquare className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Marcar mostradas ({filteredBulkProducts.length})</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDeselectAllVisible(filteredBulkProducts.map((p) => p.sku || p.id))}
+                  className="px-2.5 py-1.5 bg-white/5 hover:bg-white/15 text-white/80 hover:text-white border border-white/10 rounded-lg text-[11px] font-bold uppercase transition flex items-center space-x-1 cursor-pointer"
+                  title="Desmarcar todas las prendas que se muestran en el filtro actual"
+                >
+                  <Square className="w-3.5 h-3.5 text-white/40" />
+                  <span>Desmarcar</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Mensaje de Feedback si existe */}
+            {bulkFeedback && (
+              <div
+                className={`px-6 py-2.5 text-xs font-bold border-b flex items-center space-x-2 ${
+                  bulkFeedback.type === 'success'
+                    ? 'bg-emerald-950/80 border-emerald-500/40 text-emerald-300'
+                    : 'bg-red-950/80 border-red-500/40 text-red-300'
+                }`}
+              >
+                {bulkFeedback.type === 'success' ? (
+                  <Check className="w-4 h-4 text-emerald-400 stroke-[3]" />
+                ) : (
+                  <AlertCircle className="w-4 h-4 text-red-400" />
+                )}
+                <span>{bulkFeedback.message}</span>
+              </div>
+            )}
+
+            {/* Parrilla de Prendas Seleccionables */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-black/40">
+              {filteredBulkProducts.length === 0 ? (
+                <div className="py-16 text-center">
+                  <Package className="w-10 h-10 text-white/20 mx-auto mb-2" />
+                  <p className="text-sm font-bold text-white/60">No se encontraron prendas con este filtro o búsqueda.</p>
+                  <p className="text-xs text-white/40 mt-1">Intenta con otro término o borra el buscador.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                  {filteredBulkProducts.map((product) => {
+                    const sku = product.sku || product.id;
+                    const isChecked = bulkSelectedSkus.has(sku);
+                    const wasInitiallyInCat = bulkInitialSkus.has(sku);
+                    const custom = storedCustoms[sku];
+                    const currentProdCat = custom?.category || product.category;
+                    const matchingCatObj = categoriesList.find((c) => c.id === currentProdCat);
+                    const catDisplayName = matchingCatObj?.name || currentProdCat;
+
+                    return (
+                      <div
+                        key={sku}
+                        onClick={() => handleToggleProductSku(sku)}
+                        className={`group relative p-3 rounded-xl border transition-all cursor-pointer flex items-center space-x-3 select-none ${
+                          isChecked
+                            ? 'bg-blue-950/30 border-blue-500/70 shadow-md ring-1 ring-blue-500/30'
+                            : 'bg-[#14151D] border-white/10 hover:border-white/25 hover:bg-white/5 opacity-80 hover:opacity-100'
+                        }`}
+                      >
+                        {/* Checkbox Visual */}
+                        <div
+                          className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 transition border ${
+                            isChecked
+                              ? 'bg-blue-600 border-blue-400 text-white'
+                              : 'bg-black/50 border-white/30 text-transparent group-hover:border-white/50'
+                          }`}
+                        >
+                          <Check className="w-3.5 h-3.5 stroke-[3]" />
+                        </div>
+
+                        {/* Imagen de la prenda */}
+                        <div className="w-14 h-14 rounded-lg bg-black/60 overflow-hidden flex-shrink-0 border border-white/10 relative">
+                          <img
+                            src={
+                              custom?.images?.[0] ||
+                              product.images?.[0] ||
+                              product.image ||
+                              'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=200&auto=format&fit=crop'
+                            }
+                            alt={product.name}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+
+                        {/* Información de la prenda */}
+                        <div className="flex-1 min-w-0">
+                          <h4 className="text-xs font-bold text-white truncate uppercase">
+                            {custom?.name || product.name}
+                          </h4>
+                          <div className="flex items-center justify-between text-[11px] text-white/50 font-mono mt-0.5">
+                            <span>{sku}</span>
+                            <span className="text-[#D9C4AB] font-bold">
+                              {formatCOP(custom?.price ?? product.price)}
+                            </span>
+                          </div>
+
+                          {/* Rótulo de Estado */}
+                          <div className="mt-1.5 flex items-center">
+                            {isChecked && wasInitiallyInCat && (
+                              <span className="text-[9.5px] font-bold text-emerald-300 bg-emerald-500/15 border border-emerald-500/30 px-1.5 py-0.2 rounded">
+                                ✓ En esta categoría
+                              </span>
+                            )}
+                            {isChecked && !wasInitiallyInCat && (
+                              <span className="text-[9.5px] font-bold text-blue-300 bg-blue-500/20 border border-blue-400/40 px-1.5 py-0.2 rounded animate-pulse">
+                                + Se asignará aquí
+                              </span>
+                            )}
+                            {!isChecked && wasInitiallyInCat && (
+                              <span className="text-[9.5px] font-bold text-amber-300 bg-amber-500/15 border border-amber-500/30 px-1.5 py-0.2 rounded">
+                                ✕ Se desvinculará
+                              </span>
+                            )}
+                            {!isChecked && !wasInitiallyInCat && (
+                              <span className="text-[9.5px] text-white/40 font-mono truncate max-w-[140px]" title={catDisplayName}>
+                                En: {catDisplayName}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Pie del Modal con Estadísticas y Botón Guardar */}
+            <div className="bg-[#14151D] px-5 sm:px-6 py-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center gap-3 text-xs">
+                <span className="font-bold text-white">
+                  Total seleccionadas: <span className="text-blue-400 font-mono text-sm">{bulkSelectedSkus.size}</span> prendas
+                </span>
+                {bulkSelectedSkus.size > bulkInitialSkus.size && (
+                  <span className="text-emerald-400 text-[11px] font-bold">
+                    (+{bulkSelectedSkus.size - Array.from(bulkSelectedSkus).filter((s) => bulkInitialSkus.has(s)).length} nuevas a sumar)
+                  </span>
+                )}
+                {Array.from(bulkInitialSkus).filter((s) => !bulkSelectedSkus.has(s)).length > 0 && (
+                  <span className="text-amber-400 text-[11px] font-bold">
+                    (-{Array.from(bulkInitialSkus).filter((s) => !bulkSelectedSkus.has(s)).length} a mover a Novedades)
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center space-x-3 w-full sm:w-auto">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setBulkModalCategory(null);
+                    setBulkFeedback(null);
+                  }}
+                  disabled={isSavingBulk}
+                  className="flex-1 sm:flex-initial px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-white/60 hover:text-white transition cursor-pointer disabled:opacity-30"
+                >
+                  Cancelar
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleSaveBulkAssignment}
+                  disabled={isSavingBulk}
+                  className="flex-1 sm:flex-initial px-6 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-900/50 text-white font-bold text-xs uppercase tracking-wider rounded-lg transition cursor-pointer flex items-center justify-center space-x-2 shadow-lg disabled:cursor-not-allowed"
+                >
+                  {isSavingBulk ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                      <span>Guardando Cambios...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4" />
+                      <span>Guardar Asignación ({bulkSelectedSkus.size} Prendas)</span>
+                    </>
+                  )}
+                </button>
               </div>
             </div>
           </div>
