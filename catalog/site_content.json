@@ -144,8 +144,6 @@
     "damaOversizeKicker": "SILUETAS RELAJADAS",
     "damaOversizeTitle": "DAMA OVERSIZE"
   },
-  "lastUpdated": "2026-10-28T21:21:27.757Z",
-  "featuredSkus": [],
   "countdownBanner": {
     "enabled": false,
     "title": "FLASH DROP STREETWEAR",
@@ -156,5 +154,83 @@
     "theme": "gold",
     "autoHideOnEnd": true,
     "expiredMessage": "DROP FINALIZADO"
-  }
+  },
+  "homeBlocks": [
+    {
+      "id": "hero",
+      "label": "Carrusel Hero Principal",
+      "badge": "Banners",
+      "description": "Banners gigantes deslizantes con títulos, subtítulos y botones de compra directa.",
+      "enabled": true,
+      "order": 1
+    },
+    {
+      "id": "categories",
+      "label": "Tarjetas de Categorías (Visual Hub)",
+      "badge": "Navegación",
+      "description": "Cuadrícula interactiva con fotos de cada colección y conteo en vivo de prendas.",
+      "enabled": true,
+      "order": 2
+    },
+    {
+      "id": "latest-drops",
+      "label": "Vitrina de Últimos Lanzamientos",
+      "badge": "Prendas",
+      "description": "Carrusel horizontal con las novedades streetwear más recientes del inventario.",
+      "enabled": true,
+      "order": 3
+    },
+    {
+      "id": "young-free",
+      "label": "Cápsula Young & Free (Banner + Carrusel)",
+      "badge": "Colección",
+      "description": "Banner lookbook a pantalla completa y vitrina de siluetas juveniles urbanas.",
+      "enabled": true,
+      "order": 4
+    },
+    {
+      "id": "weird-oversize",
+      "label": "Weird Boxy & Pleasures (Banner + Carrusel)",
+      "badge": "Colección",
+      "description": "Banner lookbook y carrusel de camisetas pesadas con corte boxy exclusivo.",
+      "enabled": true,
+      "order": 5
+    },
+    {
+      "id": "dama-oversize",
+      "label": "Colección Dama Oversize (Banner + Carrusel)",
+      "badge": "Colección",
+      "description": "Banner lookbook y carrusel femenino con siluetas holgadas y estampados únicos.",
+      "enabled": true,
+      "order": 6
+    },
+    {
+      "id": "flagship",
+      "label": "Tienda Física GranSan (Local 2118)",
+      "badge": "Showroom",
+      "description": "Ubicación física en Bogotá, horarios de madrugón, mapa GPS y asesoría WhatsApp.",
+      "enabled": true,
+      "order": 7
+    },
+    {
+      "id": "manifesto",
+      "label": "Manifiesto de Marca Underground",
+      "badge": "Filosofía",
+      "description": "Esencia, confección en Bogotá, alto gramaje y visión de moda urbana.",
+      "enabled": true,
+      "order": 8
+    },
+    {
+      "id": "seo",
+      "label": "Preguntas Frecuentes & Guía de Compra",
+      "badge": "Editorial",
+      "description": "Módulo editorial de posicionamiento SEO, dudas frecuentes sobre pagos y envíos.",
+      "enabled": true,
+      "order": 9
+    }
+  ],
+  "featuredSkus": [
+    "TEST-BOLD-1500"
+  ],
+  "lastUpdated": "2026-10-28T21:34:21.206Z"
 }
