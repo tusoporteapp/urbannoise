@@ -1,7 +1,82 @@
-import { SiteContentConfig, HeroSlide } from '../types';
+import { SiteContentConfig, HeroSlide, HomeBlockItem } from '../types';
 import { HERO_SLIDES } from '../data/products';
 import { getFileSha, getGitHubConfig, GitHubConfig } from './githubStorage';
 import { getAdminHeaders } from './loyverse';
+
+export const DEFAULT_HOME_BLOCKS: HomeBlockItem[] = [
+  {
+    id: 'hero',
+    label: 'Carrusel Hero Principal',
+    badge: 'Banners',
+    description: 'Banners gigantes deslizantes con títulos, subtítulos y botones de compra directa.',
+    enabled: true,
+    order: 1,
+  },
+  {
+    id: 'categories',
+    label: 'Tarjetas de Categorías (Visual Hub)',
+    badge: 'Navegación',
+    description: 'Cuadrícula interactiva con fotos de cada colección y conteo en vivo de prendas.',
+    enabled: true,
+    order: 2,
+  },
+  {
+    id: 'latest-drops',
+    label: 'Vitrina de Últimos Lanzamientos',
+    badge: 'Prendas',
+    description: 'Carrusel horizontal con las novedades streetwear más recientes del inventario.',
+    enabled: true,
+    order: 3,
+  },
+  {
+    id: 'young-free',
+    label: 'Cápsula Young & Free (Banner + Carrusel)',
+    badge: 'Colección',
+    description: 'Banner lookbook a pantalla completa y vitrina de siluetas juveniles urbanas.',
+    enabled: true,
+    order: 4,
+  },
+  {
+    id: 'weird-oversize',
+    label: 'Weird Boxy & Pleasures (Banner + Carrusel)',
+    badge: 'Colección',
+    description: 'Banner lookbook y carrusel de camisetas pesadas con corte boxy exclusivo.',
+    enabled: true,
+    order: 5,
+  },
+  {
+    id: 'dama-oversize',
+    label: 'Colección Dama Oversize (Banner + Carrusel)',
+    badge: 'Colección',
+    description: 'Banner lookbook y carrusel femenino con siluetas holgadas y estampados únicos.',
+    enabled: true,
+    order: 6,
+  },
+  {
+    id: 'flagship',
+    label: 'Tienda Física GranSan (Local 2118)',
+    badge: 'Showroom',
+    description: 'Ubicación física en Bogotá, horarios de madrugón, mapa GPS y asesoría WhatsApp.',
+    enabled: true,
+    order: 7,
+  },
+  {
+    id: 'manifesto',
+    label: 'Manifiesto de Marca Underground',
+    badge: 'Filosofía',
+    description: 'Esencia, confección en Bogotá, alto gramaje y visión de moda urbana.',
+    enabled: true,
+    order: 8,
+  },
+  {
+    id: 'seo',
+    label: 'Preguntas Frecuentes & Guía de Compra',
+    badge: 'Editorial',
+    description: 'Módulo editorial de posicionamiento SEO, dudas frecuentes sobre pagos y envíos.',
+    enabled: true,
+    order: 9,
+  },
+];
 
 export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
   heroSlides: HERO_SLIDES.map((s) => ({
@@ -127,6 +202,7 @@ export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
     damaOversizeKicker: 'SILUETAS RELAJADAS',
     damaOversizeTitle: 'DAMA OVERSIZE',
   },
+  homeBlocks: DEFAULT_HOME_BLOCKS,
   lastUpdated: new Date().toISOString(),
 };
 
@@ -153,6 +229,10 @@ export function getStoredSiteContent(): SiteContentConfig {
             Array.isArray(parsed.categories) && parsed.categories.length > 0
               ? parsed.categories
               : DEFAULT_SITE_CONTENT.categories,
+          homeBlocks:
+            Array.isArray(parsed.homeBlocks) && parsed.homeBlocks.length > 0
+              ? parsed.homeBlocks
+              : DEFAULT_HOME_BLOCKS,
           announcements: {
             ...DEFAULT_SITE_CONTENT.announcements,
             ...(parsed.announcements || {}),
@@ -188,6 +268,22 @@ export function getStoredSiteContent(): SiteContentConfig {
     console.warn('[SiteContent] Error leyendo de localStorage:', e);
   }
   return DEFAULT_SITE_CONTENT;
+}
+
+/**
+ * Retorna la lista ordenada de bloques de la portada con fusión defensiva de bloques por defecto
+ */
+export function getHomeBlocks(): HomeBlockItem[] {
+  const content = getStoredSiteContent();
+  const raw = content.homeBlocks && content.homeBlocks.length > 0 ? content.homeBlocks : DEFAULT_HOME_BLOCKS;
+  const existingIds = new Set(raw.map((b) => b.id));
+  const merged = [...raw];
+  DEFAULT_HOME_BLOCKS.forEach((def) => {
+    if (!existingIds.has(def.id)) {
+      merged.push({ ...def, order: merged.length + 1 });
+    }
+  });
+  return merged.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
 }
 
 /**

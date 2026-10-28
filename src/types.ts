@@ -173,6 +173,26 @@ export interface HomeSectionsConfig {
   damaOversizeTitle?: string;
 }
 
+export type HomeSectionId =
+  | 'hero'
+  | 'categories'
+  | 'latest-drops'
+  | 'young-free'
+  | 'weird-oversize'
+  | 'dama-oversize'
+  | 'flagship'
+  | 'manifesto'
+  | 'seo';
+
+export interface HomeBlockItem {
+  id: HomeSectionId;
+  label: string;
+  badge?: string;
+  description?: string;
+  enabled: boolean;
+  order: number;
+}
+
 export interface SiteContentConfig {
   heroSlides: HeroSlide[];
   announcements?: AnnouncementContent;
@@ -183,5 +203,6 @@ export interface SiteContentConfig {
   social?: SocialLinksConfig;
   whatsapp?: WhatsAppFloatingConfig;
   sections?: HomeSectionsConfig;
+  homeBlocks?: HomeBlockItem[];
   lastUpdated?: string;
 }

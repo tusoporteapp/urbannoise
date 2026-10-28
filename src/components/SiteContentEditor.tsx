@@ -51,12 +51,14 @@ import {
   HomeSectionsConfig,
   Product,
   ProductCustomization,
+  HomeBlockItem,
 } from '../types';
 import {
   getStoredSiteContent,
   saveSiteContent,
   saveSiteContentToGitHub,
   DEFAULT_SITE_CONTENT,
+  DEFAULT_HOME_BLOCKS,
 } from '../lib/siteContent';
 import { getGitHubConfig } from '../lib/githubStorage';
 import { PRODUCTS_DATA, formatCOP } from '../data/products';
@@ -404,6 +406,64 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
     setNewCatKicker(preset.kicker);
     setNewCatDesc(preset.description);
     setNewCatImage(preset.image);
+  };
+
+  const homeBlocksList: HomeBlockItem[] = (
+    content.homeBlocks && content.homeBlocks.length > 0
+      ? content.homeBlocks
+      : DEFAULT_HOME_BLOCKS
+  ).slice().sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+
+  const handleToggleBlockEnabled = (blockId: string) => {
+    setContent((prev) => {
+      const currentList = (
+        prev.homeBlocks && prev.homeBlocks.length > 0
+          ? prev.homeBlocks
+          : DEFAULT_HOME_BLOCKS
+      ).slice();
+
+      const updated = currentList.map((b) => {
+        if (b.id === blockId) {
+          return { ...b, enabled: b.enabled === false ? true : false };
+        }
+        return b;
+      });
+
+      return {
+        ...prev,
+        homeBlocks: updated,
+      };
+    });
+  };
+
+  const handleMoveBlock = (index: number, direction: 'up' | 'down') => {
+    const list = [...homeBlocksList];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= list.length) return;
+
+    const temp = list[index];
+    list[index] = list[targetIndex];
+    list[targetIndex] = temp;
+
+    const reordered = list.map((item, idx) => ({
+      ...item,
+      order: idx + 1,
+    }));
+
+    setContent((prev) => ({
+      ...prev,
+      homeBlocks: reordered,
+    }));
+  };
+
+  const handleResetHomeBlocks = () => {
+    if (confirm('¿Restablecer todas las secciones de la portada al orden y visibilidad por defecto?')) {
+      setContent((prev) => ({
+        ...prev,
+        homeBlocks: DEFAULT_HOME_BLOCKS,
+      }));
+      onShowToast?.('Secciones de portada restablecidas.');
+    }
   };
 
   const handleNewCategoryImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -954,7 +1014,7 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
           }`}
         >
           <Share2 className="w-4 h-4 flex-shrink-0 text-pink-400" />
-          <span>6. Títulos & Redes</span>
+          <span>6. 🎛️ Organizador de Portada & Redes</span>
         </button>
       </div>
 
@@ -2685,10 +2745,128 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
       )}
 
       {/* ============================================================== */}
-      {/* 6. TÍTULOS DE SECCIONES & REDES */}
+      {/* 6. ORGANIZADOR DE SECCIONES DE LA PORTADA & REDES */}
       {/* ============================================================== */}
       {activeSubTab === 'sections-social' && (
-        <div className="space-y-5 max-w-4xl">
+        <div className="space-y-6 max-w-4xl">
+          {/* MÓDULO: ORGANIZADOR DE SECCIONES DE LA PORTADA */}
+          <div className="bg-[#14151D] p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-white/10 gap-3">
+              <div>
+                <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-400 mb-1">
+                  <LayoutTemplate className="w-4 h-4" />
+                  <span>ORGANIZADOR DE SECCIONES DE LA PORTADA (HOME BUILDER)</span>
+                </div>
+                <h3 className="text-base sm:text-lg font-black uppercase text-white tracking-tight">
+                  Estructura y Orden de la Página de Inicio
+                </h3>
+                <p className="text-xs text-white/60 mt-0.5 leading-relaxed">
+                  Activa, oculta o reordena los bloques visuales de la tienda. Puedes subir la vitrina de productos de primera, ocultar el manifiesto o pausar cualquier colección con un solo clic.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleResetHomeBlocks}
+                className="px-3 py-1.5 bg-white/5 hover:bg-white/15 text-white/70 hover:text-white border border-white/10 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 cursor-pointer whitespace-nowrap self-start sm:self-center"
+                title="Restablecer el orden y visibilidad original de las secciones"
+              >
+                <RefreshCw className="w-3.5 h-3.5 text-amber-400" />
+                <span>Orden por Defecto</span>
+              </button>
+            </div>
+
+            {/* Lista Interactiva de Secciones */}
+            <div className="space-y-2.5 pt-1">
+              {homeBlocksList.map((block, idx) => {
+                const isEnabled = block.enabled !== false;
+                const isFirst = idx === 0;
+                const isLast = idx === homeBlocksList.length - 1;
+
+                return (
+                  <div
+                    key={block.id}
+                    className={`p-3 sm:p-3.5 rounded-xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+                      isEnabled
+                        ? 'bg-black/50 border-white/15 shadow-sm'
+                        : 'bg-black/25 border-white/5 opacity-60'
+                    }`}
+                  >
+                    {/* Posición, Nombre y Descripción */}
+                    <div className="flex items-start sm:items-center space-x-3 min-w-0 flex-1">
+                      {/* Rótulo de Posición */}
+                      <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 font-mono font-black text-xs text-[#D9C4AB]">
+                        #{idx + 1}
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                          <h4 className="text-xs sm:text-sm font-black uppercase tracking-tight text-white">
+                            {block.label}
+                          </h4>
+                          {block.badge && (
+                            <span className="text-[9.5px] font-bold uppercase font-mono px-2 py-0.2 rounded bg-white/10 text-white/70 border border-white/10">
+                              {block.badge}
+                            </span>
+                          )}
+                          {!isEnabled && (
+                            <span className="text-[9.5px] font-bold uppercase font-mono px-2 py-0.2 rounded bg-red-500/15 text-red-300 border border-red-500/30">
+                              ✕ Oculta en Portada
+                            </span>
+                          )}
+                        </div>
+                        {block.description && (
+                          <p className="text-[11px] text-white/50 truncate mt-0.5">
+                            {block.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Acciones: Flechas de Orden y Toggle de Visibilidad */}
+                    <div className="flex items-center space-x-2 self-end sm:self-center flex-shrink-0">
+                      {/* Flechas Subir / Bajar */}
+                      <div className="flex items-center bg-black/60 border border-white/10 rounded-lg p-0.5">
+                        <button
+                          type="button"
+                          onClick={() => handleMoveBlock(idx, 'up')}
+                          disabled={isFirst}
+                          className="p-1.5 text-white/70 hover:text-white disabled:opacity-20 disabled:hover:text-white/70 transition cursor-pointer"
+                          title="Mover arriba en la página"
+                        >
+                          <ArrowUp className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleMoveBlock(idx, 'down')}
+                          disabled={isLast}
+                          className="p-1.5 text-white/70 hover:text-white disabled:opacity-20 disabled:hover:text-white/70 transition cursor-pointer"
+                          title="Mover abajo en la página"
+                        >
+                          <ArrowDown className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+
+                      {/* Botón de Visibilidad */}
+                      <button
+                        type="button"
+                        onClick={() => handleToggleBlockEnabled(block.id)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 cursor-pointer border ${
+                          isEnabled
+                            ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/25'
+                            : 'bg-white/5 border-white/15 text-white/40 hover:text-white/70'
+                        }`}
+                        title={isEnabled ? 'Clic para ocultar esta sección' : 'Clic para mostrar esta sección'}
+                      >
+                        <Eye className={`w-3.5 h-3.5 ${isEnabled ? 'text-emerald-400' : 'text-white/30'}`} />
+                        <span>{isEnabled ? 'Visible' : 'Oculto'}</span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
           <div className="bg-[#14151D] p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
             <div className="border-b border-white/10 pb-3">
               <h3 className="font-bold text-xs uppercase tracking-wider text-white/90 flex items-center space-x-2">

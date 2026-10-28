@@ -38,8 +38,9 @@ import {
   clearAllAdminSessions,
 } from './lib/loyverse';
 import { trackEvent } from './lib/analytics';
-import { loadSiteContentFromRemote, getStoredSiteContent } from './lib/siteContent';
+import { loadSiteContentFromRemote, getStoredSiteContent, getHomeBlocks } from './lib/siteContent';
 import { verifyBoldReturnRedirect } from './lib/bold';
+import { HomeBlockItem } from './types';
 
 export default function App() {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -62,11 +63,17 @@ export default function App() {
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [siteSections, setSiteSections] = useState(() => getStoredSiteContent().sections || {});
+  const [homeBlocks, setHomeBlocks] = useState<HomeBlockItem[]>(() => getHomeBlocks());
 
   useEffect(() => {
     const handler = (e: any) => {
       if (e.detail?.sections) {
         setSiteSections(e.detail.sections);
+      }
+      if (e.detail?.homeBlocks) {
+        setHomeBlocks(
+          [...e.detail.homeBlocks].sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
+        );
       }
     };
     window.addEventListener('urbannoise_site_content_updated', handler);
@@ -921,199 +928,240 @@ export default function App() {
         />
       ) : (
         <>
-          {/* Hero Section */}
-          <HeroSection
-            onCtaClick={(anchor) => {
-              const clean = (anchor || '').replace('#', '');
-              if (clean === 'flagship' || clean === 'brand-manifesto') {
-                const el = document.getElementById(clean);
-                if (el) {
-                  const headerEl = document.getElementById('header-wrapper');
-                  const headerHeight = headerEl ? Math.round(headerEl.getBoundingClientRect().height) : 96;
-                  const targetPos = el.getBoundingClientRect().top + window.pageYOffset;
-                  window.scrollTo({ top: Math.max(0, targetPos - headerHeight + 2), behavior: 'smooth' });
-                  return;
+          {homeBlocks.map((block) => {
+            if (block.enabled === false) return null;
+
+            switch (block.id) {
+              case 'hero':
+                return (
+                  <HeroSection
+                    key="hero"
+                    onCtaClick={(anchor) => {
+                      const clean = (anchor || '').replace('#', '');
+                      if (clean === 'flagship' || clean === 'brand-manifesto') {
+                        const el = document.getElementById(clean);
+                        if (el) {
+                          const headerEl = document.getElementById('header-wrapper');
+                          const headerHeight = headerEl ? Math.round(headerEl.getBoundingClientRect().height) : 96;
+                          const targetPos = el.getBoundingClientRect().top + window.pageYOffset;
+                          window.scrollTo({ top: Math.max(0, targetPos - headerHeight + 2), behavior: 'smooth' });
+                          return;
+                        }
+                      }
+                      handleOpenMarketplace(clean || 'all');
+                    }}
+                  />
+                );
+
+              case 'categories':
+                return (
+                  <CategoryVisualHub
+                    key="categories"
+                    onSelectCategory={handleOpenMarketplace}
+                    categoryCounts={dynamicCategoryCounts}
+                  />
+                );
+
+              case 'latest-drops':
+                return (
+                  <section
+                    key="latest-drops"
+                    id="latest-drops"
+                    className="w-full border-b border-[#E5E5E5] bg-white pt-4 sm:pt-6 md:pt-8 pb-10 sm:pb-16 scroll-mt-[84px] sm:scroll-mt-[100px]"
+                  >
+                    <ProductCarousel
+                      id="latest-drops-carousel"
+                      kicker={siteSections.latestDropsKicker || 'DROP EXCLUSIVO 2026'}
+                      title={siteSections.latestDropsTitle || 'ÚLTIMOS LANZAMIENTOS'}
+                      products={latestDrops}
+                      onQuickView={handleOpenProduct}
+                      onViewAll={() => handleOpenMarketplace('latest-drops')}
+                    />
+                  </section>
+                );
+
+              case 'young-free':
+                return (
+                  <React.Fragment key="young-free">
+                    <section
+                      id="young-free"
+                      className="relative w-full h-screen h-[100dvh] min-h-[100dvh] bg-[#101013] text-white flex items-center justify-center text-center overflow-hidden px-6 border-b border-white/10 scroll-mt-[84px] sm:scroll-mt-[100px]"
+                    >
+                      <span id="willy" className="absolute top-0 pointer-events-none opacity-0 -translate-y-24" aria-hidden="true" />
+                      <img
+                        src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=2000&auto=format&fit=crop"
+                        alt="Cápsula Young and Free URBANNOISE - Streetwear oversize juvenil y siluetas auténticas confeccionadas en Bogotá"
+                        className="absolute inset-0 w-full h-full object-cover opacity-50 filter contrast-125"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute inset-0 bg-black/35 pointer-events-none" />
+                      <div className="relative z-10 max-w-3xl my-auto py-8">
+                        <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#D9C4AB] mb-2 sm:mb-3 font-semibold">
+                          URBANO Y AUDAZ • TALLAS S-XL
+                        </p>
+                        <h2 className="font-extrabold text-3xl sm:text-6xl md:text-7xl uppercase tracking-tight mb-5 sm:mb-7 leading-none text-[#F5F2E4]">
+                          CÁPSULA{' '}
+                          <span className="font-light italic tracking-normal lowercase text-3xl sm:text-6xl text-[#D9C4AB]">
+                            young & free
+                          </span>
+                          <br />
+                          URBANNOISE
+                        </h2>
+                        <a
+                          href="#willy-products"
+                          className="inline-block bg-[#F5F2E4] text-[#101013] font-bold text-[11px] sm:text-xs uppercase tracking-widest px-8 sm:px-10 py-3.5 sm:py-4 hover:bg-[#101013] hover:text-[#F5F2E4] transition border border-[#F5F2E4] shadow-lg"
+                        >
+                          EXPLORAR CÁPSULA ↓
+                        </a>
+                      </div>
+                    </section>
+                    <section
+                      id="willy-products"
+                      className="w-full bg-white border-b border-[#E5E5E5] pt-4 sm:pt-6 md:pt-8 pb-10 sm:pb-16 scroll-mt-[84px] sm:scroll-mt-[100px]"
+                    >
+                      <ProductCarousel
+                        id="willy-carousel"
+                        kicker={siteSections.youngFreeKicker || 'CÁPSULA ESTELAR'}
+                        title={siteSections.youngFreeTitle || 'YOUNG & FREE'}
+                        products={youngFree}
+                        onQuickView={handleOpenProduct}
+                        onViewAll={() => handleOpenMarketplace('young-free')}
+                      />
+                    </section>
+                  </React.Fragment>
+                );
+
+              case 'weird-oversize':
+                return (
+                  <React.Fragment key="weird-oversize">
+                    <section
+                      id="weird-oversize"
+                      className="relative w-full h-screen h-[100dvh] min-h-[100dvh] bg-[#202F3D] text-white flex items-center justify-center text-center overflow-hidden px-6 border-b border-white/10 scroll-mt-[84px] sm:scroll-mt-[100px]"
+                    >
+                      <span id="pleasures" className="absolute top-0 pointer-events-none opacity-0 -translate-y-24" aria-hidden="true" />
+                      <img
+                        src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=2000&auto=format&fit=crop"
+                        alt="Edición Weird Boxy y Pleasures URBANNOISE - Camisetas de alto gramaje y corte holgado en Colombia"
+                        className="absolute inset-0 w-full h-full object-cover opacity-50"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+                      <div className="relative z-10 max-w-3xl my-auto py-8">
+                        <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#D9C4AB] mb-2 sm:mb-3 font-semibold">
+                          INNOVACIÓN TEXTIL URBANA
+                        </p>
+                        <h2 className="font-extrabold text-3xl sm:text-6xl md:text-7xl uppercase tracking-tight mb-5 sm:mb-7 text-[#F5F2E4]">
+                          <span className="font-light italic tracking-normal">PLEASURES</span>
+                          <br />
+                          SPECIAL DROP
+                        </h2>
+                        <a
+                          href="#pleasures-products"
+                          className="inline-block bg-[#F5F2E4] text-[#101013] font-bold text-[11px] sm:text-xs uppercase tracking-widest px-8 sm:px-10 py-3.5 sm:py-4 hover:bg-[#101013] hover:text-[#F5F2E4] transition border border-[#F5F2E4] shadow-lg"
+                        >
+                          VER PRENDAS ↓
+                        </a>
+                      </div>
+                    </section>
+                    <section
+                      id="pleasures-products"
+                      className="w-full bg-white border-b border-[#E5E5E5] pt-4 sm:pt-6 md:pt-8 pb-10 sm:pb-16 scroll-mt-[84px] sm:scroll-mt-[100px]"
+                    >
+                      <ProductCarousel
+                        id="pleasures-carousel"
+                        kicker={siteSections.weirdOversizeKicker || 'SPECIAL OVERSIZE'}
+                        title={siteSections.weirdOversizeTitle || 'PLEASURES & WEIRD BOXY'}
+                        products={weirdOversize}
+                        onQuickView={handleOpenProduct}
+                        onViewAll={() => handleOpenMarketplace('weird-oversize')}
+                      />
+                    </section>
+                  </React.Fragment>
+                );
+
+              case 'dama-oversize':
+                return (
+                  <React.Fragment key="dama-oversize">
+                    <section
+                      id="dama-oversize"
+                      className="relative w-full h-screen h-[100dvh] min-h-[100dvh] bg-[#1E342A] text-white flex items-center justify-center text-center overflow-hidden px-6 border-b border-white/10 scroll-mt-[84px] sm:scroll-mt-[100px]"
+                    >
+                      <span id="avavav" className="absolute top-0 pointer-events-none opacity-0 -translate-y-24" aria-hidden="true" />
+                      <img
+                        src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2000&auto=format&fit=crop"
+                        alt="Colección Dama Oversize URBANNOISE - Moda urbana femenina y estampados streetwear únicos en Bogotá"
+                        className="absolute inset-0 w-full h-full object-cover opacity-50"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+                      <div className="relative z-10 max-w-3xl my-auto py-8">
+                        <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#D9C4AB] mb-2 sm:mb-3 font-semibold">
+                          COLECCIÓN DAMA OVERSIZE
+                        </p>
+                        <h2 className="font-extrabold text-3xl sm:text-6xl md:text-7xl uppercase tracking-tight mb-5 sm:mb-7 text-[#F5F2E4]">
+                          <span className="font-light italic tracking-normal lowercase text-2xl sm:text-5xl">
+                            estampados únicos
+                          </span>
+                          <br />
+                          ESTILO ÚNICO
+                        </h2>
+                        <a
+                          href="#avavav-products"
+                          className="inline-block bg-[#F5F2E4] text-[#101013] font-bold text-[11px] sm:text-xs uppercase tracking-widest px-8 sm:px-10 py-3.5 sm:py-4 hover:bg-[#101013] hover:text-[#F5F2E4] transition border border-[#F5F2E4] shadow-lg"
+                        >
+                          VER COLECCIÓN DAMA ↓
+                        </a>
+                      </div>
+                    </section>
+                    <section
+                      id="avavav-products"
+                      className="w-full bg-white border-b border-[#E5E5E5] pt-4 sm:pt-6 md:pt-8 pb-10 sm:pb-16 scroll-mt-[84px] sm:scroll-mt-[100px]"
+                    >
+                      <ProductCarousel
+                        id="avavav-carousel"
+                        kicker={siteSections.damaOversizeKicker || 'CÁPSULA FEMENINA'}
+                        title={siteSections.damaOversizeTitle || 'DAMA OVERSIZE'}
+                        products={damaOversize}
+                        onQuickView={handleOpenProduct}
+                        onViewAll={() => handleOpenMarketplace('dama-oversize')}
+                      />
+                    </section>
+                  </React.Fragment>
+                );
+
+              case 'flagship':
+                return (
+                  <FlagshipSection
+                    key="flagship"
+                    showStore={true}
+                    showManifesto={homeBlocks.some((b) => b.id === 'manifesto' && b.enabled !== false)}
+                  />
+                );
+
+              case 'manifesto':
+                // Si flagship ya está activo, FlagshipSection maneja ambas columnas.
+                // Si flagship está desactivado, renderizamos solo el manifiesto:
+                if (homeBlocks.some((b) => b.id === 'flagship' && b.enabled !== false)) {
+                  return null;
                 }
-              }
-              handleOpenMarketplace(clean || 'all');
-            }}
-          />
+                return (
+                  <FlagshipSection
+                    key="manifesto"
+                    showStore={false}
+                    showManifesto={true}
+                  />
+                );
 
-          {/* Hub Visual de Colecciones: Acceso Directo por Categoría al Marketplace */}
-          <CategoryVisualHub
-            onSelectCategory={handleOpenMarketplace}
-            categoryCounts={dynamicCategoryCounts}
-          />
+              case 'seo':
+                return <SeoEditorialSection key="seo" />;
 
-          {/* Sección 1: Últimos Lanzamientos */}
-          <section
-            id="latest-drops"
-            className="w-full border-b border-[#E5E5E5] bg-white pt-4 sm:pt-6 md:pt-8 pb-10 sm:pb-16 scroll-mt-[84px] sm:scroll-mt-[100px]"
-          >
-            <ProductCarousel
-              id="latest-drops-carousel"
-              kicker={siteSections.latestDropsKicker || 'DROP EXCLUSIVO 2026'}
-              title={siteSections.latestDropsTitle || 'ÚLTIMOS LANZAMIENTOS'}
-              products={latestDrops}
-              onQuickView={handleOpenProduct}
-              onViewAll={() => handleOpenMarketplace('latest-drops')}
-            />
-          </section>
-
-          {/* Sección 2: Banner Lookbook Young & Free (Full Pantalla 100%) */}
-          <section
-            id="young-free"
-            className="relative w-full h-screen h-[100dvh] min-h-[100dvh] bg-[#101013] text-white flex items-center justify-center text-center overflow-hidden px-6 border-b border-white/10 scroll-mt-[84px] sm:scroll-mt-[100px]"
-          >
-            {/* Ancla de compatibilidad para enlaces anteriores #willy */}
-            <span id="willy" className="absolute top-0 pointer-events-none opacity-0 -translate-y-24" aria-hidden="true" />
-            <img
-              src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=2000&auto=format&fit=crop"
-              alt="Cápsula Young and Free URBANNOISE - Streetwear oversize juvenil y siluetas auténticas confeccionadas en Bogotá"
-              className="absolute inset-0 w-full h-full object-cover opacity-50 filter contrast-125"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="absolute inset-0 bg-black/35 pointer-events-none" />
-            <div className="relative z-10 max-w-3xl my-auto py-8">
-              <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#D9C4AB] mb-2 sm:mb-3 font-semibold">
-                URBANO Y AUDAZ • TALLAS S-XL
-              </p>
-              <h2 className="font-extrabold text-3xl sm:text-6xl md:text-7xl uppercase tracking-tight mb-5 sm:mb-7 leading-none text-[#F5F2E4]">
-                CÁPSULA{' '}
-                <span className="font-light italic tracking-normal lowercase text-3xl sm:text-6xl text-[#D9C4AB]">
-                  young & free
-                </span>
-                <br />
-                URBANNOISE
-              </h2>
-              <a
-                href="#willy-products"
-                className="inline-block bg-[#F5F2E4] text-[#101013] font-bold text-[11px] sm:text-xs uppercase tracking-widest px-8 sm:px-10 py-3.5 sm:py-4 hover:bg-[#101013] hover:text-[#F5F2E4] transition border border-[#F5F2E4] shadow-lg"
-              >
-                EXPLORAR CÁPSULA ↓
-              </a>
-            </div>
-          </section>
-
-          {/* Sección 3: Carrusel de Productos Young & Free */}
-          <section
-            id="willy-products"
-            className="w-full bg-white border-b border-[#E5E5E5] pt-4 sm:pt-6 md:pt-8 pb-10 sm:pb-16 scroll-mt-[84px] sm:scroll-mt-[100px]"
-          >
-            <ProductCarousel
-              id="willy-carousel"
-              kicker={siteSections.youngFreeKicker || 'CÁPSULA ESTELAR'}
-              title={siteSections.youngFreeTitle || 'YOUNG & FREE'}
-              products={youngFree}
-              onQuickView={handleOpenProduct}
-              onViewAll={() => handleOpenMarketplace('young-free')}
-            />
-          </section>
-
-          {/* Sección 4: Banner Lookbook Weird & Oversize (Full Pantalla 100%) */}
-          <section
-            id="weird-oversize"
-            className="relative w-full h-screen h-[100dvh] min-h-[100dvh] bg-[#202F3D] text-white flex items-center justify-center text-center overflow-hidden px-6 border-b border-white/10 scroll-mt-[84px] sm:scroll-mt-[100px]"
-          >
-            {/* Ancla de compatibilidad para enlaces anteriores #pleasures */}
-            <span id="pleasures" className="absolute top-0 pointer-events-none opacity-0 -translate-y-24" aria-hidden="true" />
-            <img
-              src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=2000&auto=format&fit=crop"
-              alt="Edición Weird Boxy y Pleasures URBANNOISE - Camisetas de alto gramaje y corte holgado en Colombia"
-              className="absolute inset-0 w-full h-full object-cover opacity-50"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-            <div className="relative z-10 max-w-3xl my-auto py-8">
-              <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#D9C4AB] mb-2 sm:mb-3 font-semibold">
-                INNOVACIÓN TEXTIL URBANA
-              </p>
-              <h2 className="font-extrabold text-3xl sm:text-6xl md:text-7xl uppercase tracking-tight mb-5 sm:mb-7 text-[#F5F2E4]">
-                <span className="font-light italic tracking-normal">PLEASURES</span>
-                <br />
-                SPECIAL DROP
-              </h2>
-              <a
-                href="#pleasures-products"
-                className="inline-block bg-[#F5F2E4] text-[#101013] font-bold text-[11px] sm:text-xs uppercase tracking-widest px-8 sm:px-10 py-3.5 sm:py-4 hover:bg-[#101013] hover:text-[#F5F2E4] transition border border-[#F5F2E4] shadow-lg"
-              >
-                VER PRENDAS ↓
-              </a>
-            </div>
-          </section>
-
-          {/* Sección 5: Carrusel PLEASURES */}
-          <section
-            id="pleasures-products"
-            className="w-full bg-white border-b border-[#E5E5E5] pt-4 sm:pt-6 md:pt-8 pb-10 sm:pb-16 scroll-mt-[84px] sm:scroll-mt-[100px]"
-          >
-            <ProductCarousel
-              id="pleasures-carousel"
-              kicker={siteSections.weirdOversizeKicker || 'SPECIAL OVERSIZE'}
-              title={siteSections.weirdOversizeTitle || 'PLEASURES & WEIRD BOXY'}
-              products={weirdOversize}
-              onQuickView={handleOpenProduct}
-              onViewAll={() => handleOpenMarketplace('weird-oversize')}
-            />
-          </section>
-
-          {/* Sección 6: Banner Lookbook Dama Oversize (Full Pantalla 100%) */}
-          <section
-            id="dama-oversize"
-            className="relative w-full h-screen h-[100dvh] min-h-[100dvh] bg-[#1E342A] text-white flex items-center justify-center text-center overflow-hidden px-6 border-b border-white/10 scroll-mt-[84px] sm:scroll-mt-[100px]"
-          >
-            {/* Ancla de compatibilidad para enlaces anteriores #avavav */}
-            <span id="avavav" className="absolute top-0 pointer-events-none opacity-0 -translate-y-24" aria-hidden="true" />
-            <img
-              src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=2000&auto=format&fit=crop"
-              alt="Colección Dama Oversize URBANNOISE - Moda urbana femenina y estampados streetwear únicos en Bogotá"
-              className="absolute inset-0 w-full h-full object-cover opacity-50"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-            <div className="relative z-10 max-w-3xl my-auto py-8">
-              <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#D9C4AB] mb-2 sm:mb-3 font-semibold">
-                COLECCIÓN DAMA OVERSIZE
-              </p>
-              <h2 className="font-extrabold text-3xl sm:text-6xl md:text-7xl uppercase tracking-tight mb-5 sm:mb-7 text-[#F5F2E4]">
-                <span className="font-light italic tracking-normal lowercase text-2xl sm:text-5xl">
-                  estampados únicos
-                </span>
-                <br />
-                ESTILO ÚNICO
-              </h2>
-              <a
-                href="#avavav-products"
-                className="inline-block bg-[#F5F2E4] text-[#101013] font-bold text-[11px] sm:text-xs uppercase tracking-widest px-8 sm:px-10 py-3.5 sm:py-4 hover:bg-[#101013] hover:text-[#F5F2E4] transition border border-[#F5F2E4] shadow-lg"
-              >
-                VER COLECCIÓN DAMA ↓
-              </a>
-            </div>
-          </section>
-
-          {/* Sección 7: Carrusel Dama Oversize */}
-          <section
-            id="avavav-products"
-            className="w-full bg-white border-b border-[#E5E5E5] pt-4 sm:pt-6 md:pt-8 pb-10 sm:pb-16 scroll-mt-[84px] sm:scroll-mt-[100px]"
-          >
-            <ProductCarousel
-              id="avavav-carousel"
-              kicker={siteSections.damaOversizeKicker || 'CÁPSULA FEMENINA'}
-              title={siteSections.damaOversizeTitle || 'DAMA OVERSIZE'}
-              products={damaOversize}
-              onQuickView={handleOpenProduct}
-              onViewAll={() => handleOpenMarketplace('dama-oversize')}
-            />
-          </section>
-
-          {/* Sección 8: Flagship & Manifiesto */}
-          <FlagshipSection />
-
-          {/* Sección 9: Posicionamiento SEO & Preguntas Frecuentes */}
-          <SeoEditorialSection />
+              default:
+                return null;
+            }
+          })}
         </>
       )}
 
