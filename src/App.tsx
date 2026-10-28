@@ -38,7 +38,7 @@ import {
   clearAllAdminSessions,
 } from './lib/loyverse';
 import { trackEvent } from './lib/analytics';
-import { loadSiteContentFromRemote, getStoredSiteContent, getHomeBlocks } from './lib/siteContent';
+import { loadSiteContentFromRemote, getStoredSiteContent, getHomeBlocks, getFeaturedSkus } from './lib/siteContent';
 import { verifyBoldReturnRedirect } from './lib/bold';
 import { HomeBlockItem } from './types';
 
@@ -64,6 +64,7 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [siteSections, setSiteSections] = useState(() => getStoredSiteContent().sections || {});
   const [homeBlocks, setHomeBlocks] = useState<HomeBlockItem[]>(() => getHomeBlocks());
+  const [featuredSkus, setFeaturedSkus] = useState<string[]>(() => getFeaturedSkus());
 
   useEffect(() => {
     const handler = (e: any) => {
@@ -74,6 +75,9 @@ export default function App() {
         setHomeBlocks(
           [...e.detail.homeBlocks].sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
         );
+      }
+      if (e.detail?.featuredSkus !== undefined) {
+        setFeaturedSkus(Array.isArray(e.detail.featuredSkus) ? e.detail.featuredSkus : []);
       }
     };
     window.addEventListener('urbannoise_site_content_updated', handler);
@@ -843,6 +847,37 @@ export default function App() {
     () => availableProducts.filter((p) => p.category === 'latest-drops'),
     [availableProducts]
   );
+
+  // Vitrina Principal de Portada (Lanzamientos / Prendas Estrella):
+  // 1. Prendas fijadas con ⭐ en el CMS en su orden exacto de prioridad (#1, #2...)
+  // 2. Seguidas por las novedades de 'latest-drops' no duplicadas
+  const homeFeaturedProducts = useMemo(() => {
+    if (!featuredSkus || featuredSkus.length === 0) {
+      return latestDrops;
+    }
+
+    const starred: Product[] = [];
+    const addedIds = new Set<string>();
+
+    // Buscar prendas fijadas por SKU o por ID en todo el inventario disponible
+    for (const skuOrId of featuredSkus) {
+      if (!skuOrId) continue;
+      const clean = String(skuOrId).trim().toLowerCase();
+      const found = availableProducts.find(
+        (p) =>
+          (p.sku && p.sku.toLowerCase() === clean) ||
+          (p.id && p.id.toLowerCase() === clean)
+      );
+      if (found && !addedIds.has(found.id)) {
+        starred.push(found);
+        addedIds.add(found.id);
+      }
+    }
+
+    // Agregar el resto de últimas novedades que no estén ya fijadas como estrellas
+    const remainingDrops = latestDrops.filter((p) => !addedIds.has(p.id));
+    return [...starred, ...remainingDrops];
+  }, [featuredSkus, availableProducts, latestDrops]);
   const youngFree = useMemo(
     () => availableProducts.filter((p) => p.category === 'young-free'),
     [availableProducts]
@@ -973,7 +1008,8 @@ export default function App() {
                       id="latest-drops-carousel"
                       kicker={siteSections.latestDropsKicker || 'DROP EXCLUSIVO 2026'}
                       title={siteSections.latestDropsTitle || 'ÚLTIMOS LANZAMIENTOS'}
-                      products={latestDrops}
+                      products={homeFeaturedProducts}
+                      featuredSkus={featuredSkus}
                       onQuickView={handleOpenProduct}
                       onViewAll={() => handleOpenMarketplace('latest-drops')}
                     />

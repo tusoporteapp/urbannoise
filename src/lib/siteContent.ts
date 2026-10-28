@@ -203,6 +203,7 @@ export const DEFAULT_SITE_CONTENT: SiteContentConfig = {
     damaOversizeTitle: 'DAMA OVERSIZE',
   },
   homeBlocks: DEFAULT_HOME_BLOCKS,
+  featuredSkus: [],
   lastUpdated: new Date().toISOString(),
 };
 
@@ -261,6 +262,7 @@ export function getStoredSiteContent(): SiteContentConfig {
             ...DEFAULT_SITE_CONTENT.sections,
             ...(parsed.sections || {}),
           },
+          featuredSkus: Array.isArray(parsed.featuredSkus) ? parsed.featuredSkus : [],
         };
       }
     }
@@ -268,6 +270,14 @@ export function getStoredSiteContent(): SiteContentConfig {
     console.warn('[SiteContent] Error leyendo de localStorage:', e);
   }
   return DEFAULT_SITE_CONTENT;
+}
+
+/**
+ * Retorna la lista de SKUs de prendas destacadas fijadas en portada (Top Picks)
+ */
+export function getFeaturedSkus(): string[] {
+  const content = getStoredSiteContent();
+  return Array.isArray(content.featuredSkus) ? content.featuredSkus : [];
 }
 
 /**

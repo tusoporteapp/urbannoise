@@ -38,6 +38,7 @@ interface ProductCarouselProps {
   kicker?: string;
   title: string;
   products: Product[];
+  featuredSkus?: string[];
   onQuickView: (product: Product) => void;
   onViewAll?: () => void;
 }
@@ -47,6 +48,7 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
   kicker,
   title,
   products,
+  featuredSkus,
   onQuickView,
   onViewAll,
 }) => {
@@ -215,16 +217,29 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({
                   />
                 </button>
 
-                {/* Badge de Disponibilidad */}
-                {product.stock !== undefined && product.stock <= 0 ? (
-                  <div className="absolute top-2 left-2 bg-black/90 text-red-400 border border-red-500/40 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 shadow">
-                    Agotado
-                  </div>
-                ) : product.stock !== undefined && product.stock <= 3 ? (
-                  <div className="absolute top-2 left-2 bg-black/90 text-amber-300 border border-amber-400/40 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 shadow">
-                    Últimas piezas
-                  </div>
-                ) : null}
+                {/* Badges superiores izquierda: Top Pick ⭐ y Disponibilidad de Stock */}
+                <div className="absolute top-2 left-2 z-10 flex flex-col gap-1 items-start pointer-events-none">
+                  {Boolean(
+                    featuredSkus &&
+                      ((product.sku && featuredSkus.includes(product.sku)) ||
+                        (product.id && featuredSkus.includes(product.id)))
+                  ) && (
+                    <div className="bg-[#101013]/95 backdrop-blur-xs text-[#F5F2E4] border border-[#D9C4AB]/70 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 shadow-md flex items-center gap-1">
+                      <span className="text-[#D9C4AB] text-[10px]">⭐</span>
+                      <span>TOP PICK</span>
+                    </div>
+                  )}
+
+                  {product.stock !== undefined && product.stock <= 0 ? (
+                    <div className="bg-black/90 text-red-400 border border-red-500/40 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 shadow">
+                      Agotado
+                    </div>
+                  ) : product.stock !== undefined && product.stock <= 3 ? (
+                    <div className="bg-black/90 text-amber-300 border border-amber-400/40 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 shadow">
+                      Últimas piezas
+                    </div>
+                  ) : null}
+                </div>
 
                 {/* Badge de Video Lookbook */}
                 {product.video && (

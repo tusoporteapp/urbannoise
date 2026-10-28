@@ -204,5 +204,6 @@ export interface SiteContentConfig {
   whatsapp?: WhatsAppFloatingConfig;
   sections?: HomeSectionsConfig;
   homeBlocks?: HomeBlockItem[];
+  featuredSkus?: string[];
   lastUpdated?: string;
 }

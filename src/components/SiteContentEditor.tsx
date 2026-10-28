@@ -39,6 +39,7 @@ import {
   Package,
   X,
   Loader2,
+  Star,
 } from 'lucide-react';
 import {
   HeroSlide,
@@ -202,6 +203,92 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
     if (!id) return false;
     return id === 'latest-drops' || id === 'young-free' || id === 'weird-oversize' || id === 'dama-oversize';
   };
+
+  // Estados para Selector de Prendas Estrella (Top Picks en Portada)
+  const [isSelectingFeaturedModal, setIsSelectingFeaturedModal] = useState<boolean>(false);
+  const [featuredSearchTerm, setFeaturedSearchTerm] = useState<string>('');
+  const [featuredFilterTab, setFeaturedFilterTab] = useState<'all' | 'starred' | 'unstarred'>('all');
+
+  const currentFeaturedSkus: string[] = Array.isArray(content.featuredSkus) ? content.featuredSkus : [];
+  const allAvailableProducts = products && products.length > 0 ? products : PRODUCTS_DATA;
+
+  const handleToggleFeaturedSku = (skuOrId: string) => {
+    if (!skuOrId) return;
+    const clean = skuOrId.trim();
+    setContent((prev) => {
+      const existing = Array.isArray(prev.featuredSkus) ? [...prev.featuredSkus] : [];
+      const idx = existing.indexOf(clean);
+      let updated: string[];
+      if (idx >= 0) {
+        updated = existing.filter((s) => s !== clean);
+      } else {
+        updated = [...existing, clean];
+      }
+      return {
+        ...prev,
+        featuredSkus: updated,
+      };
+    });
+  };
+
+  const handleMoveFeaturedSku = (index: number, direction: 'up' | 'down') => {
+    const list = [...currentFeaturedSkus];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= list.length) return;
+
+    const temp = list[index];
+    list[index] = list[targetIndex];
+    list[targetIndex] = temp;
+
+    setContent((prev) => ({
+      ...prev,
+      featuredSkus: list,
+    }));
+  };
+
+  const handleRemoveFeaturedSku = (skuOrId: string) => {
+    setContent((prev) => ({
+      ...prev,
+      featuredSkus: (prev.featuredSkus || []).filter((s) => s !== skuOrId),
+    }));
+  };
+
+  const handleClearAllFeaturedSkus = () => {
+    if (confirm('¿Deseas desmarcar todas las prendas estrella? La vitrina de la portada volverá a mostrar las novedades automáticas de Loyverse.')) {
+      setContent((prev) => ({
+        ...prev,
+        featuredSkus: [],
+      }));
+      onShowToast?.('Se han desmarcado todas las prendas estrella.');
+    }
+  };
+
+  const getProductBySkuOrId = (skuOrId: string): Product | undefined => {
+    if (!skuOrId) return undefined;
+    const clean = skuOrId.trim().toLowerCase();
+    return allAvailableProducts.find(
+      (p) =>
+        (p.sku && p.sku.toLowerCase() === clean) ||
+        (p.id && p.id.toLowerCase() === clean)
+    );
+  };
+
+  const filteredFeaturedProducts = allAvailableProducts.filter((p) => {
+    const sku = p.sku || p.id;
+    const query = featuredSearchTerm.trim().toLowerCase();
+    const matchesQuery =
+      !query ||
+      (p.name && p.name.toLowerCase().includes(query)) ||
+      (p.sku && p.sku.toLowerCase().includes(query)) ||
+      (p.category && p.category.toLowerCase().includes(query));
+
+    if (!matchesQuery) return false;
+
+    const isStarred = currentFeaturedSkus.includes(sku);
+    if (featuredFilterTab === 'starred') return isStarred;
+    if (featuredFilterTab === 'unstarred') return !isStarred;
+    return true;
+  });
 
   // Estados para el Asignador Masivo de Prendas a Categorías
   const [bulkModalCategory, setBulkModalCategory] = useState<CategoryCardContent | null>(null);
@@ -780,7 +867,6 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
     },
   ];
 
-  const allAvailableProducts = products && products.length > 0 ? products : PRODUCTS_DATA;
   const storedCustoms = getStoredCustomizations();
 
   const filteredBulkProducts = allAvailableProducts.filter((p) => {
@@ -2867,6 +2953,176 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
               })}
             </div>
           </div>
+
+          {/* MÓDULO: SELECTOR DE PRENDAS ESTRELLA EN PORTADA (TOP PICKS) */}
+          <div className="bg-[#14151D] p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-white/10 gap-3">
+              <div>
+                <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-amber-400 mb-1">
+                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  <span>PRENDAS ESTRELLA EN PORTADA (TOP PICKS / BEST SELLERS)</span>
+                </div>
+                <h3 className="text-base sm:text-lg font-black uppercase text-white tracking-tight">
+                  Prendas Destacadas al Inicio de la Portada
+                </h3>
+                <p className="text-xs text-white/60 mt-0.5 leading-relaxed">
+                  Fija manualmente las prendas con mayor stock o margen de ganancia para que aparezcan de primeras en la vitrina de la portada con la insignia <span className="text-amber-300 font-bold">⭐ TOP PICK</span>, seguidas por el resto de novedades.
+                </p>
+              </div>
+
+              <div className="flex items-center space-x-2 self-start sm:self-center flex-wrap gap-y-2">
+                {currentFeaturedSkus.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleClearAllFeaturedSkus}
+                    className="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/20 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 cursor-pointer"
+                    title="Desmarcar todas las prendas estrella"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-red-400" />
+                    <span>Limpiar Todo</span>
+                  </button>
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFeaturedSearchTerm('');
+                    setFeaturedFilterTab('all');
+                    setIsSelectingFeaturedModal(true);
+                  }}
+                  className="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-[#101013] rounded-lg text-xs font-black uppercase tracking-wider transition flex items-center space-x-1.5 cursor-pointer shadow-md"
+                  title="Abrir galería para seleccionar o quitar prendas estrella"
+                >
+                  <Star className="w-3.5 h-3.5 fill-black text-black" />
+                  <span>+ Elegir Prendas Estrella ({currentFeaturedSkus.length})</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Lista Ordenada de Prendas Fijadas */}
+            {currentFeaturedSkus.length === 0 ? (
+              <div className="p-6 bg-black/40 rounded-xl border border-dashed border-white/10 text-center space-y-2">
+                <Star className="w-8 h-8 text-amber-400/40 mx-auto" />
+                <p className="text-xs font-bold text-white/80 uppercase tracking-wide">
+                  No hay prendas fijadas en portada actualmente
+                </p>
+                <p className="text-xs text-white/50 max-w-md mx-auto">
+                  La portada está mostrando automáticamente las últimas novedades sincronizadas con Loyverse. Haz clic en el botón superior para fijar prendas específicas en la posición #1, #2, etc.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFeaturedSearchTerm('');
+                    setFeaturedFilterTab('all');
+                    setIsSelectingFeaturedModal(true);
+                  }}
+                  className="mt-2 inline-flex items-center space-x-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/15 rounded-lg text-xs font-bold text-amber-300 transition cursor-pointer"
+                >
+                  <Star className="w-3.5 h-3.5 fill-amber-300" />
+                  <span>Fijar mi primera prenda estrella ahora</span>
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-[11px] text-white/50 px-1 font-mono">
+                  <span>Orden de aparición en la portada (de izquierda a derecha):</span>
+                  <span>{currentFeaturedSkus.length} prenda{currentFeaturedSkus.length === 1 ? '' : 's'} fijada{currentFeaturedSkus.length === 1 ? '' : 's'}</span>
+                </div>
+
+                {currentFeaturedSkus.map((skuOrId, idx) => {
+                  const product = getProductBySkuOrId(skuOrId);
+                  const isFirst = idx === 0;
+                  const isLast = idx === currentFeaturedSkus.length - 1;
+                  const displayName = product?.name || skuOrId;
+                  const displayImage = product?.image || (product?.images && product.images[0]) || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=300';
+                  const displayPrice = product?.price ? formatCOP(product.price) : '';
+                  const displayStock = product?.stock !== undefined ? product.stock : null;
+
+                  return (
+                    <div
+                      key={skuOrId}
+                      className="p-3 bg-black/50 border border-white/15 rounded-xl flex items-center justify-between gap-3 shadow-sm hover:border-amber-400/40 transition"
+                    >
+                      <div className="flex items-center space-x-3 min-w-0 flex-1">
+                        {/* Posición en el Carrusel */}
+                        <div className="w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/30 flex items-center justify-center flex-shrink-0 font-mono font-black text-xs text-amber-300">
+                          #{idx + 1}
+                        </div>
+
+                        {/* Thumbnail */}
+                        <div className="w-11 h-11 rounded-lg bg-white/5 border border-white/10 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                          <img
+                            src={displayImage}
+                            alt={displayName}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src =
+                                'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=300';
+                            }}
+                          />
+                        </div>
+
+                        {/* Metadata */}
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center space-x-2">
+                            <h4 className="text-xs sm:text-sm font-black uppercase text-white truncate">
+                              {displayName}
+                            </h4>
+                            <span className="text-[10px] font-mono text-amber-300 bg-amber-400/10 px-1.5 py-0.2 rounded border border-amber-400/20 whitespace-nowrap">
+                              ⭐ TOP PICK
+                            </span>
+                          </div>
+                          <div className="flex items-center space-x-2 text-[11px] text-white/50 mt-0.5">
+                            <span className="font-mono text-white/70">{product?.sku || skuOrId}</span>
+                            {displayPrice && <span>• {displayPrice}</span>}
+                            {displayStock !== null && (
+                              <span className={displayStock > 0 ? 'text-emerald-400' : 'text-red-400'}>
+                                • {displayStock > 0 ? `${displayStock} en stock` : 'Agotado'}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Botones de Orden y Quitar */}
+                      <div className="flex items-center space-x-2 flex-shrink-0">
+                        <div className="flex items-center bg-black/60 border border-white/10 rounded-lg p-0.5">
+                          <button
+                            type="button"
+                            onClick={() => handleMoveFeaturedSku(idx, 'up')}
+                            disabled={isFirst}
+                            className="p-1.5 text-white/70 hover:text-white disabled:opacity-20 transition cursor-pointer"
+                            title="Mover hacia la izquierda (subir prioridad)"
+                          >
+                            <ArrowUp className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleMoveFeaturedSku(idx, 'down')}
+                            disabled={isLast}
+                            className="p-1.5 text-white/70 hover:text-white disabled:opacity-20 transition cursor-pointer"
+                            title="Mover hacia la derecha (bajar prioridad)"
+                          >
+                            <ArrowDown className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveFeaturedSku(skuOrId)}
+                          className="p-1.5 text-white/40 hover:text-red-400 bg-white/5 hover:bg-red-500/10 border border-white/10 hover:border-red-500/20 rounded-lg transition cursor-pointer"
+                          title="Quitar estrella y desfijar de portada"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
           <div className="bg-[#14151D] p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
             <div className="border-b border-white/10 pb-3">
               <h3 className="font-bold text-xs uppercase tracking-wider text-white/90 flex items-center space-x-2">
@@ -3373,6 +3629,205 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                   )}
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* ============================================================== */}
+      {/* MODAL: SELECTOR DE PRENDAS ESTRELLA EN PORTADA (TOP PICKS)     */}
+      {/* ============================================================== */}
+      {isSelectingFeaturedModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+          <div
+            className="bg-[#101013] border border-white/15 rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Cabecera del Modal */}
+            <div className="bg-[#14151D] px-5 sm:px-6 py-4 border-b border-white/10 flex items-center justify-between gap-3 flex-shrink-0">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl bg-amber-400/15 border border-amber-400/30 flex items-center justify-center flex-shrink-0">
+                  <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-lg font-black uppercase tracking-tight text-white flex items-center gap-2">
+                    <span>SELECCIONAR PRENDAS ESTRELLA</span>
+                    <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                      {currentFeaturedSkus.length} fijadas
+                    </span>
+                  </h3>
+                  <p className="text-xs text-white/60">
+                    Haz clic en cualquier prenda para marcarla con una estrella ⭐ y fijarla al inicio de la tienda.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsSelectingFeaturedModal(false)}
+                className="p-2 text-white/50 hover:text-white hover:bg-white/10 rounded-lg transition cursor-pointer"
+                title="Cerrar ventana"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Barra de Filtros y Búsqueda */}
+            <div className="px-5 sm:px-6 py-3 bg-[#12131A] border-b border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 flex-shrink-0">
+              {/* Buscador */}
+              <div className="relative flex-1">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
+                <input
+                  type="text"
+                  placeholder="Buscar prenda por nombre, SKU o categoría..."
+                  value={featuredSearchTerm}
+                  onChange={(e) => setFeaturedSearchTerm(e.target.value)}
+                  className="w-full pl-9 pr-9 py-2 bg-black/60 border border-white/15 rounded-xl text-xs font-medium text-white placeholder-white/30 focus:outline-none focus:border-amber-400 transition"
+                />
+                {featuredSearchTerm && (
+                  <button
+                    type="button"
+                    onClick={() => setFeaturedSearchTerm('')}
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/40 hover:text-white cursor-pointer"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+
+              {/* Filtros por Pestaña */}
+              <div className="flex items-center space-x-1.5 self-center sm:self-auto overflow-x-auto py-0.5">
+                <button
+                  type="button"
+                  onClick={() => setFeaturedFilterTab('all')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                    featuredFilterTab === 'all'
+                      ? 'bg-amber-400 text-black shadow'
+                      : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  Todas ({allAvailableProducts.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFeaturedFilterTab('starred')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer whitespace-nowrap flex items-center space-x-1 ${
+                    featuredFilterTab === 'starred'
+                      ? 'bg-amber-400 text-black shadow'
+                      : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  <Star className="w-3 h-3 fill-current" />
+                  <span>Fijadas ({currentFeaturedSkus.length})</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFeaturedFilterTab('unstarred')}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer whitespace-nowrap ${
+                    featuredFilterTab === 'unstarred'
+                      ? 'bg-amber-400 text-black shadow'
+                      : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  Sin fijar ({Math.max(0, allAvailableProducts.length - currentFeaturedSkus.length)})
+                </button>
+              </div>
+            </div>
+
+            {/* Listado de Prendas */}
+            <div className="p-4 sm:p-6 overflow-y-auto max-h-[60vh] space-y-2 flex-1">
+              {filteredFeaturedProducts.length === 0 ? (
+                <div className="py-12 text-center text-white/50 text-xs">
+                  No se encontraron prendas con los filtros aplicados.
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {filteredFeaturedProducts.map((p) => {
+                    const sku = p.sku || p.id;
+                    const isStarred = currentFeaturedSkus.includes(sku);
+                    const starredIndex = isStarred ? currentFeaturedSkus.indexOf(sku) : -1;
+                    const displayImage = p.image || (p.images && p.images[0]) || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=300';
+
+                    return (
+                      <div
+                        key={p.id}
+                        onClick={() => handleToggleFeaturedSku(sku)}
+                        className={`p-3 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                          isStarred
+                            ? 'bg-amber-500/10 border-amber-400/50 shadow-md'
+                            : 'bg-black/40 border-white/10 hover:border-white/25 hover:bg-black/60'
+                        }`}
+                      >
+                        <div className="flex items-center space-x-3 min-w-0 flex-1">
+                          {/* Thumbnail */}
+                          <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 overflow-hidden flex-shrink-0">
+                            <img
+                              src={displayImage}
+                              alt={p.name}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                              onError={(e) => {
+                                (e.currentTarget as HTMLImageElement).src =
+                                  'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=300';
+                              }}
+                            />
+                          </div>
+
+                          {/* Info */}
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center space-x-1.5">
+                              <h4 className="text-xs font-bold text-white uppercase truncate">
+                                {p.name}
+                              </h4>
+                            </div>
+                            <div className="flex items-center space-x-2 text-[10px] text-white/50 mt-0.5">
+                              <span className="font-mono text-white/70">{sku}</span>
+                              <span>• {formatCOP(p.price)}</span>
+                              {p.stock !== undefined && (
+                                <span className={p.stock > 0 ? 'text-emerald-400' : 'text-red-400'}>
+                                  • {p.stock > 0 ? `${p.stock} uds` : 'Agotado'}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Botón Estrella */}
+                        <div className="flex items-center space-x-1.5 flex-shrink-0">
+                          {isStarred ? (
+                            <div className="flex items-center space-x-1 px-2.5 py-1 bg-amber-400 text-black rounded-lg text-xs font-black uppercase tracking-wider shadow">
+                              <Star className="w-3.5 h-3.5 fill-black" />
+                              <span>#{starredIndex + 1}</span>
+                            </div>
+                          ) : (
+                            <div className="flex items-center space-x-1 px-2.5 py-1 bg-white/5 hover:bg-white/10 text-white/60 hover:text-white border border-white/15 rounded-lg text-xs font-bold transition">
+                              <Star className="w-3.5 h-3.5 text-white/40" />
+                              <span>Fijar</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Pie del Modal */}
+            <div className="bg-[#14151D] px-5 sm:px-6 py-4 border-t border-white/10 flex items-center justify-between gap-3 flex-shrink-0">
+              <span className="text-xs text-white/70 font-mono">
+                {currentFeaturedSkus.length} de {allAvailableProducts.length} prendas fijadas como ⭐ TOP PICK
+              </span>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsSelectingFeaturedModal(false);
+                  onShowToast?.(`Prendas estrella actualizadas (${currentFeaturedSkus.length} fijadas). Recuerda presionar "Guardar y Publicar en la Web" para guardar.`);
+                }}
+                className="px-5 py-2 bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase tracking-wider rounded-lg transition cursor-pointer shadow-lg"
+              >
+                Listo / Aceptar
+              </button>
             </div>
           </div>
         </div>
