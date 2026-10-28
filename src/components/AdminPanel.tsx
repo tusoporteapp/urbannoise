@@ -5201,6 +5201,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                       onChange={(e) => setEditCategory(e.target.value as any)}
                       className="w-full bg-black/60 border border-white/20 rounded px-3 py-2 text-white text-xs focus:outline-none"
                     >
+                      {editCategory && !adminCategories.some((c) => c.id === editCategory) && (
+                        <option value={editCategory}>
+                          {editCategory} (Personalizada)
+                        </option>
+                      )}
                       {adminCategories.map((c) => (
                         <option key={c.id} value={c.id}>
                           {c.name || c.id}

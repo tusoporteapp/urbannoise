@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   LayoutTemplate,
   Image as ImageIcon,
@@ -92,6 +92,17 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
   const [saveMessage, setSaveMessage] = useState<string>('');
+  const [catalogVersion, setCatalogVersion] = useState<number>(0);
+
+  useEffect(() => {
+    const handleCatalogUpdate = () => {
+      setCatalogVersion((v) => v + 1);
+    };
+    window.addEventListener('urbannoise_catalog_updated', handleCatalogUpdate);
+    return () => {
+      window.removeEventListener('urbannoise_catalog_updated', handleCatalogUpdate);
+    };
+  }, []);
 
   // Estados interactivos para categorías y conexiones
   const [categoryPreviewMode, setCategoryPreviewMode] = useState<'card' | 'banner' | 'header'>('card');
@@ -262,6 +273,22 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
 
   const handleSaveBulkAssignment = async () => {
     if (!bulkModalCategory) return;
+
+    const newlyAdded = Array.from(bulkSelectedSkus).filter((s) => !bulkInitialSkus.has(s));
+    const newlyRemoved = Array.from(bulkInitialSkus).filter((s) => !bulkSelectedSkus.has(s));
+
+    if (newlyAdded.length === 0 && newlyRemoved.length === 0) {
+      setBulkFeedback({
+        type: 'success',
+        message: 'No se detectaron cambios en la asignación de prendas.',
+      });
+      setTimeout(() => {
+        setBulkModalCategory(null);
+        setBulkFeedback(null);
+      }, 800);
+      return;
+    }
+
     setIsSavingBulk(true);
     setBulkFeedback(null);
 
@@ -270,12 +297,13 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
       const storedCustoms = getStoredCustomizations();
       const itemsToUpdate: ProductCustomization[] = [];
 
-      // 1. Prendas que quedaron seleccionadas -> asignarlas a bulkModalCategory.id
-      bulkSelectedSkus.forEach((sku) => {
+      // 1. Prendas nuevas que se van a sumar a esta categoría
+      newlyAdded.forEach((sku) => {
         const prod = allAvailableProducts.find((p) => (p.sku || p.id) === sku);
         if (prod) {
           const existingCustom = storedCustoms[sku];
           itemsToUpdate.push({
+            ...(existingCustom || {}),
             sku,
             name: existingCustom?.name || prod.name,
             desc: existingCustom?.desc || prod.desc || '',
@@ -291,36 +319,45 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
             video: existingCustom?.video || prod.video,
             fit: existingCustom?.fit || prod.fit,
             isPublished: existingCustom?.isPublished ?? prod.isPublished !== false,
+            availableSizes: existingCustom?.availableSizes || prod.availableSizes,
+            availableColors: existingCustom?.availableColors || prod.availableColors,
+            variants: existingCustom?.variants || prod.variants,
+            loyverseItemId: existingCustom?.loyverseItemId || prod.loyverseItemId,
+            loyverseVariantId: existingCustom?.loyverseVariantId || prod.loyverseVariantId,
             updatedAt: new Date().toISOString(),
           });
         }
       });
 
       // 2. Prendas que estaban en esta categoría pero se desmarcaron -> mover a 'latest-drops'
-      bulkInitialSkus.forEach((sku) => {
-        if (!bulkSelectedSkus.has(sku)) {
-          const prod = allAvailableProducts.find((p) => (p.sku || p.id) === sku);
-          if (prod) {
-            const existingCustom = storedCustoms[sku];
-            itemsToUpdate.push({
-              sku,
-              name: existingCustom?.name || prod.name,
-              desc: existingCustom?.desc || prod.desc || '',
-              category: 'latest-drops',
-              categoryLabel: 'Últimos Lanzamientos',
-              price: existingCustom?.price ?? prod.price,
-              images:
-                existingCustom?.images && existingCustom.images.length > 0
-                  ? existingCustom.images
-                  : prod.images && prod.images.length > 0
-                  ? prod.images
-                  : [prod.image],
-              video: existingCustom?.video || prod.video,
-              fit: existingCustom?.fit || prod.fit,
-              isPublished: existingCustom?.isPublished ?? prod.isPublished !== false,
-              updatedAt: new Date().toISOString(),
-            });
-          }
+      newlyRemoved.forEach((sku) => {
+        const prod = allAvailableProducts.find((p) => (p.sku || p.id) === sku);
+        if (prod) {
+          const existingCustom = storedCustoms[sku];
+          itemsToUpdate.push({
+            ...(existingCustom || {}),
+            sku,
+            name: existingCustom?.name || prod.name,
+            desc: existingCustom?.desc || prod.desc || '',
+            category: 'latest-drops',
+            categoryLabel: 'Últimos Lanzamientos',
+            price: existingCustom?.price ?? prod.price,
+            images:
+              existingCustom?.images && existingCustom.images.length > 0
+                ? existingCustom.images
+                : prod.images && prod.images.length > 0
+                ? prod.images
+                : [prod.image],
+            video: existingCustom?.video || prod.video,
+            fit: existingCustom?.fit || prod.fit,
+            isPublished: existingCustom?.isPublished ?? prod.isPublished !== false,
+            availableSizes: existingCustom?.availableSizes || prod.availableSizes,
+            availableColors: existingCustom?.availableColors || prod.availableColors,
+            variants: existingCustom?.variants || prod.variants,
+            loyverseItemId: existingCustom?.loyverseItemId || prod.loyverseItemId,
+            loyverseVariantId: existingCustom?.loyverseVariantId || prod.loyverseVariantId,
+            updatedAt: new Date().toISOString(),
+          });
         }
       });
 
@@ -3058,6 +3095,10 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                             alt={product.name}
                             className="w-full h-full object-cover"
                             loading="lazy"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).src =
+                                'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=200&auto=format&fit=crop';
+                            }}
                           />
                         </div>
 

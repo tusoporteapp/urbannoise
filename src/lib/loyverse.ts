@@ -372,6 +372,10 @@ export async function saveBulkProductCustomizations(
   customizations: ProductCustomization[],
   syncToGitHub: boolean = true
 ): Promise<{ success: boolean; count: number; githubSynced?: boolean; commitSha?: string; error?: string }> {
+  if (!customizations || customizations.length === 0) {
+    return { success: true, count: 0, githubSynced: false };
+  }
+
   const current = getStoredCustomizations();
   const now = new Date().toISOString();
 
@@ -400,7 +404,9 @@ export async function saveBulkProductCustomizations(
   }
 
   // Disparar evento para que la tienda se actualice en tiempo real en la pantalla
-  window.dispatchEvent(new CustomEvent('urbannoise_catalog_updated'));
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('urbannoise_catalog_updated'));
+  }
 
   // Sincronización automática con GitHub si está configurado
   if (syncToGitHub && isGitHubConfigured()) {
