@@ -162,43 +162,46 @@ export async function onRequestPost({ request }) {
       console.error("[Loyverse Receipt Exception]:", rErr.message);
     }
 
-    // 3. Descontar Inventario en Loyverse si hay variantes con stock rastreado
-    try {
-      for (const it of items) {
-        if (it.loyverseVariantId) {
-          const invQuery = await fetch(
-            `https://api.loyverse.com/v1.0/inventory?variant_ids=${it.loyverseVariantId}`,
-            { headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` } }
-          );
-          if (invQuery.ok) {
-            const invData = await invQuery.json();
-            const currentLevel = (invData.inventory_levels || []).find(
-              (l) => l.store_id === STORE_ID
+    // 3. Descontar Inventario solo si el recibo NO se sincronizó automáticamente en Loyverse POS
+    // (Al crear exitosamente un recibo SELL con variant_id, Loyverse POS descuenta el stock de forma nativa).
+    if (!loyverseReceipt?.syncedToPos) {
+      try {
+        for (const it of items) {
+          if (it.loyverseVariantId) {
+            const invQuery = await fetch(
+              `https://api.loyverse.com/v1.0/inventory?variant_ids=${it.loyverseVariantId}`,
+              { headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` } }
             );
-            const currentStock = currentLevel ? Number(currentLevel.in_stock) : 5;
-            const newStock = Math.max(0, currentStock - (Number(it.qty) || 1));
+            if (invQuery.ok) {
+              const invData = await invQuery.json();
+              const currentLevel = (invData.inventory_levels || []).find(
+                (l) => l.store_id === STORE_ID
+              );
+              const currentStock = currentLevel ? Number(currentLevel.in_stock) : 5;
+              const newStock = Math.max(0, currentStock - (Number(it.qty) || 1));
 
-            await fetch("https://api.loyverse.com/v1.0/inventory", {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${LOYVERSE_TOKEN}`,
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                inventory_levels: [
-                  {
-                    variant_id: it.loyverseVariantId,
-                    store_id: STORE_ID,
-                    stock_after: newStock,
-                  },
-                ],
-              }),
-            });
+              await fetch("https://api.loyverse.com/v1.0/inventory", {
+                method: "POST",
+                headers: {
+                  Authorization: `Bearer ${LOYVERSE_TOKEN}`,
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  inventory_levels: [
+                    {
+                      variant_id: it.loyverseVariantId,
+                      store_id: STORE_ID,
+                      stock_after: newStock,
+                    },
+                  ],
+                }),
+              });
+            }
           }
         }
+      } catch (invErr) {
+        console.warn("[Loyverse Stock Deduction Warning]:", invErr.message);
       }
-    } catch (invErr) {
-      console.warn("[Loyverse Stock Deduction Warning]:", invErr.message);
     }
 
     if (!loyverseReceipt) {
