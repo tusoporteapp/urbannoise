@@ -44,30 +44,54 @@
     {
       "id": "latest-drops",
       "name": "ÚLTIMOS LANZAMIENTOS",
+      "menuTitle": "Novedades",
+      "mobileTitle": "ÚLTIMOS LANZAMIENTOS",
       "subtitle": "Drop Semanal 2026",
       "badge": "NUEVO",
-      "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop"
+      "kicker": "DROP EXCLUSIVO 2026",
+      "description": "Prendas recién confeccionadas en Bogotá con serigrafía de alta densidad, tintorería ácida mineral wash y siluetas boxy de edición numerada.",
+      "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop",
+      "enabled": true,
+      "order": 1
     },
     {
       "id": "young-free",
       "name": "YOUNG & FREE",
+      "menuTitle": "Young & Free",
+      "mobileTitle": "COLECCIÓN YOUNG & FREE",
       "subtitle": "Underground & Audaz",
       "badge": "POPULAR",
-      "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop"
+      "kicker": "CÁPSULA JUVENIL",
+      "description": "Gráficos serigráficos provocadores inspirados en la escena underground contemporánea. Confección en algodón 100% peinado nacional.",
+      "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop",
+      "enabled": true,
+      "order": 2
     },
     {
       "id": "weird-oversize",
       "name": "PLEASURES & WEIRD BOXY",
+      "menuTitle": "Weird Boxy",
+      "mobileTitle": "EDICIÓN WEIRD & OVERSIZE",
       "subtitle": "Algodón Pesado 300g",
       "badge": "BOXY FIT",
-      "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1000&auto=format&fit=crop"
+      "kicker": "BOX FIT STREETWEAR",
+      "description": "Hombros caídos pronunciados, cuellos gruesos de 3.5cm y caída recta estructurada. El fit oversize definitivo desarrollado por URBANNOISE Bogotá.",
+      "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1000&auto=format&fit=crop",
+      "enabled": true,
+      "order": 3
     },
     {
       "id": "dama-oversize",
       "name": "DAMA OVERSIZE",
+      "menuTitle": "Dama",
+      "mobileTitle": "DESTACADOS DAMA OVERSIZE",
       "subtitle": "Estampados de Autor",
       "badge": "CÁPSULA",
-      "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop"
+      "kicker": "SILUETAS RELAJADAS",
+      "description": "Prendas fluidas diseñadas para adaptarse con carácter. Cortes contemporáneos con comodidad absoluta y estética streetwear vanguardista.",
+      "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop",
+      "enabled": true,
+      "order": 4
     }
   ],
   "announcements": {
