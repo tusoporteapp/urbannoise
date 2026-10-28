@@ -46,13 +46,33 @@ export async function onRequestPost({ request, env }) {
         );
 
         if (targetCust) {
-          // Limpiar etiqueta anterior de guía si existía
+          const cleanOrderId = String(orderId || "").replace(/^#/, "").trim();
           let currentNote = targetCust.note || "";
+
+          // Extraer todos los tags de guía existentes preservando los de OTRAS órdenes
+          const existingTags = [];
+          const tagRegex = /\[GUIA:\s*([^\|\]]+)(?:\|\s*EMPRESA:\s*([^\|\]]+))?(?:\|\s*ORDEN:\s*([^\|\]]+))?\]/gi;
+          let match;
+          while ((match = tagRegex.exec(currentNote)) !== null) {
+            const gNum = (match[1] || "").trim();
+            const gEmp = (match[2] || "Servientrega").trim();
+            const gOrd = match[3] ? match[3].replace(/^#/, "").trim() : "";
+            if (gOrd && gOrd.toUpperCase() !== cleanOrderId.toUpperCase()) {
+              existingTags.push(`[GUIA:${gNum}|EMPRESA:${gEmp}|ORDEN:${gOrd}]`);
+            }
+          }
+
+          // Remover todos los tags de guía de currentNote para reensamblar limpiamente
           currentNote = currentNote.replace(/\s*\|\s*\[GUIA:[^\]]*\]/gi, "").replace(/\[GUIA:[^\]]*\]/gi, "").trim();
 
-          // Si hay nueva guía, añadir etiqueta normalizada
+          // Si se proporcionó una guía para ESTA orden, agregarla
           if (cleanGuia) {
-            currentNote += ` | [GUIA:${cleanGuia}|EMPRESA:${cleanCompany}|ORDEN:${orderId}]`;
+            existingTags.push(`[GUIA:${cleanGuia}|EMPRESA:${cleanCompany}|ORDEN:${cleanOrderId}]`);
+          }
+
+          // Re-ensamblar la nota conservando los datos del cliente y los tags por orden
+          if (existingTags.length > 0) {
+            currentNote = currentNote ? `${currentNote} | ${existingTags.join(" | ")}` : existingTags.join(" | ");
           }
 
           await fetch("https://api.loyverse.com/v1.0/customers", {

@@ -81,13 +81,57 @@ export async function onRequestGet({ request }) {
       const clientAddress = attachedCust?.address || (addrMatch ? addrMatch[1].trim() : "cl 2 sur 11 c 45");
       const clientCity = attachedCust?.city || (cityMatch ? cityMatch[1].trim() : "Bogota");
 
-      // Buscar guía en la nota del cliente o en la nota del recibo
-      const custNote = attachedCust?.note || "";
-      const guiaTagMatch = custNote.match(/\[GUIA:\s*([^\|\]]+)(?:\|\s*EMPRESA:\s*([^\|\]]+))?(?:\|\s*ORDEN:\s*([^\|\]]+))?\]/i);
-      const rawGuiaMatch = note.match(/GU[ÍI]A:\s*([^\s•|]+)/i);
+      // Buscar guía vinculada estrictamente a ESTA orden
+      const orderIdentifiers = new Set();
+      if (r.order) {
+        const oClean = r.order.trim().toUpperCase();
+        orderIdentifiers.add(oClean);
+        orderIdentifiers.add(oClean.replace(/^#/, ''));
+      }
+      if (r.receipt_number) {
+        const rcClean = String(r.receipt_number).trim().toUpperCase();
+        orderIdentifiers.add(rcClean);
+        orderIdentifiers.add(`REC-${rcClean}`);
+        orderIdentifiers.add(`#REC-${rcClean}`);
+      }
+      const orderInNoteMatch = note.match(/#(UN-[A-Z0-9_-]+)/i) || note.match(/(UN-[A-Z0-9_-]+)/i);
+      if (orderInNoteMatch) {
+        const onClean = orderInNoteMatch[1].trim().toUpperCase();
+        orderIdentifiers.add(onClean);
+        orderIdentifiers.add(onClean.replace(/^#/, ''));
+      }
 
-      const trackingNumber = guiaTagMatch ? guiaTagMatch[1].trim() : (rawGuiaMatch ? rawGuiaMatch[1].trim() : undefined);
-      const trackingCompany = (guiaTagMatch && guiaTagMatch[2]) ? guiaTagMatch[2].trim() : "Servientrega";
+      let trackingNumber = undefined;
+      let trackingCompany = "Servientrega";
+
+      // 1. Buscar en tags [GUIA:...|ORDEN:...] en la ficha del cliente que correspondan a ESTA orden
+      const custNote = attachedCust?.note || "";
+      const tagMatches = custNote.matchAll(/\[GUIA:\s*([^\|\]]+)(?:\|\s*EMPRESA:\s*([^\|\]]+))?(?:\|\s*ORDEN:\s*([^\|\]]+))?\]/gi);
+      for (const match of tagMatches) {
+        const gNum = (match[1] || "").trim();
+        const gEmp = (match[2] || "Servientrega").trim();
+        const gOrd = match[3] ? match[3].replace(/^#/, "").trim().toUpperCase() : "";
+
+        if (gOrd && (orderIdentifiers.has(gOrd) || Array.from(orderIdentifiers).some(id => id === gOrd || id.includes(gOrd) || gOrd.includes(id)))) {
+          trackingNumber = gNum;
+          trackingCompany = gEmp;
+          break;
+        }
+      }
+
+      // 2. Si no se encontró en la ficha de cliente, revisar la nota del recibo específico
+      if (!trackingNumber) {
+        const receiptGuiaTag = note.match(/\[GUIA:\s*([^\|\]]+)(?:\|\s*EMPRESA:\s*([^\|\]]+))?(?:\|\s*ORDEN:\s*([^\|\]]+))?\]/i);
+        if (receiptGuiaTag) {
+          trackingNumber = receiptGuiaTag[1].trim();
+          if (receiptGuiaTag[2]) trackingCompany = receiptGuiaTag[2].trim();
+        } else {
+          const rawGuiaMatch = note.match(/GU[ÍI]A:\s*([^\s•|]+)/i);
+          if (rawGuiaMatch) {
+            trackingNumber = rawGuiaMatch[1].trim();
+          }
+        }
+      }
 
       let trackingUrl = undefined;
       if (trackingNumber) {
@@ -133,7 +177,7 @@ export async function onRequestGet({ request }) {
           title: "En Preparación",
           date: dateFormatted,
           completed: true,
-          current: false,
+          current: !trackingNumber,
           detail: "Prendas empacadas y embaladas con estándares de protección de URBANNOISE.",
         },
         {
