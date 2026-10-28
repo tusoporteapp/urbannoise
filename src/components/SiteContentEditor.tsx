@@ -26,6 +26,13 @@ import {
   Monitor,
   Smartphone,
   Info,
+  HelpCircle,
+  Shield,
+  Link2,
+  ExternalLink,
+  Layers,
+  Tag,
+  Bookmark,
 } from 'lucide-react';
 import {
   HeroSlide,
@@ -36,6 +43,7 @@ import {
   SocialLinksConfig,
   WhatsAppFloatingConfig,
   HomeSectionsConfig,
+  Product,
 } from '../types';
 import {
   getStoredSiteContent,
@@ -47,6 +55,8 @@ import { getGitHubConfig } from '../lib/githubStorage';
 
 interface SiteContentEditorProps {
   onShowToast?: (msg: string) => void;
+  products?: Product[];
+  onNavigateToCatalog?: (categoryId?: string) => void;
 }
 
 type EditorSubTab =
@@ -59,6 +69,8 @@ type EditorSubTab =
 
 export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
   onShowToast,
+  products = [],
+  onNavigateToCatalog,
 }) => {
   const [content, setContent] = useState<SiteContentConfig>(() =>
     getStoredSiteContent()
@@ -69,6 +81,10 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
   const [saveMessage, setSaveMessage] = useState<string>('');
+
+  // Estados interactivos para categorías y conexiones
+  const [categoryPreviewMode, setCategoryPreviewMode] = useState<'card' | 'banner' | 'header'>('card');
+  const [showCategoryGuide, setShowCategoryGuide] = useState<boolean>(false);
 
   // Estados para creación de nueva categoría dinámica
   const [isCreatingCategory, setIsCreatingCategory] = useState<boolean>(false);
@@ -83,6 +99,119 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
   );
   const [newCatKicker, setNewCatKicker] = useState<string>('CÁPSULA EXCLUSIVA');
   const [newCatDesc, setNewCatDesc] = useState<string>('');
+
+  // Plantillas de 1 Clic para Crear Categorías Urbanas
+  const STREETWEAR_CATEGORY_PRESETS = [
+    {
+      label: '🧥 Buzos & Hoodies',
+      name: 'HOODIES & BUZOS OVERSIZE',
+      menuTitle: 'Buzos',
+      mobileTitle: 'COLECCIÓN BUZOS & HOODIES',
+      id: 'hoodies-buzos',
+      subtitle: 'Algodón Rústico Pesado 320g',
+      badge: 'HOODIES',
+      kicker: 'CÁPSULA OVERSIZE BOGOTÁ',
+      description: 'Buzos con capota estructurada, bolsillo canguro y caída pesada confeccionados en Bogotá.',
+      image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1000&auto=format&fit=crop',
+    },
+    {
+      label: '👕 Camisetas Boxy',
+      name: 'CAMISETAS BOXY FIT',
+      menuTitle: 'Camisetas',
+      mobileTitle: 'CAMISETAS BOXY FIT 240G',
+      id: 'camisetas-boxy',
+      subtitle: 'Algodón Peinado 240g',
+      badge: 'BOXY FIT',
+      kicker: 'SILUETAS PESADAS',
+      description: 'Camisetas con cuello redondo reforzado de 3cm y silueta ancha con caída impecable.',
+      image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop',
+    },
+    {
+      label: '👖 Pantalones Cargo',
+      name: 'PANTALONES & CARGO STREET',
+      menuTitle: 'Pantalones',
+      mobileTitle: 'PANTALONES & CARGO JOGGERS',
+      id: 'pantalones-cargo',
+      subtitle: 'Dril Rígido & Bolsillos Tácticos',
+      badge: 'CARGO',
+      kicker: 'STREETWEAR FUNCIONAL',
+      description: 'Siluetas holgadas con bolsillos fuelle y pretina ajustable para outfit urbano.',
+      image: 'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?q=80&w=1000&auto=format&fit=crop',
+    },
+    {
+      label: '🧢 Gorras & Caps',
+      name: 'GORRAS & ACCESORIOS URBANOS',
+      menuTitle: 'Gorras',
+      mobileTitle: 'GORRAS & ACCESORIOS STREETWEAR',
+      id: 'gorras-accesorios',
+      subtitle: 'Bordados 3D en Relieve',
+      badge: 'ACCESORIOS',
+      kicker: 'COMPLEMENTOS STREETWEAR',
+      description: 'Gorras snapback y trucker con bordado de alta definición y broche metálico.',
+      image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=1000&auto=format&fit=crop',
+    },
+    {
+      label: '⚡ Edición Acid Wash',
+      name: 'ACID WASH VINTAGE',
+      menuTitle: 'Acid Wash',
+      mobileTitle: 'EDICIÓN ESPECIAL ACID WASH',
+      id: 'acid-wash',
+      subtitle: 'Lavado Mineral Artesanal',
+      badge: 'VINTAGE',
+      kicker: 'EDICIÓN LIMITADA BOGOTÁ',
+      description: 'Prendas con efecto desgastado artesanal, cada pieza tiene un teñido irrepetible.',
+      image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1000&auto=format&fit=crop',
+    },
+  ];
+
+  // Galería de Fotos Recomendadas de Alta Definición (Streetwear)
+  const CURATED_STREETWEAR_PHOTOS = [
+    { label: 'Negro Street', url: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop' },
+    { label: 'Underground', url: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1000&auto=format&fit=crop' },
+    { label: 'Hoodie Boxy', url: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1000&auto=format&fit=crop' },
+    { label: 'Weird Oversize', url: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=1000&auto=format&fit=crop' },
+    { label: 'Dama Urbana', url: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop' },
+    { label: 'Algodón Pesado', url: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop' },
+  ];
+
+  const isSystemProtectedCategory = (id?: string) => {
+    if (!id) return false;
+    return id === 'latest-drops' || id === 'young-free' || id === 'weird-oversize' || id === 'dama-oversize';
+  };
+
+  const getProductCountForCategory = (catId?: string) => {
+    if (!catId || !products || products.length === 0) return 0;
+    return products.filter((p) => p.category === catId && p.isPublished !== false).length;
+  };
+
+  const handleApplyCategoryPreset = (preset: typeof STREETWEAR_CATEGORY_PRESETS[0]) => {
+    setNewCatName(preset.name);
+    setNewCatId(preset.id);
+    setNewCatMenuTitle(preset.menuTitle);
+    setNewCatMobileTitle(preset.mobileTitle);
+    setNewCatSubtitle(preset.subtitle);
+    setNewCatBadge(preset.badge);
+    setNewCatKicker(preset.kicker);
+    setNewCatDesc(preset.description);
+    setNewCatImage(preset.image);
+  };
+
+  const handleNewCategoryImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      alert('Por favor selecciona un archivo de imagen válido (JPG, PNG, WEBP).');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target?.result as string;
+      if (dataUrl) {
+        setNewCatImage(dataUrl);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
 
   const currentSlide: HeroSlide | undefined = content.heroSlides[selectedSlideIndex];
   const categoriesList: CategoryCardContent[] = content.categories || DEFAULT_SITE_CONTENT.categories || [];
@@ -940,39 +1069,117 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
       {/* ============================================================== */}
       {activeSubTab === 'categories' && (
         <div className="space-y-6">
-          {/* Cabecera Informativa con Botón de Creación */}
-          <div className="bg-[#14151D] p-5 rounded-xl border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          {/* Cabecera Informativa con Botones de Ayuda y Creación */}
+          <div className="bg-[#14151D] p-5 sm:p-6 rounded-xl border border-white/10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
               <div className="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-blue-400 mb-1">
                 <Grid className="w-4 h-4" />
-                <span>MÓDULO 1: CONTROL TOTAL DE MENÚ Y CATEGORÍAS</span>
+                <span>MÓDULO 1: CONTROL TOTAL DE MENÚ, PORTADA Y CATEGORÍAS</span>
               </div>
-              <h2 className="text-lg font-black uppercase text-white tracking-tight">
-                Gestor Dinámico de Menú Superior y Colecciones
+              <h2 className="text-lg sm:text-xl font-black uppercase text-white tracking-tight">
+                Gestor Dinámico de Menú Superior, Portada y Catálogo
               </h2>
-              <p className="text-xs text-white/60 mt-0.5 max-w-2xl">
-                Modifica los nombres que ven los clientes en el menú superior (ej. cambiar <em>Weird Boxy</em> por <em>Boxy Fit</em>, o <em>Dama</em> por <em>Mujer</em>), añade nuevas categorías ilimitadas (ej. <em>Buzos</em>, <em>Gorras</em>) y reordena las colecciones en vivo.
+              <p className="text-xs text-white/60 mt-1 max-w-2xl leading-relaxed">
+                Modifica nombres visibles (ej. cambiar <em>Weird Boxy</em> por <em>Boxy Fit</em>, o <em>Dama</em> por <em>Mujer</em>), fotos de portada, subtítulos e insignias sin romper la conexión con tus prendas. Añade nuevas categorías ilimitadas y ordénalas a tu gusto.
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setIsCreatingCategory(!isCreatingCategory)}
-              className={`px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center space-x-2 cursor-pointer transition shadow-md flex-shrink-0 ${
-                isCreatingCategory
-                  ? 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
-                  : 'bg-blue-600 hover:bg-blue-500 text-white'
-              }`}
-            >
-              <Plus className="w-4 h-4" />
-              <span>{isCreatingCategory ? 'Cancelar Creación' : '➕ Nueva Categoría'}</span>
-            </button>
+            <div className="flex items-center space-x-2 flex-shrink-0">
+              <button
+                type="button"
+                onClick={() => setShowCategoryGuide(!showCategoryGuide)}
+                className={`px-3.5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center space-x-2 cursor-pointer transition border ${
+                  showCategoryGuide
+                    ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                    : 'bg-white/5 hover:bg-white/10 text-white/80 border-white/15'
+                }`}
+                title="Aprende cómo funciona el Identificador y las conexiones"
+              >
+                <HelpCircle className="w-4 h-4 text-amber-400" />
+                <span>{showCategoryGuide ? 'Ocultar Guía' : '💡 ¿Cómo Conecta?'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsCreatingCategory(!isCreatingCategory);
+                  if (showCategoryGuide) setShowCategoryGuide(false);
+                }}
+                className={`px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center space-x-2 cursor-pointer transition shadow-md ${
+                  isCreatingCategory
+                    ? 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+                    : 'bg-blue-600 hover:bg-blue-500 text-white'
+                }`}
+              >
+                <Plus className="w-4 h-4" />
+                <span>{isCreatingCategory ? 'Cancelar' : '➕ Nueva Categoría'}</span>
+              </button>
+            </div>
           </div>
+
+          {/* Guía Interactiva Didáctica Desplegable */}
+          {showCategoryGuide && (
+            <div className="bg-[#0E1017] p-5 sm:p-6 rounded-xl border border-amber-500/30 shadow-2xl space-y-4 animate-in fade-in duration-200">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <div className="flex items-center space-x-2 text-amber-400 font-black text-sm uppercase tracking-wide">
+                  <Sparkles className="w-4 h-4" />
+                  <span>Guía Maestra: Identificador, Portada y Conexión de Prendas</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowCategoryGuide(false)}
+                  className="text-xs text-white/50 hover:text-white uppercase font-bold cursor-pointer"
+                >
+                  ✕ Cerrar Guía
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                {/* Pilar 1: El Identificador */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-2">
+                  <div className="flex items-center space-x-2 text-blue-400 font-bold uppercase text-[11px]">
+                    <Link2 className="w-4 h-4" />
+                    <span>1. ¿Qué es el Identificador (ID)?</span>
+                  </div>
+                  <p className="text-white/70 leading-relaxed text-[11px]">
+                    Es la <strong className="text-white">llave técnica interna</strong> (ej: <code className="bg-black/60 text-[#D9C4AB] px-1 py-0.5 rounded font-mono">young-free</code> o <code className="bg-black/60 text-[#D9C4AB] px-1 py-0.5 rounded font-mono">hoodies</code>) que enlaza tus prendas del inventario con esta categoría en la tienda web. Se escribe en minúsculas y sin espacios.
+                  </p>
+                  <p className="text-[10px] text-white/50 italic">
+                    Al crear una categoría se autogenera a partir del nombre, así que no necesitas crearlo a mano.
+                  </p>
+                </div>
+
+                {/* Pilar 2: Por qué no se pierden las conexiones */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-2">
+                  <div className="flex items-center space-x-2 text-emerald-400 font-bold uppercase text-[11px]">
+                    <Shield className="w-4 h-4" />
+                    <span>2. ¿Por qué NO se pierden las prendas?</span>
+                  </div>
+                  <p className="text-white/70 leading-relaxed text-[11px]">
+                    ¡Puedes renombrar tus colecciones tantas veces como quieras! Si cambias <strong className="text-white">Weird Boxy</strong> por <strong className="text-white">Boxy Fit 2026</strong> o <strong className="text-white">Dama</strong> por <strong className="text-white">Colección Mujer</strong>, <span className="text-emerald-300 font-bold">ninguna prenda se desconecta</span> porque el identificador técnico interno permanece intacto.
+                  </p>
+                </div>
+
+                {/* Pilar 3: Los 3 lugares donde se muestra cada dato */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-2">
+                  <div className="flex items-center space-x-2 text-amber-400 font-bold uppercase text-[11px]">
+                    <Layers className="w-4 h-4" />
+                    <span>3. ¿Dónde se muestra cada texto?</span>
+                  </div>
+                  <ul className="text-white/70 space-y-1 text-[11px] list-disc list-inside">
+                    <li><strong className="text-white">Menú Superior:</strong> Texto corto en barra PC y móvil.</li>
+                    <li><strong className="text-white">Tarjeta de Portada:</strong> Foto vertical, Insignia, Subtítulo y Nombre.</li>
+                    <li><strong className="text-white">Banner en Tienda:</strong> Kicker con estrella, Título póster y Descripción.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Formulario de Creación de Nueva Categoría (Desplegable) */}
           {isCreatingCategory && (
-            <div className="bg-[#10121A] p-5 sm:p-6 rounded-xl border-2 border-blue-500/40 shadow-2xl space-y-4 animate-in fade-in duration-200">
-              <div className="border-b border-white/10 pb-3 flex items-center justify-between">
+            <div className="bg-[#10121A] p-5 sm:p-6 rounded-xl border-2 border-blue-500/50 shadow-2xl space-y-5 animate-in fade-in duration-200">
+              <div className="border-b border-white/10 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
                   <h3 className="font-black text-sm uppercase tracking-wide text-blue-300 flex items-center space-x-2">
                     <Sparkles className="w-4 h-4 text-blue-400" />
@@ -982,31 +1189,56 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                     Aparecerá automáticamente en el Menú Superior, Menú Móvil, Visual Hub y Filtros del Catálogo.
                   </p>
                 </div>
-                <span className="text-[10px] font-mono uppercase bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded border border-blue-500/30">
-                  PASO 1 DE 1
+                <span className="text-[10px] font-mono uppercase bg-blue-500/20 text-blue-300 px-2.5 py-1 rounded border border-blue-500/30 self-start sm:self-auto font-bold">
+                  PLANTILLAS O PERSONALIZADO
                 </span>
               </div>
 
+              {/* Selector de Plantillas Rápidas (1 Clic) */}
+              <div className="bg-black/40 border border-white/10 rounded-xl p-3.5 space-y-2">
+                <span className="text-[10px] uppercase font-bold text-amber-400 tracking-wider flex items-center space-x-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Plantillas Rápidas de Streetwear (Relleno en 1 Clic):</span>
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {STREETWEAR_CATEGORY_PRESETS.map((preset) => (
+                    <button
+                      key={preset.id}
+                      type="button"
+                      onClick={() => handleApplyCategoryPreset(preset)}
+                      className="px-3 py-1.5 bg-white/5 hover:bg-white/15 text-white/90 hover:text-white border border-white/15 rounded-lg text-xs font-bold transition flex items-center space-x-1.5 cursor-pointer"
+                    >
+                      <span>{preset.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Formulario de Campos */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                    Nombre Oficial de la Colección *
+                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                    <span>Nombre Oficial de la Colección *</span>
+                    <span className="text-[9px] text-blue-400 font-mono">PORTADA & BANNER</span>
                   </label>
                   <input
                     type="text"
                     value={newCatName}
                     onChange={(e) => {
-                      setNewCatName(e.target.value);
+                      const val = e.target.value;
+                      setNewCatName(val);
                       if (!newCatId) {
                         setNewCatId(
-                          e.target.value
+                          val
                             .toLowerCase()
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '')
                             .replace(/[^a-z0-9]+/g, '-')
                             .replace(/(^-|-$)/g, '')
                         );
                       }
                       if (!newCatMenuTitle) {
-                        setNewCatMenuTitle(e.target.value);
+                        setNewCatMenuTitle(val);
                       }
                     }}
                     placeholder="Ej. BUZOS & HOODIES"
@@ -1015,8 +1247,9 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                    Texto en Menú Superior (Header) *
+                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                    <span>Texto en Menú Superior *</span>
+                    <span className="text-[9px] text-amber-400 font-mono">HEADER PC</span>
                   </label>
                   <input
                     type="text"
@@ -1028,8 +1261,9 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                    Texto en Menú Móvil *
+                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                    <span>Texto en Menú Móvil *</span>
+                    <span className="text-[9px] text-emerald-400 font-mono">MENÚ CELULAR</span>
                   </label>
                   <input
                     type="text"
@@ -1041,21 +1275,34 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                    ID / Slug Único (en minúsculas)
+                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                    <span>Identificador / Slug Único *</span>
+                    <span className="text-[9px] text-[#D9C4AB] font-mono">CLAVE TÉCNICA</span>
                   </label>
                   <input
                     type="text"
                     value={newCatId}
-                    onChange={(e) => setNewCatId(e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g, ''))}
+                    onChange={(e) =>
+                      setNewCatId(
+                        e.target.value
+                          .toLowerCase()
+                          .normalize('NFD')
+                          .replace(/[\u0300-\u036f]/g, '')
+                          .replace(/[^a-z0-9_-]/g, '')
+                      )
+                    }
                     placeholder="Ej. buzos-hoodies"
                     className="w-full bg-black/60 border border-white/20 rounded-lg px-3 py-2 text-xs font-mono text-[#D9C4AB] focus:border-blue-400 focus:outline-none"
                   />
+                  <p className="text-[9.5px] text-white/40 mt-1">
+                    Código que conectará tus prendas con esta categoría.
+                  </p>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                    Subtítulo Descriptivo *
+                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                    <span>Subtítulo Descriptivo *</span>
+                    <span className="text-[9px] text-amber-300 font-mono">TEXTO DORADO</span>
                   </label>
                   <input
                     type="text"
@@ -1067,29 +1314,91 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                    Insignia / Badge
+                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                    <span>Insignia / Badge *</span>
+                    <span className="text-[9px] text-blue-300 font-mono">ETIQUETA SUPERIOR</span>
                   </label>
                   <input
                     type="text"
                     value={newCatBadge}
                     onChange={(e) => setNewCatBadge(e.target.value)}
-                    placeholder="Ej. NUEVO o HOT"
+                    placeholder="Ej. NUEVO, HOT o HOODIES"
                     className="w-full bg-black/60 border border-white/20 rounded-lg px-3 py-2 text-xs font-bold text-white uppercase focus:border-blue-400 focus:outline-none"
                   />
                 </div>
 
-                <div className="sm:col-span-2 lg:col-span-3">
-                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                    Foto de Portada de la Tarjeta (URL) *
+                <div>
+                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                    <span>Kicker Decorativo en Catálogo</span>
+                    <span className="text-[9px] text-purple-300 font-mono">BANNER TIENDA</span>
                   </label>
                   <input
                     type="text"
-                    value={newCatImage}
-                    onChange={(e) => setNewCatImage(e.target.value)}
-                    placeholder="https://ejemplo.com/foto-buzos.jpg"
+                    value={newCatKicker}
+                    onChange={(e) => setNewCatKicker(e.target.value)}
+                    placeholder="Ej. CÁPSULA OVERSIZE 2026"
+                    className="w-full bg-black/60 border border-white/20 rounded-lg px-3 py-2 text-xs font-bold text-white uppercase focus:border-blue-400 focus:outline-none"
+                  />
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                    <span>Descripción Detallada en Catálogo</span>
+                    <span className="text-[9px] text-purple-300 font-mono">BANNER TIENDA</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={newCatDesc}
+                    onChange={(e) => setNewCatDesc(e.target.value)}
+                    placeholder="Prendas de autor con confección pesada en Bogotá..."
                     className="w-full bg-black/60 border border-white/20 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-400 focus:outline-none"
                   />
+                </div>
+
+                <div className="sm:col-span-2 lg:col-span-3 space-y-2">
+                  <label className="block text-xs font-bold text-white/80 uppercase tracking-wide flex items-center justify-between">
+                    <span>Foto de Portada de la Tarjeta *</span>
+                    <span className="text-[9px] text-neutral-400 font-mono">VERTICAL 3:4 (1200 × 1600 px)</span>
+                  </label>
+
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="text"
+                      value={newCatImage}
+                      onChange={(e) => setNewCatImage(e.target.value)}
+                      placeholder="https://ejemplo.com/foto-buzos.jpg"
+                      className="flex-1 bg-black/60 border border-white/20 rounded-lg px-3 py-2 text-xs text-white focus:border-blue-400 focus:outline-none"
+                    />
+                    <label className="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center space-x-1.5 cursor-pointer transition flex-shrink-0">
+                      <Upload className="w-3.5 h-3.5 text-[#D9C4AB]" />
+                      <span>Subir Foto</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleNewCategoryImageUpload}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+
+                  {/* Fotos Recomendadas en 1 Clic */}
+                  <div className="flex items-center space-x-1.5 overflow-x-auto pt-1 pb-1">
+                    <span className="text-[10px] text-white/50 uppercase font-mono flex-shrink-0">Fotos sugeridas:</span>
+                    {CURATED_STREETWEAR_PHOTOS.map((photo, pIdx) => (
+                      <button
+                        key={pIdx}
+                        type="button"
+                        onClick={() => setNewCatImage(photo.url)}
+                        className={`text-[10px] px-2 py-0.5 rounded border transition flex-shrink-0 cursor-pointer ${
+                          newCatImage === photo.url
+                            ? 'bg-blue-600 text-white border-blue-400 font-bold'
+                            : 'bg-white/5 text-white/70 hover:bg-white/15 border-white/15'
+                        }`}
+                      >
+                        {photo.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -1113,11 +1422,12 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
             </div>
           )}
 
-          {/* Selector de Categoría (Pestañas Horizontales) */}
+          {/* Selector de Categoría (Pestañas Horizontales con Conteo en Vivo) */}
           <div className="bg-[#14151D] p-3 rounded-xl border border-white/10 flex items-center space-x-2 overflow-x-auto">
             {categoriesList.map((cat, idx) => {
               const isSelected = idx === selectedCategoryIndex;
               const isEnabled = cat.enabled !== false;
+              const count = getProductCountForCategory(cat.id);
               return (
                 <button
                   key={cat.id || idx}
@@ -1149,7 +1459,7 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                         : 'bg-white/10 text-[#D9C4AB]'
                     }`}
                   >
-                    {cat.badge || 'TAG'}
+                    {count} {count === 1 ? 'prenda' : 'prendas'}
                   </span>
                 </button>
               );
@@ -1159,13 +1469,45 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
           {/* Editor Detallado de la Categoría Seleccionada */}
           {currentCategory && (
             <div className="space-y-6">
-              {/* Barra de Acciones Rápidas de la Categoría (Estado, Orden, Eliminar) */}
-              <div className="bg-[#14151D] p-3.5 rounded-xl border border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
-                <div className="flex items-center space-x-2">
-                  <span className="text-white/50 uppercase font-semibold text-[11px]">Identificador:</span>
-                  <code className="font-mono bg-black/60 text-[#D9C4AB] px-2 py-0.5 rounded border border-white/10 font-bold">
-                    {currentCategory.id}
-                  </code>
+              {/* Barra de Acciones y Conexión de Inventario */}
+              <div className="bg-[#14151D] p-4 rounded-xl border border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <div className="flex items-center space-x-1.5">
+                    <span className="text-white/50 uppercase font-semibold text-[11px]">Identificador:</span>
+                    <code className="font-mono bg-black/60 text-[#D9C4AB] px-2 py-0.5 rounded border border-white/10 font-bold">
+                      {currentCategory.id}
+                    </code>
+                  </div>
+
+                  {isSystemProtectedCategory(currentCategory.id) ? (
+                    <span className="inline-flex items-center space-x-1 text-[10px] font-bold text-amber-300 bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 rounded-full">
+                      <Shield className="w-3 h-3 text-amber-400" />
+                      <span>ID Protegido del Sistema</span>
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center space-x-1 text-[10px] font-bold text-blue-300 bg-blue-500/15 border border-blue-500/30 px-2 py-0.5 rounded-full">
+                      <Tag className="w-3 h-3 text-blue-400" />
+                      <span>Categoría Personalizada</span>
+                    </span>
+                  )}
+
+                  {/* Contador de Prendas y Acceso Directo */}
+                  <div className="flex items-center space-x-1.5 pl-2 border-l border-white/15">
+                    <span className="text-[11px] text-white/70 font-mono font-bold">
+                      📦 {getProductCountForCategory(currentCategory.id)} prendas conectadas
+                    </span>
+                    {onNavigateToCatalog && (
+                      <button
+                        type="button"
+                        onClick={() => onNavigateToCatalog(currentCategory.id)}
+                        className="text-[10px] text-blue-400 hover:text-blue-300 font-bold underline flex items-center space-x-1 cursor-pointer"
+                        title="Ver y editar las prendas de esta categoría en el inventario"
+                      >
+                        <span>Ver en Inventario</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </button>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2">
@@ -1233,15 +1575,21 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                 <div className="lg:col-span-7 bg-[#14151D] p-5 sm:p-6 rounded-xl border border-white/10 space-y-5">
                   {/* Sección 1: Textos del Menú */}
                   <div className="border-b border-white/10 pb-4 space-y-4">
-                    <div className="flex items-center space-x-2 text-xs font-bold text-white/90 uppercase tracking-wide">
-                      <Type className="w-4 h-4 text-amber-400" />
-                      <span>Textos en Menús de Navegación</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2 text-xs font-bold text-white/90 uppercase tracking-wide">
+                        <Type className="w-4 h-4 text-amber-400" />
+                        <span>1. Textos en Menús de Navegación</span>
+                      </div>
+                      <span className="text-[10px] font-mono uppercase bg-amber-500/10 text-amber-300 px-2 py-0.5 rounded border border-amber-500/20 font-bold">
+                        BARRA SUPERIOR & MÓVIL
+                      </span>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                          Texto en Menú Superior (Header) *
+                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                          <span>Texto en Menú Superior (Header) *</span>
+                          <span className="text-[9px] text-amber-400 font-mono">PC / LAPTOP</span>
                         </label>
                         <input
                           type="text"
@@ -1251,13 +1599,14 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                           className="w-full bg-black/50 border border-[#D9C4AB]/50 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-bold text-white placeholder-white/40 focus:outline-none focus:border-[#D9C4AB] transition"
                         />
                         <p className="text-[10px] text-white/40 mt-1">
-                          Texto que verán los clientes en la barra superior en PC/Laptop.
+                          Nombre visible en la barra horizontal superior.
                         </p>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                          Texto en Menú de Celulares *
+                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                          <span>Texto en Menú de Celulares *</span>
+                          <span className="text-[9px] text-emerald-400 font-mono">SMARTPHONE</span>
                         </label>
                         <input
                           type="text"
@@ -1267,36 +1616,43 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                           className="w-full bg-black/50 border border-white/20 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-bold text-white uppercase placeholder-white/40 focus:outline-none focus:border-[#D9C4AB] transition"
                         />
                         <p className="text-[10px] text-white/40 mt-1">
-                          Texto en el menú lateral desplegable en teléfonos móviles.
+                          Texto que ven los usuarios al abrir el menú hamburguesa.
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Sección 2: Identidad en Visual Hub y Catálogo */}
+                  {/* Sección 2: Identidad en Portada y Catálogo */}
                   <div className="border-b border-white/10 pb-4 space-y-4">
-                    <div className="flex items-center space-x-2 text-xs font-bold text-white/90 uppercase tracking-wide">
-                      <Grid className="w-4 h-4 text-blue-400" />
-                      <span>Tarjeta del Hub Visual & Cabecera de Catálogo</span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2 text-xs font-bold text-white/90 uppercase tracking-wide">
+                        <Grid className="w-4 h-4 text-blue-400" />
+                        <span>2. Tarjeta en la Portada (Visual Hub)</span>
+                      </div>
+                      <span className="text-[10px] font-mono uppercase bg-blue-500/10 text-blue-300 px-2 py-0.5 rounded border border-blue-500/20 font-bold">
+                        HOME PAGE
+                      </span>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                          Nombre Oficial de la Colección *
+                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                          <span>Nombre Oficial de la Colección *</span>
+                          <span className="text-[9px] text-blue-400 font-mono">TÍTULO GRUESO</span>
                         </label>
                         <input
                           type="text"
                           value={currentCategory.name}
                           onChange={(e) => handleUpdateCategory('name', e.target.value)}
-                          placeholder="ÚLTIMOS LANZAMIENTOS"
+                          placeholder="PLEASURES & WEIRD BOXY"
                           className="w-full bg-black/50 border border-white/15 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-black text-white uppercase placeholder-white/40 focus:outline-none focus:border-[#D9C4AB] transition"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                          Insignia / Badge
+                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                          <span>Insignia / Badge *</span>
+                          <span className="text-[9px] text-blue-400 font-mono">ETIQUETA ARRIBA</span>
                         </label>
                         <input
                           type="text"
@@ -1308,21 +1664,38 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                       </div>
 
                       <div className="sm:col-span-2">
-                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                          Subtítulo Descriptivo *
+                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                          <span>Subtítulo Descriptivo *</span>
+                          <span className="text-[9px] text-amber-300 font-mono">TEXTO DORADO</span>
                         </label>
                         <input
                           type="text"
                           value={currentCategory.subtitle}
                           onChange={(e) => handleUpdateCategory('subtitle', e.target.value)}
-                          placeholder="Drop Semanal 2026 o Algodón Pesado 300g"
+                          placeholder="Algodón Pesado 300g o Drop Semanal"
                           className="w-full bg-black/50 border border-white/15 rounded-lg px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-white placeholder-white/40 focus:outline-none focus:border-[#D9C4AB] transition"
                         />
                       </div>
+                    </div>
+                  </div>
 
-                      <div>
-                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                          Kicker Decorativo en Catálogo
+                  {/* Sección 3: Banner en el Catálogo */}
+                  <div className="border-b border-white/10 pb-4 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2 text-xs font-bold text-white/90 uppercase tracking-wide">
+                        <Bookmark className="w-4 h-4 text-purple-400" />
+                        <span>3. Cabecera en el Catálogo (Marketplace)</span>
+                      </div>
+                      <span className="text-[10px] font-mono uppercase bg-purple-500/10 text-purple-300 px-2 py-0.5 rounded border border-purple-500/20 font-bold">
+                        BANNER TIENDA
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="sm:col-span-2">
+                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                          <span>Kicker Decorativo con Estrella</span>
+                          <span className="text-[9px] text-purple-400 font-mono">PARTE SUPERIOR</span>
                         </label>
                         <input
                           type="text"
@@ -1334,8 +1707,9 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                       </div>
 
                       <div className="sm:col-span-2">
-                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide">
-                          Descripción Detallada en Catálogo
+                        <label className="block text-xs font-bold text-white/80 mb-1 uppercase tracking-wide flex items-center justify-between">
+                          <span>Descripción Detallada en Catálogo</span>
+                          <span className="text-[9px] text-purple-400 font-mono">PÁRRAFO COMPLETO</span>
                         </label>
                         <textarea
                           rows={2}
@@ -1348,10 +1722,11 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                     </div>
                   </div>
 
-                  {/* Sección 3: Foto de Portada */}
+                  {/* Sección 4: Foto de Portada */}
                   <div className="space-y-3">
-                    <label className="block text-xs font-bold text-white/80 uppercase tracking-wide">
-                      Foto de Portada de la Tarjeta *
+                    <label className="block text-xs font-bold text-white/80 uppercase tracking-wide flex items-center justify-between">
+                      <span>Foto de Portada de la Tarjeta *</span>
+                      <span className="text-[9px] text-neutral-400 font-mono">VERTICAL 3:4 (1200 × 1600 px)</span>
                     </label>
                     <div className="flex items-center space-x-2">
                       <input
@@ -1373,7 +1748,26 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                       </label>
                     </div>
 
-                    {/* Especificación técnica Super Retina XDR */}
+                    {/* Galería de Fotos Streetwear Recomendadas en 1 Clic */}
+                    <div className="flex items-center space-x-1.5 overflow-x-auto pt-1 pb-1">
+                      <span className="text-[10px] text-white/50 uppercase font-mono flex-shrink-0">Reemplazar por foto pro:</span>
+                      {CURATED_STREETWEAR_PHOTOS.map((photo, pIdx) => (
+                        <button
+                          key={pIdx}
+                          type="button"
+                          onClick={() => handleUpdateCategory('image', photo.url)}
+                          className={`text-[10px] px-2 py-0.5 rounded border transition flex-shrink-0 cursor-pointer ${
+                            currentCategory.image === photo.url
+                              ? 'bg-blue-600 text-white border-blue-400 font-bold'
+                              : 'bg-white/5 text-white/70 hover:bg-white/15 border-white/15'
+                          }`}
+                        >
+                          {photo.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Especificación técnica */}
                     <div className="bg-[#0C0D12] border border-[#D9C4AB]/30 rounded-lg p-2.5 flex items-start space-x-2.5 text-[11px] text-neutral-300">
                       <div className="p-1 rounded bg-[#D9C4AB]/15 text-[#D9C4AB] shrink-0 mt-0.5">
                         <Sparkles className="w-3.5 h-3.5" />
@@ -1388,66 +1782,175 @@ export const SiteContentEditor: React.FC<SiteContentEditorProps> = ({
                           </span>
                         </div>
                         <p className="text-[10px] text-neutral-400 leading-tight">
-                          DPI óptimo: 72–150 DPI. Formato sugerido: WebP o JPG 85% para máxima fidelidad visual.
+                          Esta misma imagen se utiliza en alta definición en la tarjeta de la portada y difuminada en el banner del catálogo.
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Columna Derecha: Vistas Previas en Vivo */}
-                <div className="lg:col-span-5 space-y-5">
-                  {/* Vista Previa del Botón en el Header */}
+                {/* Columna Derecha: Previsualizador Interactivo en Tiempo Real */}
+                <div className="lg:col-span-5 space-y-4">
                   <div className="bg-[#14151D] p-4 rounded-xl border border-white/10 space-y-3">
-                    <div className="flex items-center space-x-2 text-xs font-bold text-white/80 uppercase tracking-wide">
-                      <Monitor className="w-4 h-4 text-amber-400" />
-                      <span>Vista Previa en Barra Superior (Header)</span>
-                    </div>
-
-                    <div className="bg-[#101013] p-3 rounded-lg border border-white/10 flex items-center justify-between">
-                      <span className="text-[10px] text-white/40 uppercase font-mono">Fondo Oscuro:</span>
-                      <span className="text-xs font-bold uppercase tracking-wider text-white hover:opacity-75 transition">
-                        {currentCategory.menuTitle || currentCategory.name}
-                      </span>
-                    </div>
-
-                    <div className="bg-white p-3 rounded-lg border border-stone-200 flex items-center justify-between">
-                      <span className="text-[10px] text-stone-400 uppercase font-mono">Fondo Blanco (Scrolled):</span>
-                      <span className="text-xs font-black uppercase tracking-wider text-black underline underline-offset-4">
-                        {currentCategory.menuTitle || currentCategory.name}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Vista Previa de la Tarjeta en el Hub Visual */}
-                  <div className="bg-[#14151D] p-4 rounded-xl border border-white/10 space-y-3">
-                    <div className="flex items-center space-x-2 text-xs font-bold text-white/80 uppercase tracking-wide">
-                      <Eye className="w-4 h-4 text-blue-400" />
-                      <span>Vista Previa de la Tarjeta en Portada</span>
-                    </div>
-
-                    <div className="relative w-full h-[320px] rounded-xl overflow-hidden shadow-2xl bg-black text-white flex flex-col justify-end p-5 border border-white/15">
-                      <img
-                        src={currentCategory.image}
-                        alt={currentCategory.name}
-                        className="absolute inset-0 w-full h-full object-cover filter contrast-105"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop';
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
-
-                      <div className="relative z-10 space-y-2">
-                        <span className="inline-block bg-[#101013] text-[#F5F2E4] text-[10px] font-mono font-bold px-2 py-0.5 rounded uppercase tracking-wider border border-white/20">
-                          {currentCategory.badge || 'COLECCIÓN'}
-                        </span>
-                        <h4 className="font-black text-xl uppercase tracking-tight text-[#F5F2E4]">
-                          {currentCategory.name}
-                        </h4>
-                        <p className="text-xs font-medium text-white/80">{currentCategory.subtitle}</p>
+                    <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+                      <div className="flex items-center space-x-2 text-xs font-bold text-white/90 uppercase tracking-wide">
+                        <Eye className="w-4 h-4 text-blue-400" />
+                        <span>Previsualizador en Vivo</span>
+                      </div>
+                      <div className="flex items-center space-x-1 bg-black/50 p-0.5 rounded-lg border border-white/10 text-[10px]">
+                        <button
+                          type="button"
+                          onClick={() => setCategoryPreviewMode('card')}
+                          className={`px-2 py-1 rounded font-bold transition cursor-pointer ${
+                            categoryPreviewMode === 'card'
+                              ? 'bg-blue-600 text-white'
+                              : 'text-white/60 hover:text-white'
+                          }`}
+                        >
+                          Portada
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setCategoryPreviewMode('banner')}
+                          className={`px-2 py-1 rounded font-bold transition cursor-pointer ${
+                            categoryPreviewMode === 'banner'
+                              ? 'bg-blue-600 text-white'
+                              : 'text-white/60 hover:text-white'
+                          }`}
+                        >
+                          Catálogo
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setCategoryPreviewMode('header')}
+                          className={`px-2 py-1 rounded font-bold transition cursor-pointer ${
+                            categoryPreviewMode === 'header'
+                              ? 'bg-blue-600 text-white'
+                              : 'text-white/60 hover:text-white'
+                          }`}
+                        >
+                          Menú
+                        </button>
                       </div>
                     </div>
+
+                    {/* VISTA 1: Tarjeta en la Portada (Visual Hub) */}
+                    {categoryPreviewMode === 'card' && (
+                      <div className="space-y-2 animate-in fade-in duration-150">
+                        <span className="text-[10px] text-white/50 uppercase font-mono block">
+                          Así se ve la tarjeta en la página de inicio (Visual Hub):
+                        </span>
+                        <div className="relative w-full h-[360px] rounded-none overflow-hidden shadow-2xl bg-black text-white flex flex-col justify-end p-5 border border-white/15 group">
+                          <img
+                            src={currentCategory.image}
+                            alt={currentCategory.name}
+                            className="absolute inset-0 w-full h-full object-cover opacity-75 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 filter contrast-110"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src =
+                                'https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=1000&auto=format&fit=crop';
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent pointer-events-none" />
+
+                          {/* Badges superiores */}
+                          <div className="absolute top-3 left-3 z-10 flex items-center space-x-2">
+                            <span className="bg-[#101013]/90 backdrop-blur-xs text-[#F5F2E4] text-[9.5px] font-black uppercase px-2 py-0.5 rounded-xs border border-white/20">
+                              {currentCategory.badge || 'COLECCIÓN'}
+                            </span>
+                            <span className="bg-white/20 backdrop-blur-xs text-white text-[9.5px] font-mono font-bold px-1.5 py-0.5 rounded-xs">
+                              {getProductCountForCategory(currentCategory.id)} prendas
+                            </span>
+                          </div>
+
+                          {/* Contenido inferior */}
+                          <div className="relative z-10 space-y-1.5">
+                            <p className="text-[11px] text-[#D9C4AB] font-semibold uppercase tracking-widest">
+                              {currentCategory.subtitle || 'Edición Limitada'}
+                            </p>
+                            <h4 className="font-black text-xl uppercase tracking-tight text-[#F5F2E4] leading-tight">
+                              {currentCategory.name}
+                            </h4>
+                            <div className="pt-2">
+                              <span className="inline-flex items-center space-x-1.5 text-[10px] font-black uppercase tracking-wider text-white bg-white/15 px-3 py-1.5 rounded-xs border border-white/30">
+                                <span>Ver Colección</span>
+                                <ArrowRight className="w-3 h-3" />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* VISTA 2: Banner Gigante en Catálogo */}
+                    {categoryPreviewMode === 'banner' && (
+                      <div className="space-y-2 animate-in fade-in duration-150">
+                        <span className="text-[10px] text-white/50 uppercase font-mono block">
+                          Así se ve la cabecera cuando el cliente entra a comprar:
+                        </span>
+                        <div className="relative w-full h-[280px] rounded-xl overflow-hidden shadow-2xl bg-[#101013] text-[#F5F2E4] flex flex-col justify-center p-5 border border-white/15">
+                          <img
+                            src={currentCategory.image}
+                            alt={currentCategory.name}
+                            className="absolute inset-0 w-full h-full object-cover opacity-35 filter contrast-125"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-black/50" />
+
+                          <div className="relative z-10 space-y-2">
+                            <div className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-md px-2.5 py-0.5 rounded border border-white/15">
+                              <Sparkles className="w-3 h-3 text-[#D9C4AB]" />
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#D9C4AB]">
+                                {currentCategory.kicker || 'CÁPSULA ESPECIAL'}
+                              </span>
+                            </div>
+
+                            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-[#F5F2E4] leading-tight">
+                              {currentCategory.name}
+                            </h3>
+
+                            <p className="text-[11px] text-white/75 leading-relaxed line-clamp-2">
+                              {currentCategory.description || 'Prendas con confección de autor en Bogotá.'}
+                            </p>
+
+                            <div className="pt-1 flex items-center space-x-2 text-[10px] text-white/60">
+                              <span className="bg-white/20 text-white font-mono px-2 py-0.5 rounded font-bold">
+                                {getProductCountForCategory(currentCategory.id)} prendas disponibles
+                              </span>
+                              <span>•</span>
+                              <span className="text-emerald-400 font-semibold">Despacho inmediato</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* VISTA 3: Menú Superior Header */}
+                    {categoryPreviewMode === 'header' && (
+                      <div className="space-y-3 animate-in fade-in duration-150">
+                        <span className="text-[10px] text-white/50 uppercase font-mono block">
+                          Así se ve el botón en la barra de navegación:
+                        </span>
+                        <div className="bg-[#101013] p-3 rounded-lg border border-white/10 flex items-center justify-between">
+                          <span className="text-[10px] text-white/40 uppercase font-mono">Header Oscuro:</span>
+                          <span className="text-xs font-bold uppercase tracking-wider text-white">
+                            {currentCategory.menuTitle || currentCategory.name}
+                          </span>
+                        </div>
+
+                        <div className="bg-white p-3 rounded-lg border border-stone-200 flex items-center justify-between text-black">
+                          <span className="text-[10px] text-stone-400 uppercase font-mono">Header Blanco (Scroll):</span>
+                          <span className="text-xs font-black uppercase tracking-wider text-black underline underline-offset-4">
+                            {currentCategory.menuTitle || currentCategory.name}
+                          </span>
+                        </div>
+
+                        <div className="bg-[#101013] p-3 rounded-lg border border-white/10 space-y-1">
+                          <span className="text-[10px] text-white/40 uppercase font-mono block">Menú Celular:</span>
+                          <div className="py-2 px-3 bg-white/5 rounded border border-white/10 text-xs font-bold uppercase text-white/90">
+                            {currentCategory.mobileTitle || currentCategory.name}
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

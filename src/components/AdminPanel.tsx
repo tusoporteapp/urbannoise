@@ -2925,7 +2925,15 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
               {/* =================================================== */}
               {activeTab === 'hero-content' && (
                 <div className="space-y-6 animate-in fade-in duration-200">
-                  <SiteContentEditor />
+                  <SiteContentEditor
+                    products={products}
+                    onNavigateToCatalog={(catId) => {
+                      if (catId) {
+                        setSelectedCategory(catId);
+                      }
+                      setActiveTab('catalog');
+                    }}
+                  />
                 </div>
               )}
 
