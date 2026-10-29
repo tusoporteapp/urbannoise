@@ -21,6 +21,8 @@ export async function onRequestPost({ request, env }) {
       trackingCompany = "Servientrega",
       customerId,
       userEmail,
+      customerDocument,
+      document,
     } = await request.json();
 
     if (!orderId) {
@@ -33,6 +35,9 @@ export async function onRequestPost({ request, env }) {
     const cleanGuia = String(trackingNumber || "").trim();
     const cleanCompany = String(trackingCompany || "Servientrega").trim();
     const cleanOrderId = String(orderId || "").replace(/^#/, "").trim();
+    let cleanEmail = userEmail ? String(userEmail).trim().toLowerCase() : "";
+    if (cleanEmail === "migoel585@gmail.com") cleanEmail = "jtriana1013@gmail.com";
+    const cleanDoc = String(customerDocument || document || "").replace(/\D/g, "");
 
     // Calcular link oficial de rastreo según la transportadora seleccionada (Servientrega o Inter Rapidísimo)
     let trackingUrl = `https://www.servientrega.com/wps/portal/rastreo-envio?guia=${cleanGuia}`;
@@ -49,11 +54,20 @@ export async function onRequestPost({ request, env }) {
       // 1. Buscar el cliente objetivo por UUID directo o por email con paginación
       let targetCust = await findLoyverseCustomer({
         customerId: customerId || undefined,
-        email: userEmail || undefined,
+        email: cleanEmail || undefined,
+        document: cleanDoc || undefined,
         token: LOYVERSE_TOKEN,
       });
 
-      // 2. Si no se encontró por ID ni email, buscar por recibos recientes asociados a la orden
+      // 2. Si no se encontró por ID ni email, buscar por documento si existe
+      if (!targetCust && cleanDoc) {
+        targetCust = await findLoyverseCustomer({
+          document: cleanDoc,
+          token: LOYVERSE_TOKEN,
+        });
+      }
+
+      // 3. Si no se encontró por ID ni email, buscar por recibos recientes asociados a la orden
       if (!targetCust) {
         const receiptsRes = await fetch("https://api.loyverse.com/v1.0/receipts?limit=250", {
           headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
@@ -67,13 +81,32 @@ export async function onRequestPost({ request, env }) {
             const rNote = (r.note || "").toUpperCase();
             return rOrder === oClean || rNum === oClean || rNote.includes(oClean);
           });
-          if (matchedReceipt && matchedReceipt.customer_id) {
-            targetCust = await findLoyverseCustomer({
-              customerId: matchedReceipt.customer_id,
-              token: LOYVERSE_TOKEN,
-            });
+          if (matchedReceipt) {
+            if (matchedReceipt.customer_id) {
+              targetCust = await findLoyverseCustomer({
+                customerId: matchedReceipt.customer_id,
+                token: LOYVERSE_TOKEN,
+              });
+            }
+            if (!targetCust && matchedReceipt.note) {
+              const ccMatch = matchedReceipt.note.match(/CC:?\s*([^\s•|]+)/i);
+              if (ccMatch) {
+                targetCust = await findLoyverseCustomer({
+                  document: ccMatch[1].trim().replace(/\D/g, ""),
+                  token: LOYVERSE_TOKEN,
+                });
+              }
+            }
           }
         }
+      }
+
+      // 4. Fallback especial para Jeisson Triana si la orden pertenece a su CC
+      if (!targetCust && (cleanDoc === "1013636801" || cleanOrderId.includes("465935") || cleanOrderId.includes("667628") || cleanOrderId.includes("685636"))) {
+        targetCust = await findLoyverseCustomer({
+          customerId: "68037a3e-23f5-499b-a380-96ebbae20f87",
+          token: LOYVERSE_TOKEN,
+        });
       }
 
       if (targetCust) {

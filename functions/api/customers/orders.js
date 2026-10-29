@@ -40,11 +40,15 @@ export async function onRequestGet({ request, env }) {
     // 2. Filtrar recibos correspondientes al cliente de forma estricta (Zero Cross-Account Leak)
     const emailEscaped = email ? email.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") : null;
     const emailRegex = emailEscaped ? new RegExp(`(?:^|[^a-zA-Z0-9_.+-])${emailEscaped}(?:$|[^a-zA-Z0-9_.+-])`, "i") : null;
+    const targetCc = targetCust?.customer_code ? String(targetCust.customer_code).trim().replace(/\D/g, "") : (doc || "");
     const matchedReceipts = allReceipts.filter((r) => {
       if (verifiedCustId && r.customer_id === verifiedCustId) return true;
 
       const note = r.note || "";
       if (emailRegex && emailRegex.test(note)) return true;
+
+      // Si el recibo tiene el documento C.C. verificado de este cliente
+      if (targetCc && targetCc.length >= 6 && note.includes(targetCc)) return true;
 
       return false;
     });

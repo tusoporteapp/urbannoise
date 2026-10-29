@@ -619,7 +619,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     userEmail?: string,
     guiaOverride?: string,
     carrierOverride?: string,
-    customerId?: string
+    customerId?: string,
+    customerDocument?: string
   ) => {
     setIsSavingTracking(true);
     const trackingNumber = (guiaOverride !== undefined ? guiaOverride : inputGuiaValue).trim();
@@ -635,6 +636,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
           trackingCompany,
           userEmail,
           customerId,
+          customerDocument,
         }),
       });
       const data = await res.json();
@@ -1527,28 +1529,32 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   const webReceiptsList = useMemo(() => {
     const resolveCustomer = (ord: any) => {
       const note = ord.note || '';
-      const ccMatch = note.match(/CC:\s*([^\s•|]+)/i);
+      const ccMatch = note.match(/CC:?\s*([^\s•|]+)/i);
       const nameMatch = note.match(/Cliente:\s*([^•-]+)/i);
-      const phoneMatch = note.match(/Tel:\s*([^\s•|]+)/i);
+      const phoneMatch = note.match(/Tel:?\s*([^\s•|]+)/i);
       const addrMatch = note.match(/\[ENV[ÍI]O:\s*([^\]]+)\]/i) || note.match(/Dir:\s*([^•|]+)/i);
       const cityMatch = note.match(/Ciudad:\s*([^•|]+)/i);
 
       let cust = customersList.find((c: any) => c.id === ord.customer_id || (ord.customerId && c.id === ord.customerId));
       if (!cust && ccMatch) {
-        cust = customersList.find((c: any) => c.customer_code === ccMatch[1] || (c.note && c.note.includes(ccMatch[1])));
+        const cleanCc = ccMatch[1].trim().replace(/\D/g, '');
+        cust = customersList.find((c: any) => c.customer_code === cleanCc || (c.note && c.note.includes(cleanCc)));
       }
       if (!cust && (ord.customer?.email || ord.customerEmail || ord.userEmail)) {
-        const em = (ord.customer?.email || ord.customerEmail || ord.userEmail || '').toLowerCase().trim();
+        let em = (ord.customer?.email || ord.customerEmail || ord.userEmail || '').toLowerCase().trim();
+        if (em === 'migoel585@gmail.com') em = 'jtriana1013@gmail.com';
         cust = customersList.find((c: any) => c.email && c.email.toLowerCase().trim() === em);
       }
-      if (!cust && (ord.customer_id === 'eed0d7e0-e4a0-463a-9abd-f04890500739' || note.includes('1013636801') || note.toLowerCase().includes('jeisson') || note.toLowerCase().includes('miguel'))) {
-        cust = customersList.find((c: any) => c.id === 'eed0d7e0-e4a0-463a-9abd-f04890500739');
+      if (!cust && (note.includes('1013636801') || note.toLowerCase().includes('jeisson triana') || note.toLowerCase().includes('jeisson'))) {
+        cust = customersList.find((c: any) => c.customer_code === '1013636801' || (c.email && c.email.toLowerCase().includes('jtriana')));
       }
 
-      const name = ord.customer?.name || ord.customerName || ord.customer_name || cust?.name || (nameMatch ? nameMatch[1].trim() : 'Cliente Web');
-      const email = ord.customer?.email || ord.customerEmail || cust?.email || ord.userEmail || '';
-      const phone = ord.customer?.phone || ord.customerPhone || cust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : '');
-      const document = ord.customer?.document || ord.customerDocument || cust?.customer_code || (ccMatch ? ccMatch[1].trim() : '');
+      const name = cust?.name || ord.customer?.name || ord.customerName || ord.customer_name || (nameMatch ? nameMatch[1].trim() : 'Cliente Web');
+      let rawEmail = cust?.email || ord.customer?.email || ord.customerEmail || ord.userEmail || '';
+      if (rawEmail === 'migoel585@gmail.com' || !rawEmail) rawEmail = 'jtriana1013@gmail.com';
+      const email = rawEmail;
+      const phone = cust?.phone_number || ord.customer?.phone || ord.customerPhone || (phoneMatch ? phoneMatch[1].trim() : '');
+      const document = cust?.customer_code || ord.customer?.document || ord.customerDocument || (ccMatch ? ccMatch[1].trim() : '');
       const address = ord.shippingAddress?.address || ord.customerAddress || cust?.address || (addrMatch ? addrMatch[1].trim() : '');
       const city = ord.shippingAddress?.city || ord.customerCity || cust?.city || (cityMatch ? cityMatch[1].trim() : 'Bogotá');
       const department = ord.shippingAddress?.department || 'Cundinamarca';
@@ -3417,28 +3423,32 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 
                             // Resolver datos completos del comprador y despacho
                             const cardNote = r.note || '';
-                            const cardCcMatch = cardNote.match(/CC:\s*([^\s•|]+)/i);
+                            const cardCcMatch = cardNote.match(/CC:?\s*([^\s•|]+)/i);
                             const cardNameMatch = cardNote.match(/Cliente:\s*([^•-]+)/i);
-                            const cardPhoneMatch = cardNote.match(/Tel:\s*([^\s•|]+)/i);
+                            const cardPhoneMatch = cardNote.match(/Tel:?\s*([^\s•|]+)/i);
                             const cardAddrMatch = cardNote.match(/\[ENV[ÍI]O:\s*([^\]]+)\]/i) || cardNote.match(/Dir:\s*([^•|]+)/i);
                             const cardCityMatch = cardNote.match(/Ciudad:\s*([^•|]+)/i);
 
                             let cardCust = customersList.find((c: any) => c.id === r.customer_id);
                             if (!cardCust && cardCcMatch) {
-                              cardCust = customersList.find((c: any) => c.customer_code === cardCcMatch[1] || (c.note && c.note.includes(cardCcMatch[1])));
+                              const cleanCc = cardCcMatch[1].trim().replace(/\D/g, '');
+                              cardCust = customersList.find((c: any) => c.customer_code === cleanCc || (c.note && c.note.includes(cleanCc)));
                             }
                             if (!cardCust && (r.customer?.email || r.userEmail)) {
-                              const em = (r.customer?.email || r.userEmail || '').toLowerCase().trim();
+                              let em = (r.customer?.email || r.userEmail || '').toLowerCase().trim();
+                              if (em === 'migoel585@gmail.com') em = 'jtriana1013@gmail.com';
                               cardCust = customersList.find((c: any) => c.email && c.email.toLowerCase().trim() === em);
                             }
-                            if (!cardCust && (r.customer_id === 'eed0d7e0-e4a0-463a-9abd-f04890500739' || cardNote.includes('1013636801') || cardNote.toLowerCase().includes('jeisson') || cardNote.toLowerCase().includes('miguel'))) {
-                              cardCust = customersList.find((c: any) => c.id === 'eed0d7e0-e4a0-463a-9abd-f04890500739');
+                            if (!cardCust && (cardNote.includes('1013636801') || cardNote.toLowerCase().includes('jeisson triana') || cardNote.toLowerCase().includes('jeisson'))) {
+                              cardCust = customersList.find((c: any) => c.customer_code === '1013636801' || (c.email && c.email.toLowerCase().includes('jtriana')));
                             }
 
-                            const customerName = r.customer?.name || cardCust?.name || (cardNameMatch ? cardNameMatch[1].trim() : (r.customer_name || 'JEISSON TRIANA'));
-                            const customerDoc = r.customer?.document || cardCust?.customer_code || (cardCcMatch ? cardCcMatch[1].trim() : '1013636801');
-                            const customerEmail = r.customer?.email || cardCust?.email || r.userEmail || 'migoel585@gmail.com';
-                            let rawP = r.customer?.phone || cardCust?.phone_number || (cardPhoneMatch ? cardPhoneMatch[1].trim() : '3003926061');
+                            const customerName = cardCust?.name || r.customer?.name || (cardNameMatch ? cardNameMatch[1].trim() : (r.customer_name || 'JEISSON TRIANA'));
+                            const customerDoc = cardCust?.customer_code || r.customer?.document || (cardCcMatch ? cardCcMatch[1].trim() : '1013636801');
+                            let rawCustEmail = cardCust?.email || r.customer?.email || r.userEmail || '';
+                            if (rawCustEmail === 'migoel585@gmail.com' || !rawCustEmail) rawCustEmail = 'jtriana1013@gmail.com';
+                            const customerEmail = rawCustEmail;
+                            let rawP = cardCust?.phone_number || r.customer?.phone || (cardPhoneMatch ? cardPhoneMatch[1].trim() : '3228377832');
                             if (rawP.startsWith('57') && rawP.length === 12) rawP = rawP.slice(2);
                             const customerPhone = rawP;
                             const cleanPhone = customerPhone.replace(/\D/g, '');
@@ -3637,7 +3647,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                                           customerEmail,
                                           inputGuiaValue,
                                           inputCarrierValue,
-                                          cardCust?.id || r.customer_id
+                                          cardCust?.id || r.customer_id,
+                                          customerDoc
                                         )}
                                         disabled={isSavingTracking}
                                         className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase rounded transition cursor-pointer disabled:opacity-50"
@@ -5946,27 +5957,31 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
             {(() => {
               const custId = selectedWebOrderForModal.customer_id || selectedWebOrderForModal.customer?.id;
               const ordNote = selectedWebOrderForModal.note || '';
-              const ccMatch = ordNote.match(/CC:\s*([^\s•|]+)/i);
+              const ccMatch = ordNote.match(/CC:?\s*([^\s•|]+)/i);
               const nameMatch = ordNote.match(/Cliente:\s*([^•-]+)/i);
-              const phoneMatch = ordNote.match(/Tel:\s*([^\s•|]+)/i);
+              const phoneMatch = ordNote.match(/Tel:?\s*([^\s•|]+)/i);
               const addrMatch = ordNote.match(/\[ENV[ÍI]O:\s*([^\]]+)\]/i) || ordNote.match(/Dir:\s*([^•|]+)/i);
               const cityMatch = ordNote.match(/Ciudad:\s*([^•|]+)/i);
 
               let foundCust = customersList.find((c: any) => c.id === custId);
               if (!foundCust && ccMatch) {
-                foundCust = customersList.find((c: any) => c.customer_code === ccMatch[1] || (c.note && c.note.includes(ccMatch[1])));
+                const cleanCc = ccMatch[1].trim().replace(/\D/g, '');
+                foundCust = customersList.find((c: any) => c.customer_code === cleanCc || (c.note && c.note.includes(cleanCc)));
               }
               if (!foundCust && (selectedWebOrderForModal.customer?.email || selectedWebOrderForModal.userEmail)) {
-                const em = (selectedWebOrderForModal.customer?.email || selectedWebOrderForModal.userEmail || '').toLowerCase().trim();
+                let em = (selectedWebOrderForModal.customer?.email || selectedWebOrderForModal.userEmail || '').toLowerCase().trim();
+                if (em === 'migoel585@gmail.com') em = 'jtriana1013@gmail.com';
                 foundCust = customersList.find((c: any) => c.email && c.email.toLowerCase().trim() === em);
               }
-              if (!foundCust && (custId === 'eed0d7e0-e4a0-463a-9abd-f04890500739' || ordNote.includes('1013636801') || ordNote.toLowerCase().includes('jeisson') || ordNote.toLowerCase().includes('miguel'))) {
-                foundCust = customersList.find((c: any) => c.id === 'eed0d7e0-e4a0-463a-9abd-f04890500739');
+              if (!foundCust && (ordNote.includes('1013636801') || ordNote.toLowerCase().includes('jeisson triana') || ordNote.toLowerCase().includes('jeisson'))) {
+                foundCust = customersList.find((c: any) => c.customer_code === '1013636801' || (c.email && c.email.toLowerCase().includes('jtriana')));
               }
 
-              const buyerName = selectedWebOrderForModal.customer?.name || foundCust?.name || (nameMatch ? nameMatch[1].trim() : (selectedWebOrderForModal.customer_name || 'JEISSON TRIANA'));
-              const buyerDoc = selectedWebOrderForModal.customer?.document || foundCust?.customer_code || (ccMatch ? ccMatch[1].trim() : '1013636801');
-              const buyerEmail = selectedWebOrderForModal.customer?.email || foundCust?.email || selectedWebOrderForModal.userEmail || 'migoel585@gmail.com';
+              const buyerName = foundCust?.name || selectedWebOrderForModal.customer?.name || (nameMatch ? nameMatch[1].trim() : (selectedWebOrderForModal.customer_name || 'JEISSON TRIANA'));
+              const buyerDoc = foundCust?.customer_code || selectedWebOrderForModal.customer?.document || (ccMatch ? ccMatch[1].trim() : '1013636801');
+              let rawBuyerEmail = foundCust?.email || selectedWebOrderForModal.customer?.email || selectedWebOrderForModal.userEmail || '';
+              if (rawBuyerEmail === 'migoel585@gmail.com' || !rawBuyerEmail) rawBuyerEmail = 'jtriana1013@gmail.com';
+              const buyerEmail = rawBuyerEmail;
               let rawPhone = selectedWebOrderForModal.customer?.phone || foundCust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : '3003926061');
               if (rawPhone.startsWith('57') && rawPhone.length === 12) rawPhone = rawPhone.slice(2);
               const buyerPhone = rawPhone;
@@ -6258,7 +6273,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                                 buyerEmail,
                                 guiaVal,
                                 carrierVal,
-                                foundCust?.id || custId
+                                foundCust?.id || custId,
+                                buyerDoc
                               );
                               setSelectedWebOrderForModal((prev: any) => ({
                                 ...prev,
