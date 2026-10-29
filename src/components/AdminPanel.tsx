@@ -350,16 +350,28 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   const [isExecutingApi, setIsExecutingApi] = useState<boolean>(false);
   const [copiedResponse, setCopiedResponse] = useState<boolean>(false);
 
-  // Cargar estado inicial al abrir
+  // Cargar estado inicial al abrir y al autenticarse en el CMS
   useEffect(() => {
     if (isOpen) {
-      setAuthenticated(isAdminAuthenticated());
+      const isAuth = isAdminAuthenticated();
+      setAuthenticated(isAuth);
+      fetchLoyverseStatus();
+      fetchBoldConfig();
+      if (isAuth) {
+        fetchRecentOrders();
+        loadAllLoyverseData();
+      }
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen && authenticated) {
       fetchLoyverseStatus();
       fetchBoldConfig();
       fetchRecentOrders();
       loadAllLoyverseData();
     }
-  }, [isOpen]);
+  }, [isOpen, authenticated]);
 
   useEffect(() => {
     if (isOpen && activeTab === 'discounts') {
@@ -451,6 +463,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 
   const loadAllLoyverseData = async () => {
     // Carga de recursos esenciales
+    fetchRecentOrders();
     fetchLoyverseReceipts()
       .then((data) => setReceiptsList(data.receipts || []))
       .catch(() => {});
@@ -569,6 +582,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         setAuthenticated(true);
         setAdminPassword('');
         setAuthError('');
+        // Carga inmediata de todos los pedidos, recibos, clientes y métricas al iniciar sesión
+        fetchLoyverseStatus();
+        fetchBoldConfig();
+        fetchRecentOrders();
+        loadAllLoyverseData();
       } else {
         setAuthError(res.error || 'Correo o contraseña de administrador no válidos.');
       }
@@ -585,6 +603,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     setAdminEmail('');
     setAdminPassword('');
     setAuthError('');
+    setReceiptsList([]);
+    setRecentOrdersList([]);
+    setCustomersList([]);
     if (onLogout) {
       onLogout();
     } else {
