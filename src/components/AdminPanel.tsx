@@ -3993,16 +3993,15 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                           })
                           .map((c, idx) => {
                             const isWebCustomer =
-                              Boolean(c.email) ||
                               (c.customer_code && c.customer_code.toUpperCase().startsWith('WEB')) ||
                               (c.note && (
-                                c.note.toLowerCase().includes('web') ||
+                                c.note.toLowerCase().includes('cliente web') ||
+                                c.note.toLowerCase().includes('urbannoise web') ||
                                 c.note.toLowerCase().includes('[g:') ||
                                 c.note.toLowerCase().includes('|o:') ||
-                                c.note.toLowerCase().includes('un-') ||
-                                c.note.toLowerCase().includes('orden') ||
-                                c.note.toLowerCase().includes('bld-')
-                              ));
+                                c.note.toLowerCase().includes('un-')
+                              )) ||
+                              (c.email && c.email.toLowerCase() === 'migocreativo.com@gmail.com');
 
                             return (
                               <div key={c.id || idx} className="p-4 hover:bg-white/5 transition flex flex-col md:flex-row md:items-center justify-between gap-3">

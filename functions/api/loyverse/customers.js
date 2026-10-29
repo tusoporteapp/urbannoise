@@ -22,26 +22,21 @@ export async function onRequestGet({ request, env }) {
     // Obtener todos los clientes de Loyverse paginando
     const allCustomers = await getAllLoyverseCustomers(LOYVERSE_TOKEN, 8);
 
-    // Identificar clientes registrados a través de la página web o con órdenes web
+    // Filtrar estrictamente SOLO clientes registrados a través de la página web de URBANNOISE
     const isWebCustomer = (c) => {
-      const email = (c.email || "").trim().toLowerCase();
       const note = (c.note || "").toLowerCase();
       const code = (c.customer_code || "").toUpperCase();
 
       return (
-        Boolean(email) ||
         code.startsWith("WEB-") ||
         note.includes("cliente web") ||
-        note.includes("catálogo mayorista web") ||
-        note.includes("web") ||
-        note.includes("[g:") ||
-        note.includes("|o:") ||
+        note.includes("urbannoise web") ||
         note.includes("un-") ||
-        note.includes("orden") ||
-        note.includes("bld-") ||
-        note.includes("bold") ||
+        note.includes("|o:") ||
+        note.includes("[g:") ||
         note.includes("[pw_web:") ||
-        c.id === "eed0d7e0-e4a0-463a-9abd-f04890500739" ||
+        note.includes("[web]") ||
+        (c.email && c.email.toLowerCase() === "migocreativo.com@gmail.com") ||
         c.id === "7a0cc03a-f658-4b2a-a6d6-86f010205b0b"
       );
     };

@@ -33,7 +33,7 @@ export async function onRequestPost({ request, env }) {
           ? existing.customer_code
           : "");
 
-      // Nota 100% limpia sin contraseñas: preserva solo tags logísticos de órdenes y guías [G:..|E:..|O:..]
+      // Nota limpia con marca inequívoca de registro web y tags logísticos de órdenes [G:..|O:..]
       const buildNote = (baseNote = "") => {
         const tagRegex = /\[(?:GUIA|G):\s*([^\|\]]+?)(?:\|\s*(?:EMPRESA|E):\s*([^\|\]]+?))?(?:\|\s*(?:ORDEN|O):\s*([^\|\]]+?))?\]/gi;
         const orderTags = [];
@@ -48,17 +48,10 @@ export async function onRequestPost({ request, env }) {
           }
         }
 
-        let finalNote = orderTags.join(" | ");
-        // Límite estricto de 250 caracteres de Loyverse POS
+        const webTag = "Cliente Web URBANNOISE";
+        let finalNote = orderTags.length > 0 ? `${webTag} • ${orderTags.join(" | ")}` : webTag;
         if (finalNote.length > 250) {
-          const parts = [];
-          for (let i = orderTags.length - 1; i >= 0; i--) {
-            const candidate = (parts.length > 0 ? parts.join(" | ") + " | " : "") + orderTags[i];
-            if (candidate.length <= 250) {
-              parts.push(orderTags[i]);
-            }
-          }
-          finalNote = parts.join(" | ");
+          finalNote = finalNote.slice(0, 250);
         }
         return finalNote;
       };
