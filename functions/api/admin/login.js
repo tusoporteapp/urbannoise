@@ -75,14 +75,12 @@ export async function onRequestPost({ request, env }) {
     );
   } catch (err) {
     return new Response(
-      JSON.stringify({ success: false, error: "Error interno al autenticar administrador." }),
+      JSON.stringify({
+        success: false,
+        error: "Error interno al autenticar administrador.",
+        details: err?.message || String(err),
+      }),
       {
-        status: 500,
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-      }
-    );
-  }
-}
         status: 500,
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       }
