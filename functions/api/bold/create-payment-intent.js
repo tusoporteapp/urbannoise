@@ -1,5 +1,5 @@
 import { setPendingOrder } from "../_pendingOrders.js";
-import { findLoyverseCustomer, saveOrUpdateLoyverseCustomer, cleanColombianPhone, LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
+import { LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
 
 export async function onRequestPost(context) {
   const { request, env } = context;
@@ -67,43 +67,6 @@ export async function onRequestPost(context) {
     };
 
     setPendingOrder(orderId, pendingPayload);
-
-    // Pre-asegurar el cliente en Loyverse CRM en segundo plano sin pausar ni retrasar el pago del cliente
-    if (customer?.email) {
-      const crmPromise = (async () => {
-        try {
-          const cleanEmail = (customer.email || "").trim().toLowerCase();
-          const cleanPhone = cleanColombianPhone(customer.phone);
-          const cleanDoc = (customer.document || "").trim().replace(/\D/g, "");
-
-          const existing = await findLoyverseCustomer({
-            email: cleanEmail,
-            token: LOYVERSE_TOKEN,
-          });
-
-          if (!existing && customer.name) {
-            await saveOrUpdateLoyverseCustomer(
-              {
-                name: (customer.name || "Cliente Web").trim().toUpperCase(),
-                email: cleanEmail,
-                phone_number: cleanPhone || undefined,
-                customer_code: cleanDoc || `WEB-${Date.now().toString().slice(-6)}`,
-                address: customer.address || shippingAddress.address || undefined,
-                city: customer.city || shippingAddress.city || "Bogotá",
-                note: `Cliente Web URBANNOISE • Intención de Compra #${orderId}`,
-              },
-              LOYVERSE_TOKEN
-            );
-          }
-        } catch (crmErr) {
-          console.warn("[CRM Pre-registro Aviso]:", crmErr.message);
-        }
-      })();
-
-      if (typeof context?.waitUntil === "function") {
-        context.waitUntil(crmPromise);
-      }
-    }
 
     return new Response(
       JSON.stringify({

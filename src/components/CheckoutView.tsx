@@ -1134,18 +1134,6 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
     };
     saveCustomerSession(localUser as any);
 
-    // Enviar registro al CRM en segundo plano sin pausar ni congelar la pantalla de pago
-    registerWebCustomer({
-      name: fullName,
-      email: targetEmail,
-      phone: cleanPhone,
-      city: city || 'Bogotá, D.C.',
-      address: `${address} ${apartment}`.trim(),
-      document: cleanDoc,
-    }).catch((err) => {
-      console.warn('[CRM Sync Background]:', err);
-    });
-
     // Proceder de inmediato al cobro oficial con pasarela Bold.co
     await executeBoldPaymentFlow();
   };
