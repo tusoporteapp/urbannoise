@@ -14,13 +14,10 @@ export async function onRequestPost({ request, env }) {
     const cleanInput = emailOrPhone.trim().toLowerCase();
     const cleanDigits = emailOrPhone.trim().replace(/\D/g, "");
 
-    // Buscar en Loyverse mediante búsqueda paginada y directa
-    const foundCustomer = await findLoyverseCustomer({
-      email: cleanInput.includes("@") ? cleanInput : undefined,
-      phone: cleanDigits.length >= 7 ? cleanDigits : undefined,
-      document: !cleanInput.includes("@") && cleanDigits.length >= 6 ? cleanDigits : undefined,
-      token: LOYVERSE_TOKEN,
-    });
+    // Buscar en Loyverse de forma estricta para evitar colisiones
+    const foundCustomer = cleanInput.includes("@")
+      ? await findLoyverseCustomer({ email: cleanInput, token: LOYVERSE_TOKEN })
+      : await findLoyverseCustomer({ phone: cleanDigits, token: LOYVERSE_TOKEN });
 
     if (!foundCustomer) {
       return new Response(JSON.stringify({ error: "Usuario no encontrado en la base de clientes" }), {

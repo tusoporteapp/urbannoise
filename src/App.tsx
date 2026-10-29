@@ -40,7 +40,7 @@ import {
 } from './lib/loyverse';
 import { trackEvent } from './lib/analytics';
 import { loadSiteContentFromRemote, getStoredSiteContent, getHomeBlocks, getFeaturedSkus } from './lib/siteContent';
-import { verifyBoldReturnRedirect } from './lib/bold';
+import { verifyBoldReturnRedirect, getPendingCheckout } from './lib/bold';
 import { HomeBlockItem } from './types';
 
 export default function App() {
@@ -114,11 +114,25 @@ export default function App() {
     return () => window.removeEventListener('urbannoise_lock_gate', handleLock);
   }, []);
 
-  // Detectar retorno de pago desde Bold.co para abrir comprobante
+  // Detectar retorno de pago desde Bold.co o recuperación anti-F5 para abrir comprobante
   useEffect(() => {
     const returnCheck = verifyBoldReturnRedirect();
     if (returnCheck.isReturningFromBold) {
       setIsCheckoutOpen(true);
+      return;
+    }
+
+    // Comprobación anti-F5: Si un cliente recargó en pagos Nequi o PSE y la orden ya fue aprobada
+    const pending = getPendingCheckout();
+    if (pending && pending.orderId) {
+      fetch(`/api/bold/order-status?orderId=${encodeURIComponent(pending.orderId)}`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((res) => {
+          if (res && res.status === 'APPROVED' && res.paid) {
+            setIsCheckoutOpen(true);
+          }
+        })
+        .catch(() => {});
     }
   }, []);
 

@@ -28,11 +28,9 @@ export async function onRequestPost({ request, env }) {
     let loyverseCustomer = null;
 
     try {
-      // 1. Buscar si ya existe en Loyverse POS por correo, teléfono o cédula mediante búsqueda paginada
+      // 1. Buscar si ya existe en Loyverse POS estrictamente por correo para evitar colisión entre usuarios
       const existing = await findLoyverseCustomer({
         email: cleanEmail,
-        phone: cleanPhone,
-        document: cleanDocument,
         token: LOYVERSE_TOKEN,
       });
 

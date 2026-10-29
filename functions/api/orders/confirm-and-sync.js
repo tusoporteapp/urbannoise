@@ -27,9 +27,56 @@ export async function onRequestPost({ request, env }) {
     const itemsTotal = (items || []).reduce((acc, it) => acc + (Number(it.price) || 0) * (Number(it.qty) || 1), 0);
     const orderAmount = Number(totals?.total ?? body.total ?? body.total_money ?? amount ?? (itemsTotal > 0 ? itemsTotal : 0));
 
+    // 0. Idempotencia: Verificar si ya existe un recibo oficial en Loyverse para este orderId
+    try {
+      const checkRes = await fetch("https://api.loyverse.com/v1.0/receipts?limit=50", {
+        headers: { Authorization: `Bearer ${LOYVERSE_TOKEN}` },
+      });
+      if (checkRes.ok) {
+        const checkData = await checkRes.json();
+        const existingReceipt = (checkData.receipts || []).find((r) => {
+          const ord = (r.order || "").trim().toUpperCase();
+          const note = (r.note || "").toUpperCase();
+          const targetOrd = orderId.trim().toUpperCase();
+          return ord === targetOrd || ord.includes(targetOrd) || note.includes(targetOrd);
+        });
+
+        if (existingReceipt) {
+          console.log(`[Idempotencia] Orden ${orderId} ya tiene recibo en Loyverse: ${existingReceipt.receipt_number}`);
+          return new Response(
+            JSON.stringify({
+              success: true,
+              orderId,
+              boldTransaction: boldTransaction || {
+                orderId,
+                status: "APROBADA",
+                amount: orderAmount,
+              },
+              loyverseReceipt: {
+                id: existingReceipt.id,
+                receipt_number: existingReceipt.receipt_number,
+                created_at: existingReceipt.created_at,
+                total_money: existingReceipt.total_money,
+                syncedToPos: true,
+              },
+              loyverseSyncStatus: "SUCCESS",
+              inventoryDeducted: true,
+              deductedStockInfo: [],
+            }),
+            {
+              status: 200,
+              headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+            }
+          );
+        }
+      }
+    } catch (checkErr) {
+      console.warn("[Idempotencia Check Warning]:", checkErr);
+    }
+
     let customerId = customer?.loyverseCustomerId || null;
 
-    // 1. Vincular o crear cliente en Loyverse CRM con búsqueda paginada robusta
+    // 1. Vincular o crear cliente en Loyverse CRM estrictamente por correo
     if (!customerId && (customer?.email || customer?.phone)) {
       try {
         const cleanEmail = (customer.email || "").trim().toLowerCase();
@@ -38,8 +85,6 @@ export async function onRequestPost({ request, env }) {
 
         const existing = await findLoyverseCustomer({
           email: cleanEmail,
-          phone: cleanPhone,
-          document: cleanDoc,
           token: LOYVERSE_TOKEN,
         });
 

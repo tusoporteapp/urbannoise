@@ -283,8 +283,44 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
           window.history.replaceState(null, '', window.location.pathname);
         } catch {}
       }
+
+      // Recuperación Automática Anti-F5: Si el usuario recargó durante el pago en Nequi/PSE
+      const pending = getPendingCheckout();
+      if (pending && pending.orderId && !orderComplete) {
+        fetch(`/api/bold/order-status?orderId=${encodeURIComponent(pending.orderId)}`)
+          .then((r) => (r.ok ? r.json() : null))
+          .then((res) => {
+            if (res && res.status === 'APPROVED' && res.paid) {
+              console.log('[Recovery Anti-F5] Pago aprobado detectado en servidor:', pending.orderId);
+              completeReturningOrder(pending, pending.orderId);
+            }
+          })
+          .catch(() => {});
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, orderComplete]);
+
+  // Sondeo Activo de Pago Asíncrono (Nequi / PSE):
+  // Mientras haya una orden pendiente y no esté completa, verificar con el servidor cada 3.5 segundos
+  React.useEffect(() => {
+    const pending = getPendingCheckout();
+    if (!pending?.orderId || orderComplete) return;
+
+    const interval = setInterval(() => {
+      fetch(`/api/bold/order-status?orderId=${encodeURIComponent(pending.orderId)}`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((res) => {
+          if (res && res.status === 'APPROVED' && res.paid) {
+            clearInterval(interval);
+            console.log('[Sondeo Nequi/PSE] ¡Pago Aprobado en Servidor! Completando orden...');
+            completeReturningOrder(pending, pending.orderId);
+          }
+        })
+        .catch(() => {});
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [orderComplete]);
 
   // Escuchar eventos en vivo del modal embebido de Bold.co
   React.useEffect(() => {
@@ -747,12 +783,13 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
         orderId: generatedId,
         amount: total,
         currency: 'COP',
-        customer: {
-          name: `${firstName} ${lastName}`.trim() || 'Cliente URBANNOISE',
-          email: emailOrPhone.includes('@') ? emailOrPhone : `${phone || 'cliente'}@urbannoise.co`,
-          phone: phone || '',
-          document: documentId || '1028394829',
-        },
+        customer: orderPayload.customer,
+        items: orderPayload.items,
+        totals: orderPayload.totals,
+        shippingAddress: orderPayload.shippingAddress,
+        shippingCarrier: orderPayload.shippingCarrier,
+        shippingMethod: orderPayload.shippingMethod,
+        paymentMethod: orderPayload.paymentMethod,
         description: `Pedido URBANNOISE #${generatedId}`,
         redirectionUrl: `${window.location.origin}${window.location.pathname}?bold-order-id=${generatedId}`,
       });

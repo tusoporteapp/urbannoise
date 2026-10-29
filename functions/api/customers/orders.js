@@ -16,13 +16,12 @@ export async function onRequestGet({ request, env }) {
 
     const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
 
-    // 1. Obtener datos del cliente de Loyverse (O(1) por UUID o búsqueda paginada)
+    // 1. Obtener datos del cliente de Loyverse de forma estricta por correo o ID
     // y obtener los recibos de venta recientes en paralelo
     const [targetCust, receiptsRes] = await Promise.all([
       findLoyverseCustomer({
         customerId: customerId || undefined,
         email: email || undefined,
-        document: doc || undefined,
         token: LOYVERSE_TOKEN,
       }),
       fetch("https://api.loyverse.com/v1.0/receipts?limit=250", {
@@ -36,15 +35,14 @@ export async function onRequestGet({ request, env }) {
       allReceipts = data.receipts || [];
     }
 
-    const targetCustId = targetCust?.id || customerId;
+    const verifiedCustId = targetCust?.id || null;
 
-    // 2. Filtrar recibos correspondientes al cliente
+    // 2. Filtrar recibos correspondientes al cliente de forma estricta (Zero Cross-Account Leak)
     const matchedReceipts = allReceipts.filter((r) => {
-      if (targetCustId && r.customer_id === targetCustId) return true;
+      if (verifiedCustId && r.customer_id === verifiedCustId) return true;
 
       const note = (r.note || "").toLowerCase();
       if (email && note.includes(email)) return true;
-      if (doc && doc.length >= 4 && note.includes(doc)) return true;
 
       return false;
     });

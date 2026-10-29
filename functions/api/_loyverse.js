@@ -62,7 +62,11 @@ export async function findLoyverseCustomer({ customerId, email, phone, document,
 
       const found = customers.find((c) => {
         if (customerId && c.id === customerId) return true;
-        if (cleanEmail && c.email && c.email.toLowerCase() === cleanEmail) return true;
+        // Aislamiento Estricto: Si se proporciona correo, solo coincidir con ese correo exacto
+        if (cleanEmail) {
+          return Boolean(c.email && c.email.toLowerCase() === cleanEmail);
+        }
+        // Búsqueda secundaria (solo cuando no se especificó correo)
         if (cleanPhone && c.phone_number) {
           const cPhone = cleanColombianPhone(c.phone_number);
           if (cPhone && cPhone.endsWith(cleanPhone.slice(-10))) return true;

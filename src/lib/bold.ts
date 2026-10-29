@@ -142,7 +142,14 @@ export async function createBoldPaymentIntent(params: {
     email?: string;
     phone?: string;
     document?: string;
+    loyverseCustomerId?: string;
   };
+  items?: any[];
+  totals?: any;
+  shippingAddress?: any;
+  shippingCarrier?: string;
+  shippingMethod?: string;
+  paymentMethod?: string;
   description?: string;
   redirectionUrl?: string;
 }) {
