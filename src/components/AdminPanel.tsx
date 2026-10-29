@@ -1499,24 +1499,24 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
       const addrMatch = note.match(/\[ENV[ÍI]O:\s*([^\]]+)\]/i) || note.match(/Dir:\s*([^•|]+)/i);
       const cityMatch = note.match(/Ciudad:\s*([^•|]+)/i);
 
-      let cust = customersList.find((c: any) => c.id === ord.customer_id);
+      let cust = customersList.find((c: any) => c.id === ord.customer_id || (ord.customerId && c.id === ord.customerId));
       if (!cust && ccMatch) {
         cust = customersList.find((c: any) => c.customer_code === ccMatch[1] || (c.note && c.note.includes(ccMatch[1])));
       }
-      if (!cust && (ord.customer?.email || ord.userEmail)) {
-        const em = (ord.customer?.email || ord.userEmail || '').toLowerCase().trim();
+      if (!cust && (ord.customer?.email || ord.customerEmail || ord.userEmail)) {
+        const em = (ord.customer?.email || ord.customerEmail || ord.userEmail || '').toLowerCase().trim();
         cust = customersList.find((c: any) => c.email && c.email.toLowerCase().trim() === em);
       }
       if (!cust && (ord.customer_id === 'eed0d7e0-e4a0-463a-9abd-f04890500739' || note.includes('1013636801') || note.toLowerCase().includes('jeisson') || note.toLowerCase().includes('miguel'))) {
         cust = customersList.find((c: any) => c.id === 'eed0d7e0-e4a0-463a-9abd-f04890500739');
       }
 
-      const name = ord.customer?.name || cust?.name || (nameMatch ? nameMatch[1].trim() : 'JEISSON TRIANA');
-      const email = ord.customer?.email || cust?.email || ord.userEmail || 'migoel585@gmail.com';
-      const phone = ord.customer?.phone || cust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : '3003926061');
-      const document = ord.customer?.document || cust?.customer_code || (ccMatch ? ccMatch[1].trim() : '1013636801');
-      const address = ord.shippingAddress?.address || cust?.address || (addrMatch ? addrMatch[1].trim() : 'cl 2 sur 11 c 45');
-      const city = ord.shippingAddress?.city || cust?.city || (cityMatch ? cityMatch[1].trim() : 'Bogota');
+      const name = ord.customer?.name || ord.customerName || ord.customer_name || cust?.name || (nameMatch ? nameMatch[1].trim() : 'Cliente Web');
+      const email = ord.customer?.email || ord.customerEmail || cust?.email || ord.userEmail || '';
+      const phone = ord.customer?.phone || ord.customerPhone || cust?.phone_number || (phoneMatch ? phoneMatch[1].trim() : '');
+      const document = ord.customer?.document || ord.customerDocument || cust?.customer_code || (ccMatch ? ccMatch[1].trim() : '');
+      const address = ord.shippingAddress?.address || ord.customerAddress || cust?.address || (addrMatch ? addrMatch[1].trim() : '');
+      const city = ord.shippingAddress?.city || ord.customerCity || cust?.city || (cityMatch ? cityMatch[1].trim() : 'Bogotá');
       const department = ord.shippingAddress?.department || 'Cundinamarca';
 
       const custNote = cust?.note || '';
@@ -1621,6 +1621,14 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
       }));
 
       const resolved = resolveCustomer(ord);
+      const totalAmount = Number(
+        ord.total_money ??
+        ord.total ??
+        ord.amount ??
+        ord.totals?.total ??
+        itemsList.reduce((acc: number, curr: any) => acc + (Number(curr.total) || 0), 0)
+      );
+      const resolvedCreatedAt = ord.createdAt || ord.created_at || (ord.timestamp ? new Date(ord.timestamp).toISOString() : new Date().toISOString());
 
       return {
         ...ord,
@@ -1628,10 +1636,12 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         isWeb: true,
         channel: 'Tienda Web',
         orderId: ord.orderId || ord.id,
-        receipt_number: ord.loyverseReceipt?.receipt_number || ord.receipt_number || (ord.orderId ? `#WEB-${ord.orderId}` : undefined),
-        total_money: Number(ord.totals?.total || ord.amount || ord.total_money || 0),
+        receipt_number: ord.loyverseReceipt?.receipt_number || ord.receipt_number || ord.receiptNumber || (ord.orderId ? `#WEB-${ord.orderId}` : undefined),
+        total_money: totalAmount,
+        total: totalAmount,
+        amount: totalAmount,
         payment_type: ord.paymentMethod || ord.payments?.[0]?.name || 'Pasarela Bold / Web',
-        created_at: ord.createdAt || ord.created_at,
+        created_at: resolvedCreatedAt,
         items: itemsList,
       };
     });
@@ -1697,17 +1707,31 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   // Lista unificada completa de todas las ventas (Web + Punto Físico POS)
   const allSalesList = useMemo(() => {
     // 1. Órdenes emitidas directamente por la web
-    const webOrders = recentOrdersList.map((ord: any) => ({
-      ...ord,
-      isWeb: true,
-      channel: 'Tienda Web',
-      receipt_number: ord.loyverseReceipt?.receipt_number || (ord.orderId ? `#WEB-${ord.orderId}` : '#WEB'),
-      customer_name: ord.customer?.name || 'Cliente Web',
-      total_money: Number(ord.totals?.total || ord.amount || 0),
-      payment_type: ord.paymentMethod || 'Pasarela Bold / Web',
-      created_at: ord.createdAt || ord.created_at || new Date().toISOString(),
-      status: ord.loyverseSyncStatus === 'SUCCESS' ? 'Sincronizado' : 'Confirmado',
-    }));
+    const webOrders = recentOrdersList.map((ord: any) => {
+      const totalAmount = Number(
+        ord.total_money ??
+        ord.total ??
+        ord.amount ??
+        ord.totals?.total ??
+        (ord.items || []).reduce((acc: number, curr: any) => acc + (Number(curr.total || curr.price) || 0), 0)
+      );
+      const custName = ord.customerName || ord.customer?.name || ord.customer_name || 'Cliente Web';
+      const resolvedCreatedAt = ord.createdAt || ord.created_at || (ord.timestamp ? new Date(ord.timestamp).toISOString() : new Date().toISOString());
+
+      return {
+        ...ord,
+        isWeb: true,
+        channel: 'Tienda Web',
+        receipt_number: ord.loyverseReceipt?.receipt_number || ord.receipt_number || ord.receiptNumber || (ord.orderId ? `#WEB-${ord.orderId}` : '#WEB'),
+        customer_name: custName,
+        total_money: totalAmount,
+        total: totalAmount,
+        amount: totalAmount,
+        payment_type: ord.paymentMethod || 'Pasarela Bold / Web',
+        created_at: resolvedCreatedAt,
+        status: ord.loyverseSyncStatus === 'SUCCESS' ? 'Sincronizado' : 'Confirmado',
+      };
+    });
 
     // 2. Todos los recibos de Loyverse POS
     const posReceipts = receiptsList.map((r: any) => {
@@ -1764,7 +1788,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     const totalOrders = webSalesOnly.length;
 
     for (const item of webSalesOnly) {
-      const amount = Number(item.total_money || 0);
+      const amount = Number(item.total_money ?? item.total ?? item.amount ?? 0);
       totalSales += amount;
 
       const d = new Date(item.created_at);
@@ -1841,10 +1865,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
       : filteredByPeriod;
 
     // Métricas del período
-    const periodTotal = filteredByPeriod.reduce((acc, i) => acc + (Number(i.total_money) || 0), 0);
+    const periodTotal = filteredByPeriod.reduce((acc, i) => acc + (Number(i.total_money ?? i.total ?? 0) || 0), 0);
     const periodOrdersCount = filteredByPeriod.length;
     const periodAvgTicket = periodOrdersCount > 0 ? Math.round(periodTotal / periodOrdersCount) : 0;
-    const periodMaxSale = filteredByPeriod.reduce((max, i) => Math.max(max, Number(i.total_money) || 0), 0);
+    const periodMaxSale = filteredByPeriod.reduce((max, i) => Math.max(max, Number(i.total_money ?? i.total ?? 0) || 0), 0);
 
     // Datos para el gráfico de barras según el período
     let chartBars: { label: string; fullLabel: string; total: number; count: number }[] = [];
@@ -1856,7 +1880,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
           const d = new Date(item.created_at);
           return !isNaN(d.getTime()) && d.getFullYear() === salesReportYear && d.getMonth() === idx;
         });
-        const total = monthItems.reduce((acc, i) => acc + (Number(i.total_money) || 0), 0);
+        const total = monthItems.reduce((acc, i) => acc + (Number(i.total_money ?? i.total ?? 0) || 0), 0);
         return {
           label,
           fullLabel: `${MONTH_NAMES[idx]} ${salesReportYear}`,
@@ -1873,7 +1897,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
           const d = new Date(item.created_at);
           return !isNaN(d.getTime()) && d.toISOString().slice(0, 10) === dayStr;
         });
-        const total = dayItems.reduce((acc, i) => acc + (Number(i.total_money) || 0), 0);
+        const total = dayItems.reduce((acc, i) => acc + (Number(i.total_money ?? i.total ?? 0) || 0), 0);
         return {
           label: `${dayNum}`,
           fullLabel: `${dayNum} de ${MONTH_NAMES[salesReportMonth]}`,
@@ -1898,7 +1922,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
           const hr = d.getHours();
           return hr >= h.start && hr < h.end;
         });
-        const total = hourItems.reduce((acc, i) => acc + (Number(i.total_money) || 0), 0);
+        const total = hourItems.reduce((acc, i) => acc + (Number(i.total_money ?? i.total ?? 0) || 0), 0);
         return {
           label: h.label,
           fullLabel: `Franja ${h.label}`,
@@ -2508,16 +2532,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                               </span>
                               <div>
                                 <p className="text-white/80 font-medium">
-                                  {item.customer?.name || item.customer_name || 'Cliente Web'}
+                                  {item.customer?.name || item.customerName || item.customer_name || 'Cliente Web'}
                                 </p>
                                 <span className="text-[10px] text-white/50">
-                                  {item.created_at ? new Date(item.created_at).toLocaleString('es-CO') : 'Reciente'}
+                                  {item.created_at ? new Date(item.created_at).toLocaleString('es-CO', {
+                                    day: '2-digit',
+                                    month: 'short',
+                                    year: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                  }) : (item.date || 'Reciente')}
                                 </span>
                               </div>
                             </div>
                             <div className="text-right">
                               <span className="font-bold font-mono text-emerald-400">
-                                {formatCOP(item.total_money || item.totals?.total || 0)}
+                                {formatCOP(item.total_money || item.total || item.amount || item.totals?.total || 0)}
                               </span>
                               <span className="block text-[9.5px] text-white/50 uppercase">
                                 {item.paymentMethod || item.payment_type || 'Web / Pasarela'}
@@ -3228,7 +3258,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                                   <div className="flex items-center gap-3">
                                     <div className="text-right">
                                       <span className="text-base sm:text-lg font-mono font-black text-[#F5F2E4]">
-                                        {formatCOP(r.total_money || r.totals?.total || 0)}
+                                        {formatCOP(r.total_money || r.total || r.amount || r.totals?.total || 0)}
                                       </span>
                                     </div>
                                     <button
@@ -3557,7 +3587,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                                     <div className="border-t border-white/10 pt-2 flex items-center justify-between text-xs font-mono">
                                       <span className="text-white/60">Total Pedido:</span>
                                       <span className="font-black text-sm text-[#F5F2E4]">
-                                        {formatCOP(r.total_money || r.totals?.total || 0)}
+                                        {formatCOP(r.total_money || r.total || r.amount || r.totals?.total || 0)}
                                       </span>
                                     </div>
                                   </div>
@@ -5901,7 +5931,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                     <div className="border-t border-white/10 pt-2 flex items-center justify-between text-sm">
                       <span className="font-bold text-white uppercase">Total Pagado:</span>
                       <span className="font-mono font-black text-lg text-[#F5F2E4]">
-                        {formatCOP(selectedWebOrderForModal.total_money || selectedWebOrderForModal.totals?.total || selectedWebOrderForModal.amount || 0)}
+                        {formatCOP(selectedWebOrderForModal.total_money || selectedWebOrderForModal.total || selectedWebOrderForModal.totals?.total || selectedWebOrderForModal.amount || 0)}
                       </span>
                     </div>
                   </div>

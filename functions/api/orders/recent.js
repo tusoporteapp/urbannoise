@@ -161,6 +161,12 @@ export async function onRequestGet({ request, env }) {
           date: formattedDate,
           timestamp: dateObj.getTime(),
           total: totalMoney,
+          total_money: totalMoney,
+          amount: totalMoney,
+          created_at: r.created_at,
+          createdAt: r.created_at,
+          receipt_date: r.receipt_date || r.created_at,
+          receipt_number: String(r.receipt_number || ""),
           status: trackingNumber ? "ENVIADO" : "EN_PREPARACION",
           statusLabel: trackingNumber ? `Enviado con ${trackingCompany}` : "En Preparación",
           trackingNumber: trackingNumber || undefined,
@@ -175,8 +181,21 @@ export async function onRequestGet({ request, env }) {
           customerAddress: clientAddress,
           customerCity: clientCity,
           customerId: attachedCust?.id || r.customer_id || undefined,
+          customer: {
+            name: clientName,
+            email: clientEmail,
+            phone: clientPhone,
+            document: clientDoc,
+          },
+          shippingAddress: {
+            address: clientAddress,
+            city: clientCity,
+            recipientName: clientName,
+            recipientPhone: clientPhone,
+          },
           items,
           receiptNote: note,
+          note: note,
         };
       });
 

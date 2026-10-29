@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>URBANNOISE - Plan de Arquitectura Reservas Loyverse POS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+    @page {
+      size: A4;
+      margin: 18mm 16mm 18mm 16mm;
+      @bottom-right {
+        content: counter(page);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 8pt;
+        color: #888888;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1a1a1f;
+      background-color: #ffffff;
+      line-height: 1.55;
+      font-size: 9.5pt;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page-break {
+      page-break-before: always;
+      padding-top: 10px;
+    }
+
+    /* HEADER */
+    .header {
+      border-bottom: 2px solid #101013;
+      padding-bottom: 14px;
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      background: #101013;
+      color: #F5F2E4;
+      font-size: 7.5pt;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      padding: 3px 8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      border-radius: 2px;
+    }
+
+    .title {
+      font-size: 17pt;
+      font-weight: 900;
+      color: #101013;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .subtitle {
+      font-size: 8.5pt;
+      color: #55555c;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .meta-box {
+      text-align: right;
+      font-size: 7.5pt;
+      color: #666666;
+      line-height: 1.4;
+    }
+
+    .meta-box strong {
+      color: #101013;
+      font-weight: 700;
+    }
+
+    /* SECTIONS */
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 11pt;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #101013;
+      border-left: 3.5px solid #D9C4AB;
+      padding-left: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    p {
+      margin-bottom: 9px;
+      color: #333339;
+    }
+
+    /* HIGHLIGHT BOXES */
+    .callout {
+      background: #faf9f6;
+      border: 1px solid #e7e2d6;
+      border-left: 4px solid #101013;
+      padding: 12px 14px;
+      margin: 12px 0;
+      border-radius: 4px;
+    }
+
+    .callout-title {
+      font-size: 8.5pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #101013;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .callout p {
+      margin-bottom: 0;
+      font-size: 8.5pt;
+      color: #44444a;
+      line-height: 1.45;
+    }
+
+    .alert-gold {
+      background: #fbf8f2;
+      border: 1px solid #e9dfcc;
+      border-left: 4px solid #b8935c;
+    }
+
+    .alert-dark {
+      background: #14151D;
+      color: #F5F2E4;
+      border: 1px solid #2a2b38;
+      border-left: 4px solid #D9C4AB;
+      padding: 12px 14px;
+      border-radius: 4px;
+      margin: 14px 0;
+    }
+
+    .alert-dark p {
+      color: #d1cfe0;
+      font-size: 8.5pt;
+    }
+
+    .alert-dark strong {
+      color: #FFFFFF;
+    }
+
+    /* STEP CARDS (3 MOMENTOS) */
+    .steps-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .step-card {
+      border: 1px solid #e5e5ea;
+      border-radius: 6px;
+      padding: 12px 14px;
+      background: #ffffff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      border-bottom: 1px dashed #e8e8ee;
+      padding-bottom: 6px;
+    }
+
+    .step-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 7.5pt;
+      background: #101013;
+      color: #F5F2E4;
+      padding: 2px 7px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+
+    .step-tag {
+      font-size: 7pt;
+      font-weight: 700;
+      color: #b8935c;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .step-name {
+      font-size: 10pt;
+      font-weight: 800;
+      color: #101013;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .step-desc {
+      font-size: 8.5pt;
+      color: #4b4b52;
+      line-height: 1.45;
+    }
+
+    .step-detail {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid #f0f0f4;
+      font-size: 8pt;
+      color: #606068;
+    }
+
+    .step-detail strong {
+      color: #101013;
+    }
+
+    /* TABLES */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 8pt;
+    }
+
+    th {
+      background: #101013;
+      color: #F5F2E4;
+      text-transform: uppercase;
+      font-size: 7.5pt;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 8px 10px;
+      text-align: left;
+      border: 1px solid #101013;
+    }
+
+    td {
+      padding: 8px 10px;
+      border: 1px solid #e4e4ec;
+      vertical-align: top;
+      line-height: 1.4;
+      color: #333339;
+    }
+
+    tr:nth-child(even) td {
+      background: #fafafc;
+    }
+
+    .badge-win {
+      background: #e8f5e9;
+      color: #1b5e20;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: 800;
+      font-size: 7pt;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 2px;
+    }
+
+    .badge-risk {
+      background: #ffebee;
+      color: #b71c1c;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: 800;
+      font-size: 7pt;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 2px;
+    }
+
+    /* CODE BLOCKS / LOGIC */
+    .code-box {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5pt;
+      background: #0f1015;
+      color: #e5e5ec;
+      padding: 10px 12px;
+      border-radius: 4px;
+      margin: 10px 0;
+      line-height: 1.45;
+      border: 1px solid #232430;
+    }
+
+    .code-box .kw { color: #d9c4ab; font-weight: 700; }
+    .code-box .fn { color: #79c0ff; }
+    .code-box .str { color: #a5d6ff; }
+    .code-box .cm { color: #6e7681; font-style: italic; }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid #e5e5ea;
+      padding-top: 10px;
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: #888890;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PÁGINA 1 ==================== -->
+  <div class="header">
+    <div>
+      <span class="brand-badge">URBANNOISE STUDIO • ARQUITECTURA DIGITAL</span>
+      <h1 class="title">Sincronización Omnicanal: Carrito & Loyverse POS</h1>
+      <p class="subtitle">Estrategia para resolver la competencia de inventario entre la tienda física El GranSan y el e-commerce</p>
+    </div>
+    <div class="meta-box">
+      <div><strong>Documento:</strong> PLAN-OMNI-2026-V1</div>
+      <div><strong>Tienda Física:</strong> C.C. El GranSan L-2354</div>
+      <div><strong>POS Central:</strong> Loyverse REST API</div>
+      <div><strong>Pasarela:</strong> Bold.co (PSE / Tarjetas)</div>
+      <div><strong>Fecha:</strong> Octubre 2026</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">1. El Diagnóstico del Reto Omnicanal</div>
+    <p>
+      En <strong>URBANNOISE</strong> el inventario de prendas es compartido en tiempo real por dos canales con dinámicas completamente opuestas:
+    </p>
+    <ul style="margin-left: 18px; margin-bottom: 12px; font-size: 8.5pt; color: #333339;">
+      <li style="margin-bottom: 4px;"><strong>Punto Físico (El GranSan, Bogotá):</strong> Clientes presenciales que se prueban la prenda en probador, caminan a la caja y la vendedora la factura en la tablet de <strong>Loyverse POS</strong> en menos de 10 segundos.</li>
+      <li><strong>Tienda Virtual (E-commerce Nacional):</strong> Compradores de toda Colombia que navegan, agregan al carrito, activan el temporizador de 10 minutos y proceden al checkout con Bold.</li>
+    </ul>
+
+    <div class="callout alert-gold">
+      <div class="callout-title">⚠️ El Dilema de la Última Unidad</div>
+      <p>
+        Si un cliente web tiene la última camiseta talla M en su bolsa y en ese mismo instante una vendedora en El GranSan la pasa por la caja registradora: <strong>¿A quién le pertenece la prenda? ¿Cómo evitamos cobrar dinero por una prenda que la vendedora acaba de entregar en físico?</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">2. Regla de Oro del Retail Físico + Web</div>
+    <div class="alert-dark">
+      <p style="font-size: 9pt; line-height: 1.45; margin-bottom: 6px;">
+        <strong>REGLA FUNDAMENTAL:</strong> El 70% de los carritos en internet se abandonan. Por lo tanto, un usuario que solo "mira" en la web <strong>NUNCA debe bloquear físicamente a la vendedora en El GranSan cuando tiene a un cliente con dinero en mano</strong>.
+      </p>
+      <p style="font-size: 8pt; color: #a9a7ba;">
+        La venta presencial tiene prioridad natural de mostrador. La inteligencia del sistema web consiste en adaptarse en milisegundos cuando la vendedora factura, sin generar frustración ni cobros indebidos.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">3. El Algoritmo en 3 Momentos Clave</div>
+    <p>El sistema divide el recorrido del comprador web en tres fases con reglas matemáticas precisas:</p>
+
+    <div class="steps-grid">
+      <!-- MOMENTO 1 -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-number">MOMENTO 1</span>
+          <span class="step-tag">Bolsa de Compras (10 Minutos)</span>
+        </div>
+        <div class="step-name">Reserva Temporal entre Usuarios Web (Soft-Hold)</div>
+        <div class="step-desc">
+          El temporizador de 10 minutos opera como un escudo entre compradores web: si queda 1 sola unidad y el <em>Cliente A</em> la tiene en su bolsa, el <em>Cliente B</em> verá que la prenda está temporalmente apartada.
+        </div>
+        <div class="step-detail">
+          <strong>¿Qué pasa si la vendedora la factura en el GranSan mientras tanto?</strong><br>
+          Loyverse pasa el stock a <code>0</code>. El servidor lo detecta vía Webhook al instante. En la pantalla del cliente web el reloj se detiene y muestra una alerta elegante: <em>"¡Prenda agotada hace unos instantes en nuestro local físico de El GranSan!"</em>. El botón de pago se inhabilita para esa prenda antes de cobrar cualquier peso.
+        </div>
+      </div>
+
+      <!-- MOMENTO 2 -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-number">MOMENTO 2</span>
+          <span class="step-tag">Pantalla de Pago Bold (5 Minutos)</span>
+        </div>
+        <div class="step-name">El Candado de Pasarela en Loyverse (Hard-Hold)</div>
+        <div class="step-desc">
+          Cuando el cliente presiona <strong>"FINALIZAR PEDIDO (PAGO DIRECTO)"</strong>, ya no es un curioso: tiene su Nequi o tarjeta lista. En ese segundo exacto, el servidor llama a Loyverse y <strong>resta temporalmente 1 unidad</strong> en la tablet del GranSan por 5 minutos.
+        </div>
+        <div class="step-detail">
+          <strong>Comportamiento en Loyverse POS:</strong> La vendedora ve el stock en <code>0</code> con la etiqueta <em>"En proceso de pago online"</em>. Si el pago en Bold es exitoso, se genera el recibo definitivo. Si el cliente cancela o se le rechaza la tarjeta, al cumplirse 5 minutos el servidor restituye automáticamente el <code>+1</code> a Loyverse.
+        </div>
+      </div>
+
+      <!-- MOMENTO 3 -->
+      <div class="step-card">
+        <div class="step-header">
+          <span class="step-number">MOMENTO 3</span>
+          <span class="step-tag">Milisegundo Final del Cobro</span>
+        </div>
+        <div class="step-name">Verificación Atómica Anti-Carrera (Double-Check)</div>
+        <div class="step-desc">
+          En el caso extremo (1 en un millón) donde la vendedora presione "Cobrar" exactamente en el mismo segundo en que Bold procesa la tarjeta, el servidor ejecuta una validación atómica final contra Loyverse API antes de confirmar el débito bancario.
+        </div>
+        <div class="step-detail">
+          <strong>Garantía Cero Sobreventa:</strong> Si la vendedora cobró 2 segundos antes, la pasarela cancela el débito bancario de inmediato y le informa al cliente con total transparencia: <em>"Transacción cancelada sin costo: la última unidad fue adquirida en mostrador justo antes de completar el pago"</em>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>URBANNOISE S.A.S. • NIT 901.847.239-1 • Cra 10 # 9-37 Local 23-54, GranSan, Bogotá</span>
+    <span>Página 1 de 2</span>
+  </div>
+
+  <!-- ==================== PÁGINA 2 ==================== -->
+  <div class="page-break"></div>
+
+  <div class="header">
+    <div>
+      <span class="brand-badge">URBANNOISE STUDIO • ARQUITECTURA DIGITAL</span>
+      <h1 class="title">Matriz Comparativa & Protocolo VIP</h1>
+      <p class="subtitle">Evaluación de estrategias de bloqueo y protocolo de atención ante contingencias</p>
+    </div>
+    <div class="meta-box">
+      <div><strong>Documento:</strong> PLAN-OMNI-2026-V1</div>
+      <div><strong>Módulo:</strong> Carrito & Loyverse API</div>
+      <div><strong>Página:</strong> 2 de 2</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">4. Matriz de Decisiones Técnicas</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Estrategia</th>
+          <th style="width: 25%;">Mecánica de Stock</th>
+          <th style="width: 25%;">Impacto en Local GranSan</th>
+          <th style="width: 25%;">Veredicto URBANNOISE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Opción A:<br>Soft-Hold Exclusivo Web</strong></td>
+          <td>El temporizador de 10 min solo bloquea entre usuarios de internet. Loyverse solo se descuenta cuando el pago está 100% aprobado.</td>
+          <td><span class="badge-win">Cero Riesgo</span><br>La vendedora nunca pierde ventas físicas por carritos abandonados en internet.</td>
+          <td><strong>Excelente para tiendas con alta rotación física.</strong> Fácil de mantener y muy segura.</td>
+        </tr>
+        <tr>
+          <td><strong>Opción B:<br>Bloqueo Inmediato en Loyverse</strong></td>
+          <td>Al agregar a la bolsa se resta 1 en Loyverse de inmediato. Si pasan 10 min sin compra, se suma +1 de vuelta.</td>
+          <td><span class="badge-risk">Riesgo Alto</span><br>Curiosos o bots en internet vacían temporalmente el stock de la tablet en el local físico.</td>
+          <td><strong>No recomendada</strong> para punto físico comercial de alto tráfico como El GranSan.</td>
+        </tr>
+        <tr>
+          <td><strong>Opción C:<br>Candado de Pasarela (Recomendada)</strong></td>
+          <td>Bolsa con Soft-Hold (10 min). Bloqueo físico en Loyverse únicamente durante los 5 min de Checkout en Bold.</td>
+          <td><span class="badge-win">Riesgo Mínimo</span><br>Solo se aparta cuando el cliente ya está digitando su clave PSE o tarjeta.</td>
+          <td><strong>La solución profesional estándar</strong> utilizada por marcas internacionales de streetwear (Shopify Plus / Nike).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">5. Alternativa: Regla del Buffer de Seguridad (Última Unidad)</div>
+    <p>
+      Para locales con prendas de edición muy limitada, muchas marcas de moda urbana aplican la <strong>Regla del Buffer de Mostrador</strong>:
+    </p>
+    <div class="code-box">
+<span class="cm">// Algoritmo de Disponibilidad de la Última Unidad</span>
+<span class="kw">function</span> <span class="fn">calcularDisponibilidadWeb</span>(stockEnLoyverse) {
+  <span class="kw">if</span> (stockEnLoyverse &gt;= <span class="str">2</span>) {
+    <span class="kw">return</span> { estado: <span class="str">"DISPONIBLE_ONLINE"</span>, permiteBolsa: <span class="kw">true</span> };
+  } <span class="kw">else if</span> (stockEnLoyverse === <span class="str">1</span>) {
+    <span class="cm">// La última prenda se reserva para mostrador físico o pedido guiado</span>
+    <span class="kw">return</span> {
+      estado: <span class="str">"EXCLUSIVO_GRANSAN"</span>,
+      permiteBolsa: <span class="kw">false</span>,
+      mensaje: <span class="str">"🔥 Última unidad en Tienda Física GranSan (Local 23-54) o aparta vía WhatsApp"</span>
+    };
+  } <span class="kw">else</span> {
+    <span class="kw">return</span> { estado: <span class="str">"AGOTADO"</span>, permiteBolsa: <span class="kw">false</span> };
+  }
+}
+    </div>
+    <p style="font-size: 8pt; color: #55555e;">
+      <strong>Ventaja comercial:</strong> Cuando queda 1 prenda, en lugar de arriesgar una doble venta, la web invita al cliente a visitar el local físico o a escribir al WhatsApp oficial <code>(+57) 310 872 0491</code> para apartarla con la vendedora directamente.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">6. Protocolo de Cortesía VIP (En caso de Contingencia)</div>
+    <p>
+      Si en un caso extraordinario (1 en un millón) el sistema llegara a registrar dos pagos exactamente al mismo segundo, el cliente web recibe un trato preferencial automático:
+    </p>
+    <div class="callout alert-gold" style="font-size: 8.5pt;">
+      <p style="margin-bottom: 6px;"><strong>Mensaje automático de WhatsApp al comprador web:</strong></p>
+      <p style="font-style: italic; color: #403e48;">
+        "¡Hola [Nombre]! Te escribe el equipo de URBANNOISE Bogotá. Tuvimos una compra simultánea de la última prenda en nuestro punto físico del Centro Comercial El GranSan justo mientras se confirmaba tu orden. Para darte la mejor experiencia streetwear te ofrecemos:<br>
+        1. <strong>Confección prioritaria en taller:</strong> La producimos exclusivamente para ti y te la despachamos en 48 horas con envío gratis.<br>
+        2. <strong>Cambio con beneficio:</strong> Escoge cualquier prenda de igual o mayor valor con un bono de cortesía de $20.000 COP.<br>
+        3. <strong>Reembolso inmediato:</strong> Te devolvemos el 100% de tu dinero a tu cuenta al instante."
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">7. Conclusión y Pasos de Implementación</div>
+    <p style="font-size: 8.5pt;">
+      El algoritmo de <strong>Candado de Pasarela (Opción C)</strong> garantiza que:
+    </p>
+    <ul style="margin-left: 18px; font-size: 8pt; color: #333339; line-height: 1.5;">
+      <li><strong>Loyverse POS siempre tiene la autoridad:</strong> Ningún carrito abandonado en internet le quita ventas en efectivo a la vendedora del GranSan.</li>
+      <li><strong>El cliente web disfruta del temporizador de 10 min:</strong> Genera sensación de drop exclusivo y urgencia de compra real.</li>
+      <li><strong>Cero sobreventas:</strong> El cobro en Bold solo se hace si Loyverse confirma la prenda en el milisegundo exacto.</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <span>URBANNOISE S.A.S. • Documento Técnico de Arquitectura de Software • Confidencial</span>
+    <span>Página 2 de 2</span>
+  </div>
+
+</body>
+</html>
