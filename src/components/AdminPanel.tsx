@@ -1780,6 +1780,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
     return combined;
   }, [recentOrdersList, receiptsList, customersList]);
 
+  // Cantidad de ventas nuevas que requieren guía de envío oficial
+  const pendingShippingOrdersCount = useMemo(() => {
+    return webReceiptsList.filter((r: any) => !r.trackingNumber).length;
+  }, [webReceiptsList]);
+
   // Lista unificada completa de todas las ventas (Web + Punto Físico POS)
   const allSalesList = useMemo(() => {
     // 1. Órdenes emitidas directamente por la web
@@ -2472,8 +2477,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                     </div>
                   </div>
 
-                  {/* Tarjetas de Métricas Principales (Ventas Hoy, Mes, Año y Catálogo con Fotos) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {/* Tarjetas de Métricas Principales (Ventas Hoy, Mes, Año, Catálogo y Ventas Nuevas) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3.5 sm:gap-4">
                     {/* Tarjeta 1: Ventas Hoy */}
                     <div
                       onClick={() => {
@@ -2555,6 +2560,60 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                       </div>
                       <div className="text-[11px] text-emerald-400 flex items-center space-x-1">
                         <span>● {metrics.withCustomImagesCount} visibles con fotos • {metrics.pendingImagesCount} pendientes</span>
+                      </div>
+                    </div>
+
+                    {/* Tarjeta 5: Ventas Nuevas (Solo Nuevas • Requiere Guía) */}
+                    <div
+                      onClick={() => {
+                        setReceiptsStatusFilter('pending_shipping');
+                        setActiveTab('receipts');
+                      }}
+                      className={`bg-[#14151D] border rounded-xl p-4 sm:p-5 space-y-2 transition cursor-pointer group shadow-lg ${
+                        pendingShippingOrdersCount > 0
+                          ? 'border-amber-500/50 hover:border-amber-400 bg-gradient-to-br from-amber-500/15 via-[#14151D] to-[#14151D] shadow-amber-950/30'
+                          : 'border-white/10 hover:border-emerald-500/40'
+                      }`}
+                      title="Ver ventas nuevas que requieren guía de despacho en Ventas Web"
+                    >
+                      <div className="flex items-center justify-between text-xs text-white/60">
+                        <span className={`font-bold uppercase tracking-wider flex items-center gap-1.5 ${
+                          pendingShippingOrdersCount > 0 ? 'text-amber-400' : 'text-white/70'
+                        }`}>
+                          {pendingShippingOrdersCount > 0 ? (
+                            <AlertTriangle className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                          ) : (
+                            <Truck className="w-3.5 h-3.5 text-emerald-400" />
+                          )}
+                          <span>Ventas Nuevas</span>
+                        </span>
+                        <Package className={`w-4 h-4 group-hover:scale-110 transition ${
+                          pendingShippingOrdersCount > 0 ? 'text-amber-400' : 'text-emerald-400'
+                        }`} />
+                      </div>
+                      <div className="flex items-baseline gap-2">
+                        <div className={`text-2xl sm:text-3xl font-black font-mono ${
+                          pendingShippingOrdersCount > 0 ? 'text-amber-300' : 'text-emerald-400'
+                        }`}>
+                          {pendingShippingOrdersCount}
+                        </div>
+                        {pendingShippingOrdersCount > 0 && (
+                          <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/40 text-amber-300 animate-pulse">
+                            Requiere Guía
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-[11px] flex items-center justify-between">
+                        <span className={pendingShippingOrdersCount > 0 ? 'text-amber-300/90 font-medium' : 'text-white/60'}>
+                          {pendingShippingOrdersCount === 0
+                            ? 'Al día • Todo despachado'
+                            : `${pendingShippingOrdersCount} ${pendingShippingOrdersCount === 1 ? 'pedido requiere' : 'pedidos requieren'} guía`}
+                        </span>
+                        <span className={`font-bold group-hover:translate-x-0.5 transition ${
+                          pendingShippingOrdersCount > 0 ? 'text-amber-300' : 'text-white/60'
+                        }`}>
+                          {pendingShippingOrdersCount > 0 ? 'Despachar →' : 'Ver recibos →'}
+                        </span>
                       </div>
                     </div>
                   </div>
