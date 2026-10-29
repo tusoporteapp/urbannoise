@@ -492,6 +492,70 @@ export default function App() {
     };
     window.addEventListener('urbannoise_stock_deducted', handleStockDeducted);
 
+    // Actualización de stock puntual en tiempo real por prenda (desde micro-endpoint ~300ms)
+    const handleProductStockUpdated = (e: any) => {
+      const { productId, sku, stockMap } = e.detail || {};
+      if (!stockMap) return;
+
+      setProducts((prev) =>
+        prev.map((p) => {
+          if (p.id === productId || (sku && p.sku === sku)) {
+            const updatedVariants = (p.variants || []).map((v) => {
+              if (v.variant_id && stockMap[v.variant_id] !== undefined) {
+                return { ...v, in_stock: stockMap[v.variant_id] };
+              }
+              return v;
+            });
+            const newTotalStock = updatedVariants.reduce((sum, v) => sum + (v.in_stock || 0), 0);
+            return {
+              ...p,
+              variants: updatedVariants,
+              stock: updatedVariants.length > 0 ? newTotalStock : (p.stock ?? 0),
+            };
+          }
+          return p;
+        })
+      );
+    };
+    window.addEventListener('urbannoise_product_stock_updated', handleProductStockUpdated);
+
+    // Descuento optimista de stock inmediato tras compra (0 ms de lag)
+    const handleOptimisticDeduct = (e: any) => {
+      const { items } = e.detail || {};
+      if (!items || !Array.isArray(items)) return;
+
+      setProducts((prev) =>
+        prev.map((p) => {
+          let hasChanges = false;
+          const updatedVariants = (p.variants || []).map((v) => {
+            const matchedItem = items.find(
+              (it: any) =>
+                (it.variantId && it.variantId === v.variant_id) ||
+                (it.sku && it.sku === v.sku) ||
+                (it.id && it.id === p.id)
+            );
+            if (matchedItem) {
+              hasChanges = true;
+              const newQty = Math.max(0, (v.in_stock || 0) - (Number(matchedItem.qty) || 1));
+              return { ...v, in_stock: newQty };
+            }
+            return v;
+          });
+
+          if (hasChanges) {
+            const newTotalStock = updatedVariants.reduce((sum, v) => sum + (v.in_stock || 0), 0);
+            return {
+              ...p,
+              variants: updatedVariants,
+              stock: updatedVariants.length > 0 ? newTotalStock : Math.max(0, (p.stock || 0) - 1),
+            };
+          }
+          return p;
+        })
+      );
+    };
+    window.addEventListener('urbannoise_stock_optimistic_deduct', handleOptimisticDeduct);
+
     // Cargar personalizaciones almacenadas en GitHub (Cloudflare Pages y multi-dispositivo)
     loadCustomizationsFromGitHub()
       .then((hasUpdates) => {
@@ -515,6 +579,8 @@ export default function App() {
     return () => {
       window.removeEventListener('urbannoise_catalog_updated', handleCatalogUpdated);
       window.removeEventListener('urbannoise_stock_deducted', handleStockDeducted);
+      window.removeEventListener('urbannoise_product_stock_updated', handleProductStockUpdated);
+      window.removeEventListener('urbannoise_stock_optimistic_deduct', handleOptimisticDeduct);
     };
   }, []);
 

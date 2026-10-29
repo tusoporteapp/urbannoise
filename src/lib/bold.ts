@@ -242,6 +242,12 @@ export async function confirmOrderAndSyncLoyverse(orderPayload: {
     if (res.ok) {
       const data = await res.json();
       if (typeof window !== 'undefined') {
+        const purchasedItems = (orderPayload.items || []).map((it: any) => ({
+          variantId: it.loyverseVariantId,
+          sku: it.sku,
+          qty: it.qty,
+        }));
+        window.dispatchEvent(new CustomEvent('urbannoise_stock_optimistic_deduct', { detail: { items: purchasedItems } }));
         window.dispatchEvent(new CustomEvent('urbannoise_catalog_updated'));
         window.dispatchEvent(new CustomEvent('urbannoise_stock_deducted', { detail: data }));
       }

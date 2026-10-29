@@ -80,6 +80,42 @@ export async function syncLoyverseCatalog(force: boolean = false): Promise<{
   }
 }
 
+// Micro-consulta de existencias reales por variante(s) en tiempo real (~300ms)
+// Consulta únicamente las variantes de la prenda seleccionada sin saturar la API ni descargar todo el catálogo.
+export async function fetchLiveProductStock(
+  variantIds: string[]
+): Promise<Record<string, number> | null> {
+  const cleanIds = (variantIds || []).filter(Boolean);
+  if (cleanIds.length === 0) return null;
+
+  try {
+    const idsParam = encodeURIComponent(cleanIds.join(','));
+    const res = await fetch(`/api/loyverse/stock?variant_ids=${idsParam}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.success && data.stockMap) {
+        return data.stockMap as Record<string, number>;
+      }
+    }
+  } catch (err: any) {
+    console.warn('[Loyverse micro-stock query warning]:', err.message || err);
+  }
+  return null;
+}
+
+// Descuento optimista de stock inmediato en cliente (0 ms de lag tras compra)
+export function deductOptimisticStock(
+  items: Array<{ variantId?: string; sku?: string; qty: number }>
+): void {
+  if (typeof window !== 'undefined' && items && items.length > 0) {
+    window.dispatchEvent(
+      new CustomEvent('urbannoise_stock_optimistic_deduct', {
+        detail: { items },
+      })
+    );
+  }
+}
+
 // Ejecutar cualquier endpoint de Loyverse (Proxy 100% de la API)
 export async function executeLoyverseProxy(endpoint: string, method: string = 'GET', body?: any) {
   try {

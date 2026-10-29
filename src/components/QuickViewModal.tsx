@@ -29,6 +29,7 @@ import { useWishlist } from '../lib/wishlist';
 import { getProductSizes, normalizeSizeName } from '../lib/catalogFilters';
 import { isYouTubeUrl, getYouTubeEmbedUrl, getYouTubeThumbnail } from '../lib/videoUtils';
 import { ProductLookbookVideo } from './ProductLookbookVideo';
+import { fetchLiveProductStock } from '../lib/loyverse';
 
 const COLOR_HEX_MAP: Record<string, string> = {
   negro: '#111111',
@@ -100,6 +101,43 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
   const [showSizeGuide, setShowSizeGuide] = useState<boolean>(false);
   const [isStickyDismissed, setIsStickyDismissed] = useState<boolean>(false);
   const [copiedShareLink, setCopiedShareLink] = useState<boolean>(false);
+  const [liveStockMap, setLiveStockMap] = useState<Record<string, number>>({});
+  const [isLiveStockSynced, setIsLiveStockSynced] = useState<boolean>(false);
+
+  // Micro-consulta de stock en vivo desde Loyverse (~300ms) al abrir o cambiar de prenda
+  useEffect(() => {
+    if (!product) {
+      setLiveStockMap({});
+      setIsLiveStockSynced(false);
+      return;
+    }
+
+    const variantIds: string[] = [];
+    if (product.variants && product.variants.length > 0) {
+      for (const v of product.variants) {
+        if (v.variant_id) variantIds.push(v.variant_id);
+      }
+    }
+    if (product.loyverseVariantId && !variantIds.includes(product.loyverseVariantId)) {
+      variantIds.push(product.loyverseVariantId);
+    }
+
+    if (variantIds.length > 0) {
+      fetchLiveProductStock(variantIds).then((map) => {
+        if (map && Object.keys(map).length > 0) {
+          setLiveStockMap(map);
+          setIsLiveStockSynced(true);
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(
+              new CustomEvent('urbannoise_product_stock_updated', {
+                detail: { productId: product.id, sku: product.sku, stockMap: map },
+              })
+            );
+          }
+        }
+      });
+    }
+  }, [product?.id, product?.sku]);
 
   const handleCopyShareLink = async () => {
     try {
@@ -274,8 +312,12 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
     return items;
   }, [product, galleryImages]);
 
-  // Stock para la combinación actual de Talla + Color
-  const currentVariantStock = activeVariant ? (activeVariant.in_stock ?? 0) : (product?.stock ?? 0);
+  // Stock para la combinación actual de Talla + Color (Con prioridad al stock en vivo verificado)
+  const currentVariantStock = activeVariant
+    ? (activeVariant.variant_id && liveStockMap[activeVariant.variant_id] !== undefined
+        ? liveStockMap[activeVariant.variant_id]
+        : (activeVariant.in_stock ?? 0))
+    : (product?.stock ?? 0);
   const isOutOfStockForCombination = currentVariantStock <= 0;
 
   // IMPORTANTE: Retorno condicional ÚNICAMENTE después de declarar el 100% de los hooks de React
@@ -748,8 +790,14 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                     <label className="text-[11px] font-bold uppercase tracking-wider text-[#101013]">
                       Color: <span className="text-black font-extrabold">{selectedColor || 'Estándar'}</span>
                     </label>
-                    <span className="text-[10px] text-[#777777] font-medium">
-                      {colorsList.length} {colorsList.length === 1 ? 'tono disponible' : 'tonos disponibles'}
+                    <span className="text-[10px] text-[#777777] font-medium flex items-center gap-1.5">
+                      <span>{colorsList.length} {colorsList.length === 1 ? 'tono disponible' : 'tonos disponibles'}</span>
+                      {isLiveStockSynced && (
+                        <span className="inline-flex items-center gap-1 text-[9px] text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded font-mono font-bold" title="Stock verificado en tiempo real con Loyverse POS">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                          EN VIVO
+                        </span>
+                      )}
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -758,7 +806,12 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                       const hex = getColorHex(col);
                       const totalStockForColor = (product.variants || [])
                         .filter((v: any) => (v.color || v.option2_value || '').toLowerCase() === col.toLowerCase())
-                        .reduce((sum: number, v: any) => sum + (v.in_stock || 0), 0);
+                        .reduce((sum: number, v: any) => {
+                          const s = (v.variant_id && liveStockMap[v.variant_id] !== undefined)
+                            ? liveStockMap[v.variant_id]
+                            : (v.in_stock || 0);
+                          return sum + s;
+                        }, 0);
                       const isColorOutOfStock = (product.variants && product.variants.length > 0) ? totalStockForColor <= 0 : false;
 
                       return (
@@ -840,7 +893,9 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                         normalizeSizeName(size)
                     );
                     const stockForSize = variantForSize
-                      ? (variantForSize.in_stock ?? 0)
+                      ? (variantForSize.variant_id && liveStockMap[variantForSize.variant_id] !== undefined
+                          ? liveStockMap[variantForSize.variant_id]
+                          : (variantForSize.in_stock ?? 0))
                       : (product.variants && product.variants.length > 0 ? 0 : (product.stock ?? 0));
                     const isSizeOutOfStock = stockForSize <= 0;
                     const isSizeUrgent = stockForSize > 0 && stockForSize <= 3;

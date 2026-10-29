@@ -54,7 +54,7 @@ async function handleSync(request, env, forceRefresh = false) {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
-          "Cache-Control": "public, max-age=15, s-maxage=15, stale-while-revalidate=30",
+          "Cache-Control": "public, max-age=60, s-maxage=60, stale-while-revalidate=300",
           "X-Sync-Source": "MemoryCache",
         },
       });
@@ -142,16 +142,16 @@ async function handleSync(request, env, forceRefresh = false) {
       syncedAt: new Date().toISOString(),
     };
 
-    // Guardar en cache durante 15 segundos
+    // Guardar en cache durante 60 segundos
     memoryCache = responsePayload;
-    cacheExpiresAt = Date.now() + 15 * 1000;
+    cacheExpiresAt = Date.now() + 60 * 1000;
 
     return new Response(JSON.stringify(responsePayload), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "public, max-age=15, s-maxage=15, stale-while-revalidate=30",
+        "Cache-Control": "public, max-age=60, s-maxage=60, stale-while-revalidate=300",
         "X-Sync-Source": "LoyverseLive",
       },
     });
