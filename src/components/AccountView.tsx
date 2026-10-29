@@ -195,7 +195,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
   const [password, setPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
-  const [document, setDocument] = useState<string>('');
+  const [docId, setDocId] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [city, setCity] = useState<string>('Bogotá, D.C.');
   const [address, setAddress] = useState<string>('');
@@ -385,7 +385,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
     setSuccessMsg('');
 
     const cleanName = name.trim();
-    const cleanDoc = document.replace(/\D/g, '');
+    const cleanDoc = docId.replace(/\D/g, '');
     const cleanPhone = phone.replace(/\D/g, '');
     const cleanAddress = address.trim();
     const cleanCity = city.trim();
@@ -530,7 +530,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
     let isCancelled = false;
 
     const checkStatus = async () => {
-      if (typeof document !== 'undefined' && document.visibilityState !== 'visible') return;
+      if (typeof window !== 'undefined' && window.document?.visibilityState !== 'visible') return;
       if (isCancelled) return;
 
       try {
@@ -576,16 +576,20 @@ export const AccountView: React.FC<AccountViewProps> = ({
     timer = setTimeout(checkStatus, 45000);
 
     const onVisibilityChange = () => {
-      if (document.visibilityState === 'visible' && !isCancelled && !selectedOrder.trackingNumber) {
+      if (typeof window !== 'undefined' && window.document?.visibilityState === 'visible' && !isCancelled && !selectedOrder.trackingNumber) {
         checkStatus();
       }
     };
-    document.addEventListener('visibilitychange', onVisibilityChange);
+    if (typeof window !== 'undefined') {
+      window.document.addEventListener('visibilitychange', onVisibilityChange);
+    }
 
     return () => {
       isCancelled = true;
       if (timer) clearTimeout(timer);
-      document.removeEventListener('visibilitychange', onVisibilityChange);
+      if (typeof window !== 'undefined') {
+        window.document.removeEventListener('visibilitychange', onVisibilityChange);
+      }
     };
   }, [selectedOrder?.id, selectedOrder?.trackingNumber, currentUser?.email]);
 
@@ -1969,8 +1973,8 @@ export const AccountView: React.FC<AccountViewProps> = ({
                               name="documentId"
                               type="text"
                               placeholder="Ej: 1028394829"
-                              value={document}
-                              onChange={(e) => setDocument(e.target.value.replace(/\D/g, ''))}
+                              value={docId}
+                              onChange={(e) => setDocId(e.target.value.replace(/\D/g, ''))}
                               className="w-full pl-8 pr-3 py-2 bg-white border border-gray-200 rounded-md text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-black font-mono"
                             />
                           </div>
