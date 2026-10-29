@@ -68,6 +68,51 @@ export function getCarrierTrackingUrl(company: string, guia: string): string {
   return `https://www.servientrega.com/wps/portal/rastreo-envio?guia=${cleanGuia}`;
 }
 
+export function normalizeCustomerOrder(order: any): CustomerOrder {
+  if (!order) return order;
+  const items = Array.isArray(order.items)
+    ? order.items.map((it: any, idx: number) => ({
+        id: it?.id || `item-${idx}`,
+        name: it?.name || 'Prenda URBANNOISE',
+        size: it?.size || 'M',
+        qty: Number(it?.qty || 1),
+        price: Number(it?.price || 0),
+        image: it?.image || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000&auto=format&fit=crop',
+        sku: it?.sku || 'URBAN-STREET',
+      }))
+    : [];
+
+  const rawTotal = Number(order.totals?.total ?? order.total ?? order.total_money ?? order.amount ?? 0);
+  const rawSubtotal = Number(order.totals?.subtotal ?? order.subtotal ?? rawTotal);
+
+  return {
+    ...order,
+    id: order.id || order.orderNumber || `UN-${Date.now()}`,
+    orderNumber: order.orderNumber || order.id || 'UN-000000',
+    date: order.date || 'Reciente',
+    timestamp: Number(order.timestamp || Date.now()),
+    status: order.status || 'EN_PREPARACION',
+    statusLabel: order.statusLabel || (order.status === 'EN_CAMINO' ? 'En Camino' : 'En Preparación'),
+    items,
+    totals: {
+      subtotal: rawSubtotal,
+      shipping: Number(order.totals?.shipping ?? order.shipping ?? 0),
+      discount: Number(order.totals?.discount ?? order.discount ?? 0),
+      total: rawTotal,
+    },
+    shippingAddress: {
+      name: order.shippingAddress?.name || 'Cliente URBANNOISE',
+      city: order.shippingAddress?.city || 'Bogotá',
+      department: order.shippingAddress?.department || 'Colombia',
+      address: order.shippingAddress?.address || 'Dirección registrada',
+      phone: order.shippingAddress?.phone || '',
+    },
+    timeline: Array.isArray(order.timeline) ? order.timeline : [],
+    paymentMethod: order.paymentMethod || 'Pasarela Bold.co',
+    paymentStatus: order.paymentStatus || 'APROBADO',
+  };
+}
+
 const STORAGE_ORDERS_PREFIX = 'urbannoise_customer_orders_';
 
 export function getCustomerOrders(email?: string): CustomerOrder[] {
@@ -80,7 +125,7 @@ export function getCustomerOrders(email?: string): CustomerOrder[] {
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed;
+        return parsed.map(normalizeCustomerOrder);
       }
     }
   } catch (err) {
@@ -95,7 +140,8 @@ export function saveCustomerOrders(email: string, orders: CustomerOrder[]): void
   const targetEmail = email.trim().toLowerCase();
   const storageKey = `${STORAGE_ORDERS_PREFIX}${targetEmail}`;
   try {
-    localStorage.setItem(storageKey, JSON.stringify(orders));
+    const normalizedList = orders.map(normalizeCustomerOrder);
+    localStorage.setItem(storageKey, JSON.stringify(normalizedList));
     window.dispatchEvent(new CustomEvent('urbannoise_orders_updated'));
   } catch (err) {
     console.error('Error guardando pedidos locales:', err);
@@ -106,7 +152,8 @@ export function addCustomerOrder(newOrder: CustomerOrder, email?: string): void 
   const targetEmail = (email || newOrder.userEmail || '').trim().toLowerCase();
   if (!targetEmail) return;
   const currentOrders = getCustomerOrders(targetEmail);
-  const updatedOrders = [newOrder, ...currentOrders.filter((o) => o.id !== newOrder.id)];
+  const normalized = normalizeCustomerOrder(newOrder);
+  const updatedOrders = [normalized, ...currentOrders.filter((o) => o.id !== normalized.id)];
   saveCustomerOrders(targetEmail, updatedOrders);
 }
 
@@ -151,10 +198,10 @@ export async function fetchCustomerOrdersFromServer(
             };
           });
 
-          return {
+          return normalizeCustomerOrder({
             ...so,
             items: resolvedItems,
-          };
+          });
         });
 
         // Combinar con pedidos locales dando autoridad absoluta al servidor

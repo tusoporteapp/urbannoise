@@ -28861,8 +28861,9 @@ export const HERO_SLIDES: HeroSlide[] = [
   }
 ];
 
-export const formatCOP = (val: number): string => {
-  return "$" + val.toLocaleString("es-CO");
+export const formatCOP = (val: number | string | undefined | null): string => {
+  const num = typeof val === 'number' ? val : Number(val) || 0;
+  return "$" + num.toLocaleString("es-CO");
 };
 
 export const INITIAL_PRODUCTS: Product[] = PRODUCTS_DATA.map(p => ({

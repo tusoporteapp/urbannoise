@@ -1117,12 +1117,12 @@ export const AccountView: React.FC<AccountViewProps> = ({
 
                         <div className="mt-2 text-xs text-gray-500 font-mono flex items-center justify-between">
                           <span>{o.date}</span>
-                          <span className="font-bold text-[#101013]">{formatCOP(o.totals.total)}</span>
+                          <span className="font-bold text-[#101013]">{formatCOP(o.totals?.total ?? (o as any).total ?? 0)}</span>
                         </div>
 
                         <div className="mt-2 pt-2 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-600">
-                          <span>{o.items.length} prenda(s)</span>
-                          <span className="text-emerald-700 font-medium">{o.trackingCompany}</span>
+                          <span>{(o.items || []).length} prenda(s)</span>
+                          <span className="text-emerald-700 font-medium">{o.trackingCompany || 'Envío Estándar'}</span>
                         </div>
                       </button>
                     );
@@ -1165,7 +1165,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                         <div className="text-left sm:text-right">
                           <span className="text-[11px] text-gray-500 block">Total Pagado:</span>
                           <span className="text-xl font-black text-[#101013]">
-                            {formatCOP(selectedOrder.totals.total)}
+                            {formatCOP(selectedOrder.totals?.total ?? (selectedOrder as any).total ?? 0)}
                           </span>
                           <span className="text-[10px] text-emerald-700 font-bold block">
                             ● {selectedOrder.paymentMethod}
@@ -1369,11 +1369,11 @@ export const AccountView: React.FC<AccountViewProps> = ({
                       <div className="p-6 sm:p-8 bg-gray-50/60">
                         <h4 className="font-extrabold text-xs text-[#101013] uppercase tracking-wider mb-4 flex items-center space-x-2">
                           <ShoppingBag className="w-4 h-4 text-gray-500" />
-                          <span>Prendas Adquiridas en esta Orden ({selectedOrder.items.length})</span>
+                          <span>Prendas Adquiridas en esta Orden ({(selectedOrder.items || []).length})</span>
                         </h4>
 
                         <div className="space-y-3">
-                          {selectedOrder.items.map((item, idx) => {
+                          {(selectedOrder.items || []).map((item, idx) => {
                             const allCatalogProducts = products && products.length > 0 ? products : INITIAL_PRODUCTS;
                             const matchedProduct = allCatalogProducts.find(
                               (p) =>
@@ -1383,6 +1383,8 @@ export const AccountView: React.FC<AccountViewProps> = ({
                                 (item.sku && item.sku !== 'N/A' && p.sku === item.sku)
                             );
                             const resolvedImage = item.image || matchedProduct?.image || matchedProduct?.images?.[0] || 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop';
+                            const itemQty = Number(item.qty || 1);
+                            const itemPrice = Number(item.price || 0);
 
                             return (
                               <div
@@ -1393,10 +1395,10 @@ export const AccountView: React.FC<AccountViewProps> = ({
                                   {/* Thumbnail interactivo con zoom */}
                                   <div
                                     onClick={() => setViewingGarmentImage({
-                                      name: item.name,
+                                      name: item.name || 'Prenda URBANNOISE',
                                       image: resolvedImage,
                                       size: item.size,
-                                      price: item.price,
+                                      price: itemPrice,
                                       sku: item.sku,
                                       product: matchedProduct,
                                     })}
@@ -1405,7 +1407,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                                   >
                                     <img
                                       src={resolvedImage}
-                                      alt={item.name}
+                                      alt={item.name || 'Prenda URBANNOISE'}
                                       className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                                     />
                                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
@@ -1417,17 +1419,17 @@ export const AccountView: React.FC<AccountViewProps> = ({
                                     <button
                                       type="button"
                                       onClick={() => setViewingGarmentImage({
-                                        name: item.name,
+                                        name: item.name || 'Prenda URBANNOISE',
                                         image: resolvedImage,
                                         size: item.size,
-                                        price: item.price,
+                                        price: itemPrice,
                                         sku: item.sku,
                                         product: matchedProduct,
                                       })}
                                       className="text-left font-bold text-xs sm:text-sm uppercase text-[#101013] hover:text-[#9e8265] transition line-clamp-1 cursor-pointer flex items-center gap-1.5"
                                       title="Haz clic para ver la foto en grande"
                                     >
-                                      <span>{item.name}</span>
+                                      <span>{item.name || 'Prenda URBANNOISE'}</span>
                                       <ZoomIn className="w-3.5 h-3.5 text-gray-400 group-hover:text-black flex-shrink-0" />
                                     </button>
 
@@ -1437,17 +1439,17 @@ export const AccountView: React.FC<AccountViewProps> = ({
                                           Talla: {item.size}
                                         </span>
                                       )}
-                                      <span>Cantidad: {item.qty}</span>
+                                      <span>Cantidad: {itemQty}</span>
                                       {item.sku && item.sku !== 'N/A' && <span>• SKU: {item.sku}</span>}
                                     </div>
 
                                     <button
                                       type="button"
                                       onClick={() => setViewingGarmentImage({
-                                        name: item.name,
+                                        name: item.name || 'Prenda URBANNOISE',
                                         image: resolvedImage,
                                         size: item.size,
-                                        price: item.price,
+                                        price: itemPrice,
                                         sku: item.sku,
                                         product: matchedProduct,
                                       })}
@@ -1461,11 +1463,11 @@ export const AccountView: React.FC<AccountViewProps> = ({
 
                                 <div className="text-right flex-shrink-0">
                                   <span className="font-extrabold text-sm text-[#101013]">
-                                    {formatCOP(item.price * item.qty)}
+                                    {formatCOP(itemPrice * itemQty)}
                                   </span>
-                                  {item.qty > 1 && (
+                                  {itemQty > 1 && (
                                     <span className="text-[10px] text-gray-500 block font-mono">
-                                      {formatCOP(item.price)} c/u
+                                      {formatCOP(itemPrice)} c/u
                                     </span>
                                   )}
                                 </div>
@@ -1478,7 +1480,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
                         <div className="mt-6 pt-4 border-t border-gray-200 text-xs sm:text-sm space-y-2 text-gray-600">
                           <div className="flex justify-between">
                             <span>Subtotal Prendas:</span>
-                            <span className="font-mono text-gray-900 font-bold">{formatCOP(selectedOrder.totals.subtotal)}</span>
+                            <span className="font-mono text-gray-900 font-bold">
+                              {formatCOP(selectedOrder.totals?.subtotal ?? (selectedOrder as any).subtotal ?? (selectedOrder as any).total ?? 0)}
+                            </span>
                           </div>
                           <div className="flex justify-between items-center text-gray-700">
                             <div>
@@ -1493,7 +1497,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
                           </div>
                           <div className="flex justify-between text-base font-black text-[#101013] pt-2 border-t border-gray-200">
                             <span>Total Cancelado (COP):</span>
-                            <span>{formatCOP(selectedOrder.totals.total)}</span>
+                            <span>
+                              {formatCOP(selectedOrder.totals?.total ?? (selectedOrder as any).total ?? 0)}
+                            </span>
                           </div>
                         </div>
 
@@ -1503,7 +1509,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                           <div>
                             <span className="font-bold text-[#101013] block">Destino de Entrega:</span>
                             <span>
-                              {selectedOrder.shippingAddress.name} • {selectedOrder.shippingAddress.address}, {selectedOrder.shippingAddress.city} • Tel: {selectedOrder.shippingAddress.phone}
+                              {selectedOrder.shippingAddress?.name || currentUser?.name || 'Cliente URBANNOISE'} • {selectedOrder.shippingAddress?.address || currentUser?.address || 'Dirección registrada'}, {selectedOrder.shippingAddress?.city || currentUser?.city || 'Bogotá'} • Tel: {selectedOrder.shippingAddress?.phone || currentUser?.phone || 'No registrado'}
                             </span>
                           </div>
                         </div>
