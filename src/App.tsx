@@ -31,7 +31,6 @@ import {
   syncLoyverseCatalog,
   loadCustomizationsFromGitHub,
   getCustomerSession,
-  isUserAdminCredentials,
   isAdminAuthenticated,
   clearAdminToken,
   setAdminAuthenticated,

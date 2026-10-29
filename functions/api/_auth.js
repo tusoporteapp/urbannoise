@@ -39,12 +39,7 @@ export async function signAdminToken(secret = DEFAULT_ADMIN_SECRET) {
 export async function verifyAdminToken(token, secret = DEFAULT_ADMIN_SECRET) {
   if (!token || typeof token !== "string") return false;
 
-  // Soportar tokens de sesión local de desarrollo o PINs directos
   const clean = token.trim();
-  if (clean === "1994" || clean === "URBAN2026" || clean === "URBANNOISE2026") {
-    return true;
-  }
-
   const parts = clean.split(".");
   if (parts.length !== 3) return false;
 

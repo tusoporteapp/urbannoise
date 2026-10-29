@@ -75,7 +75,6 @@ import {
   deleteProductCustomization,
   isAdminAuthenticated,
   setAdminAuthenticated,
-  isUserAdminCredentials,
   loginAdminWithServer,
   clearAdminToken,
   clearCustomerSession,
@@ -570,25 +569,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         setAdminPassword('');
         setAuthError('');
       } else {
-        // Fallback local con credenciales maestras
-        if (isUserAdminCredentials(cleanEmail, cleanPassword)) {
-          setAdminAuthenticated(true);
-          setAuthenticated(true);
-          setAdminPassword('');
-          setAuthError('');
-        } else {
-          setAuthError(res.error || 'Correo o contraseña de administrador no válidos.');
-        }
+        setAuthError(res.error || 'Correo o contraseña de administrador no válidos.');
       }
     } catch {
-      if (isUserAdminCredentials(cleanEmail, cleanPassword)) {
-        setAdminAuthenticated(true);
-        setAuthenticated(true);
-        setAdminPassword('');
-        setAuthError('');
-      } else {
-        setAuthError('Error al conectar o credenciales no válidas.');
-      }
+      setAuthError('Error de conexión con el servidor seguro.');
     } finally {
       setIsLoggingIn(false);
     }

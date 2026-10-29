@@ -380,6 +380,10 @@ export async function launchBoldCheckout(intent: {
     });
 
     if (typeof window !== 'undefined') {
+      (window as any).__urbannoise_is_navigating_to_gateway = true;
+      try {
+        window.onbeforeunload = null;
+      } catch {}
       window.location.href = directUrl;
       return true;
     }

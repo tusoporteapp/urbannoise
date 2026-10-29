@@ -366,6 +366,10 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
 
     // 1. Advertencia nativa al intentar cerrar o recargar la pestaña
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // Si la navegación es intencional hacia la pasarela de pago oficial de Bold.co, permitir la salida sin alertas molestas
+      if (typeof window !== 'undefined' && (window as any).__urbannoise_is_navigating_to_gateway) {
+        return;
+      }
       e.preventDefault();
       e.returnValue = 'Tu pago está en proceso de verificación bancaria. Si recargas o sales ahora, la confirmación podría demorarse.';
       return e.returnValue;
@@ -875,6 +879,12 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
 
       // Si hay credenciales de producción activas, lanzar Bold con redirección de página completa sustituyendo la ventana
       if (intent.hasLiveCredentials && intent.identityKey) {
+        if (typeof window !== 'undefined') {
+          (window as any).__urbannoise_is_navigating_to_gateway = true;
+          try {
+            window.onbeforeunload = null;
+          } catch {}
+        }
         setBoldProcessingStep('Redirigiendo a pasarela oficial Bold.co...');
         const opened = await launchBoldCheckout({
           identityKey: intent.identityKey,

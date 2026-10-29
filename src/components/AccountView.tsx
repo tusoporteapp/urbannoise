@@ -41,7 +41,6 @@ import {
   saveCustomerSession,
   clearCustomerSession,
   clearAllAdminSessions,
-  isUserAdminCredentials,
   setAdminAuthenticated,
   clearAdminToken,
   registerWebCustomer,
@@ -271,7 +270,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
     setErrorMsg('');
     setSuccessMsg('');
 
-    // 1. Modo Administrador con contraseña maestra
+    // 1. Modo Administrador con autenticación segura contra servidor
     if (isAdminMode) {
       if (!email.trim() || !password.trim()) {
         setErrorMsg('Por favor ingresa tu correo electrónico y contraseña de administrador.');
@@ -279,29 +278,31 @@ export const AccountView: React.FC<AccountViewProps> = ({
       }
 
       setIsLoading(true);
-      const isAdmin = isUserAdminCredentials(email, password);
-
-      if (isAdmin) {
-        setAdminAuthenticated(true);
-        const adminUser: CustomerUser = {
-          name: 'Administrador URBANNOISE',
-          email: email.trim(),
-          isAdmin: true,
-          createdAt: new Date().toISOString(),
-        };
-        saveCustomerSession(adminUser);
-        setCurrentUser(adminUser);
-        try {
-          await loginAdminWithServer(password, email);
-        } catch {}
-        trackEvent('login', { method: 'admin_credentials' });
+      try {
+        const res = await loginAdminWithServer(password.trim(), email.trim());
+        if (res.success) {
+          setAdminAuthenticated(true);
+          const adminUser: CustomerUser = {
+            name: 'Administrador URBANNOISE',
+            email: email.trim(),
+            isAdmin: true,
+            createdAt: new Date().toISOString(),
+          };
+          saveCustomerSession(adminUser);
+          setCurrentUser(adminUser);
+          trackEvent('login', { method: 'admin_server_auth' });
+          setIsLoading(false);
+          onOpenAdmin();
+          onBackToHome();
+          return;
+        } else {
+          setIsLoading(false);
+          setErrorMsg(res.error || 'Contraseña o credenciales de administrador inválidas.');
+          return;
+        }
+      } catch (err: any) {
         setIsLoading(false);
-        onOpenAdmin();
-        onBackToHome();
-        return;
-      } else {
-        setIsLoading(false);
-        setErrorMsg('Contraseña o credenciales de administrador inválidas.');
+        setErrorMsg('Error de conexión con el servidor seguro.');
         return;
       }
     }

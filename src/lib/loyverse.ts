@@ -629,9 +629,11 @@ export function clearAdminToken(): void {
 
 export function getAdminHeaders(): Record<string, string> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-  const token = getAdminToken() || 'URBAN2026';
-  headers['Authorization'] = `Bearer ${token}`;
-  headers['x-admin-token'] = token;
+  const token = getAdminToken();
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+    headers['x-admin-token'] = token;
+  }
   return headers;
 }
 
@@ -658,23 +660,15 @@ export async function loginAdminWithServer(
   }
 }
 
-export function isUserAdminCredentials(email: string, passOrPin: string): boolean {
+export function isAuthorizedAdminEmail(email: string): boolean {
   const cleanEmail = (email || '').trim().toLowerCase();
-  const rawPass = (passOrPin || '').trim();
+  return cleanEmail === 'urban.noice@gmail.com' || cleanEmail === 'admin@urbannoise.co';
+}
 
-  if (!cleanEmail || !rawPass) {
-    return false;
-  }
-
-  // 1. Correo oficial de Administrador
-  const isAuthorizedEmail =
-    cleanEmail === 'urban.noice@gmail.com' ||
-    cleanEmail === 'admin@urbannoise.co';
-
-  // 2. Contraseña maestra oficial exacta
-  const isExactMasterPassword = rawPass === '8624Urban';
-
-  return Boolean(isAuthorizedEmail && isExactMasterPassword);
+export function isUserAdminCredentials(_email: string, _passOrPin: string): boolean {
+  // Directiva Security-Audit: La autenticación de administrador es estrictamente Server-Authoritative
+  // Cero contraseñas en texto plano en el cliente para proteger la plataforma contra ingeniería inversa.
+  return false;
 }
 
 export function getCustomerSession(): CustomerUser | null {
