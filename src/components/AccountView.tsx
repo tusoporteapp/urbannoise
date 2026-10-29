@@ -225,6 +225,12 @@ export const AccountView: React.FC<AccountViewProps> = ({
       return;
     }
 
+    // Si la sesión tenía un flag isAdmin huérfano sin token autenticado, limpiarlo para evitar inconsistencias
+    if (session?.isAdmin && !isAdminAuthenticated()) {
+      session.isAdmin = false;
+      saveCustomerSession(session);
+    }
+
     setCurrentUser(session);
     setErrorMsg('');
     setSuccessMsg('');
@@ -545,7 +551,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
 
           // Actualizar la lista de órdenes completa para reflejar los 3 pasos en verde
           if (currentUser?.email) {
-            fetchCustomerOrdersFromServer(currentUser.email).then((fresh) => {
+            fetchCustomerOrdersFromServer(currentUser, products || INITIAL_PRODUCTS).then((fresh) => {
               if (fresh && fresh.length > 0) setOrders(fresh);
             });
           }
@@ -866,14 +872,14 @@ export const AccountView: React.FC<AccountViewProps> = ({
 
             <div className="flex items-start sm:items-center space-x-4 z-10">
               <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white text-[#101013] flex items-center justify-center font-black text-lg sm:text-xl uppercase shadow-md flex-shrink-0">
-                {currentUser.name
-                  ? currentUser.name.split(' ').map((n) => n[0]).slice(0, 2).join('')
+                {typeof currentUser?.name === 'string' && currentUser.name.trim()
+                  ? currentUser.name.trim().split(/\s+/).map((n) => n[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()
                   : 'CL'}
               </div>
               <div className="space-y-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <h2 className="font-extrabold text-xl sm:text-2xl uppercase tracking-tight text-white">
-                    {currentUser.name}
+                    {currentUser?.name || 'Cliente URBANNOISE'}
                   </h2>
                   <span className="bg-white/10 text-white/90 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded tracking-wider">
                     Cliente Verificado

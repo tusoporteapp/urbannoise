@@ -651,6 +651,27 @@ export default function App() {
     const session = getCustomerSession();
     const isCurrentlyLoggedInAdmin = isSessionAdmin(session);
 
+    // Cierre de sesión y limpieza de emergencia por URL (#logout, #salir, ?logout=1)
+    const lowerHash = (hash || '').toLowerCase();
+    const lowerSearch = (window.location.search || '').toLowerCase();
+    if (lowerHash === '#logout' || lowerHash === '#salir' || lowerSearch.includes('logout')) {
+      clearCustomerSession();
+      clearAllAdminSessions();
+      try {
+        const keysToRemove: string[] = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (k && (k.startsWith('urbannoise_') || k.includes('session') || k.includes('admin') || k.includes('order'))) {
+            keysToRemove.push(k);
+          }
+        }
+        keysToRemove.forEach((k) => localStorage.removeItem(k));
+      } catch {}
+      window.history.replaceState(null, '', window.location.pathname + '#cuenta');
+      window.location.reload();
+      return;
+    }
+
     if (
       pathname === '/cms' ||
       pathname === '/cms/' ||
@@ -844,6 +865,26 @@ export default function App() {
       // 2. Navegación de vistas por pathname y hash
       const currentPath = window.location.pathname.toLowerCase();
       if (
+        window.location.hash === '#logout' ||
+        window.location.hash === '#salir' ||
+        window.location.search.toLowerCase().includes('logout')
+      ) {
+        clearCustomerSession();
+        clearAllAdminSessions();
+        try {
+          const keysToRemove: string[] = [];
+          for (let i = 0; i < localStorage.length; i++) {
+            const k = localStorage.key(i);
+            if (k && (k.startsWith('urbannoise_') || k.includes('session') || k.includes('admin') || k.includes('order'))) {
+              keysToRemove.push(k);
+            }
+          }
+          keysToRemove.forEach((k) => localStorage.removeItem(k));
+        } catch {}
+        window.history.replaceState(null, '', window.location.pathname + '#cuenta');
+        window.location.reload();
+        return;
+      } else if (
         currentPath === '/cms' ||
         currentPath === '/cms/' ||
         currentPath === '/admin' ||

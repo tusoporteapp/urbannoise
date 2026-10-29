@@ -1,5 +1,5 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { AlertTriangle, RotateCcw } from 'lucide-react';
+import { AlertTriangle, RotateCcw, LogOut } from 'lucide-react';
 
 interface Props {
   children: ReactNode;
@@ -44,6 +44,25 @@ export class ErrorBoundary extends Component<Props, State> {
     }
   };
 
+  public handleLogoutAndReset = () => {
+    try {
+      if (typeof window !== 'undefined') {
+        const keysToRemove: string[] = [];
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (k && (k.startsWith('urbannoise_') || k.includes('session') || k.includes('admin') || k.includes('order'))) {
+            keysToRemove.push(k);
+          }
+        }
+        keysToRemove.forEach((k) => localStorage.removeItem(k));
+        window.location.hash = '#cuenta';
+        window.location.reload();
+      }
+    } catch {
+      window.location.reload();
+    }
+  };
+
   public render() {
     if (this.state.hasError) {
       return (
@@ -56,16 +75,34 @@ export class ErrorBoundary extends Component<Props, State> {
               {this.props.fallbackTitle || 'Aviso de Visualización'}
             </h3>
             <p className="text-xs text-white/70 leading-relaxed font-normal">
-              Ocurrió un problema al renderizar los medios de esta prenda. Hemos protegido tu sesión.
+              Ocurrió un problema temporal al cargar esta vista. Puedes regresar a la tienda o cerrar tu sesión para limpiar el estado del navegador.
             </p>
-            <button
-              type="button"
-              onClick={this.handleReset}
-              className="bg-[#F5F2E4] hover:bg-[#D9C4AB] text-[#101013] font-black text-xs uppercase tracking-widest px-6 py-3 rounded transition cursor-pointer flex items-center justify-center space-x-2 mx-auto"
-            >
-              <RotateCcw className="w-4 h-4" />
-              <span>Regresar a la Tienda</span>
-            </button>
+
+            {this.state.error && (
+              <div className="p-2.5 bg-black/60 border border-white/10 rounded text-[11px] font-mono text-amber-300/90 text-left max-h-24 overflow-auto break-all">
+                {this.state.error.message || String(this.state.error)}
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 pt-2">
+              <button
+                type="button"
+                onClick={this.handleReset}
+                className="w-full sm:w-auto bg-[#F5F2E4] hover:bg-[#D9C4AB] text-[#101013] font-black text-xs uppercase tracking-widest px-5 py-3 rounded transition cursor-pointer flex items-center justify-center space-x-2"
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span>Regresar a la Tienda</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={this.handleLogoutAndReset}
+                className="w-full sm:w-auto bg-red-600/90 hover:bg-red-700 text-white font-extrabold text-xs uppercase tracking-widest px-5 py-3 rounded transition cursor-pointer flex items-center justify-center space-x-2"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Cerrar Sesión</span>
+              </button>
+            </div>
           </div>
         </div>
       );
