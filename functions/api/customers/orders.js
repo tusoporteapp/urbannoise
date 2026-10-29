@@ -38,11 +38,13 @@ export async function onRequestGet({ request, env }) {
     const verifiedCustId = targetCust?.id || null;
 
     // 2. Filtrar recibos correspondientes al cliente de forma estricta (Zero Cross-Account Leak)
+    const emailEscaped = email ? email.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") : null;
+    const emailRegex = emailEscaped ? new RegExp(`(?:^|[^a-zA-Z0-9_.+-])${emailEscaped}(?:$|[^a-zA-Z0-9_.+-])`, "i") : null;
     const matchedReceipts = allReceipts.filter((r) => {
       if (verifiedCustId && r.customer_id === verifiedCustId) return true;
 
-      const note = (r.note || "").toLowerCase();
-      if (email && note.includes(email)) return true;
+      const note = r.note || "";
+      if (emailRegex && emailRegex.test(note)) return true;
 
       return false;
     });

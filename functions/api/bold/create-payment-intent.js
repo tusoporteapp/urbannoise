@@ -33,8 +33,8 @@ export async function onRequestPost(context) {
       );
     }
 
-    const identityKey = "lRI_amtz7N6CTdY-m3JWIYDmTZC2DHMaO9Oe7z5-u-U";
-    const secretKey = "zGivRzn0ym4CDxGErtEtYQ";
+    const identityKey = env?.BOLD_IDENTITY_KEY || "lRI_amtz7N6CTdY-m3JWIYDmTZC2DHMaO9Oe7z5-u-U";
+    const secretKey = env?.BOLD_SECRET_KEY || "zGivRzn0ym4CDxGErtEtYQ";
 
     // Fórmula oficial Bold: SHA256(orderId + amount + currency + secretKey) - Cálculo ultraveloz (0.01 ms)
     const rawStringToSign = `${orderId}${numAmount}${currency}${secretKey}`;

@@ -15,6 +15,23 @@ export async function onRequestPost({ request, env }) {
     const cleanInput = rawInput.trim().toLowerCase();
     const cleanDigits = rawInput.trim().replace(/\D/g, "");
 
+    const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (cleanInput.includes("@")) {
+      if (!EMAIL_REGEX.test(cleanInput) || cleanInput.length > 120) {
+        return new Response(JSON.stringify({ error: "Formato de correo electrónico inválido." }), {
+          status: 400,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        });
+      }
+    } else {
+      if (cleanDigits.length < 7 || cleanDigits.length > 15) {
+        return new Response(JSON.stringify({ error: "Ingresa un número de teléfono válido (7 a 10 dígitos) o tu correo." }), {
+          status: 400,
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        });
+      }
+    }
+
     // Buscar en Loyverse de forma estricta por correo para clientes comunes
     const foundCustomer = cleanInput.includes("@")
       ? await findLoyverseCustomer({ email: cleanInput, token: LOYVERSE_TOKEN })

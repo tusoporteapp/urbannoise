@@ -1,4 +1,5 @@
 import { findLoyverseCustomer, saveOrUpdateLoyverseCustomer, cleanColombianPhone, LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
+import { getPendingOrder } from "../_pendingOrders.js";
 
 export async function onRequestPost({ request, env }) {
   try {

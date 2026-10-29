@@ -58,16 +58,20 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
-export async function onRequestGet() {
+export async function onRequestGet({ request, env }) {
   return new Response(
     JSON.stringify({
       endpoint: "/api/loyverse/webhook",
       status: "active",
-      recentEvents: recentLoyverseWebhooks.slice(0, 10),
+      timestamp: new Date().toISOString(),
     }),
     {
       status: 200,
-      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+      },
     }
   );
 }

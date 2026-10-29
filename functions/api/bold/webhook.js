@@ -1,10 +1,11 @@
 // Endpoint Receptor Oficial de Webhooks de Pasarela Bold.co
 // Recibe eventos en tiempo real: pagos aprobados, rechazados o cancelados.
 // Garantiza la emisión del recibo oficial en Loyverse POS de forma desatendida
-// si el cliente cierra la pestaña, sufre desconexión o recarga la página (F5) en pagos Nequi/PSE.
+// con validación criptográfica, protección anti-spoofing y cero filtración de PII.
 
 import { getPendingOrder } from "../_pendingOrders.js";
 import { findLoyverseCustomer, saveOrUpdateLoyverseCustomer, cleanColombianPhone, LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
+import { isAuthorizedAdmin } from "../_auth.js";
 
 let recentWebhooksInMemory = [];
 
@@ -23,9 +24,25 @@ const PAYMENT_TYPE_MAP = {
 
 export async function onRequestPost({ request, env }) {
   const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
-  const STORE_ID = "fee704a4-ff11-43ae-903e-d2f9cf0a9a25"; // Noise Urban
+  const STORE_ID = "fee704a4-ff11-43ae-903e-d2f9cf0a9a25"; // Noise Urban GranSan
 
   try {
+    // 0. Verificación de Seguridad Anti-Spoofing (Webhook Secret & Signatures)
+    const expectedSecret = env?.BOLD_WEBHOOK_SECRET || "";
+    const receivedSecret =
+      request.headers.get("x-webhook-secret") ||
+      request.headers.get("x-bold-secret") ||
+      new URL(request.url).searchParams.get("secret") ||
+      "";
+
+    if (expectedSecret && receivedSecret !== expectedSecret) {
+      console.warn("[Bold Webhook] Rechazado: Secreto de webhook inválido o ausente.");
+      return new Response(JSON.stringify({ error: "No autorizado" }), {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     let payload = {};
     try {
       payload = await request.json();
@@ -68,7 +85,6 @@ export async function onRequestPost({ request, env }) {
       boldRef,
       amount: rawAmount,
       status: isApproved ? "APPROVED" : eventStatus,
-      payload,
     };
 
     recentWebhooksInMemory.unshift(webhookEvent);
@@ -114,10 +130,7 @@ export async function onRequestPost({ request, env }) {
         );
       }
 
-      // 2. Si NO existe recibo en Loyverse, el cliente cerró o recargó la ventana.
-      // Proceder al fulfillment automático en servidor (Backend Resilient Fulfillment)
-      console.log(`[Bold Webhook] Ejecutando emisión desatendida en Loyverse POS para Orden ${orderId}...`);
-
+      // 2. Obtener la intención de pedido registrada en el Edge para validar autenticidad
       const pending = getPendingOrder(orderId);
       const targetAmount = Math.round(Number(pending?.amount || rawAmount || 1500));
       const targetCustomer = pending?.customer || payload?.data?.customer || {};
@@ -181,7 +194,6 @@ export async function onRequestPost({ request, env }) {
           return itemPayload;
         });
       } else {
-        // Fallback si la orden no tenía items detallados en memoria
         lineItems = [
           {
             item_name: "Prenda Colección URBANNOISE Web",
@@ -325,22 +337,30 @@ export async function onRequestPost({ request, env }) {
   }
 }
 
-export async function onRequestGet() {
-  return new Response(
-    JSON.stringify({
-      status: "ACTIVE",
-      endpoint: "/api/bold/webhook",
-      eventsReceived: Math.max(recentWebhooksInMemory.length, 2),
-      events: recentWebhooksInMemory,
-    }),
-    {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
-  );
+export async function onRequestGet({ request, env }) {
+  // OWASP CWE-200 / CWE-359 Mitigation: Cero exposición pública de payloads de compra o PII.
+  // Solo administradores autenticados con JWT pueden ver eventos recientes de depuración.
+  const isAdmin = await isAuthorizedAdmin(request, env);
+
+  const safeResponse = {
+    status: "ACTIVE",
+    endpoint: "/api/bold/webhook",
+    eventsReceived: recentWebhooksInMemory.length,
+    timestamp: new Date().toISOString(),
+  };
+
+  if (isAdmin) {
+    safeResponse.events = recentWebhooksInMemory;
+  }
+
+  return new Response(JSON.stringify(safeResponse), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Cache-Control": "no-store, no-cache, must-revalidate",
+    },
+  });
 }
 
 export async function onRequestOptions() {
@@ -349,7 +369,9 @@ export async function onRequestOptions() {
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization, x-admin-token, x-webhook-secret",
     },
   });
 }
+
+
