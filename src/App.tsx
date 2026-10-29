@@ -263,15 +263,8 @@ export default function App() {
 
   const isSessionAdmin = (s: any) => {
     if (!s) return false;
-    const cleanEmail = (s.email || '').toLowerCase().trim();
-    return Boolean(
-      s.isAdmin ||
-      cleanEmail === 'urban.noice@gmail.com' ||
-      cleanEmail === 'urban.noice2023@gmail.com' ||
-      cleanEmail === 'admin@urbannoise.co' ||
-      cleanEmail === 'admin' ||
-      (s.email && isUserAdminCredentials(s.email, ''))
-    );
+    // Solo es administrador si cuenta con credencial administrativa activa validada por clave
+    return Boolean(s.isAdmin && isAdminAuthenticated());
   };
 
   const handleOpenAccount = () => {

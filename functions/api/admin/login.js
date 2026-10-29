@@ -4,14 +4,12 @@ import { signAdminToken } from "../_auth.js";
 export async function onRequestPost({ request, env }) {
   try {
     const body = await request.json();
-    const pin = body.pin || body.password || "";
-    const email = body.email || "";
-    const cleanPin = String(pin || "").trim().toUpperCase();
-    const cleanEmail = String(email || "").trim().toLowerCase();
+    const rawPass = String(body.pin || body.password || "").trim();
+    const cleanEmail = String(body.email || "").trim().toLowerCase();
 
-    if (!cleanPin) {
+    if (!rawPass || !cleanEmail) {
       return new Response(
-        JSON.stringify({ success: false, error: "La contraseña o PIN de administrador es obligatoria." }),
+        JSON.stringify({ success: false, error: "El correo y la contraseña de administrador son obligatorios." }),
         {
           status: 400,
           headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
@@ -19,21 +17,19 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
-    const isAdminEmail =
+    // 1. Verificación estricta de correo de administrador autorizado
+    const isAuthorizedAdminEmail =
       cleanEmail === "urban.noice@gmail.com" ||
-      cleanEmail === "urban.noice2023@gmail.com" ||
-      cleanEmail === "admin@urbannoise.co" ||
-      cleanEmail === "admin";
+      cleanEmail === "admin@urbannoise.co";
 
-    const allowedPins = [
-      (env?.ADMIN_PIN || "").toUpperCase(),
-      "1994",
-      "URBAN2026",
-      "URBANNOISE2026",
+    // 2. Verificación estricta de contraseña maestra autorizada (Exact Match)
+    const allowedPasswords = [
+      "8624Urban",
+      env?.ADMIN_MASTER_PASSWORD,
+      env?.ADMIN_PIN,
     ].filter(Boolean);
 
-    // Validación estricta del PIN o clave maestra administrativa
-    const isMatch = allowedPins.includes(cleanPin) || (isAdminEmail && String(pin).trim().length >= 4);
+    const isMatch = isAuthorizedAdminEmail && allowedPasswords.includes(rawPass);
 
     if (!isMatch) {
       return new Response(
@@ -60,7 +56,7 @@ export async function onRequestPost({ request, env }) {
     );
   } catch (err) {
     return new Response(
-      JSON.stringify({ success: false, error: err.message || "Error interno del servidor" }),
+      JSON.stringify({ success: false, error: "Error interno al autenticar administrador." }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },

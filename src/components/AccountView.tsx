@@ -215,18 +215,10 @@ export const AccountView: React.FC<AccountViewProps> = ({
   // Cargar sesión y pedidos al montar
   useEffect(() => {
     const session = getCustomerSession();
-    const cleanEmail = (session?.email || '').toLowerCase().trim();
-    const isAdmin = Boolean(
-      session?.isAdmin ||
-      cleanEmail === 'urban.noice@gmail.com' ||
-      cleanEmail === 'urban.noice2023@gmail.com' ||
-      cleanEmail === 'admin@urbannoise.co' ||
-      cleanEmail === 'admin'
-    );
+    const isAdmin = Boolean(session?.isAdmin && isAdminAuthenticated());
 
-    // Si el usuario es administrador, su pantalla es el CMS: abrirlo y salir de esta vista
+    // Si el usuario es administrador autenticado, su pantalla es el CMS: abrirlo y salir de esta vista
     if (isAdmin) {
-      setAdminAuthenticated(true);
       onOpenAdmin();
       onBackToHome();
       return;
@@ -332,24 +324,6 @@ export const AccountView: React.FC<AccountViewProps> = ({
       }
 
       const customer = res.customer;
-      const cleanCustEmail = (customer.email || '').toLowerCase().trim();
-      const isAdminLogin = Boolean(
-        customer.isAdmin ||
-        cleanCustEmail === 'urban.noice@gmail.com' ||
-        cleanCustEmail === 'urban.noice2023@gmail.com'
-      );
-
-      if (isAdminLogin) {
-        customer.isAdmin = true;
-        setAdminAuthenticated(true);
-        saveCustomerSession(customer);
-        setCurrentUser(customer);
-        setIsLoading(false);
-        onOpenAdmin();
-        onBackToHome();
-        return;
-      }
-
       saveCustomerSession(customer);
       setCurrentUser(customer);
       const userOrders = getCustomerOrders(customer.email);
@@ -813,8 +787,8 @@ export const AccountView: React.FC<AccountViewProps> = ({
     );
   };
 
-  // Protección: Si el usuario es administrador, no renderizar interfaz de cliente
-  if (currentUser?.isAdmin || (currentUser?.email && isUserAdminCredentials(currentUser.email, ''))) {
+  // Protección: Si el usuario es administrador autenticado con credencial activa, no renderizar interfaz de cliente
+  if (currentUser?.isAdmin && isAdminAuthenticated()) {
     return null;
   }
 

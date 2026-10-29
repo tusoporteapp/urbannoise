@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, Search, User, ShoppingBag } from 'lucide-react';
-import { getCustomerSession } from '../lib/loyverse';
+import { getCustomerSession, isAdminAuthenticated } from '../lib/loyverse';
 import { getActiveCategories } from '../lib/siteContent';
 import { CategoryCardContent } from '../types';
 
@@ -60,14 +60,7 @@ export const Header: React.FC<HeaderProps> = ({
   const isUserAdmin = () => {
     const s = getCustomerSession();
     if (!s) return false;
-    const clean = (s.email || '').toLowerCase().trim();
-    return Boolean(
-      s.isAdmin ||
-      clean === 'urban.noice@gmail.com' ||
-      clean === 'urban.noice2023@gmail.com' ||
-      clean === 'admin@urbannoise.co' ||
-      clean === 'admin'
-    );
+    return Boolean(s.isAdmin && isAdminAuthenticated());
   };
 
   return (

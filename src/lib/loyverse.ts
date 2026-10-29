@@ -660,30 +660,21 @@ export async function loginAdminWithServer(
 
 export function isUserAdminCredentials(email: string, passOrPin: string): boolean {
   const cleanEmail = (email || '').trim().toLowerCase();
-  const cleanPin = (passOrPin || '').trim().toUpperCase();
+  const rawPass = (passOrPin || '').trim();
 
-  const isAdminEmail =
+  if (!cleanEmail || !rawPass) {
+    return false;
+  }
+
+  // 1. Correo oficial de Administrador
+  const isAuthorizedEmail =
     cleanEmail === 'urban.noice@gmail.com' ||
-    cleanEmail === 'urban.noice2023@gmail.com' ||
-    cleanEmail === 'admin@urbannoise.co' ||
-    cleanEmail === 'admin';
+    cleanEmail === 'admin@urbannoise.co';
 
-  const isAdminPin =
-    cleanPin === '1994' ||
-    cleanPin === 'URBAN2026' ||
-    cleanPin === 'URBANNOISE2026';
+  // 2. Contraseña maestra oficial exacta
+  const isExactMasterPassword = rawPass === '8624Urban';
 
-  // 1. PIN maestro autorizado
-  if (cleanPin && isAdminPin) {
-    return true;
-  }
-
-  // 2. Correo oficial de Administrador con contraseña válida
-  if (isAdminEmail && passOrPin && passOrPin.trim().length >= 4) {
-    return true;
-  }
-
-  return false;
+  return Boolean(isAuthorizedEmail && isExactMasterPassword);
 }
 
 export function getCustomerSession(): CustomerUser | null {
