@@ -161,7 +161,7 @@ export async function fetchLoyverseReceipts(limit: number = 50) {
 // Consultar Clientes desde Loyverse POS (soporta filtrar solo clientes de la página web)
 export async function fetchLoyverseCustomers(limit: number = 250, webOnly: boolean = false) {
   try {
-    const query = webOnly ? `?limit=${limit}&webOnly=true` : `?limit=${limit}`;
+    const query = webOnly ? `?limit=${limit}&webOnly=true` : `?limit=${limit}&webOnly=false`;
     const res = await fetch(`/api/loyverse/customers${query}`, {
       headers: getAdminHeaders(),
     });

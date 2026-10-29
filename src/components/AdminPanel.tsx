@@ -3690,6 +3690,21 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                         <button
                           type="button"
                           onClick={() => {
+                            setCrmFilter('all');
+                            refreshCustomers('all');
+                          }}
+                          className={`px-3 py-1.5 rounded-md text-xs font-bold transition flex items-center space-x-1.5 cursor-pointer ${
+                            crmFilter === 'all'
+                              ? 'bg-[#F5F2E4] text-[#101013] shadow'
+                              : 'text-white/70 hover:text-white'
+                          }`}
+                        >
+                          <Users className="w-3.5 h-3.5" />
+                          <span>Todos los clientes {allCustomersCount > 0 ? `(${allCustomersCount})` : ''}</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
                             setCrmFilter('subscribers');
                             fetchSubscribers();
                           }}
@@ -3978,8 +3993,16 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                           })
                           .map((c, idx) => {
                             const isWebCustomer =
-                              (c.note && c.note.toLowerCase().includes('web')) ||
-                              (c.customer_code && c.customer_code.toUpperCase().startsWith('WEB'));
+                              Boolean(c.email) ||
+                              (c.customer_code && c.customer_code.toUpperCase().startsWith('WEB')) ||
+                              (c.note && (
+                                c.note.toLowerCase().includes('web') ||
+                                c.note.toLowerCase().includes('[g:') ||
+                                c.note.toLowerCase().includes('|o:') ||
+                                c.note.toLowerCase().includes('un-') ||
+                                c.note.toLowerCase().includes('orden') ||
+                                c.note.toLowerCase().includes('bld-')
+                              ));
 
                             return (
                               <div key={c.id || idx} className="p-4 hover:bg-white/5 transition flex flex-col md:flex-row md:items-center justify-between gap-3">
