@@ -150,7 +150,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 }) => {
   // Estado de Autenticación
   const [authenticated, setAuthenticated] = useState<boolean>(isAdminAuthenticated());
-  const [pinInput, setPinInput] = useState<string>('');
+  const [adminEmail, setAdminEmail] = useState<string>('');
+  const [adminPassword, setAdminPassword] = useState<string>('');
+  const [showAdminPassword, setShowAdminPassword] = useState<boolean>(false);
+  const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string>('');
 
   // Pestaña Activa del CMS Studio
@@ -550,27 +553,52 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthError('');
-    const res = await loginAdminWithServer(pinInput, pinInput);
-    if (res.success) {
-      setAdminAuthenticated(true);
-      setAuthenticated(true);
-      setPinInput('');
-    } else {
-      // Fallback para desarrollo si el servidor aún no tiene endpoint activo
-      if (isUserAdminCredentials(pinInput, pinInput)) {
+    const cleanEmail = adminEmail.trim().toLowerCase();
+    const cleanPassword = adminPassword.trim();
+
+    if (!cleanEmail || !cleanPassword) {
+      setAuthError('Por favor ingresa tu correo y contraseña de administrador.');
+      return;
+    }
+
+    setIsLoggingIn(true);
+    try {
+      const res = await loginAdminWithServer(cleanPassword, cleanEmail);
+      if (res.success) {
         setAdminAuthenticated(true);
         setAuthenticated(true);
-        setPinInput('');
+        setAdminPassword('');
+        setAuthError('');
       } else {
-        setAuthError(res.error || 'PIN o credenciales de administrador no válidas.');
+        // Fallback local con credenciales maestras
+        if (isUserAdminCredentials(cleanEmail, cleanPassword)) {
+          setAdminAuthenticated(true);
+          setAuthenticated(true);
+          setAdminPassword('');
+          setAuthError('');
+        } else {
+          setAuthError(res.error || 'Correo o contraseña de administrador no válidos.');
+        }
       }
+    } catch {
+      if (isUserAdminCredentials(cleanEmail, cleanPassword)) {
+        setAdminAuthenticated(true);
+        setAuthenticated(true);
+        setAdminPassword('');
+        setAuthError('');
+      } else {
+        setAuthError('Error al conectar o credenciales no válidas.');
+      }
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
   const handleLogout = () => {
     clearAllAdminSessions();
     setAuthenticated(false);
-    setPinInput('');
+    setAdminEmail('');
+    setAdminPassword('');
     setAuthError('');
     if (onLogout) {
       onLogout();
@@ -2104,30 +2132,65 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
             </div>
 
             <div>
-              <h2 className="text-xl font-black uppercase tracking-tight text-[#F5F2E4]">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[#D9C4AB] bg-[#D9C4AB]/10 px-2.5 py-1 rounded-full border border-[#D9C4AB]/20 inline-block mb-1">
+                URBANNOISE CMS • ACCESO PRIVADO
+              </span>
+              <h2 className="text-xl font-black uppercase tracking-tight text-[#F5F2E4] mt-1">
                 ACCESO RESTRINGIDO • CMS STUDIO
               </h2>
               <p className="text-xs text-white/60 mt-1">
-                Panel de control exclusivo para administradores de URBANNOISE S.A.S.
+                Panel exclusivo de administración y control operativo.
               </p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-3.5 text-left">
               <div>
-                <label htmlFor="admin-pin-input" className="block text-[11px] uppercase font-bold text-white/70 mb-1">
-                  Ingresa tu PIN o Correo Administrador
+                <label htmlFor="admin-email-input" className="block text-[11px] uppercase font-bold text-white/70 mb-1">
+                  Correo Electrónico de Administrador
                 </label>
-                <input
-                  id="admin-pin-input"
-                  name="adminPin"
-                  type="password"
-                  autoComplete="current-password"
-                  value={pinInput}
-                  onChange={(e) => setPinInput(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full bg-black/60 border border-white/20 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#D9C4AB] font-mono tracking-wider"
-                  autoFocus
-                />
+                <div className="relative">
+                  <Mail className="w-4 h-4 text-white/40 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    id="admin-email-input"
+                    name="adminEmail"
+                    type="email"
+                    autoComplete="username email"
+                    required
+                    value={adminEmail}
+                    onChange={(e) => setAdminEmail(e.target.value)}
+                    placeholder="admin@urbannoise.co"
+                    className="w-full bg-black/60 border border-white/20 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-[#D9C4AB]"
+                    autoFocus
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="admin-password-input" className="block text-[11px] uppercase font-bold text-white/70 mb-1 flex items-center justify-between">
+                  <span>Contraseña Maestra</span>
+                  <span className="text-[10px] text-[#D9C4AB] font-normal lowercase">credencial segura</span>
+                </label>
+                <div className="relative">
+                  <Lock className="w-4 h-4 text-white/40 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <input
+                    id="admin-password-input"
+                    name="adminPassword"
+                    type={showAdminPassword ? 'text' : 'password'}
+                    autoComplete="current-password"
+                    required
+                    value={adminPassword}
+                    onChange={(e) => setAdminPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full bg-black/60 border border-white/20 rounded-lg pl-9 pr-10 py-2.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-[#D9C4AB] font-mono tracking-wider"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowAdminPassword(!showAdminPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white cursor-pointer"
+                  >
+                    {showAdminPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
 
               {authError && (
@@ -2139,9 +2202,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 
               <button
                 type="submit"
-                className="w-full bg-[#F5F2E4] hover:bg-[#D9C4AB] text-[#101013] font-black text-xs uppercase tracking-widest py-3 rounded-lg transition cursor-pointer shadow-lg"
+                disabled={isLoggingIn}
+                className="w-full bg-[#F5F2E4] hover:bg-[#D9C4AB] text-[#101013] font-black text-xs uppercase tracking-widest py-3 rounded-lg transition cursor-pointer shadow-lg disabled:opacity-60 flex items-center justify-center space-x-2"
               >
-                INGRESAR AL STUDIO CMS
+                <span>{isLoggingIn ? 'Verificando credenciales...' : 'INGRESAR AL STUDIO CMS'}</span>
               </button>
             </form>
 

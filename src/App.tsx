@@ -57,7 +57,68 @@ export default function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
-  const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
+  const [isAdminOpen, setIsAdminOpen] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      return (
+        path === '/cms' ||
+        path === '/cms/' ||
+        path === '/admin' ||
+        path === '/admin/' ||
+        hash === '#cms' ||
+        hash === '#admin'
+      );
+    }
+    return false;
+  });
+
+  // Gestión de Indexación y URL para el CMS Studio (/cms) - Anti-Indexación en Google
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    let metaRobots = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+    if (!metaRobots) {
+      metaRobots = document.createElement('meta');
+      metaRobots.name = 'robots';
+      document.head.appendChild(metaRobots);
+    }
+
+    const currentPath = window.location.pathname.toLowerCase();
+    const isCmsRoute =
+      isAdminOpen ||
+      currentPath.startsWith('/cms') ||
+      currentPath.startsWith('/admin');
+
+    if (isCmsRoute) {
+      // Bloquear 100% la indexación en Google y motores de búsqueda para la ruta /cms
+      metaRobots.setAttribute('content', 'noindex, nofollow, noarchive, nosnippet');
+      document.title = 'CMS Studio • URBANNOISE (Privado)';
+
+      try {
+        if (window.location.pathname !== '/cms') {
+          window.history.replaceState({ view: 'cms' }, '', '/cms');
+        }
+      } catch {}
+    } else {
+      // Restaurar indexación normal y SEO para la tienda pública
+      metaRobots.setAttribute(
+        'content',
+        'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+      );
+      document.title = 'URBANNOISE | Marca de Ropa Colombiana Oversize & Streetwear Bogotá';
+
+      try {
+        if (
+          window.location.pathname === '/cms' ||
+          window.location.pathname === '/cms/' ||
+          window.location.pathname.startsWith('/admin')
+        ) {
+          window.history.pushState(null, '', '/');
+        }
+      } catch {}
+    }
+  }, [isAdminOpen]);
   const [isPoliciesOpen, setIsPoliciesOpen] = useState<boolean>(false);
   const [policiesInitialTab, setPoliciesInitialTab] = useState<string>('terminos');
   const [accountInitialTab, setAccountInitialTab] = useState<'orders' | 'wishlist' | 'profile'>('orders');
@@ -528,14 +589,24 @@ export default function App() {
 
     // Comportamiento al cargar o recargar la página por primera vez:
     const hash = window.location.hash;
+    const pathname = window.location.pathname.toLowerCase();
     const session = getCustomerSession();
     const isCurrentlyLoggedInAdmin = isSessionAdmin(session);
 
-    if (hash === '#admin' || hash === '#cms') {
+    if (
+      pathname === '/cms' ||
+      pathname === '/cms/' ||
+      pathname === '/admin' ||
+      pathname === '/admin/' ||
+      hash === '#admin' ||
+      hash === '#cms'
+    ) {
       setIsAdminOpen(true);
       setCurrentView('home');
       try {
-        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        if (window.location.pathname !== '/cms') {
+          window.history.replaceState({ view: 'cms' }, '', '/cms');
+        }
       } catch {}
     } else if (
       hash === '#cuenta' ||
@@ -712,8 +783,16 @@ export default function App() {
         }
       } catch {}
 
-      // 2. Navegación de vistas por hash
-      if (window.location.hash === '#admin' || window.location.hash === '#cms') {
+      // 2. Navegación de vistas por pathname y hash
+      const currentPath = window.location.pathname.toLowerCase();
+      if (
+        currentPath === '/cms' ||
+        currentPath === '/cms/' ||
+        currentPath === '/admin' ||
+        currentPath === '/admin/' ||
+        window.location.hash === '#admin' ||
+        window.location.hash === '#cms'
+      ) {
         setIsAdminOpen(true);
         setCurrentView('home');
       } else if (
@@ -1337,6 +1416,15 @@ export default function App() {
         isOpen={isAdminOpen}
         onClose={() => {
           setIsAdminOpen(false);
+          try {
+            if (
+              window.location.pathname === '/cms' ||
+              window.location.pathname === '/cms/' ||
+              window.location.pathname.startsWith('/admin')
+            ) {
+              window.history.pushState(null, '', '/');
+            }
+          } catch {}
           if (currentView === 'account') {
             handleBackToHome(true);
           }
@@ -1346,6 +1434,15 @@ export default function App() {
         onLogout={() => {
           setIsAdminOpen(false);
           clearAllAdminSessions();
+          try {
+            if (
+              window.location.pathname === '/cms' ||
+              window.location.pathname === '/cms/' ||
+              window.location.pathname.startsWith('/admin')
+            ) {
+              window.history.pushState(null, '', '/');
+            }
+          } catch {}
           handleBackToHome(true);
         }}
       />

@@ -3,6 +3,22 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /admin
+Disallow: /admin/
+Disallow: /cms
+Disallow: /cms/
+
+# Motores de búsqueda específicos (Googlebot, Bingbot, etc.)
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /cms/
+Disallow: /cms
+Disallow: /api/
+
+User-agent: Bingbot
+Disallow: /admin/
+Disallow: /cms/
+Disallow: /cms
+Disallow: /api/
 
 # Sitemap Oficial
 Sitemap: https://www.urbannoise.co/sitemap.xml

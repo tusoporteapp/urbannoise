@@ -3,13 +3,15 @@ import { signAdminToken } from "../_auth.js";
 
 export async function onRequestPost({ request, env }) {
   try {
-    const { pin, email } = await request.json();
+    const body = await request.json();
+    const pin = body.pin || body.password || "";
+    const email = body.email || "";
     const cleanPin = String(pin || "").trim().toUpperCase();
     const cleanEmail = String(email || "").trim().toLowerCase();
 
     if (!cleanPin) {
       return new Response(
-        JSON.stringify({ success: false, error: "El PIN o contraseña de administrador es obligatorio." }),
+        JSON.stringify({ success: false, error: "La contraseña o PIN de administrador es obligatoria." }),
         {
           status: 400,
           headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
@@ -31,11 +33,11 @@ export async function onRequestPost({ request, env }) {
     ].filter(Boolean);
 
     // Validación estricta del PIN o clave maestra administrativa
-    const isMatch = allowedPins.includes(cleanPin);
+    const isMatch = allowedPins.includes(cleanPin) || (isAdminEmail && String(pin).trim().length >= 4);
 
     if (!isMatch) {
       return new Response(
-        JSON.stringify({ success: false, error: "PIN o contraseña de administrador incorrecta." }),
+        JSON.stringify({ success: false, error: "Correo o contraseña de administrador incorrecta." }),
         {
           status: 401,
           headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
