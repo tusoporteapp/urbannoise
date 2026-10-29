@@ -42,6 +42,8 @@ import {
   clearCustomerSession,
   clearAllAdminSessions,
   setAdminAuthenticated,
+  isAdminAuthenticated,
+  loginAdminWithServer,
   clearAdminToken,
   registerWebCustomer,
   loginWebCustomer,

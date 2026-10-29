@@ -1134,15 +1134,20 @@ export default function App() {
           onOpenSearch={() => setIsSearchOpen(true)}
         />
       ) : currentView === 'account' ? (
-        <AccountView
-          onBackToHome={() => handleBackToHome(true)}
-          onOpenAdmin={() => setIsAdminOpen(true)}
-          onOpenCatalog={() => handleOpenMarketplace('all')}
-          products={availableProducts}
-          onAddToCart={handleAddToCart}
-          onQuickView={handleOpenProduct}
-          initialTab={accountInitialTab}
-        />
+        <ErrorBoundary
+          fallbackTitle="Portal de Clientes URBANNOISE"
+          onReset={() => handleBackToHome(true)}
+        >
+          <AccountView
+            onBackToHome={() => handleBackToHome(true)}
+            onOpenAdmin={() => setIsAdminOpen(true)}
+            onOpenCatalog={() => handleOpenMarketplace('all')}
+            products={availableProducts}
+            onAddToCart={handleAddToCart}
+            onQuickView={handleOpenProduct}
+            initialTab={accountInitialTab}
+          />
+        </ErrorBoundary>
       ) : currentView === 'marketplace' ? (
         <CategoryMarketplaceView
           products={availableProducts}

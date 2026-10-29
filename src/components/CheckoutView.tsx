@@ -682,6 +682,20 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
         targetEmail
       );
 
+      // Garantizar que la sesión del cliente quede activa en el navegador para consultar sus pedidos en #cuenta
+      const activeSession = getCustomerSession();
+      saveCustomerSession({
+        id: syncResult.loyverseCustomerId || activeSession?.id || `web-cust-${targetEmail}`,
+        loyverseCustomerId: syncResult.loyverseCustomerId || activeSession?.loyverseCustomerId,
+        name: pending.customer?.name || activeSession?.name || `${firstName} ${lastName}`.trim() || 'Cliente URBANNOISE',
+        email: targetEmail,
+        phone: pending.customer?.phone || activeSession?.phone || phone,
+        document: pending.customer?.document || activeSession?.document || documentId,
+        address: pending.customer?.address || activeSession?.address || address,
+        city: pending.customer?.city || activeSession?.city || city,
+        createdAt: activeSession?.createdAt || new Date().toISOString(),
+      });
+
       clearPendingCheckout();
       onClearCart();
       setIsVerifyingReturn(false);
