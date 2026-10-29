@@ -4,6 +4,7 @@
 import { LOYVERSE_DEFAULT_TOKEN } from "../_loyverse.js";
 
 const DEFAULT_STORE_ID = "fee704a4-ff11-43ae-903e-d2f9cf0a9a25"; // Tienda Noise Urban GranSan
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export async function onRequestGet({ request, env }) {
   try {
@@ -29,48 +30,35 @@ export async function onRequestGet({ request, env }) {
       );
     }
 
+    // Filtrar estrictamente solo UUIDs válidos para la API de Loyverse
+    const validUuidVariants = variantIds.filter((id) => UUID_REGEX.test(id));
+
     const token = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
-
-    // Llamada puntual a Loyverse filtrando exclusivamente por los variant_ids de la prenda
-    const loyverseUrl = `https://api.loyverse.com/v1.0/inventory?variant_ids=${encodeURIComponent(variantIds.join(","))}`;
-
-    const res = await fetch(loyverseUrl, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!res.ok) {
-      const errText = await res.text();
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: `Error de Loyverse API: ${res.status}`,
-          details: errText,
-        }),
-        {
-          status: res.status,
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
-    }
-
-    const data = await res.json();
-    const levels = data.inventory_levels || [];
-
-    // Mapear stock real para la tienda GranSan
     const stockMap = {};
     let totalStock = 0;
 
-    for (const lvl of levels) {
-      if (lvl.variant_id && (!storeId || lvl.store_id === storeId)) {
-        const qty = Number(lvl.in_stock) || 0;
-        stockMap[lvl.variant_id] = qty;
-        totalStock += qty;
+    if (validUuidVariants.length > 0) {
+      // Llamada puntual a Loyverse filtrando exclusivamente por los UUIDs válidos de la prenda
+      const loyverseUrl = `https://api.loyverse.com/v1.0/inventory?variant_ids=${encodeURIComponent(validUuidVariants.join(","))}`;
+
+      const res = await fetch(loyverseUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        const levels = data.inventory_levels || [];
+
+        for (const lvl of levels) {
+          if (lvl.variant_id && (!storeId || lvl.store_id === storeId)) {
+            const qty = Number(lvl.in_stock) || 0;
+            stockMap[lvl.variant_id] = qty;
+            totalStock += qty;
+          }
+        }
       }
     }
 
