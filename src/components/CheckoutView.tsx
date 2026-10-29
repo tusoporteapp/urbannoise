@@ -144,6 +144,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
   const [orderHoneypot, setOrderHoneypot] = useState('');
   const [boldGatewayConfig, setBoldGatewayConfig] = useState<BoldServerConfig | null>(null);
   const [boldRedirectError, setBoldRedirectError] = useState<string>('');
+  const [isBoldModalWaiting, setIsBoldModalWaiting] = useState<boolean>(false);
 
   // Modal Push para crear contraseña cuando un cliente invitado compra
   const [showPasswordPushModal, setShowPasswordPushModal] = useState(false);
@@ -349,6 +350,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
             if (isApproved) {
               completeReturningOrder(pending, pending.orderId || orderId);
             } else if (d.status === 'rejected' || d.action === 'PAYMENT_REJECTED') {
+              setIsBoldModalWaiting(false);
               setBoldRedirectError('El pago en Bold.co fue cancelado o rechazado.');
             }
           }
@@ -361,6 +363,40 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
     window.addEventListener('message', handleBoldModalEvent);
     return () => window.removeEventListener('message', handleBoldModalEvent);
   }, [orderId]);
+
+  // Escudo Anti-F5 y Prevención de Recarga Accidental durante la transacción
+  React.useEffect(() => {
+    const isTransactionInProgress = isSubmitting || isBoldModalWaiting;
+    if (!isTransactionInProgress || orderComplete) return;
+
+    // 1. Advertencia nativa al intentar cerrar o recargar la pestaña
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = 'Tu pago está en proceso de verificación bancaria. Si recargas o sales ahora, la confirmación podría demorarse.';
+      return e.returnValue;
+    };
+
+    // 2. Interceptar teclas de recarga (F5, Ctrl+R, Cmd+R)
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.key === 'F5' ||
+        (e.ctrlKey && (e.key === 'r' || e.key === 'R')) ||
+        (e.metaKey && (e.key === 'r' || e.key === 'R'))
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.warn('[Escudo Anti-F5] Recarga de página prevenida mientras la pasarela procesa el pago.');
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isSubmitting, isBoldModalWaiting, orderComplete]);
 
   if (!isOpen) return null;
 
@@ -377,6 +413,46 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
     : 0;
 
   const total = Math.max(0, subtotal - discountValue);
+
+  // Obtiene los datos dinámicos (monto y método) para el escudo visual anti-estrés
+  const getWaitingPaymentInfo = () => {
+    const formattedAmount = formatCOP(total || finalOrderAmount || 1500);
+    switch (paymentMethod) {
+      case 'bold_nequi':
+        return {
+          title: 'Esperando confirmación en tu App Nequi',
+          methodName: 'Nequi',
+          instructions: 'Abre tu aplicación Nequi en tu celular, ingresa a notificaciones y autoriza el débito.',
+          amountText: formattedAmount,
+          icon: 'nequi',
+        };
+      case 'bold_pse':
+      case 'bold_bancolombia':
+        return {
+          title: 'Esperando confirmación bancaria en PSE',
+          methodName: 'PSE / Bancolombia',
+          instructions: 'Completa la autorización con tu entidad bancaria. Estamos conectados en vivo esperando la confirmación.',
+          amountText: formattedAmount,
+          icon: 'pse',
+        };
+      case 'bold_card':
+        return {
+          title: 'Validando transacción con tu banco emisor',
+          methodName: 'Tarjeta de Crédito / Débito',
+          instructions: 'Tu entidad bancaria está procesando el cobro seguro y validando los sistemas de seguridad.',
+          amountText: formattedAmount,
+          icon: 'card',
+        };
+      default:
+        return {
+          title: 'Transacción segura en curso con Pasarela Bold.co',
+          methodName: 'Pasarela Bold.co',
+          instructions: 'Estamos sincronizados en tiempo real con Bold.co esperando la aprobación de tu pago.',
+          amountText: formattedAmount,
+          icon: 'shield',
+        };
+    }
+  };
 
   const handleApplyCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -448,6 +524,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
 
   const completeReturningOrder = async (pending: any, confirmedOrderId: string) => {
     setIsSubmitting(true);
+    setIsBoldModalWaiting(false);
     setBoldProcessingStep('Confirmando pago aprobado por Bold.co y emitiendo recibo...');
     try {
       const resolvedAmount = Number(pending.amount || pending.totals?.total || total || 1500);
@@ -574,6 +651,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
       setOrderComplete(true);
     } finally {
       setIsSubmitting(false);
+      setIsBoldModalWaiting(false);
     }
   };
 
@@ -815,9 +893,11 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
 
         if (opened) {
           setIsSubmitting(false);
+          setIsBoldModalWaiting(true);
           return;
         } else {
           setIsSubmitting(false);
+          setIsBoldModalWaiting(false);
           setBoldRedirectError('No se pudo abrir la ventana emergente de pago de Bold.co. Por favor verifica que tu navegador permita ventanas emergentes o recarga la página.');
           return;
         }
@@ -1169,6 +1249,65 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
           </button>
         </div>
       </header>
+
+      {/* Banner Escudo Dinámico Anti-Estrés y Anti-F5 */}
+      {isBoldModalWaiting && !orderComplete && (
+        <aside
+          role="status"
+          aria-live="polite"
+          className="bg-[#101013] text-white border-b-2 border-emerald-500 shadow-2xl px-3 sm:px-8 py-3.5 sm:py-4 sticky top-[49px] sm:top-[57px] z-40 animate-in slide-in-from-top duration-300"
+        >
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4">
+            <div className="flex items-start sm:items-center space-x-3 text-left w-full">
+              <div className="relative flex-shrink-0 mt-0.5 sm:mt-0">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center">
+                  <div className="w-3 h-3 bg-emerald-400 rounded-full animate-ping absolute"></div>
+                  <ShieldCheck className="w-5 h-5 text-emerald-400 relative z-10" />
+                </div>
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center space-x-2">
+                  <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-emerald-400">
+                    Sincronización en vivo • Pasarela Bold.co
+                  </span>
+                  <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                </div>
+                <h4 className="text-xs sm:text-sm font-extrabold text-[#F5F2E4] leading-tight mt-0.5">
+                  {getWaitingPaymentInfo().title} por <span className="text-emerald-400 font-mono font-black">{getWaitingPaymentInfo().amountText}</span>
+                </h4>
+                <p className="text-[11px] text-gray-300 mt-1 leading-snug">
+                  {getWaitingPaymentInfo().instructions} <span className="font-bold text-amber-300">Por favor no recargues ni cierres esta pantalla.</span>
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between md:justify-end w-full md:w-auto space-x-2 border-t border-gray-800 md:border-0 pt-2 md:pt-0 flex-shrink-0">
+              <div className="text-[10px] text-gray-400 flex items-center space-x-1">
+                <Lock className="w-3 h-3 text-emerald-400" />
+                <span className="font-semibold">Vigilado SuperFinanciera</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const pending = getPendingCheckout();
+                  if (pending?.orderId) {
+                    fetch(`/api/bold/order-status?orderId=${encodeURIComponent(pending.orderId)}`)
+                      .then((r) => r.json())
+                      .then((res) => {
+                        if (res?.status === 'APPROVED') {
+                          completeReturningOrder(pending, pending.orderId);
+                        }
+                      });
+                  }
+                }}
+                className="text-[10px] font-bold uppercase tracking-wider bg-white/10 hover:bg-white/20 text-[#F5F2E4] px-2.5 py-1 rounded transition border border-white/20 flex items-center space-x-1 cursor-pointer"
+              >
+                <span>Verificar Pago</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+      )}
 
       {/* Pantalla de Confirmación de Pedido Exitoso con Voucher Oficial Bold.co */}
       {orderComplete ? (
