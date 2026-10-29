@@ -36,7 +36,7 @@ export async function onRequestGet({ request, env }) {
     const data = await res.json();
     const allReceipts = data.receipts || [];
 
-    // Filtrar estrictamente SOLO ventas realizadas desde la página web
+    // Filtrar estrictamente SOLO ventas realizadas desde la página web y ordenar por más reciente primero
     const webReceipts = allReceipts.filter((r) => {
       const note = (r.note || "").toLowerCase();
       const order = (r.order || "").toLowerCase();
@@ -48,6 +48,16 @@ export async function onRequestGet({ request, env }) {
         source === "sitioweb" ||
         order.startsWith("un-")
       );
+    });
+
+    // Orden cronológico estricto: la orden más reciente siempre de primera (DESC)
+    webReceipts.sort((a, b) => {
+      const timeA = new Date(a.created_at || a.receipt_date || 0).getTime();
+      const timeB = new Date(b.created_at || b.receipt_date || 0).getTime();
+      if (timeA !== timeB) return timeB - timeA;
+      const numA = parseInt(String(a.receipt_number || a.order || "").replace(/\D/g, ""), 10) || 0;
+      const numB = parseInt(String(b.receipt_number || b.order || "").replace(/\D/g, ""), 10) || 0;
+      return numB - numA;
     });
 
     return new Response(JSON.stringify({ receipts: webReceipts }), {

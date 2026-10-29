@@ -197,6 +197,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
   // Datos de Módulos Loyverse
   const [receiptsList, setReceiptsList] = useState<any[]>([]);
   const [isLoadingReceipts, setIsLoadingReceipts] = useState<boolean>(false);
+  const [receiptsStatusFilter, setReceiptsStatusFilter] = useState<'all' | 'pending_shipping' | 'shipped'>('all');
   const [customersList, setCustomersList] = useState<any[]>([]);
   const [isLoadingCustomers, setIsLoadingCustomers] = useState<boolean>(false);
   const [crmFilter, setCrmFilter] = useState<'web' | 'all' | 'subscribers'>('web');
@@ -1640,7 +1641,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         ord.totals?.total ??
         itemsList.reduce((acc: number, curr: any) => acc + (Number(curr.total) || 0), 0)
       );
-      const resolvedCreatedAt = ord.createdAt || ord.created_at || (ord.timestamp ? new Date(ord.timestamp).toISOString() : new Date().toISOString());
+      const resolvedCreatedAt = ord.createdAt || ord.created_at || (ord.timestamp ? new Date(ord.timestamp).toISOString() : (ord.receipt_date || ord.date || new Date(0).toISOString()));
 
       return {
         ...ord,
@@ -1654,6 +1655,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         amount: totalAmount,
         payment_type: ord.paymentMethod || ord.payments?.[0]?.name || 'Pasarela Bold / Web',
         created_at: resolvedCreatedAt,
+        receipt_date: ord.receipt_date || resolvedCreatedAt,
         items: itemsList,
       };
     });
@@ -1693,6 +1695,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
         if ((!combined[existingIdx].items || combined[existingIdx].items.length === 0) && parsedItems.length > 0) {
           combined[existingIdx].items = parsedItems;
         }
+        if (lr.created_at || lr.receipt_date) {
+          combined[existingIdx].created_at = lr.created_at || lr.receipt_date;
+        }
         // Enriquecer la orden existente con todos los datos resueltos del cliente
         combined[existingIdx] = {
           ...combined[existingIdx],
@@ -1708,10 +1713,48 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
           receipt_number: lr.receipt_number,
           total_money: Number(lr.total_money || 0),
           payment_type: lr.payments?.[0]?.name || lr.paymentMethod || lr.payment_type || 'Bold.co',
+          created_at: lr.created_at || lr.receipt_date || new Date().toISOString(),
+          receipt_date: lr.receipt_date || lr.created_at,
           items: parsedItems,
         });
       }
     }
+
+    // Orden cronológico estricto: pedidos recién llegados siempre de primeros (DESC)
+    combined.sort((a, b) => {
+      const getTimestamp = (item: any) => {
+        if (item.created_at) {
+          const t = new Date(item.created_at).getTime();
+          if (!isNaN(t) && t > 0) return t;
+        }
+        if (item.receipt_date) {
+          const t = new Date(item.receipt_date).getTime();
+          if (!isNaN(t) && t > 0) return t;
+        }
+        if (item.createdAt) {
+          const t = new Date(item.createdAt).getTime();
+          if (!isNaN(t) && t > 0) return t;
+        }
+        if (item.timestamp) {
+          const t = Number(item.timestamp);
+          if (!isNaN(t) && t > 0) return t;
+        }
+        if (item.date) {
+          const t = new Date(item.date).getTime();
+          if (!isNaN(t) && t > 0) return t;
+        }
+        const num = parseInt(String(item.receipt_number || item.orderId || '').replace(/\D/g, ''), 10);
+        return isNaN(num) ? 0 : num * 1000;
+      };
+
+      const timeA = getTimestamp(a);
+      const timeB = getTimestamp(b);
+      if (timeA !== timeB) return timeB - timeA;
+
+      const numA = parseInt(String(a.receipt_number || '').replace(/\D/g, ''), 10) || 0;
+      const numB = parseInt(String(b.receipt_number || '').replace(/\D/g, ''), 10) || 0;
+      return numB - numA;
+    });
 
     return combined;
   }, [recentOrdersList, receiptsList, customersList]);
@@ -3194,7 +3237,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
 
                   {/* Listado de Recibos Web */}
                   <div className="bg-[#14151D] border border-white/10 rounded-xl overflow-hidden">
-                    <div className="p-3.5 border-b border-white/10 flex items-center justify-between gap-3">
+                    {/* Filtros de Estado y Buscador de Recibos */}
+                    <div className="p-3.5 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-black/20">
                       <div className="relative flex-1 max-w-xs">
                         <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
                         <input
@@ -3207,6 +3251,62 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                           placeholder="Buscar por #REC, pedido o cliente..."
                           className="w-full bg-black/50 border border-white/15 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-[#D9C4AB]"
                         />
+                      </div>
+
+                      {/* Selector Rápido: Quién ha pagado / Quién requiere guía / Despachados */}
+                      <div className="flex items-center gap-1.5 overflow-x-auto">
+                        <button
+                          type="button"
+                          onClick={() => setReceiptsStatusFilter('all')}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                            receiptsStatusFilter === 'all'
+                              ? 'bg-[#F5F2E4] text-[#101013] shadow'
+                              : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/5'
+                          }`}
+                        >
+                          <span>Todos</span>
+                          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
+                            receiptsStatusFilter === 'all' ? 'bg-[#101013] text-[#F5F2E4]' : 'bg-white/10 text-white/60'
+                          }`}>
+                            {webReceiptsList.length}
+                          </span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => setReceiptsStatusFilter('pending_shipping')}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                            receiptsStatusFilter === 'pending_shipping'
+                              ? 'bg-amber-500 text-black shadow-md shadow-amber-500/20'
+                              : 'bg-amber-500/15 text-amber-300 border border-amber-500/30 hover:bg-amber-500/25'
+                          }`}
+                        >
+                          <AlertTriangle className="w-3 h-3 text-amber-400" />
+                          <span>⚠️ Requiere Guía</span>
+                          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-bold ${
+                            receiptsStatusFilter === 'pending_shipping' ? 'bg-black text-amber-300' : 'bg-amber-500/30 text-amber-200'
+                          }`}>
+                            {webReceiptsList.filter((r) => !r.trackingNumber).length}
+                          </span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => setReceiptsStatusFilter('shipped')}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 cursor-pointer ${
+                            receiptsStatusFilter === 'shipped'
+                              ? 'bg-emerald-500 text-black shadow-md shadow-emerald-500/20'
+                              : 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/25'
+                          }`}
+                        >
+                          <Truck className="w-3 h-3 text-emerald-400" />
+                          <span>✅ Despachados</span>
+                          <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-bold ${
+                            receiptsStatusFilter === 'shipped' ? 'bg-black text-emerald-300' : 'bg-emerald-500/30 text-emerald-200'
+                          }`}>
+                            {webReceiptsList.filter((r) => Boolean(r.trackingNumber)).length}
+                          </span>
+                        </button>
                       </div>
                     </div>
 
@@ -3222,6 +3322,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                       <div className="divide-y divide-white/5 text-xs">
                         {webReceiptsList
                           .filter((r) => {
+                            if (receiptsStatusFilter === 'pending_shipping' && r.trackingNumber) return false;
+                            if (receiptsStatusFilter === 'shipped' && !r.trackingNumber) return false;
+
                             const q = receiptsSearch.toLowerCase();
                             const num = (r.receipt_number || r.orderId || '').toLowerCase();
                             const cust = (r.customer_name || r.customer?.name || '').toLowerCase();
@@ -3273,32 +3376,34 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                                 key={orderKey}
                                 className="p-4 hover:bg-white/[0.03] transition border-b border-white/5 last:border-b-0 space-y-3"
                               >
-                                {/* Fila Superior: Badge Recibo, Estado, Guía y Total */}
+                                {/* Fila Superior: Badge Recibo, Pago Aprobado, Estado Guía y Total */}
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                   <div className="flex flex-wrap items-center gap-2">
-                                    <span className="font-mono font-black text-white bg-[#F5F2E4] text-[#101013] px-2.5 py-0.5 rounded text-xs shadow-sm">
-                                      {r.receipt_number || `#WEB-${r.orderId || '2026-' + idx}`}
+                                    {/* Número de Recibo Claramente Legible con Contraste Óptimo */}
+                                    <span className="font-mono font-black text-[#101013] bg-[#F5F2E4] border border-[#D9C4AB] px-2.5 py-0.5 rounded text-xs shadow-sm flex items-center space-x-1">
+                                      <Receipt className="w-3.5 h-3.5 text-[#101013]" />
+                                      <span>#{r.receipt_number || (r.orderId ? r.orderId.replace(/^UN-/, '') : 'WEB')}</span>
                                     </span>
                                     {r.orderId && r.receipt_number && r.receipt_number !== r.orderId && (
-                                      <span className="font-mono text-[11px] text-[#D9C4AB] bg-black/50 border border-white/10 px-2 py-0.5 rounded">
+                                      <span className="font-mono text-[11px] text-[#D9C4AB] bg-black/60 border border-white/10 px-2 py-0.5 rounded">
                                         Ref: {r.orderId}
                                       </span>
                                     )}
-                                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${
-                                      r.trackingNumber
-                                        ? 'text-emerald-400 bg-emerald-500/20'
-                                        : 'text-amber-400 bg-amber-500/20'
-                                    }`}>
-                                      {r.trackingNumber ? 'ENVIADO / DESPACHADO' : 'EN PREPARACIÓN'}
+                                    {/* Badge de Pago Confirmado y Verificado */}
+                                    <span className="inline-flex items-center space-x-1 text-[10px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-950/70 border border-emerald-500/40 px-2 py-0.5 rounded shadow-sm">
+                                      <CheckCircle2 className="w-3 h-3 text-emerald-400 flex-shrink-0" />
+                                      <span>PAGADO ({r.paymentMethod || r.payment_type || 'BOLD.CO'})</span>
                                     </span>
+                                    {/* Estado de Logística y Despacho */}
                                     {r.trackingNumber ? (
-                                      <span className="inline-flex items-center space-x-1 text-[10px] font-mono font-bold text-emerald-300 bg-emerald-900/40 border border-emerald-500/40 px-2 py-0.5 rounded">
-                                        <Truck className="w-3 h-3 text-emerald-400" />
-                                        <span>Guía {orderCarrier}: {r.trackingNumber}</span>
+                                      <span className="inline-flex items-center space-x-1 text-[10px] font-mono font-bold text-emerald-300 bg-emerald-950/60 border border-emerald-500/40 px-2.5 py-0.5 rounded">
+                                        <Truck className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                                        <span>DESPACHADO ({orderCarrier}: {r.trackingNumber})</span>
                                       </span>
                                     ) : (
-                                      <span className="text-[10px] text-amber-300 bg-amber-900/40 border border-amber-500/30 px-2 py-0.5 rounded font-bold">
-                                        Pendiente de Guía
+                                      <span className="inline-flex items-center space-x-1 text-[10px] font-black uppercase text-amber-300 bg-amber-500/20 border border-amber-500/50 px-2.5 py-0.5 rounded shadow-sm">
+                                        <AlertTriangle className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+                                        <span>⚠️ REQUIERE GUÍA DE ENVÍO</span>
                                       </span>
                                     )}
                                   </div>
@@ -3518,9 +3623,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                                             setInputGuiaValue('');
                                             setInputCarrierValue('Servientrega');
                                           }}
-                                          className="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-[#D9C4AB] border border-[#D9C4AB]/30 font-bold text-[10.5px] uppercase rounded transition flex items-center space-x-1.5 cursor-pointer"
+                                          className="px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/50 font-bold text-xs uppercase rounded transition flex items-center space-x-1.5 cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
                                         >
-                                          <Truck className="w-3 h-3 text-emerald-400" />
+                                          <Truck className="w-3.5 h-3.5 text-amber-400" />
                                           <span>Asignar Guía</span>
                                         </button>
                                       )}

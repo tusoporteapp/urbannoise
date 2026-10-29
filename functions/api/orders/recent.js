@@ -199,6 +199,16 @@ export async function onRequestGet({ request, env }) {
         };
       });
 
+    // Orden cronológico estricto: pedidos recién llegados siempre de primeros (DESC)
+    webOrders.sort((a, b) => {
+      const timeA = new Date(a.created_at || a.receipt_date || a.timestamp || 0).getTime();
+      const timeB = new Date(b.created_at || b.receipt_date || b.timestamp || 0).getTime();
+      if (timeA !== timeB) return timeB - timeA;
+      const numA = parseInt(String(a.receipt_number || a.receiptNumber || a.orderId || "").replace(/\D/g, ""), 10) || 0;
+      const numB = parseInt(String(b.receipt_number || b.receiptNumber || b.orderId || "").replace(/\D/g, ""), 10) || 0;
+      return numB - numA;
+    });
+
     return new Response(JSON.stringify({ success: true, count: webOrders.length, orders: webOrders }), {
       status: 200,
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
