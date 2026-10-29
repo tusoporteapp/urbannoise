@@ -24,7 +24,8 @@ export async function onRequestPost({ request, env }) {
 
     const LOYVERSE_TOKEN = env?.LOYVERSE_API_TOKEN || LOYVERSE_DEFAULT_TOKEN;
     const STORE_ID = "fee704a4-ff11-43ae-903e-d2f9cf0a9a25"; // Noise Urban
-    const orderAmount = Number(totals.total || amount || 0);
+    const itemsTotal = (items || []).reduce((acc, it) => acc + (Number(it.price) || 0) * (Number(it.qty) || 1), 0);
+    const orderAmount = Number(totals?.total ?? body.total ?? body.total_money ?? amount ?? (itemsTotal > 0 ? itemsTotal : 0));
 
     let customerId = customer?.loyverseCustomerId || null;
 
