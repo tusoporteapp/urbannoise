@@ -138,6 +138,13 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
   const [loyverseSyncStatus, setLoyverseSyncStatus] = useState<'SUCCESS' | 'SIMULATED' | 'ERROR'>('SIMULATED');
   const [deductedStockDetails, setDeductedStockDetails] = useState<any[]>([]);
   const [orderComplete, setOrderComplete] = useState(false);
+  const [isVerifyingReturn, setIsVerifyingReturn] = useState<boolean>(() => {
+    try {
+      return typeof window !== 'undefined' && verifyBoldReturnRedirect().isReturningFromBold;
+    } catch {
+      return false;
+    }
+  });
   const [orderId, setOrderId] = useState('');
   const [finalOrderAmount, setFinalOrderAmount] = useState<number>(0);
   const [finalOrderItems, setFinalOrderItems] = useState<any[]>([]);
@@ -146,6 +153,26 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
   const [boldGatewayConfig, setBoldGatewayConfig] = useState<BoldServerConfig | null>(null);
   const [boldRedirectError, setBoldRedirectError] = useState<string>('');
   const [isBoldModalWaiting, setIsBoldModalWaiting] = useState<boolean>(false);
+
+  // Función de cierre y reseteo completo de checkout (previene bloqueos en comprobante previo)
+  const handleCloseAndReset = React.useCallback(() => {
+    setOrderComplete(false);
+    setIsVerifyingReturn(false);
+    setIsSubmitting(false);
+    setIsBoldModalWaiting(false);
+    setOrderId('');
+    setBoldTransaction(null);
+    setLoyverseReceipt(null);
+    setBoldRedirectError('');
+    setDeductedStockDetails([]);
+    if (typeof window !== 'undefined') {
+      try {
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState({}, document.title, cleanUrl);
+      } catch {}
+    }
+    onClose();
+  }, [onClose]);
 
   // Consultar configuración del servidor para pasarela Bold y precargar pasarela
   React.useEffect(() => {
@@ -262,27 +289,40 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
     if (isOpen) {
       const returnCheck = verifyBoldReturnRedirect();
       if (returnCheck.isReturningFromBold && returnCheck.orderId) {
+        setIsVerifyingReturn(true);
         if (returnCheck.status === 'approved') {
           const pending = getPendingCheckout();
           if (pending && (pending.orderId === returnCheck.orderId || !pending.orderId)) {
             completeReturningOrder(pending, returnCheck.orderId);
           } else {
             setOrderId(returnCheck.orderId);
+            setIsVerifyingReturn(false);
             setOrderComplete(true);
           }
         } else if (returnCheck.status === 'rejected') {
+          setIsVerifyingReturn(false);
           setBoldRedirectError(
             'El pago en Bold.co fue cancelado o rechazado por tu entidad bancaria. Puedes intentar de nuevo o seleccionar otro medio de pago.'
           );
+        } else {
+          setIsVerifyingReturn(false);
         }
         try {
           window.history.replaceState(null, '', window.location.pathname);
         } catch {}
+      } else {
+        // Si el cliente abre el checkout para una nueva compra (no retorno de pasarela),
+        // resetear cualquier comprobante previo para mostrar el formulario limpio inmediatamente.
+        setIsVerifyingReturn(false);
+        if (cart && cart.length > 0) {
+          setOrderComplete(false);
+          setIsSubmitting(false);
+        }
       }
 
       // Recuperación Automática Anti-F5: Si el usuario recargó durante el pago en Nequi/PSE
       const pending = getPendingCheckout();
-      if (pending && pending.orderId && !orderComplete) {
+      if (pending && pending.orderId && !orderComplete && !returnCheck.isReturningFromBold) {
         fetch(`/api/bold/order-status?orderId=${encodeURIComponent(pending.orderId)}`)
           .then((r) => (r.ok ? r.json() : null))
           .then((res) => {
@@ -294,7 +334,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
           .catch(() => {});
       }
     }
-  }, [isOpen, orderComplete]);
+  }, [isOpen, cart.length]);
 
   // Sondeo Activo de Pago Asíncrono (Nequi / PSE):
   // Mientras haya una orden pendiente y no esté completa, verificar con el servidor cada 3.5 segundos
@@ -644,13 +684,16 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
 
       clearPendingCheckout();
       onClearCart();
+      setIsVerifyingReturn(false);
       setOrderComplete(true);
     } catch (err) {
       console.error('Error completando orden retornada de Bold:', err);
+      setIsVerifyingReturn(false);
       setOrderComplete(true);
     } finally {
       setIsSubmitting(false);
       setIsBoldModalWaiting(false);
+      setIsVerifyingReturn(false);
     }
   };
 
@@ -1184,7 +1227,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
       <header className="bg-white border-b border-[#E5E5E5] sticky top-0 z-30 px-3 sm:px-8 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 w-full">
         <div className="flex items-center space-x-1.5 sm:space-x-3 min-w-0">
           <button
-            onClick={onClose}
+            onClick={handleCloseAndReset}
             className="p-1 sm:p-1.5 -ml-1 text-xs font-bold uppercase tracking-wider text-[#101013] hover:opacity-60 transition cursor-pointer flex items-center space-x-1 flex-shrink-0"
             aria-label="Volver a la tienda"
           >
@@ -1209,7 +1252,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
             <span className="sm:hidden uppercase tracking-wider text-[9px]">Seguro</span>
           </div>
           <button
-            onClick={onClose}
+            onClick={handleCloseAndReset}
             className="p-1 sm:p-1.5 hover:bg-gray-100 rounded transition cursor-pointer"
             aria-label="Cerrar checkout"
           >
@@ -1277,8 +1320,33 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
         </aside>
       )}
 
-      {/* Pantalla de Confirmación de Pedido Exitoso con Voucher Oficial Bold.co */}
-      {orderComplete ? (
+      {/* Pantalla de Transición Limpia: Verificación Inmediata al Retornar de Bold.co */}
+      {isVerifyingReturn ? (
+        <div className="max-w-xl mx-auto px-4 py-24 text-center animate-in fade-in duration-300">
+          <div className="relative w-16 h-16 mx-auto mb-6">
+            <div className="w-16 h-16 border-4 border-stone-200 border-t-[#101013] rounded-full animate-spin"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Lock className="w-5 h-5 text-[#101013]" />
+            </div>
+          </div>
+
+          <div className="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-300 text-emerald-900 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-3">
+            <Shield className="w-3.5 h-3.5 text-emerald-600" />
+            <span>PAGO APROBADO EN BOLD.CO</span>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#101013] mb-3">
+            ¡Pago Aprobado! Verificando Comprobante...
+          </h2>
+          <p className="text-sm text-stone-600 max-w-md mx-auto mb-4">
+            Estamos emitiendo tu recibo legal en Loyverse POS y cargando tu orden oficial con número de guía.
+          </p>
+          <div className="inline-flex items-center space-x-2 text-[11px] font-mono text-stone-500 bg-stone-100 px-3 py-1.5 rounded">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Conexión cifrada con entidad bancaria y POS</span>
+          </div>
+        </div>
+      ) : orderComplete ? (
         <div className="max-w-2xl mx-auto px-4 py-12 text-center">
           <div className="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="w-9 h-9" />
@@ -1474,7 +1542,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
               <span>IMPRIMIR COMPROBANTE</span>
             </button>
             <button
-              onClick={onClose}
+              onClick={handleCloseAndReset}
               className="bg-[#101013] text-[#F5F2E4] hover:bg-black font-extrabold text-xs uppercase tracking-widest px-8 py-3.5 transition cursor-pointer flex items-center justify-center space-x-2"
             >
               <ShoppingBag className="w-4 h-4" />
