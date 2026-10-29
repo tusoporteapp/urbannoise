@@ -317,8 +317,40 @@ export function loadBoldScript(): Promise<boolean> {
   });
 }
 
+const BOLD_KEY_CHARS = "BoldPaymentButton";
+const BOLD_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_.~=&";
+
+function encodeBoldParam(char: string, offset: number): string {
+  const idx = BOLD_ALPHABET.indexOf(char);
+  if (idx === -1) return char;
+  return BOLD_ALPHABET[(idx + offset + 68) % 68];
+}
+
 /**
- * Abre la pasarela oficial de Bold Checkout (Smart Checkout modal embebido)
+ * Genera la URL oficial de redirección de Bold Checkout para abrir en página completa sustituyendo la ventana
+ */
+export function buildBoldRedirectUrl(config: Record<string, string>): string {
+  const normalized: Record<string, string> = {
+    ...config,
+    originUrl: typeof window !== 'undefined' ? window.location.href : 'https://www.urbannoise.co/',
+    openingTime: String(Date.now()),
+    integrationType: 'library',
+  };
+
+  const serialized = Object.keys(normalized)
+    .map((k) => `${k.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}=${normalized[k]}`)
+    .join('<bold>');
+
+  let encoded = '';
+  for (let i = 0; i < serialized.length; i++) {
+    const shift = BOLD_KEY_CHARS.charCodeAt(i % 17);
+    encoded += encodeBoldParam(serialized[i], shift);
+  }
+  return `https://checkout.bold.co/btn?${encodeURIComponent(encoded)}`;
+}
+
+/**
+ * Abre la pasarela oficial de Bold Checkout (Redirección de página completa sustituyendo la ventana)
  */
 export async function launchBoldCheckout(intent: {
   identityKey: string;
@@ -330,6 +362,30 @@ export async function launchBoldCheckout(intent: {
   redirectionUrl?: string;
   renderMode?: 'embedded' | 'redirect';
 }): Promise<boolean> {
+  const mode = intent.renderMode || 'redirect';
+  const targetRedirectionUrl =
+    intent.redirectionUrl ||
+    `${window.location.origin}${window.location.pathname}?bold-order-id=${intent.orderId}&status=approved`;
+
+  // 1. Redirección oficial de página completa sustituyendo la ventana (Sin modal ni iframe)
+  if (mode === 'redirect') {
+    const directUrl = buildBoldRedirectUrl({
+      apiKey: intent.identityKey,
+      orderId: intent.orderId,
+      amount: String(intent.amount),
+      currency: intent.currency || 'COP',
+      integritySignature: intent.integritySignature,
+      redirectionUrl: targetRedirectionUrl,
+      description: intent.description || `Pedido URBANNOISE #${intent.orderId}`,
+    });
+
+    if (typeof window !== 'undefined') {
+      window.location.href = directUrl;
+      return true;
+    }
+  }
+
+  // 2. Modo embebido en caso de ser solicitado explícitamente
   await loadBoldScript();
 
   if (typeof window !== 'undefined' && (window as any).BoldCheckout) {
@@ -340,11 +396,9 @@ export async function launchBoldCheckout(intent: {
         amount: String(intent.amount),
         currency: intent.currency || 'COP',
         integritySignature: intent.integritySignature,
-        redirectionUrl:
-          intent.redirectionUrl ||
-          `${window.location.origin}${window.location.pathname}?bold-order-id=${intent.orderId}&status=approved`,
+        redirectionUrl: targetRedirectionUrl,
         description: intent.description || `Pedido URBANNOISE #${intent.orderId}`,
-        renderMode: intent.renderMode || 'embedded',
+        renderMode: 'embedded',
       });
 
       if (typeof checkout.open === 'function') {

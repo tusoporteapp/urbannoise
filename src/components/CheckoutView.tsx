@@ -42,6 +42,7 @@ import {
   BOLD_CONFIG,
   getBoldConfig,
   BoldServerConfig,
+  loadBoldScript,
   launchBoldCheckout,
   savePendingCheckout,
   getPendingCheckout,
@@ -146,11 +147,12 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
   const [boldRedirectError, setBoldRedirectError] = useState<string>('');
   const [isBoldModalWaiting, setIsBoldModalWaiting] = useState<boolean>(false);
 
-  // Consultar configuración del servidor para pasarela Bold
+  // Consultar configuración del servidor para pasarela Bold y precargar pasarela
   React.useEffect(() => {
     getBoldConfig()
       .then((cfg) => setBoldGatewayConfig(cfg))
       .catch(() => {});
+    loadBoldScript().catch(() => {});
   }, []);
 
   // Función para poblar todos los campos del formulario de Entrega
@@ -871,9 +873,9 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
         integritySignature: intent.integritySignature,
       });
 
-      // Si hay credenciales de producción activas, lanzar el Smart Checkout oficial de Bold
+      // Si hay credenciales de producción activas, lanzar Bold con redirección de página completa sustituyendo la ventana
       if (intent.hasLiveCredentials && intent.identityKey) {
-        setBoldProcessingStep('Abriendo pasarela oficial de Bold.co...');
+        setBoldProcessingStep('Redirigiendo a pasarela oficial Bold.co...');
         const opened = await launchBoldCheckout({
           identityKey: intent.identityKey,
           orderId: generatedId,
@@ -882,16 +884,15 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
           integritySignature: intent.integritySignature,
           description: intent.description,
           redirectionUrl: intent.redirectionUrl,
+          renderMode: 'redirect',
         });
 
         if (opened) {
           setIsSubmitting(false);
-          setIsBoldModalWaiting(true);
           return;
         } else {
           setIsSubmitting(false);
-          setIsBoldModalWaiting(false);
-          setBoldRedirectError('No se pudo abrir la ventana emergente de pago de Bold.co. Por favor verifica que tu navegador permita ventanas emergentes o recarga la página.');
+          setBoldRedirectError('No se pudo redirigir a la pasarela de pago de Bold.co. Por favor intenta nuevamente o recarga la página.');
           return;
         }
       }
@@ -1104,35 +1105,39 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
       return;
     }
 
-    // REGISTRO / ACTUALIZACIÓN AUTOMÁTICA EN LOYVERSE CRM CON EL CORREO COMO ID (SIN CONTRASEÑAS)
-    let createdLoyverseId: string | undefined = undefined;
-    try {
-      const cleanDoc = documentId.replace(/\D/g, '');
-      const cleanPhone = phone.replace(/\D/g, '');
-      const targetEmail = emailOrPhone.includes('@')
-        ? emailOrPhone.trim().toLowerCase()
-        : `${cleanPhone || 'cliente'}@urbannoise.co`;
-      const fullName = `${firstName} ${lastName}`.trim() || 'Cliente URBANNOISE';
+    // REGISTRO Y GUARDADO LOCAL INMEDIATO (CERO RETARDO / CERO LAG)
+    const cleanDoc = documentId.replace(/\D/g, '');
+    const cleanPhone = phone.replace(/\D/g, '');
+    const targetEmail = emailOrPhone.includes('@')
+      ? emailOrPhone.trim().toLowerCase()
+      : `${cleanPhone || 'cliente'}@urbannoise.co`;
+    const fullName = `${firstName} ${lastName}`.trim() || 'Cliente URBANNOISE';
 
-      const regRes = await registerWebCustomer({
-        name: fullName,
-        email: targetEmail,
-        phone: cleanPhone,
-        city: city || 'Bogotá, D.C.',
-        address: `${address} ${apartment}`.trim(),
-        document: cleanDoc,
-      });
+    const localUser = {
+      name: fullName,
+      email: targetEmail,
+      phone: cleanPhone,
+      city: city || 'Bogotá, D.C.',
+      address: `${address} ${apartment}`.trim(),
+      document: cleanDoc,
+      createdAt: new Date().toISOString(),
+    };
+    saveCustomerSession(localUser as any);
 
-      if (regRes.success && regRes.customer) {
-        saveCustomerSession(regRes.customer);
-        createdLoyverseId = regRes.customer.loyverseCustomerId;
-      }
-    } catch (err: any) {
-      console.warn('Error registrando cuenta desde checkout:', err);
-    }
+    // Enviar registro al CRM en segundo plano sin pausar ni congelar la pantalla de pago
+    registerWebCustomer({
+      name: fullName,
+      email: targetEmail,
+      phone: cleanPhone,
+      city: city || 'Bogotá, D.C.',
+      address: `${address} ${apartment}`.trim(),
+      document: cleanDoc,
+    }).catch((err) => {
+      console.warn('[CRM Sync Background]:', err);
+    });
 
-    // Proceder directo al cobro con pasarela Bold.co
-    await executeBoldPaymentFlow(createdLoyverseId);
+    // Proceder de inmediato al cobro oficial con pasarela Bold.co
+    await executeBoldPaymentFlow();
   };
 
   const colombianDepartments = [
