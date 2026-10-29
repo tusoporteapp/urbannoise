@@ -146,13 +146,6 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
   const [boldRedirectError, setBoldRedirectError] = useState<string>('');
   const [isBoldModalWaiting, setIsBoldModalWaiting] = useState<boolean>(false);
 
-  // Modal Push para crear contraseña cuando un cliente invitado compra
-  const [showPasswordPushModal, setShowPasswordPushModal] = useState(false);
-  const [guestPassword, setGuestPassword] = useState('');
-  const [showGuestPassword, setShowGuestPassword] = useState(false);
-  const [pushModalError, setPushModalError] = useState('');
-  const [isRegisteringFromCheckout, setIsRegisteringFromCheckout] = useState(false);
-
   // Consultar configuración del servidor para pasarela Bold
   React.useEffect(() => {
     getBoldConfig()
@@ -1111,41 +1104,15 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
       return;
     }
 
-    // EN URBANNOISE ES OBLIGATORIO TENER CUENTA (NO SE PERMITE COMPRA ANÓNIMA / INVITADO)
-    const currentSession = getCustomerSession();
-    if (!currentSession) {
-      if (guestPassword.trim().length >= 4) {
-        await handleCreateAccountAndPay();
-        return;
-      }
-      setPushModalError('En URBANNOISE es obligatorio crear tu contraseña (mínimo 4 caracteres) para procesar tu orden.');
-      setShowPasswordPushModal(true);
-      return;
-    }
-
-    // Si ya tiene sesión activa, proceder directo al cobro con Bold
-    await executeBoldPaymentFlow();
-  };
-
-  const handleCreateAccountAndPay = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-    setPushModalError('');
-
-    if (guestPassword.trim().length < 4) {
-      setPushModalError('Por favor ingresa una contraseña de mínimo 4 caracteres para tu cuenta.');
-      return;
-    }
-
-    setIsRegisteringFromCheckout(true);
+    // REGISTRO / ACTUALIZACIÓN AUTOMÁTICA EN LOYVERSE CRM CON EL CORREO COMO ID (SIN CONTRASEÑAS)
     let createdLoyverseId: string | undefined = undefined;
-
     try {
       const cleanDoc = documentId.replace(/\D/g, '');
       const cleanPhone = phone.replace(/\D/g, '');
       const targetEmail = emailOrPhone.includes('@')
         ? emailOrPhone.trim().toLowerCase()
         : `${cleanPhone || 'cliente'}@urbannoise.co`;
-      const fullName = `${firstName} ${lastName}`.trim();
+      const fullName = `${firstName} ${lastName}`.trim() || 'Cliente URBANNOISE';
 
       const regRes = await registerWebCustomer({
         name: fullName,
@@ -1154,7 +1121,6 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
         city: city || 'Bogotá, D.C.',
         address: `${address} ${apartment}`.trim(),
         document: cleanDoc,
-        password: guestPassword,
       });
 
       if (regRes.success && regRes.customer) {
@@ -1162,12 +1128,11 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
         createdLoyverseId = regRes.customer.loyverseCustomerId;
       }
     } catch (err: any) {
-      console.warn('Error registrando cuenta desde checkout, continuando con pedido:', err);
-    } finally {
-      setIsRegisteringFromCheckout(false);
-      setShowPasswordPushModal(false);
-      await executeBoldPaymentFlow(createdLoyverseId);
+      console.warn('Error registrando cuenta desde checkout:', err);
     }
+
+    // Proceder directo al cobro con pasarela Bold.co
+    await executeBoldPaymentFlow(createdLoyverseId);
   };
 
   const colombianDepartments = [
@@ -1678,42 +1643,10 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
                       />
                     </div>
 
-                    {/* Contraseña Obligatoria de Cuenta */}
-                    <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <label htmlFor="checkout-contact-password" className="block text-[10.5px] sm:text-[11px] font-bold uppercase tracking-wider text-[#555555]">
-                          Crea la contraseña de tu cuenta * (Obligatoria)
-                        </label>
-                        <span className="text-[10px] text-emerald-700 font-semibold flex items-center space-x-1">
-                          <Lock className="w-3 h-3" />
-                          <span>Rastreo & Garantías</span>
-                        </span>
-                      </div>
-                      <div className="relative">
-                        <input
-                          id="checkout-contact-password"
-                          name="guestPassword"
-                          type={showGuestPassword ? 'text' : 'password'}
-                          autoComplete="new-password"
-                          required
-                          value={guestPassword}
-                          onChange={(e) => setGuestPassword(e.target.value)}
-                          placeholder="Mínimo 4 caracteres (ej: miClave123)"
-                          className="w-full border border-gray-300 px-3 py-2 sm:px-3.5 sm:py-2.5 text-xs sm:text-sm focus:border-black focus:outline-none bg-white rounded-none pr-10 font-mono"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowGuestPassword(!showGuestPassword)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 cursor-pointer"
-                          tabIndex={-1}
-                        >
-                          {showGuestPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </button>
-                      </div>
-                      <p className="text-[10.5px] text-gray-500 mt-1">
-                        En URBANNOISE no permitimos compras anónimas: tu cuenta se creará automáticamente para asignarte la guía oficial de despacho y dar seguimiento a tu pedido.
-                      </p>
-                    </div>
+                    {/* Información de Cuenta por Correo (Sin Contraseña) */}
+                    <p className="text-[10.5px] text-[#666666] leading-snug">
+                      🔒 Tu cuenta se asociará automáticamente a este correo para darte acceso directo a tu historial, comprobantes digitales y guía oficial de despacho sin necesidad de recordar contraseñas.
+                    </p>
 
                     <label htmlFor="checkout-newsletter-optin" className="flex items-start space-x-2 text-[11px] sm:text-xs text-[#555555] cursor-pointer pt-0.5">
                       <input
@@ -2688,148 +2621,6 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
               </div>
             </div>
           </aside>
-        </div>
-      )}
-
-      {/* ========================================================= */}
-      {/* MODAL PUSH: CREACIÓN DE CONTRASEÑA PARA CLIENTE INVITADO   */}
-      {/* ========================================================= */}
-      {showPasswordPushModal && (
-        <div className="fixed inset-0 z-[90] bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-200">
-          <div className="bg-white border border-gray-200 rounded-2xl max-w-md w-full p-6 sm:p-7 shadow-2xl relative text-left my-auto">
-            {/* Botón cerrar */}
-            <button
-              onClick={() => setShowPasswordPushModal(false)}
-              className="absolute right-4 top-4 text-gray-400 hover:text-black p-1.5 rounded-full hover:bg-gray-100 transition cursor-pointer"
-              aria-label="Cerrar ventana"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {/* Encabezado */}
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-black text-[#F5F2E4] flex items-center justify-center flex-shrink-0 shadow-md">
-                <Lock className="w-5 h-5 text-amber-400" />
-              </div>
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-600 font-bold block">
-                  REGISTRO OBLIGATORIO DE CUENTA
-                </span>
-                <h3 className="font-extrabold text-base sm:text-lg text-[#101013] leading-tight">
-                  Crea tu contraseña para confirmar tu pedido
-                </h3>
-              </div>
-            </div>
-
-            {/* Mensaje descriptivo */}
-            <p className="text-xs text-gray-600 leading-relaxed mb-3">
-              En URBANNOISE no permitimos compras anónimas. Con tu correo o WhatsApp y esta contraseña podrás acceder a tu cuenta oficial para:
-            </p>
-
-            {/* Beneficios */}
-            <div className="bg-amber-50/70 border border-amber-200/80 rounded-xl p-3.5 space-y-2 mb-4 text-xs text-[#222]">
-              <div className="flex items-start space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                <span>Rastrear tu guía oficial de <strong>despacho nacional</strong> en vivo.</span>
-              </div>
-              <div className="flex items-start space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                <span>Ver el estado de preparación y despacho de tu pedido en Bogotá.</span>
-              </div>
-              <div className="flex items-start space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                <span>Historial de compras, pedidos y beneficios en tu cuenta URBANNOISE.</span>
-              </div>
-            </div>
-
-            {/* Resumen de datos que ingresó el cliente */}
-            <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 text-xs space-y-1.5 mb-4 font-sans">
-              <div className="flex justify-between items-center text-[11px]">
-                <span className="text-gray-500">Destinatario:</span>
-                <span className="font-bold text-gray-900 truncate ml-2">{firstName} {lastName}</span>
-              </div>
-              <div className="flex justify-between items-center text-[11px]">
-                <span className="text-gray-500">Cédula:</span>
-                <span className="font-mono font-semibold text-gray-900">{documentId}</span>
-              </div>
-              <div className="flex justify-between items-center text-[11px]">
-                <span className="text-gray-500">WhatsApp:</span>
-                <span className="font-mono font-semibold text-gray-900">{phone}</span>
-              </div>
-              <div className="flex justify-between items-center text-[11px]">
-                <span className="text-gray-500">Correo:</span>
-                <span className="font-mono text-gray-800 truncate ml-2">{emailOrPhone}</span>
-              </div>
-              <div className="flex justify-between items-center text-[11px]">
-                <span className="text-gray-500">Tipo de Envío:</span>
-                <span className="font-bold text-emerald-700 truncate ml-2">
-                  {shippingMode === 'express_bogota' ? 'Express Bogotá Mismo Día' : 'Envío Nacional Estándar'}
-                </span>
-              </div>
-              <div className="flex justify-between items-center text-[11px]">
-                <span className="text-gray-500">Entrega en:</span>
-                <span className="text-gray-800 truncate ml-2">{address}, {city}</span>
-              </div>
-            </div>
-
-            {/* Formulario de contraseña */}
-            <form onSubmit={handleCreateAccountAndPay} className="space-y-3.5">
-              <div>
-                <label htmlFor="checkout-guest-password" className="block text-[11px] font-bold uppercase tracking-wider text-gray-700 mb-1">
-                  Crea una Contraseña para tu Cuenta * (Obligatoria)
-                </label>
-                <div className="relative">
-                  <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                  <input
-                    id="checkout-guest-password"
-                    name="guestPassword"
-                    type={showGuestPassword ? 'text' : 'password'}
-                    autoComplete="new-password"
-                    required
-                    autoFocus
-                    placeholder="Mínimo 4 caracteres (ej: miClave123)"
-                    value={guestPassword}
-                    onChange={(e) => {
-                      setGuestPassword(e.target.value);
-                      if (pushModalError) setPushModalError('');
-                    }}
-                    className="w-full pl-10 pr-10 py-3 bg-white border border-gray-300 rounded-xl text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black font-mono shadow-xs"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowGuestPassword(!showGuestPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 cursor-pointer"
-                  >
-                    {showGuestPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
-
-              {pushModalError && (
-                <p className="text-[11px] text-red-600 font-bold bg-red-50 border border-red-200 p-2 rounded-lg">
-                  ⚠️ {pushModalError}
-                </p>
-              )}
-
-              <button
-                type="submit"
-                disabled={isRegisteringFromCheckout}
-                className="w-full py-3.5 bg-[#101013] text-[#F5F2E4] hover:bg-black font-extrabold text-xs uppercase tracking-widest rounded-xl transition cursor-pointer flex items-center justify-center space-x-2 shadow-lg disabled:opacity-50"
-              >
-                {isRegisteringFromCheckout ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Creando cuenta oficial y continuando...</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center space-x-2">
-                    <Lock className="w-4 h-4" />
-                    <span>GUARDAR CONTRASEÑA Y CONTINUAR AL PAGO</span>
-                  </div>
-                )}
-              </button>
-            </form>
-          </div>
         </div>
       )}
     </div>

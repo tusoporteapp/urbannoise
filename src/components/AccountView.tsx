@@ -210,6 +210,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
   const [successMsg, setSuccessMsg] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [honeypotTrap, setHoneypotTrap] = useState<string>('');
+  const [isAdminMode, setIsAdminMode] = useState<boolean>(false);
 
   // Cargar sesión y pedidos al montar
   useEffect(() => {
@@ -278,42 +279,55 @@ export const AccountView: React.FC<AccountViewProps> = ({
     setErrorMsg('');
     setSuccessMsg('');
 
-    if (!email.trim() || !password.trim()) {
-      setErrorMsg('Por favor ingresa tu correo electrónico y contraseña.');
+    // 1. Modo Administrador con contraseña maestra
+    if (isAdminMode) {
+      if (!email.trim() || !password.trim()) {
+        setErrorMsg('Por favor ingresa tu correo electrónico y contraseña de administrador.');
+        return;
+      }
+
+      setIsLoading(true);
+      const isAdmin = isUserAdminCredentials(email, password);
+
+      if (isAdmin) {
+        setAdminAuthenticated(true);
+        const adminUser: CustomerUser = {
+          name: 'Administrador URBANNOISE',
+          email: email.trim(),
+          isAdmin: true,
+          createdAt: new Date().toISOString(),
+        };
+        saveCustomerSession(adminUser);
+        setCurrentUser(adminUser);
+        try {
+          await loginAdminWithServer(password, email);
+        } catch {}
+        trackEvent('login', { method: 'admin_credentials' });
+        setIsLoading(false);
+        onOpenAdmin();
+        onBackToHome();
+        return;
+      } else {
+        setIsLoading(false);
+        setErrorMsg('Contraseña o credenciales de administrador inválidas.');
+        return;
+      }
+    }
+
+    // 2. Modo Cliente: Acceso directo con solo Correo Electrónico (Passwordless)
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !cleanEmail.includes('@') || !cleanEmail.includes('.')) {
+      setErrorMsg('Por favor ingresa un correo electrónico válido para acceder a tu cuenta.');
       return;
     }
 
     setIsLoading(true);
 
-    // 1. Verificación de credenciales de Administrador
-    const isAdmin = isUserAdminCredentials(email, password);
-
-    if (isAdmin) {
-      setAdminAuthenticated(true);
-      const adminUser: CustomerUser = {
-        name: 'Administrador URBANNOISE',
-        email: email.trim(),
-        isAdmin: true,
-        createdAt: new Date().toISOString(),
-      };
-      saveCustomerSession(adminUser);
-      setCurrentUser(adminUser);
-      try {
-        await loginAdminWithServer(password, email);
-      } catch {}
-      trackEvent('login', { method: 'admin_credentials' });
-      setIsLoading(false);
-      onOpenAdmin();
-      onBackToHome();
-      return;
-    }
-
-    // 2. Inicio de sesión como Cliente validado en Loyverse POS
     try {
-      const res = await loginWebCustomer(email, password);
+      const res = await loginWebCustomer(cleanEmail);
       if (!res.success || !res.customer) {
         setIsLoading(false);
-        setErrorMsg(res.error || 'Correo o contraseña incorrectos.');
+        setErrorMsg(res.error || 'No encontramos ninguna cuenta con este correo. Por favor crea tu cuenta primero.');
         return;
       }
 
@@ -321,7 +335,6 @@ export const AccountView: React.FC<AccountViewProps> = ({
       const cleanCustEmail = (customer.email || '').toLowerCase().trim();
       const isAdminLogin = Boolean(
         customer.isAdmin ||
-        isUserAdminCredentials(customer.email, password) ||
         cleanCustEmail === 'urban.noice@gmail.com' ||
         cleanCustEmail === 'urban.noice2023@gmail.com'
       );
@@ -331,9 +344,6 @@ export const AccountView: React.FC<AccountViewProps> = ({
         setAdminAuthenticated(true);
         saveCustomerSession(customer);
         setCurrentUser(customer);
-        try {
-          await loginAdminWithServer(password, customer.email);
-        } catch {}
         setIsLoading(false);
         onOpenAdmin();
         onBackToHome();
@@ -365,7 +375,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
       setEditAddress(customer.address || '');
       setIsLoading(false);
       setSuccessMsg('¡Sesión iniciada con éxito! Conectado a tu cuenta de compras.');
-      trackEvent('login', { method: 'customer_credentials' });
+      trackEvent('login', { method: 'customer_email_passwordless' });
 
       // Si el usuario intentó guardar una prenda antes de autenticarse, añadirla de inmediato
       try {
@@ -396,10 +406,10 @@ export const AccountView: React.FC<AccountViewProps> = ({
     const cleanPhone = phone.replace(/\D/g, '');
     const cleanAddress = address.trim();
     const cleanCity = city.trim();
-    const cleanEmail = email.trim();
+    const cleanEmail = email.trim().toLowerCase();
 
-    if (!cleanName || !cleanPhone || !cleanEmail || !password.trim()) {
-      setErrorMsg('Por favor completa los 4 campos principales: Nombre, Correo, Celular y Contraseña.');
+    if (!cleanName || !cleanPhone || !cleanEmail) {
+      setErrorMsg('Por favor completa los 3 campos obligatorios: Nombre, Correo y Celular.');
       return;
     }
 
@@ -423,44 +433,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
       return;
     }
 
-    if (password.length < 4) {
-      setErrorMsg('La contraseña debe tener al menos 4 caracteres.');
-      return;
-    }
-
     setIsLoading(true);
 
-    const isAdmin = isUserAdminCredentials(email, password);
-    if (isAdmin) {
-      setAdminAuthenticated(true);
-      const adminUser: CustomerUser = {
-        name: cleanName.toUpperCase(),
-        email: cleanEmail,
-        document: cleanDoc,
-        phone: cleanPhone,
-        city: cleanCity || 'Bogotá, D.C.',
-        address: cleanAddress,
-        isAdmin: true,
-        createdAt: new Date().toISOString(),
-      };
-      saveCustomerSession(adminUser);
-      setCurrentUser(adminUser);
-      setOrders(getCustomerOrders(adminUser.email));
-      setEditName(adminUser.name);
-      setEditDocument(adminUser.document || cleanDoc);
-      setEditPhone(adminUser.phone || '');
-      setEditCity(adminUser.city || 'Bogotá, D.C.');
-      setEditAddress(adminUser.address || '');
-      setIsLoading(false);
-      trackEvent('sign_up', { method: 'admin' });
-      setSuccessMsg('¡Cuenta de administrador creada y autenticada! Abriendo panel...');
-      setTimeout(() => {
-        onOpenAdmin();
-      }, 700);
-      return;
-    }
-
-    // Registro de cliente web sincronizado con Loyverse POS
+    // Registro de cliente web sincronizado con Loyverse POS (Sin contraseñas para clientes)
     try {
       const regRes = await registerWebCustomer({
         name: cleanName,
@@ -469,7 +444,6 @@ export const AccountView: React.FC<AccountViewProps> = ({
         city: cleanCity || 'Bogotá, D.C.',
         address: cleanAddress,
         document: cleanDoc,
-        password,
       });
 
       if (!regRes.success || !regRes.customer) {
@@ -488,7 +462,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
       setEditCity(newUser.city || 'Bogotá, D.C.');
       setEditAddress(newUser.address || '');
       setIsLoading(false);
-      trackEvent('sign_up', { method: 'customer_account_web' });
+      trackEvent('sign_up', { method: 'customer_account_web_passwordless' });
       setSuccessMsg('¡Cuenta creada exitosamente! Tus pedidos y beneficios sumarán automáticamente a tu cuenta.');
 
       // Si el usuario intentó guardar una prenda antes de autenticarse, añadirla de inmediato
@@ -1770,7 +1744,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
                   type="button"
                   onClick={() => {
                     setMode('login');
+                    setIsAdminMode(false);
                     setErrorMsg('');
+                    setSuccessMsg('');
                   }}
                   className={`flex-1 pb-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider border-b-2 transition cursor-pointer text-center ${
                     mode === 'login'
@@ -1784,7 +1760,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
                   type="button"
                   onClick={() => {
                     setMode('register');
+                    setIsAdminMode(false);
                     setErrorMsg('');
+                    setSuccessMsg('');
                   }}
                   className={`flex-1 pb-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider border-b-2 transition cursor-pointer text-center ${
                     mode === 'register'
@@ -1800,57 +1778,81 @@ export const AccountView: React.FC<AccountViewProps> = ({
               {mode === 'login' ? (
                 /* Formulario Login */
                 <form onSubmit={handleLogin} className="space-y-4">
+                  {isAdminMode && (
+                    <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg flex items-center justify-between text-amber-900 text-xs mb-3">
+                      <div className="flex items-center space-x-2">
+                        <Lock className="w-4 h-4 text-amber-700" />
+                        <span className="font-bold">Modo Administrador</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsAdminMode(false);
+                          setErrorMsg('');
+                        }}
+                        className="text-[11px] text-amber-900 underline font-semibold hover:text-black cursor-pointer"
+                      >
+                        ← Volver a clientes
+                      </button>
+                    </div>
+                  )}
+
                   <div>
                     <label htmlFor="login-account-identifier" className="block text-[11px] font-bold uppercase tracking-wider text-gray-700 mb-1 flex items-center justify-between">
-                      <span>Correo o Número de WhatsApp</span>
-                      <span className="text-[10px] text-emerald-700 font-bold lowercase">email o celular</span>
+                      <span>{isAdminMode ? 'Correo de Administrador' : 'Correo Electrónico de tu Cuenta'}</span>
+                      <span className="text-[10px] text-emerald-700 font-bold lowercase">
+                        {isAdminMode ? 'acceso maestro' : 'acceso directo'}
+                      </span>
                     </label>
                     <div className="relative">
-                      {email.replace(/\D/g, '').length >= 5 ? (
-                        <Phone className="w-4 h-4 text-emerald-600 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                      ) : (
-                        <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                      )}
+                      <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                       <input
                         id="login-account-identifier"
-                        name="username"
-                        type="text"
-                        autoComplete="username"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
                         required
-                        placeholder="tucorreo@ejemplo.com o tu WhatsApp (ej: 312 458 9210)"
+                        placeholder="tucorreo@ejemplo.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="w-full pl-10 pr-3.5 py-3 bg-white border border-gray-300 rounded-lg text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
                       />
                     </div>
+                    {!isAdminMode && (
+                      <p className="mt-1.5 text-[11px] text-gray-500 flex items-center space-x-1">
+                        <span>🔒 Accede directamente sin contraseñas para ver tus pedidos y guías oficiales.</span>
+                      </p>
+                    )}
                   </div>
 
-                  <div>
-                    <label htmlFor="login-account-password" className="block text-[11px] font-bold uppercase tracking-wider text-gray-700 mb-1">
-                      Contraseña
-                    </label>
-                    <div className="relative">
-                      <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                      <input
-                        id="login-account-password"
-                        name="password"
-                        type={showPassword ? 'text' : 'password'}
-                        autoComplete="current-password"
-                        required
-                        placeholder="••••••••"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full pl-10 pr-10 py-3 bg-white border border-gray-300 rounded-lg text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black font-mono"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 cursor-pointer"
-                      >
-                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </button>
+                  {isAdminMode && (
+                    <div>
+                      <label htmlFor="login-account-password" className="block text-[11px] font-bold uppercase tracking-wider text-gray-700 mb-1">
+                        Contraseña Maestra de Administrador
+                      </label>
+                      <div className="relative">
+                        <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                        <input
+                          id="login-account-password"
+                          name="password"
+                          type={showPassword ? 'text' : 'password'}
+                          autoComplete="current-password"
+                          required
+                          placeholder="••••••••"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          className="w-full pl-10 pr-10 py-3 bg-white border border-gray-300 rounded-lg text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black font-mono"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 cursor-pointer"
+                        >
+                          {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Honeypot Anti-Spam */}
                   <input
@@ -1870,13 +1872,33 @@ export const AccountView: React.FC<AccountViewProps> = ({
                     disabled={isLoading}
                     className="w-full py-3.5 bg-[#101013] text-[#F5F2E4] hover:bg-black font-extrabold text-xs uppercase tracking-widest rounded-lg transition cursor-pointer flex items-center justify-center space-x-2 disabled:opacity-60 shadow-md mt-2"
                   >
-                    <span>{isLoading ? 'Verificando credenciales...' : 'Entrar a mi Cuenta'}</span>
+                    <span>{isLoading ? 'Verificando...' : (isAdminMode ? 'Entrar al Panel Admin' : 'Entrar a mi Cuenta')}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
+
+                  {!isAdminMode && (
+                    <div className="pt-3 border-t border-gray-100 flex items-center justify-end">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsAdminMode(true);
+                          setErrorMsg('');
+                        }}
+                        className="text-[10px] text-gray-400 hover:text-black uppercase tracking-wider font-semibold transition cursor-pointer"
+                      >
+                        ¿Acceso Administrador?
+                      </button>
+                    </div>
+                  )}
                 </form>
               ) : (
-                /* Formulario Registro Ultrarrápido y Sencillo */
+                /* Formulario Registro Ultrarrápido y Sencillo (Sin contraseña) */
                 <form onSubmit={handleRegister} className="space-y-3.5">
+                  <div className="p-3 bg-emerald-50 border border-emerald-200/80 rounded-lg text-emerald-900 text-xs flex items-center space-x-2">
+                    <span className="font-bold">✨ Acceso sin contraseñas:</span>
+                    <span>Tu correo electrónico es tu llave única para acceder a tu historial de compras y guías de envío.</span>
+                  </div>
+
                   <div>
                     <label htmlFor="register-account-name" className="block text-[11px] font-bold uppercase tracking-wider text-gray-700 mb-1">
                       Nombre y Apellido *
@@ -1938,37 +1960,10 @@ export const AccountView: React.FC<AccountViewProps> = ({
                     </div>
                   </div>
 
-                  <div>
-                    <label htmlFor="register-account-password" className="block text-[11px] font-bold uppercase tracking-wider text-gray-700 mb-1">
-                      Contraseña *
-                    </label>
-                    <div className="relative">
-                      <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                      <input
-                        id="register-account-password"
-                        name="newPassword"
-                        type={showPassword ? 'text' : 'password'}
-                        autoComplete="new-password"
-                        required
-                        placeholder="Mínimo 4 caracteres"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full pl-10 pr-10 py-2.5 bg-white border border-gray-300 rounded-lg text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:border-black focus:ring-1 focus:ring-black font-mono"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 cursor-pointer"
-                      >
-                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </button>
-                    </div>
-                  </div>
-
                   {/* Datos de Envío y Facturación (Guardados en Loyverse POS) */}
                   <div className="pt-2 border-t border-gray-100">
                     <p className="text-[10px] text-gray-700 uppercase tracking-wider font-bold mb-2 flex items-center justify-between">
-                      <span>Datos de Envío y Facturación</span>
+                      <span>Datos de Envío y Facturación (Opcionales)</span>
                       <span className="text-emerald-700 font-semibold text-[10px]">Guardado en tu perfil</span>
                     </p>
 
@@ -2048,7 +2043,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
                     disabled={isLoading}
                     className="w-full mt-2 py-3.5 bg-[#101013] text-[#F5F2E4] hover:bg-black font-extrabold text-xs uppercase tracking-widest rounded-lg transition cursor-pointer flex items-center justify-center space-x-2 disabled:opacity-60 shadow-md"
                   >
-                    <span>{isLoading ? 'Guardando datos...' : 'Crear Cuenta y Guardar Datos'}</span>
+                    <span>{isLoading ? 'Creando cuenta...' : 'Crear mi Cuenta Oficial'}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
