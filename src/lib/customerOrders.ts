@@ -17,6 +17,7 @@ export interface CustomerOrderTimelineStep {
   completed: boolean;
   current: boolean;
   detail: string;
+  status?: 'completed' | 'in_progress' | 'pending';
 }
 
 export interface CustomerOrder {

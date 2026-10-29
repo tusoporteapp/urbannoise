@@ -170,31 +170,29 @@ export async function onRequestGet({ request, env }) {
             title: "Pago Confirmado & Verificado",
             date: formattedDate,
             completed: true,
-            current: !isDispatched,
+            current: false,
+            status: "completed",
             detail: `Transacción aprobada por $${totalMoney.toLocaleString("es-CO")} COP.`,
           },
           {
-            title: isDispatched ? `Entregado a Transportadora (${matchedEmpresa})` : "Alistamiento y Empaque en Atelier",
-            date: isDispatched ? "Despachado" : "En proceso",
+            title: "Paquete en Preparación",
+            date: isDispatched ? "Completado" : "En proceso",
+            completed: isDispatched,
+            current: !isDispatched,
+            status: isDispatched ? "completed" : "in_progress",
+            detail: isDispatched
+              ? "Paquete empacado y sellado exitosamente en el Atelier."
+              : "Prendas en confección y alistamiento en packaging de seguridad en Bogotá.",
+          },
+          {
+            title: "Enviado",
+            date: isDispatched ? "Despachado" : "Pendiente",
             completed: isDispatched,
             current: isDispatched,
+            status: isDispatched ? "completed" : "pending",
             detail: isDispatched
-              ? `Paquete entregado a ${matchedEmpresa} con número de guía ${matchedGuia}.`
-              : "Prendas confeccionadas en Bogotá siendo empacadas en packaging ecológico.",
-          },
-          {
-            title: "En Ruta hacia tu Dirección",
-            date: isDispatched ? "En camino" : "Pendiente",
-            completed: false,
-            current: false,
-            detail: `Dirección de entrega: ${clientAddress || "Dirección registrada"}, ${clientCity || "Colombia"}.`,
-          },
-          {
-            title: "Entrega Exitosa",
-            date: "Estimado",
-            completed: false,
-            current: false,
-            detail: "Recibes en la puerta de tu casa u oficina.",
+              ? `Entregado a ${matchedEmpresa} bajo la guía oficial #${matchedGuia}. En camino hacia tu dirección.`
+              : "Pendiente de entrega a la empresa de mensajería para asignación de guía.",
           },
         ],
         shippingAddress: {

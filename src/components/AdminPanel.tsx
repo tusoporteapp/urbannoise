@@ -6039,16 +6039,31 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({
                             <ExternalLink className="w-3 h-3" />
                           </a>
                         </div>
-                        {(!activeCarrier || activeCarrier.toLowerCase().includes('servientrega')) && (
-                          <button
-                            type="button"
-                            onClick={() => setTrackingAdminGuia(activeTracking)}
-                            className="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-[#D9C4AB] rounded text-[11px] font-bold inline-flex items-center gap-1 cursor-pointer"
-                          >
-                            <Eye className="w-3 h-3" />
-                            <span>Ver Rastreo en Ventana Flotante</span>
-                          </button>
-                        )}
+                        <div className="flex flex-wrap items-center gap-2">
+                          {cleanBuyerPhone && (
+                            <a
+                              href={`https://wa.me/57${cleanBuyerPhone}?text=${encodeURIComponent(
+                                `¡Hola ${buyerName}! 👋 Tu orden de URBANNOISE #${selectedWebOrderForModal.receipt_number || selectedWebOrderForModal.orderId} ya fue empacada y entregada a la transportadora ${activeCarrier} 🚀.\n\n📦 Tu número de guía oficial es: ${activeTracking}\n🔍 Puedes rastrear tu paquete en vivo aquí:\nhttps://urbannoise.co/?account=orders\n\n¡Gracias por apoyar el streetwear independiente colombiano!`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-black font-black text-[11px] uppercase tracking-wider rounded-lg transition inline-flex items-center gap-1.5 cursor-pointer shadow-md"
+                              title="Enviar notificación oficial por WhatsApp con la guía y enlace al cliente"
+                            >
+                              <span>📲 Notificar Despacho por WhatsApp</span>
+                            </a>
+                          )}
+                          {(!activeCarrier || activeCarrier.toLowerCase().includes('servientrega')) && (
+                            <button
+                              type="button"
+                              onClick={() => setTrackingAdminGuia(activeTracking)}
+                              className="px-2.5 py-1 bg-white/10 hover:bg-white/20 text-[#D9C4AB] rounded text-[11px] font-bold inline-flex items-center gap-1 cursor-pointer"
+                            >
+                              <Eye className="w-3 h-3" />
+                              <span>Ver Rastreo en Ventana Flotante</span>
+                            </button>
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>

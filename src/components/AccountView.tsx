@@ -31,6 +31,7 @@ import {
   RefreshCw,
   Maximize2,
   ExternalLink,
+  Bell,
 } from 'lucide-react';
 import { Product, ProductSize } from '../types';
 import { useWishlist, addToWishlist, PENDING_WISHLIST_KEY } from '../lib/wishlist';
@@ -173,6 +174,11 @@ export const AccountView: React.FC<AccountViewProps> = ({
   const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null);
   const [copiedTracking, setCopiedTracking] = useState<string | null>(null);
   const [trackingModalGuia, setTrackingModalGuia] = useState<string | null>(null);
+  const [newlyDispatchedToast, setNewlyDispatchedToast] = useState<{
+    orderNumber: string;
+    guia: string;
+    empresa: string;
+  } | null>(null);
   const [isLoadingOrders, setIsLoadingOrders] = useState<boolean>(false);
   const [viewingGarmentImage, setViewingGarmentImage] = useState<{
     name: string;
@@ -557,6 +563,74 @@ export const AccountView: React.FC<AccountViewProps> = ({
   };
 
   const selectedOrder = orders.find((o) => o.id === selectedOrderId) || orders[0];
+
+  // Detección Inteligente de Despacho de Alta Escala (Decay Polling + Visibility API + Micro-Ping)
+  useEffect(() => {
+    if (!selectedOrder || selectedOrder.trackingNumber) return;
+
+    let pollCount = 0;
+    let timer: any = null;
+    let isCancelled = false;
+
+    const checkStatus = async () => {
+      if (typeof document !== 'undefined' && document.visibilityState !== 'visible') return;
+      if (isCancelled) return;
+
+      try {
+        const orderIdClean = (selectedOrder.orderNumber || selectedOrder.id || '').replace(/^#/, '');
+        if (!orderIdClean) return;
+
+        const res = await fetch(`/api/orders/status-ping?orderId=${encodeURIComponent(orderIdClean)}`);
+        if (!res.ok) return;
+        const data = await res.json();
+
+        if (data.s === 'DESPACHADO' && data.g) {
+          // ¡Guía detectada en el servidor!
+          setNewlyDispatchedToast({
+            orderNumber: selectedOrder.orderNumber || selectedOrder.id,
+            guia: data.g,
+            empresa: data.c || 'Transportadora Nacional',
+          });
+
+          // Actualizar la lista de órdenes completa para reflejar los 3 pasos en verde
+          if (currentUser?.email) {
+            fetchCustomerOrdersFromServer(currentUser.email).then((fresh) => {
+              if (fresh && fresh.length > 0) setOrders(fresh);
+            });
+          }
+          return; // Detener permanentemente el polling para este cliente
+        }
+      } catch {
+        // Silencioso
+      }
+
+      pollCount += 1;
+      // Decay Polling:
+      // Minutos 0 a 3: cada 45s (4 checks)
+      // Minutos 3 a 10: cada 90s (5 checks)
+      // Más de 10 minutos (pollCount >= 9): auto-apagado total (cero consumo)
+      if (pollCount < 9 && !isCancelled) {
+        const nextDelay = pollCount <= 4 ? 45000 : 90000;
+        timer = setTimeout(checkStatus, nextDelay);
+      }
+    };
+
+    // Iniciar primer timeout a los 45s
+    timer = setTimeout(checkStatus, 45000);
+
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && !isCancelled && !selectedOrder.trackingNumber) {
+        checkStatus();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      isCancelled = true;
+      if (timer) clearTimeout(timer);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
+  }, [selectedOrder?.id, selectedOrder?.trackingNumber, currentUser?.email]);
 
   // Renderizador unificado de la sección de Lista de Deseos
   const renderWishlistContent = () => {
@@ -1148,6 +1222,33 @@ export const AccountView: React.FC<AccountViewProps> = ({
                         </div>
                       </div>
 
+                      {/* Banner / Toast de Notificación en Vivo de Despacho (Alta Escala) */}
+                      {newlyDispatchedToast && (
+                        <div className="bg-emerald-600 text-white p-4 rounded-xl shadow-xl flex items-center justify-between gap-3 animate-in fade-in slide-in-from-top-4 duration-300">
+                          <div className="flex items-center space-x-3">
+                            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                              <Bell className="w-4 h-4 text-white animate-bounce" />
+                            </div>
+                            <div>
+                              <p className="text-xs font-black uppercase tracking-wider">
+                                ¡Buenas noticias! Tu paquete ya fue despachado
+                              </p>
+                              <p className="text-[11px] text-white/90 mt-0.5">
+                                Transportadora: <strong>{newlyDispatchedToast.empresa}</strong> • Guía Oficial: <strong>#{newlyDispatchedToast.guia}</strong>
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setNewlyDispatchedToast(null)}
+                            className="p-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition cursor-pointer"
+                            title="Cerrar aviso"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      )}
+
                       {/* Tarjeta de Guía de Transporte */}
                       {selectedOrder.trackingNumber ? (
                         <div className="bg-[#101013] text-[#F5F2E4] p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 rounded-xl border border-white/10 shadow-lg">
@@ -1239,45 +1340,77 @@ export const AccountView: React.FC<AccountViewProps> = ({
                         </h4>
 
                         <div className="relative pl-7 sm:pl-9 space-y-7 before:content-[''] before:absolute before:left-3 before:top-2 before:bottom-2 before:w-0.5 before:bg-gray-200">
-                          {(selectedOrder.timeline || [])
-                            .filter((step) => !step.title.toLowerCase().includes('entregad'))
-                            .map((step, idx) => (
-                            <div key={idx} className="relative">
-                              <div
-                                className={`absolute -left-7 sm:-left-9 top-0.5 w-6 h-6 rounded-full flex items-center justify-center border-2 ${
-                                  step.completed
-                                    ? 'border-emerald-600 bg-emerald-600 text-white shadow-sm'
-                                    : 'border-gray-300 bg-gray-100 text-gray-400'
-                                }`}
-                              >
-                                {step.completed ? (
-                                  <Check className="w-3.5 h-3.5 text-white stroke-[3.5]" />
-                                ) : (
-                                  <div className="w-2 h-2 rounded-full bg-gray-400" />
-                                )}
-                              </div>
+                          {(selectedOrder.timeline || []).map((step, idx) => {
+                            const isStepCompleted = Boolean(step.completed);
+                            const isInProgress = step.status === 'in_progress' || (!isStepCompleted && (idx === 1 || step.title.toLowerCase().includes('preparaci')));
 
-                              <div>
-                                <div className="flex flex-wrap items-center justify-between gap-1">
-                                  <h5
-                                    className={`text-xs sm:text-sm font-extrabold uppercase tracking-tight ${
-                                      step.completed
-                                        ? 'text-[#101013]'
+                            return (
+                              <div key={idx} className="relative">
+                                <div
+                                  className={`absolute -left-7 sm:-left-9 top-0.5 w-6 h-6 rounded-full flex items-center justify-center border-2 ${
+                                    isStepCompleted
+                                      ? 'border-emerald-600 bg-emerald-600 text-white shadow-sm'
+                                      : isInProgress
+                                      ? 'border-amber-500 bg-amber-500 text-white shadow-sm animate-pulse'
+                                      : 'border-gray-300 bg-gray-100 text-gray-400'
+                                  }`}
+                                >
+                                  {isStepCompleted ? (
+                                    <Check className="w-3.5 h-3.5 text-white stroke-[3.5]" />
+                                  ) : isInProgress ? (
+                                    <Clock className="w-3 h-3 text-white" />
+                                  ) : (
+                                    <div className="w-2 h-2 rounded-full bg-gray-400" />
+                                  )}
+                                </div>
+
+                                <div>
+                                  <div className="flex flex-wrap items-center justify-between gap-1">
+                                    <div className="flex items-center space-x-2">
+                                      <h5
+                                        className={`text-xs sm:text-sm font-extrabold uppercase tracking-tight ${
+                                          isStepCompleted
+                                            ? 'text-[#101013]'
+                                            : isInProgress
+                                            ? 'text-amber-800'
+                                            : 'text-gray-400'
+                                        }`}
+                                      >
+                                        {step.title}
+                                      </h5>
+                                      {isInProgress && (
+                                        <span className="text-[9.5px] uppercase font-black bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded border border-amber-300">
+                                          En Proceso
+                                        </span>
+                                      )}
+                                    </div>
+                                    <span
+                                      className={`text-[11px] font-mono ${
+                                        isStepCompleted
+                                          ? 'text-gray-500 font-semibold'
+                                          : isInProgress
+                                          ? 'text-amber-600 font-bold'
+                                          : 'text-gray-400 italic'
+                                      }`}
+                                    >
+                                      {step.date}
+                                    </span>
+                                  </div>
+                                  <p
+                                    className={`text-xs mt-1 leading-relaxed ${
+                                      isStepCompleted
+                                        ? 'text-gray-600'
+                                        : isInProgress
+                                        ? 'text-amber-900/80 font-medium'
                                         : 'text-gray-400'
                                     }`}
                                   >
-                                    {step.title}
-                                  </h5>
-                                  <span className={`text-[11px] font-mono ${step.completed ? 'text-gray-500 font-semibold' : 'text-gray-400 italic'}`}>
-                                    {step.date}
-                                  </span>
+                                    {step.detail}
+                                  </p>
                                 </div>
-                                <p className={`text-xs mt-1 leading-relaxed ${step.completed ? 'text-gray-600' : 'text-gray-400'}`}>
-                                  {step.detail}
-                                </p>
                               </div>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       </div>
 
